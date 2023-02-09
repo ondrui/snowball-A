@@ -1,5 +1,11 @@
 const dataLocales = {
   ru: {
+    viewsSwitcher: ["карта", "города"],
+    /**
+     * Массив содержит слова-указатели времен.
+     */
+    timeMarker: ["сейчас", "вчера", "сегодня", "завтра", "послезавтра"],
+    allCityBtnCaption: "Все 1036 населенных пункта Армении",
     breadcrumbs: {
       main: "главная",
       weather: "погода",
@@ -11,6 +17,7 @@ const dataLocales = {
       feelsLike: "ощущается",
     },
     tabsDescr: {
+      MainTabContent: "главная",
       HourlyTabContent: "почасовой прогноз",
       DayTabContent: "прогноз погоды на дней",
     },

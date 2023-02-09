@@ -23,6 +23,7 @@
 import { languageExpressions } from "@/constants/locales";
 import HourlyTabContent from "./HourlyTabContent.vue";
 import DayTabContent from "./DayTabContent.vue";
+import MainTabContent from "./MainTabContent.vue";
 
 export default {
   data() {
@@ -30,12 +31,13 @@ export default {
       /**
        * @param currentTab Имя открытой вкладки (кампоненты).
        */
-      currentTab: "HourlyTabContent",
+      currentTab: "MainTabContent",
     };
   },
   components: {
     HourlyTabContent,
     DayTabContent,
+    MainTabContent,
   },
   computed: {
     getLocales() {
@@ -66,12 +68,12 @@ export default {
      * @param key Имя свойства, котороое содержит название вкладки.
      */
     showTitle(value, key) {
-      return key === "HourlyTabContent"
-        ? value
-        : `${value.slice(0, 18)}${this.tenDaysTabTable.length}${value.slice(
+      return key === "DayTabContent"
+        ? `${value.slice(0, 18)}${this.tenDaysTabTable.length}${value.slice(
             17,
             30
-          )}`;
+          )}`
+        : value;
     },
   },
 };
@@ -89,23 +91,25 @@ export default {
 }
 .buttons-tabs {
   display: flex;
+  align-items: flex-end;
+  column-gap: 4px;
+  position: relative;
+  // border-bottom: 1px solid #b2d3e8;
+  box-shadow: inset 0 -1px 0 0 #b2d3e8;
 
   .button-tab {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex: 1;
+    border: none;
+    white-space: nowrap;
     cursor: pointer;
-    // box-shadow: inset 0 1px 0 0 #b2d3e8;
     border: 1px solid #b2d3e8;
-    // border-top: 3px solid transparent;
     background-color: #ffffff;
-    outline: none;
-    border-radius: 3px 3px 0 0;
-
-    &:nth-child(odd) {
-      margin-right: -1px;
-    }
+    border-radius: 4px 4px 0 0;
+    min-width: 10ch;
+    min-height: 34px;
 
     & span {
       display: inline-block;
@@ -132,7 +136,6 @@ export default {
     &.active {
       background-color: #f0f7fc;
       box-shadow: none;
-      // box-shadow: inset 0 3px 0 0 #04569c;
       border-top: none;
       border-top: 3px solid #04569c;
       border-bottom: none;
@@ -140,7 +143,7 @@ export default {
       & span {
         color: #000000;
         text-decoration: none;
-        padding-top: 8px;
+        padding: 11px 0;
       }
     }
   }
