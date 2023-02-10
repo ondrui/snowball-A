@@ -84,20 +84,23 @@ export default {
   padding: 0 8px;
 }
 .tab {
-  padding: 22px 24px;
+  // padding: 22px 24px;
   background-color: #f0f7fc;
   border: 1px solid #b2d3e8;
   border-top: none;
 }
 .buttons-tabs {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: flex-end;
-  column-gap: 4px;
+  column-gap: 2px;
   position: relative;
   // border-bottom: 1px solid #b2d3e8;
   box-shadow: inset 0 -1px 0 0 #b2d3e8;
 
   .button-tab {
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -149,9 +152,9 @@ export default {
   }
 }
 @media only screen and (max-width: 600px) {
-  .tab {
-    padding: 22px 5px;
-  }
+  // .tab {
+  //   padding: 22px 5px;
+  // }
 
   .tabs-container {
     padding: 0 4px;

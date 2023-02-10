@@ -20,6 +20,7 @@ requireComponents.keys().forEach((fileName) => {
 });
 
 export default {
+  name: "BaseIcon",
   props: {
     /**
      * Имя папки где хранится файл с изображением.

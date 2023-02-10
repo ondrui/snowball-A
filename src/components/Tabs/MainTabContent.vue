@@ -1,95 +1,136 @@
 <template>
-  <div>
-    <div class="switcher">
-      <div class="radio-btn-nav">
-        <label
-          :class="{ checked: isChecked(value[0]) }"
-          :for="value[0]"
-          v-for="value in radioValues"
-          :key="value[0]"
-        >
-          <input
-            type="radio"
-            name="radios"
-            :id="value[0]"
-            :value="value[0]"
-            @change="radioHandler"
-          />
-          {{ value[1] }}
-        </label>
-      </div>
-    </div>
-    <div class="btn-all-city">
-      <button>ddddd</button>
-    </div>
+  <div class="wrapper">
+    <SwitcherRadioBtn
+      class="switcher"
+      :radioValues="getRadioValues"
+      v-model="radio"
+    />
     <div class="map-container">
       <div class="selectors">
-        <div class="left">
-          <div></div>
+        <div class="side">
+          <div v-for="item in day" :key="item">{{ item }}</div>
         </div>
-        <div class="right">
-          <div></div>
+        <div class="side">
+          <div v-for="item in indicators" :key="item">
+            {{ languageExpressions(getLocales, "climateIndicators", item) }}
+          </div>
         </div>
       </div>
+      <ArmeniaMap />
+      <div class="link-city">
+        <a href="#">
+          {{ languageExpressions(getLocales, "allCityBtnCaption") }}
+        </a>
+      </div>
     </div>
-    <ArmeniaMap />
   </div>
 </template>
 
 <script>
 import ArmeniaMap from "@/components/Maps/ArmeniaMap.vue";
+import { languageExpressions } from "@/constants/locales";
 
 export default {
   components: {
     ArmeniaMap,
   },
+  data() {
+    return {
+      radio: "map",
+      day: [],
+      indicators: ["temp", "wind"],
+    };
+  },
+  created() {
+    [0, 3, 4].forEach((e) =>
+      this.day.push(languageExpressions(this.getLocales, "timeMarker")[e])
+    );
+    this.day;
+  },
+  computed: {
+    /**
+     * Возвращает языковую метку.
+     * @example
+     * "ru"
+     */
+    getLocales() {
+      return this.$store.getters.getLocales;
+    },
+    /**
+     * Возвращает настройки отрисовки радио кнопок в компоненте Navbar.vue.
+     */
+    getRadioValues() {
+      return [
+        ["map", languageExpressions(this.getLocales, "viewsSwitcher")[0]],
+        ["cities", languageExpressions(this.getLocales, "viewsSwitcher")[1]],
+      ];
+    },
+  },
+  methods: {
+    languageExpressions,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  padding: 14px;
+  text-align: center;
+}
 .switcher {
   margin: 0 auto;
 }
-.radio-btn-nav {
-  display: flex;
-  justify-content: space-around;
-  gap: 6px;
-  padding: 4px;
-  align-items: center;
-  // background: $color-pr;
-  border-radius: 10px;
+.map-container {
+  position: relative;
+  min-width: 750px;
+  min-height: 655px;
+  background: #ffffff;
+  border: 1px solid #d8e9f3;
+  margin-top: 14px;
 
-  &:focus-within {
-    outline: 2px solid #6ec0fc;
+  & .selectors {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.side {
+  display: flex;
+}
+.link-city {
+  position: absolute;
+  margin: 0 auto;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  width: max-content;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    background: url("@/assets/images/common/arrow-right.svg?external") no-repeat;
+    background-size: 9px 9px;
+    transition: transform 0.3s ease-in-out;
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    margin: auto 0;
+    right: 14px;
+    bottom: 0;
+    top: 0;
   }
 
-  & label {
-    padding: 2px 8px;
-    color: black;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
+  & a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 12px 30px 12px 14px;
+    background: #e1ecf9;
+    border-radius: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
     text-align: center;
-    cursor: pointer;
-    border-radius: 8px;
 
-    & input[type="radio"] {
-      appearance: none;
-      margin: 0;
-      clip: rect(0 0 0 0);
-      clip-path: inset(50%);
-      height: 1px;
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 1px;
-    }
-
-    &.checked {
-      background: white;
-      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
+    color: #04569c;
   }
 }
 // box-shadow: 0 0px 8px 4px rgb(0 70 128 / 81%);

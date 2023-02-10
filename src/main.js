@@ -2,11 +2,13 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import BaseIcon from "@/components/BaseIcon.vue";
+import components from "./components/UI";
 /**
- * Регистрация компоненты глобально.
+ * Регистрация часто используемых компонент глобально.
  */
-Vue.component("BaseIcon", BaseIcon);
+components.forEach((component) => {
+  Vue.component(component.name, component);
+});
 
 Vue.config.productionTip = false;
 

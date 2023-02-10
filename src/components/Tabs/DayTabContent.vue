@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div class="ten-days-container">
       <RowCaption class="wind">
         {{
@@ -126,6 +126,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  padding: 20px;
+}
 .ten-days-container {
   position: relative;
   background-color: #ffffff;

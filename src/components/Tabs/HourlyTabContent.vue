@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div ref="hourly-tab-container" class="hourly-tab-container">
       <div class="scroll-button-container">
         <button
@@ -286,6 +286,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  padding: 20px;
+}
 .hourly-tab-container {
   position: relative;
   background-color: #ffffff;
@@ -470,8 +473,16 @@ export default {
     touch-action: manipulation;
     transition: all 0.5s;
 
+    & svg {
+      transition: transform 0.5s;
+    }
+
     &:hover {
       background-color: rgba(29, 125, 188, 0.16);
+
+      & svg {
+        transform: scale(1.4);
+      }
     }
 
     &:active {
