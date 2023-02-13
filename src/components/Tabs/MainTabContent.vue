@@ -8,11 +8,19 @@
     <div class="map-container">
       <div class="selectors">
         <div class="side">
-          <div v-for="item in day" :key="item">{{ item }}</div>
+          <div v-for="item in day" :key="item">
+            <button>
+              <span>{{ item }}</span>
+            </button>
+          </div>
         </div>
         <div class="side">
           <div v-for="item in indicators" :key="item">
-            {{ languageExpressions(getLocales, "climateIndicators", item) }}
+            <button>
+              <span>{{
+                languageExpressions(getLocales, "climateIndicators", item)
+              }}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -91,10 +99,47 @@ export default {
   & .selectors {
     display: flex;
     justify-content: space-between;
+    padding: 18px 30px 0 30px;
   }
 }
 .side {
   display: flex;
+  column-gap: 16px;
+  & div {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      display: inline-block;
+      width: 100%;
+      height: 2px;
+      border-radius: 1px;
+      background-color: #8e9fb4;
+      top: 5px;
+    }
+  }
+  & button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    & span {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      color: #8e9fb4;
+      text-transform: capitalize;
+      transition: 200ms all ease-in-out;
+    }
+    &:hover span {
+      font-weight: 500;
+      color: #8e9fb4;
+    }
+  }
 }
 .link-city {
   position: absolute;

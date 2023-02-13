@@ -1,20 +1,19 @@
 <template>
   <div class="radio-switcher">
-    <label
-      :class="{ checked: isChecked(value[0]) }"
-      :for="value[0]"
+    <input
       v-for="value in radioValues"
-      :key="value[0]"
-    >
-      <input
-        type="radio"
-        name="radios"
-        :id="value[0]"
-        :value="value[0]"
-        @change="radioHandler"
-      />
+      :key="`i-${value[0]}`"
+      type="radio"
+      name="radios"
+      :id="value[0]"
+      :value="value[0]"
+      @change="radioHandler"
+      :checked="isChecked(value[0])"
+    />
+    <label :for="value[0]" v-for="value in radioValues" :key="`l-${value[0]}`">
       {{ value[1] }}
     </label>
+    <span class="highlighter"></span>
   </div>
 </template>
 
@@ -47,7 +46,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$n: 2;
 .radio-switcher {
+  position: relative;
   display: inline-flex;
   justify-content: space-around;
   gap: 6px;
@@ -55,12 +56,6 @@ export default {
   align-items: center;
   background: #ffffff;
   border-radius: 20px;
-  // height: 32px;
-  // width: 200px;
-
-  // &:focus-within {
-  //   outline: 2px solid #6ec0fc;
-  // }
 
   & label {
     // padding: 8px 32px;
@@ -72,29 +67,41 @@ export default {
     cursor: pointer;
     border-radius: 8px;
     padding: 5px 28px;
+    text-transform: capitalize;
+    z-index: 1;
+    transition: color 300ms ease-in-out;
+  }
 
-    &::first-letter {
-      text-transform: capitalize;
-    }
+  & input[type="radio"] {
+    appearance: none;
+    margin: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
 
-    & input[type="radio"] {
-      appearance: none;
-      margin: 0;
-      clip: rect(0 0 0 0);
-      clip-path: inset(50%);
-      height: 1px;
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 1px;
+    @for $i from 1 through $n {
+      &:nth-of-type(#{$i}):checked ~ label:nth-of-type(#{$i}) {
+        color: #000000;
+        & ~ .highlighter {
+          transform: translateX(#{($i - 1) * 100%});
+        }
+      }
     }
+  }
 
-    &.checked {
-      background: #f0f7fc;
-      border-radius: 20px;
-      color: #000000;
-      // padding: 5px 10px;
-    }
+  & .highlighter {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(50% - 2px);
+    height: calc(100% - 4px);
+    border-radius: 20px;
+    background: #f0f7fc;
+    transition: transform 300ms cubic-bezier(0, 0.5, 0.5, 1.1);
   }
 }
 </style>
