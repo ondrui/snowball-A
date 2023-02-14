@@ -6,24 +6,10 @@
       v-model="radio"
     />
     <div class="map-container">
-      <div class="selectors">
-        <div class="side">
-          <div v-for="item in day" :key="item">
-            <button>
-              <span>{{ item }}</span>
-            </button>
-          </div>
-        </div>
-        <div class="side">
-          <div v-for="item in indicators" :key="item">
-            <button>
-              <span>{{
-                languageExpressions(getLocales, "climateIndicators", item)
-              }}</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <nav class="navigation">
+        <MapMenu :list="dayMarkers" />
+        <MapMenu :list="indicators" />
+      </nav>
       <ArmeniaMap />
       <div class="link-city">
         <a href="#">
@@ -36,24 +22,32 @@
 
 <script>
 import ArmeniaMap from "@/components/Maps/ArmeniaMap.vue";
+import MapMenu from "@/components/Maps/MapMenu.vue";
 import { languageExpressions } from "@/constants/locales";
 
 export default {
   components: {
     ArmeniaMap,
+    MapMenu,
   },
   data() {
     return {
       radio: "map",
-      day: [],
-      indicators: ["temp", "wind"],
+      dayMarkers: [],
+      indicators: [],
     };
   },
   created() {
     [0, 3, 4].forEach((e) =>
-      this.day.push(languageExpressions(this.getLocales, "timeMarker")[e])
+      this.dayMarkers.push(
+        languageExpressions(this.getLocales, "timeMarker")[e]
+      )
     );
-    this.day;
+    ["temp", "wind"].forEach((e) =>
+      this.indicators.push(
+        languageExpressions(this.getLocales, "climateIndicators", e)
+      )
+    );
   },
   computed: {
     /**
@@ -96,49 +90,10 @@ export default {
   border: 1px solid #d8e9f3;
   margin-top: 14px;
 
-  & .selectors {
+  & .navigation {
     display: flex;
     justify-content: space-between;
     padding: 18px 30px 0 30px;
-  }
-}
-.side {
-  display: flex;
-  column-gap: 16px;
-  & div {
-    position: relative;
-    &::after {
-      position: absolute;
-      content: "";
-      display: inline-block;
-      width: 100%;
-      height: 2px;
-      border-radius: 1px;
-      background-color: #8e9fb4;
-      top: 5px;
-    }
-  }
-  & button {
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    & span {
-      font-weight: 400;
-      font-size: 13px;
-      line-height: 15px;
-      color: #8e9fb4;
-      text-transform: capitalize;
-      transition: 200ms all ease-in-out;
-    }
-    &:hover span {
-      font-weight: 500;
-      color: #8e9fb4;
-    }
   }
 }
 .link-city {
@@ -174,8 +129,11 @@ export default {
     font-size: 14px;
     line-height: 16px;
     text-align: center;
-
     color: #04569c;
+    &:hover {
+      text-decoration: underline;
+      background: #d0e3f8;
+    }
   }
 }
 // box-shadow: 0 0px 8px 4px rgb(0 70 128 / 81%);

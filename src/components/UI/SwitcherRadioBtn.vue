@@ -90,6 +90,9 @@ $n: 2;
           transform: translateX(#{($i - 1) * 100%});
         }
       }
+      &:nth-of-type(#{$i}):not(:checked) ~ label:nth-of-type(#{$i}):hover {
+        text-decoration: underline;
+      }
     }
   }
 

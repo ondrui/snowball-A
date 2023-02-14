@@ -75,6 +75,282 @@ export default new Vuex.Store({
       //   func: (periodAdjusted, diffTime, index) => 1 / Math.exp(index),
       // },
     ],
+    /**
+     * Данные для карточек с температурой.
+     */
+    datasetsCardTemp: [
+      {
+        name_ru: "Степанаван",
+        temp: "-6°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Гюмри",
+        temp: "-1°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Ванадзор",
+        temp: "+1°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Иджеван",
+        temp: "-4°",
+        condition: "cloudy_rain_1_thunderstorm_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Аштарак",
+        temp: "+11°",
+        condition: "cloudy_rain_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Раздан",
+        temp: "0°",
+        condition: "cloudy_snow_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Гавар",
+        temp: "-6°",
+        condition: "cloudy_snow_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Армавир",
+        temp: "-3°",
+        condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Ереван",
+        temp: "-6°",
+        condition: "cloudy_snowstorm_1-light",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Арташат",
+        temp: "-4°",
+        condition: "cloudy_rain_0_thunderstorm_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Варденис",
+        temp: "+98°",
+        condition: "mainly-clear_rain_0_thunderstorm_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Ехегнадзор",
+        temp: "+5°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Шаумян",
+        temp: "-1°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Капан",
+        temp: "-2°",
+        condition: "cloudy_rain_1_thunderstorm_1",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Гадрут",
+        temp: "+4°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Степанакерт",
+        temp: "0°",
+        condition: "snowstorm",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Кельбаджар",
+        temp: "-1°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Мартакерт",
+        temp: "+5°",
+        condition: "cloudy",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Лачин",
+        temp: "+55°",
+        condition: "cloudy_sleet_1",
+        x: 0,
+        y: 0,
+      },
+    ],
+    /**
+     * Данные для карточек с ветром.
+     */
+    datasetsCardWind: [
+      {
+        name_ru: "Степанаван",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Гюмри",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Ванадзор",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Иджеван",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Аштарак",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Раздан",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Гавар",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Армавир",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Ереван",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Арташат",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Варденис",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Ехегнадзор",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Шаумян",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Капан",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Гадрут",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Степанакерт",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Кельбаджар",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Мартакерт",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+      {
+        name_ru: "Лачин",
+        wind_dir: "se",
+        wind_descr: "13 м/с ЮВ",
+        x: 0,
+        y: 0,
+      },
+    ],
   },
   getters: {
     /**
@@ -767,6 +1043,18 @@ export default new Vuex.Store({
         max,
         data,
       };
+    },
+    /**
+     * Возвращает данные для температурных карточек на корте.
+     */
+    cardMapTemp: ({ datasetsCardTemp }) => {
+      return datasetsCardTemp.slice(0, 1);
+    },
+    /**
+     * Возвращает данные для карточек с данными ветра на корте.
+     */
+    cardMapWind: ({ datasetsCardWind }) => {
+      return datasetsCardWind;
     },
   },
   mutations: {

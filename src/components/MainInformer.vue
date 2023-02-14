@@ -52,8 +52,7 @@ export default {
 .main-container {
   margin: 0 auto;
   background-color: #ffffff;
-  max-width: 900px;
-  min-width: 400px;
+  width: 800px;
 }
 .hidden {
   display: none;
