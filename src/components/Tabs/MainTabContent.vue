@@ -7,10 +7,18 @@
     />
     <div class="map-container">
       <nav class="navigation">
-        <MapMenu :list="dayMarkers" />
-        <MapMenu :list="indicators" />
+        <MapMenu
+          :list="dayMarkers"
+          :selected="selectedDayMarker"
+          @select="selectDayMarker"
+        />
+        <MapMenu
+          :list="indicators"
+          :selected="selectedIndicator"
+          @select="selectIndicator"
+        />
       </nav>
-      <ArmeniaMap />
+      <ArmeniaMap :indicator="selectedIndicator" :data="weatherData" />
       <div class="link-city">
         <a href="#">
           {{ languageExpressions(getLocales, "allCityBtnCaption") }}
@@ -35,6 +43,8 @@ export default {
       radio: "map",
       dayMarkers: [],
       indicators: [],
+      selectedIndicator: "temp",
+      selectedDayMarker: "now",
     };
   },
   created() {
@@ -44,9 +54,10 @@ export default {
       )
     );
     ["temp", "wind"].forEach((e) =>
-      this.indicators.push(
-        languageExpressions(this.getLocales, "climateIndicators", e)
-      )
+      this.indicators.push([
+        e,
+        languageExpressions(this.getLocales, "climateIndicators", e),
+      ])
     );
   },
   computed: {
@@ -67,9 +78,30 @@ export default {
         ["cities", languageExpressions(this.getLocales, "viewsSwitcher")[1]],
       ];
     },
+    /**
+     * Возвращает данные для карточек на корте из стора.
+     */
+    cardMapData() {
+      return this.$store.getters.cardMapData;
+    },
+    /**
+     * Возвращает данные для карточек с учетом примененных фильтров.
+     */
+    weatherData() {
+      const dayMarker = this.selectedDayMarker ?? "now";
+      return this.cardMapData.map(({ name_ru, x, y, [dayMarker]: marker }) => {
+        return { name_ru, x, y, ...marker };
+      });
+    },
   },
   methods: {
     languageExpressions,
+    selectDayMarker(item) {
+      this.selectedDayMarker = item;
+    },
+    selectIndicator(item) {
+      this.selectedIndicator = item;
+    },
   },
 };
 </script>

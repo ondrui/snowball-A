@@ -3,11 +3,11 @@
     <li
       v-for="(item, index) in list"
       :key="`i-${index}`"
-      :class="{ active: index === 0 }"
+      :class="{ active: isActive(item[0]) }"
     >
-      <button>
-        <span :data-text="item">
-          {{ item }}
+      <button @click="select(item[0])">
+        <span :data-text="item[1]">
+          {{ item[1] }}
         </span>
       </button>
     </li>
@@ -20,6 +20,18 @@ export default {
     list: {
       type: Array,
       required: true,
+    },
+    selected: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    isActive(item) {
+      return this.selected === item;
+    },
+    select(item) {
+      this.$emit("select", item);
     },
   },
 };

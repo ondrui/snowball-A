@@ -114,8 +114,15 @@ export const setTimeFormat = (date, format, locales) => {
  * @param obj Объект с данными для отображения, в котором есть поле wind_dir.
  * Поле wind_dir - значение указывает направление ветра.
  */
-export const windDirection = (locales, obj) => {
-  const { wind_dir } = obj;
+export const windDirection = (locales, prop) => {
+  if (typeof prop === "string") {
+    const wind_dir = prop;
+    return wind_dir
+      ? `rotate(${languageExpressions(locales, "windDir", wind_dir)[0]})`
+      : "rotate(0)";
+  }
+  const { wind_dir } = prop;
+
   return wind_dir
     ? `rotate(${languageExpressions(locales, "windDir", wind_dir[0])[0]})`
     : "rotate(0)";
