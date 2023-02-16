@@ -23,9 +23,9 @@ const dataLocales = {
       feelsLike: "ощущается",
     },
     tabsDescr: {
-      MainTabContent: "главная",
-      HourlyTabContent: "почасовой прогноз",
-      DayTabContent: "прогноз погоды на дней",
+      main: "главная",
+      hourly: "почасовой прогноз",
+      days: "прогноз погоды на дней",
     },
     detailsSegmentTitle: "погода в Москве - подробный прогноз на дней",
     climateIndicators: {

@@ -2,7 +2,7 @@
   <div class="breadcrumbs-header">
     <div class="crumbs">
       <div v-for="(item, index) in crumbs" :key="item">
-        <a v-if="isLast(index)" href="#">{{ item }}</a>
+        <router-link v-if="isLast(index)" to="/go">{{ item }}</router-link>
         <span v-else>{{ item }}</span>
         <BaseIcon
           name="chevron-breadcrumb-right"

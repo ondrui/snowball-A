@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="card-link">
+  <router-link to="/go" class="card-link">
     <div class="city-title">
       <span>{{ data.name_ru }}</span>
     </div>
@@ -24,7 +24,7 @@
         <span>{{ data.wind_descr }}</span>
       </div>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>

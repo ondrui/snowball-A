@@ -10,20 +10,16 @@
         <span>{{ showTitle(value, key) }}</span>
       </button>
     </div>
-
-    <component
-      @go="showContent('HourlyTabContent')"
-      :is="currentTab"
-      class="tab"
-    />
+    <div class="tab">
+      <!-- route outlet -->
+      <!-- component matched by the route will render here -->
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import HourlyTabContent from "./HourlyTabContent.vue";
-import DayTabContent from "./DayTabContent.vue";
-import MainTabContent from "./MainTabContent.vue";
 
 export default {
   data() {
@@ -31,13 +27,11 @@ export default {
       /**
        * @param currentTab Имя открытой вкладки (кампоненты).
        */
-      currentTab: "MainTabContent",
+      currentTab: "main",
     };
   },
-  components: {
-    HourlyTabContent,
-    DayTabContent,
-    MainTabContent,
+  created() {
+    this.currentTab = this.$route.name;
   },
   computed: {
     getLocales() {
@@ -56,11 +50,13 @@ export default {
   methods: {
     languageExpressions,
     /**
-     * Обработчик для установки имени открытой вкладки. Передается через параметр.
+     * Обработчик для установки имени открытой вкладки. Передается
+     * через параметр.
      * @param key Строка содержит имя вкладки.
      */
     showContent(key) {
-      this.currentTab = `${key}`;
+      if (key !== this.$route.name) this.$router.push({ name: key });
+      this.currentTab = this.$route.name;
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.
@@ -68,7 +64,7 @@ export default {
      * @param key Имя свойства, котороое содержит название вкладки.
      */
     showTitle(value, key) {
-      return key === "DayTabContent"
+      return key === "days"
         ? `${value.slice(0, 18)}${this.tenDaysTabTable.length}${value.slice(
             17,
             30

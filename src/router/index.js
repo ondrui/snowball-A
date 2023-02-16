@@ -1,23 +1,43 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+
+import MainInformer from "../views/MainInformer.vue";
+import NotFound from "@/components/NotFound.vue";
+import HourlyTabContent from "@/components/Tabs/HourlyTabContent.vue";
+import MainTabContent from "@/components/Tabs/MainTabContent.vue";
+import DayTabContent from "@/components/Tabs/DayTabContent.vue";
+
+// import HomeView from "../views/HomeView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/go", redirect: "/" },
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    component: MainInformer,
+    children: [
+      {
+        path: "/",
+        name: "main",
+        component: MainTabContent,
+      },
+      {
+        path: "/hourly",
+        name: "hourly",
+        component: HourlyTabContent,
+      },
+      {
+        path: "/days",
+        name: "days",
+        component: DayTabContent,
+      },
+    ],
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: NotFound,
   },
 ];
 

@@ -1,15 +1,13 @@
 <template>
   <div id="app">
-    <MainInformer />
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MainInformer from "@/components/MainInformer.vue";
 export default {
-  components: {
-    MainInformer,
-  },
   created() {
     this.getData();
   },

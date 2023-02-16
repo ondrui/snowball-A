@@ -356,7 +356,7 @@ export default new Vuex.Store({
         y: 342,
       },
       {
-        name_ru: "Шаумян",
+        name_ru: "Геранбой",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",

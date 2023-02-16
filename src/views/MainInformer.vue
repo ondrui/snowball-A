@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import HeaderInformer from "./Header/HeaderInformer.vue";
-import TabsInformer from "./Tabs/TabsInformer.vue";
-import DetailsSegment from "./DetailsSegment/DetailsSegment.vue";
-import AllSVGIcons from "./AllSVGIcons.vue";
+import HeaderInformer from "../components/Header/HeaderInformer.vue";
+import TabsInformer from "../components/Tabs/TabsInformer.vue";
+import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
+import AllSVGIcons from "../components/AllSVGIcons.vue";
 import { languageExpressions } from "@/constants/locales";
 import { setTimeFormat } from "@/constants/functions";
 

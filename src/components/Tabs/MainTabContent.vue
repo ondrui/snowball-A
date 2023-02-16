@@ -20,9 +20,9 @@
       </nav>
       <ArmeniaMap :indicator="selectedIndicator" :data="weatherData" />
       <div class="link-city">
-        <a href="#">
-          {{ languageExpressions(getLocales, "allCityBtnCaption") }}
-        </a>
+        <router-link to="/go">{{
+          languageExpressions(getLocales, "allCityBtnCaption")
+        }}</router-link>
       </div>
     </div>
   </div>
