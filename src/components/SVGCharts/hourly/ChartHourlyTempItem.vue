@@ -101,7 +101,8 @@ export default {
   // stroke-dasharray: 8 4;
   stroke: #b63705;
 }
-.exp_12 {
+.exp_12,
+.linear_8 {
   // stroke-dasharray: 8 4;
   stroke: #418105;
 }

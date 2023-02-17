@@ -7,8 +7,6 @@ import HourlyTabContent from "@/components/Tabs/HourlyTabContent.vue";
 import MainTabContent from "@/components/Tabs/MainTabContent.vue";
 import DayTabContent from "@/components/Tabs/DayTabContent.vue";
 
-// import HomeView from "../views/HomeView.vue";
-
 Vue.use(VueRouter);
 
 const routes = [

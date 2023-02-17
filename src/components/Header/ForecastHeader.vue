@@ -84,6 +84,7 @@ export default {
   column-gap: 14px;
   row-gap: 22px;
   flex-wrap: nowrap;
+  // height: 88px;
 }
 .header-content-left {
   display: flex;
@@ -103,13 +104,13 @@ export default {
     justify-content: center;
     align-self: center;
     row-gap: 2px;
-    width: 180px;
+    width: 160px;
     padding-left: 15px;
 
     & .header-content-left-text {
       font-weight: 400;
-      font-size: 14px;
-      line-height: 16px;
+      font-size: 12px;
+      line-height: 14px;
       color: #9c9c9c;
     }
 
@@ -119,8 +120,8 @@ export default {
 
     & .feeling {
       font-weight: 500;
-      font-size: 16px;
-      line-height: 18px;
+      font-size: 14px;
+      line-height: 16px;
       color: #000000;
     }
 
@@ -137,14 +138,14 @@ export default {
   align-items: center;
 }
 
-@media only screen and (max-width: 890px) {
-  .header-content-right {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 8px 17px;
-  }
-  .header-content {
-    flex-wrap: wrap;
-  }
-}
+// @media only screen and (max-width: 890px) {
+//   .header-content-right {
+//     display: grid;
+//     grid-template-columns: repeat(2, 1fr);
+//     grid-gap: 8px 17px;
+//   }
+//   .header-content {
+//     flex-wrap: wrap;
+//   }
+// }
 </style>
