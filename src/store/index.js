@@ -81,6 +81,7 @@ export default new Vuex.Store({
     datasetsMap: [
       {
         name_ru: "Степанаван",
+        name_en: "Stepanavan",
         now: {
           temp: "-6°",
           condition: "clear",
@@ -104,6 +105,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Гюмри",
+        name_en: "Gyumri",
         now: {
           temp: "+1°",
           condition: "cloudy_rain_0",
@@ -127,6 +129,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Ванадзор",
+        name_en: "Vanadzor",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -150,6 +153,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Иджеван",
+        name_en: "Ijevan",
         now: {
           temp: "+6°",
           condition: "cloudy_rain_1_thunderstorm_1_hail_1",
@@ -173,6 +177,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Аштарак",
+        name_en: "Ashtarak",
         now: {
           temp: "+5°",
           condition: "cloudy_snow_0",
@@ -196,6 +201,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Раздан",
+        name_en: "Hrazdan",
         now: {
           temp: "+5°",
           condition: "mainly-clear",
@@ -219,6 +225,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Гавар",
+        name_en: "Gavar",
         now: {
           temp: "+5°",
           condition: "mostly-cloudy",
@@ -242,6 +249,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Армавир",
+        name_en: "Armavir",
         now: {
           temp: "+5°",
           condition: "partly-cloudy_rain_1",
@@ -265,6 +273,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Ереван",
+        name_en: "Yerevan",
         now: {
           temp: "+5°",
           condition: "partly-cloudy_sleet_1",
@@ -288,6 +297,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Арташат",
+        name_en: "Artashat",
         now: {
           temp: "+5°",
           condition: "partly-cloudy_snow_1",
@@ -311,6 +321,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Варденис",
+        name_en: "Vardenis",
         now: {
           temp: "+5°",
           condition: "cloudy_snowstorm_1",
@@ -334,6 +345,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Ехегнадзор",
+        name_en: "Yeghegnadzor",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -357,6 +369,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Геранбой",
+        name_en: "Goranboy",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -380,6 +393,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Капан",
+        name_en: "Kapan",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -403,6 +417,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Гадрут",
+        name_en: "Hadrut",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -426,6 +441,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Степанакерт",
+        name_en: "Khankendi",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -449,6 +465,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Кельбаджар",
+        name_en: "Kalbajar",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -472,6 +489,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Мартакерт",
+        name_en: "Martakert",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -495,6 +513,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Лачин",
+        name_en: "Lachin",
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
