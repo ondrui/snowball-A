@@ -157,7 +157,7 @@
           ref="circle"
           :cx="item.x_svg"
           :cy="item.y_svg"
-          r="0"
+          r="1"
         />
       </svg>
     </div>
