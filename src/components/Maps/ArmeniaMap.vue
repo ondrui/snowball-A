@@ -354,7 +354,6 @@ export default {
       transition: 300ms all ease-in-out;
     }
     & path:hover {
-      // transform: scale(1.5);
       fill: #04569c;
     }
     & > g {

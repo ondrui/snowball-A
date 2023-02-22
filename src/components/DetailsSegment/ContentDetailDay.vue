@@ -30,7 +30,7 @@
               width="8"
               name="wind-direction-blue"
               pick="common"
-              :transform="windDirection(getLocales, value.wind)"
+              :style="windDirection(getLocales, value.wind)"
             />
           </div>
           <span>{{ value.wind.wind_dir[1] }}</span>

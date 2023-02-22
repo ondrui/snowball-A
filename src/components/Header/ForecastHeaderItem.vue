@@ -8,11 +8,11 @@
         width="40"
       />
       <BaseIcon
+        :style="windDirection(getLocales, value)"
         :name="value.icon"
         pick="common"
         class="icon"
         width="14"
-        :transform="windDirection(getLocales, value)"
       />
     </div>
     <div class="descr">

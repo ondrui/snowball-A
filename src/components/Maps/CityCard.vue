@@ -17,7 +17,7 @@
           width="10"
           name="wind-direction-blue"
           pick="common"
-          :transform="windDirection(getLocales, data.wind_dir)"
+          :style="windDirection(getLocales, data.wind_dir)"
         />
       </div>
       <div class="value-wind">

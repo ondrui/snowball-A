@@ -118,14 +118,18 @@ export const windDirection = (locales, prop) => {
   if (typeof prop === "string") {
     const wind_dir = prop;
     return wind_dir
-      ? `rotate(${languageExpressions(locales, "windDir", wind_dir)[0]})`
-      : "rotate(0)";
+      ? `transform:rotate(${
+          languageExpressions(locales, "windDir", wind_dir)[0]
+        }deg)`
+      : "transform:rotate(0deg)";
   }
   const { wind_dir } = prop;
 
   return wind_dir
-    ? `rotate(${languageExpressions(locales, "windDir", wind_dir[0])[0]})`
-    : "rotate(0)";
+    ? `transform:rotate(${
+        languageExpressions(locales, "windDir", wind_dir[0])[0]
+      }deg)`
+    : "transform:rotate(0deg)";
 };
 /**
  * Возвращает долготу дня в часах и минутах.
