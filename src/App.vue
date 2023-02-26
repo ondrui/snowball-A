@@ -27,7 +27,7 @@ export default {
         setTimeout(() => {
           this.$store.commit("setData", total);
           this.$store.commit("setDataAPI", data);
-        }, 1000);
+        }, 300);
       } catch (error) {
         this.answer = "Error! Could not reach the API. " + error;
       }
