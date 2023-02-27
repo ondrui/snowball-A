@@ -80,8 +80,234 @@ export default new Vuex.Store({
      */
     datasetsMap: [
       {
+        name_ru: "Гарнарич",
+        name_en: "Garnarich",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 19,
+        y_svg: 44,
+      },
+      {
+        name_ru: "Бавра",
+        name_en: "Bavra",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 73,
+        y_svg: 35,
+      },
+      {
+        name_ru: "Какавасар",
+        name_en: "Kaqavasar",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 101,
+        y_svg: 76,
+      },
+      {
+        name_ru: "Амасия",
+        name_en: "Amasia",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 50,
+        y_svg: 80,
+      },
+      {
+        name_ru: "Джаджур",
+        name_en: "Jajur",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 96,
+        y_svg: 110,
+      },
+      {
+        name_ru: "Азатан",
+        name_en: "Azatan",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 66,
+        y_svg: 145,
+      },
+      {
+        name_ru: "Баграван",
+        name_en: "Bagravan",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 32,
+        y_svg: 188,
+      },
+      {
+        name_ru: "Маралик",
+        name_en: "Maralik",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 73,
+        y_svg: 173,
+      },
+      {
+        name_ru: "Артик",
+        name_en: "Artik",
+        area_en: "Shirak Province",
+        now: {
+          temp: "-6°",
+          condition: "clear",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-3°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "+12°",
+          condition: "cloudy_snow_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 107,
+        y_svg: 161,
+      },
+      {
         name_ru: "Степанаван",
         name_en: "Stepanavan",
+        home: true,
         now: {
           temp: "-6°",
           condition: "clear",
@@ -106,6 +332,8 @@ export default new Vuex.Store({
       {
         name_ru: "Гюмри",
         name_en: "Gyumri",
+        area_en: "Shirak Province",
+        home: true,
         now: {
           temp: "+1°",
           condition: "cloudy_rain_0",
@@ -124,12 +352,13 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
-        x_svg: 51,
-        y_svg: 94,
+        x_svg: 62,
+        y_svg: 117,
       },
       {
         name_ru: "Ванадзор",
         name_en: "Vanadzor",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -154,6 +383,7 @@ export default new Vuex.Store({
       {
         name_ru: "Иджеван",
         name_en: "Ijevan",
+        home: true,
         now: {
           temp: "+6°",
           condition: "cloudy_rain_1_thunderstorm_1_hail_1",
@@ -178,6 +408,7 @@ export default new Vuex.Store({
       {
         name_ru: "Аштарак",
         name_en: "Ashtarak",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_snow_0",
@@ -202,6 +433,7 @@ export default new Vuex.Store({
       {
         name_ru: "Раздан",
         name_en: "Hrazdan",
+        home: true,
         now: {
           temp: "+5°",
           condition: "mainly-clear",
@@ -226,6 +458,7 @@ export default new Vuex.Store({
       {
         name_ru: "Гавар",
         name_en: "Gavar",
+        home: true,
         now: {
           temp: "+5°",
           condition: "mostly-cloudy",
@@ -250,6 +483,7 @@ export default new Vuex.Store({
       {
         name_ru: "Армавир",
         name_en: "Armavir",
+        home: true,
         now: {
           temp: "+5°",
           condition: "partly-cloudy_rain_1",
@@ -274,6 +508,7 @@ export default new Vuex.Store({
       {
         name_ru: "Ереван",
         name_en: "Yerevan",
+        home: true,
         now: {
           temp: "+5°",
           condition: "partly-cloudy_sleet_1",
@@ -298,6 +533,7 @@ export default new Vuex.Store({
       {
         name_ru: "Арташат",
         name_en: "Artashat",
+        home: true,
         now: {
           temp: "+5°",
           condition: "partly-cloudy_snow_1",
@@ -322,6 +558,7 @@ export default new Vuex.Store({
       {
         name_ru: "Варденис",
         name_en: "Vardenis",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_snowstorm_1",
@@ -346,6 +583,7 @@ export default new Vuex.Store({
       {
         name_ru: "Ехегнадзор",
         name_en: "Yeghegnadzor",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -370,6 +608,7 @@ export default new Vuex.Store({
       {
         name_ru: "Геранбой",
         name_en: "Goranboy",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -394,6 +633,7 @@ export default new Vuex.Store({
       {
         name_ru: "Капан",
         name_en: "Kapan",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -418,6 +658,7 @@ export default new Vuex.Store({
       {
         name_ru: "Гадрут",
         name_en: "Hadrut",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -442,6 +683,7 @@ export default new Vuex.Store({
       {
         name_ru: "Степанакерт",
         name_en: "Khankendi",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -466,6 +708,7 @@ export default new Vuex.Store({
       {
         name_ru: "Кельбаджар",
         name_en: "Kalbajar",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -490,6 +733,7 @@ export default new Vuex.Store({
       {
         name_ru: "Мартакерт",
         name_en: "Martakert",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
@@ -514,6 +758,7 @@ export default new Vuex.Store({
       {
         name_ru: "Лачин",
         name_en: "Lachin",
+        home: true,
         now: {
           temp: "+5°",
           condition: "cloudy_rain_0_thunderstorm_1",
