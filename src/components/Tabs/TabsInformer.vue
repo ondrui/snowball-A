@@ -13,7 +13,7 @@
     <div class="tab">
       <!-- route outlet -->
       <!-- component matched by the route will render here -->
-      <router-view></router-view>
+      <router-view @go="showContent('hourly')"></router-view>
     </div>
   </div>
 </template>
