@@ -307,6 +307,7 @@ export default new Vuex.Store({
       {
         name_ru: "Степанаван",
         name_en: "Stepanavan",
+        area_en: "Lori Province",
         home: true,
         now: {
           temp: "-6°",
@@ -326,8 +327,8 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
-        x_svg: 96,
-        y_svg: 25,
+        x_svg: 171,
+        y_svg: 60,
       },
       {
         name_ru: "Гюмри",
@@ -358,6 +359,7 @@ export default new Vuex.Store({
       {
         name_ru: "Ванадзор",
         name_en: "Vanadzor",
+        area_en: "Lori Province",
         home: true,
         now: {
           temp: "+5°",
@@ -377,8 +379,372 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
-        x_svg: 175,
-        y_svg: 75,
+        x_svg: 191,
+        y_svg: 123,
+      },
+      {
+        name_ru: "Мецаван",
+        name_en: "Metsavan",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 129,
+        y_svg: 24,
+      },
+      {
+        name_ru: "Ташир",
+        name_en: "Tashir",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 153,
+        y_svg: 41,
+      },
+      {
+        name_ru: "Благодарное",
+        name_en: "Blagodarnoe",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 128,
+        y_svg: 55,
+      },
+      {
+        name_ru: "Привольное",
+        name_en: "Privolnoye",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 189,
+        y_svg: 36,
+      },
+      {
+        name_ru: "Шамлуг",
+        name_en: "Shamlugh",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 230,
+        y_svg: 24,
+      },
+      {
+        name_ru: "Ахтала",
+        name_en: "Akhtala",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 254,
+        y_svg: 37,
+      },
+      {
+        name_ru: "Алаверди",
+        name_en: "Alaverdi",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 223,
+        y_svg: 46,
+      },
+      {
+        name_ru: "Сараарт",
+        name_en: "Sarahart",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 137,
+        y_svg: 92,
+      },
+      {
+        name_ru: "Цахкабер",
+        name_en: "Tsakhkaber",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 113,
+        y_svg: 116,
+      },
+      {
+        name_ru: "Спитак",
+        name_en: "Spitak",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 148,
+        y_svg: 112,
+      },
+      {
+        name_ru: "Гаргар",
+        name_en: "Gargar",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 183,
+        y_svg: 86,
+      },
+      {
+        name_ru: "Туманян",
+        name_en: "Tumanyan",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 221,
+        y_svg: 69,
+      },
+      {
+        name_ru: "Ваагни",
+        name_en: "Vahagni",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 211,
+        y_svg: 97,
+      },
+      {
+        name_ru: "Маргаовит",
+        name_en: "Margahovit",
+        area_en: "Lori Province",
+
+        now: {
+          temp: "+5°",
+          condition: "cloudy_rain_0_thunderstorm_1",
+          wind_dir: "se",
+          wind_descr: "13 м/с ЮВ",
+        },
+        tomorrow: {
+          temp: "-33°",
+          condition: "cloudy_rain_1",
+          wind_dir: "ne",
+          wind_descr: "3 м/с СВ",
+        },
+        overmorrow: {
+          temp: "-2°",
+          condition: "cloudy_rain_1_thunderstorm_1",
+          wind_dir: "w",
+          wind_descr: "7 м/с З",
+        },
+        x_svg: 227,
+        y_svg: 136,
       },
       {
         name_ru: "Иджеван",

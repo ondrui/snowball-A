@@ -196,11 +196,11 @@
             fill="#E9F4FE"
           />
           <path
-            :ref="districts.vayotsZor.name"
-            :data-name="districts.vayotsZor.name"
-            :id="districts.vayotsZor.name"
+            :ref="districts.vayotsDzor.name"
+            :data-name="districts.vayotsDzor.name"
+            :id="districts.vayotsDzor.name"
             :class="{
-              active: isArea(districts.vayotsZor.name),
+              active: isArea(districts.vayotsDzor.name),
               hover: !animationOn,
             }"
             d="M430.715 320.955C432.802 321.37 434.951 321.92 436.134
@@ -531,9 +531,9 @@ export default {
           viewbox: "199 122 322 254;",
           name: "gegharkunik",
         },
-        vayotsZor: {
+        vayotsDzor: {
           viewbox: "279 299 192 152;",
-          name: "vayotsZor",
+          name: "vayotsDzor",
         },
         syunik: {
           viewbox: "350 327 324 256;",
@@ -564,17 +564,6 @@ export default {
     );
   },
   mounted() {
-    this.calcNewViewBox("aragatsotn");
-    this.calcNewViewBox("ararat");
-    this.calcNewViewBox("shirak");
-    this.calcNewViewBox("kotayk");
-    this.calcNewViewBox("lori");
-    this.calcNewViewBox("tavush");
-    this.calcNewViewBox("armavir");
-    this.calcNewViewBox("gegharkunik");
-    this.calcNewViewBox("vayotsZor");
-    this.calcNewViewBox("syunik");
-
     /**
      * После монтирования компоненты вызываем функцию расчета координат карты
      * и карточек относительно viewport.
@@ -845,7 +834,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 0 2px teal;
     & path {
       transition: 300ms all ease-in-out;
       &.hover:hover:not(#sevan_lake):not(.active) {
