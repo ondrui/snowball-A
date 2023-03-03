@@ -54,4 +54,18 @@ export default {
     text-decoration: underline;
   }
 }
+@media only screen and (max-width: 600px) {
+  .table {
+    padding: 30px 10px 108px 10px;
+  }
+  .table-item {
+    padding: 9px 14px 9px 10px;
+    &:nth-child(-n + 4) {
+      padding: 0 14px 9px 10px;
+    }
+    &:nth-last-child(-n + 4) {
+      padding: 9px 14px 0 10px;
+    }
+  }
+}
 </style>

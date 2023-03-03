@@ -29,7 +29,7 @@
               <div>{{ day.date }}</div>
             </div>
             <div class="ten-days-icon">
-              <BaseIcon width="46" :name="day.condition" pick="light" />
+              <BaseIcon width="100%" :name="day.condition" pick="light" />
             </div>
             <div class="ten-days-temp-item"></div>
             <div class="ten-days-wind-descr">
@@ -156,7 +156,7 @@ export default {
   & .ten-days-day {
     position: relative;
     flex: 1 0;
-    min-width: 56px;
+    min-width: 50px;
     transition: box-shadow 0.5s ease-in-out;
     border-bottom: 1px solid #d8e9f3;
     border-right: 1px solid #d8e9f3;
@@ -223,7 +223,9 @@ export default {
   line-height: 21px;
 }
 .ten-days-icon {
+  margin: 0 auto;
   height: 65px;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -290,13 +292,18 @@ export default {
     transition: transform 0.3s ease-in-out;
   }
 }
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 760px) {
   .ten-days-container {
     border: 1px solid #d8e9f3;
   }
   // .swiper-container {
   //   overflow-x: scroll;
   // }
+}
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    padding: 20px 5px;
+  }
 }
 @media only screen and (max-width: 450px) {
   .ten-days-icon svg {

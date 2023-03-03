@@ -100,14 +100,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex: 1;
+    // flex: 1;
     border: none;
     white-space: nowrap;
     cursor: pointer;
     border: 1px solid #b2d3e8;
     background-color: #ffffff;
     border-radius: 4px 4px 0 0;
-    min-width: 10ch;
+    // min-width: 10ch;
     min-height: 34px;
 
     & span {
@@ -116,7 +116,7 @@ export default {
       font-size: 14px;
       line-height: 15px;
       color: #04569c;
-      padding: 10px 0;
+      padding: 10px 5px;
 
       &::first-letter {
         text-transform: capitalize;
@@ -142,7 +142,7 @@ export default {
       & span {
         color: #000000;
         text-decoration: none;
-        padding: 11px 0;
+        padding: 11px 5px;
       }
     }
   }

@@ -138,14 +138,14 @@ export default {
   align-items: center;
 }
 
-// @media only screen and (max-width: 890px) {
-//   .header-content-right {
-//     display: grid;
-//     grid-template-columns: repeat(2, 1fr);
-//     grid-gap: 8px 17px;
-//   }
-//   .header-content {
-//     flex-wrap: wrap;
-//   }
-// }
+@media only screen and (max-width: 890px) {
+  .header-content-right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px 17px;
+  }
+  .header-content {
+    flex-wrap: wrap;
+  }
+}
 </style>

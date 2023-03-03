@@ -503,7 +503,11 @@ export default {
   position: absolute;
   left: 0;
 }
-
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    padding: 20px 5px;
+  }
+}
 @media only screen and (max-width: 450px) {
   .hourly-icon svg {
     width: 30px;
