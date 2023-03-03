@@ -196,11 +196,11 @@
             fill="#E9F4FE"
           />
           <path
-            :ref="districts.vayotsDzor.name"
-            :data-name="districts.vayotsDzor.name"
-            :id="districts.vayotsDzor.name"
+            :ref="districts['vayots dzor'].name"
+            :data-name="districts['vayots dzor'].name"
+            :id="districts['vayots dzor'].name"
             :class="{
-              active: isArea(districts.vayotsDzor.name),
+              active: isArea(districts['vayots dzor'].name),
               hover: !animationOn,
             }"
             d="M430.715 320.955C432.802 321.37 434.951 321.92 436.134
@@ -402,6 +402,8 @@
           v-for="(item, index) in data"
           :key="`c-${index}`"
           :data-key="item.name_en"
+          :data-area="item.area_en?.slice(0, -9).toLowerCase()"
+          :data-home="item.home"
           ref="circle"
           :cx="item.x_svg"
           :cy="item.y_svg"
@@ -474,10 +476,12 @@ export default {
        * @example
        * {
        * "Garnarich":{
-       *  "left":"215.41891479492188px","top":"84.7847900390625px"
+       *  "left":"215px","top":"84px",
+       *  "area":"shirak", "home": "undefined"
        * },
        * "Bavra":{
-       *  "left":"354.8363952636719px","top":"61.548553466796875px"
+       *  "left":"354px","top":"61px",
+       *  "area":"shirak", "home": "undefined"
        * },}
        */
       pointsCityCoord: {},
@@ -531,9 +535,9 @@ export default {
           viewbox: "199 122 322 254;",
           name: "gegharkunik",
         },
-        vayotsDzor: {
+        "vayots dzor": {
           viewbox: "279 299 192 152;",
-          name: "vayotsDzor",
+          name: "vayots dzor",
         },
         syunik: {
           viewbox: "350 327 324 256;",
@@ -564,11 +568,17 @@ export default {
     );
   },
   mounted() {
+    // console.log("shirak", this.$refs.shirak.getBoundingClientRect());
+    // console.log("shirak", this.$refs.shirak.getCTM());
+    // console.log("shirak", this.$refs.shirak.getScreenCTM());
+    // console.log("circle", this.$refs.circle[0].getScreenCTM());
+    // console.log("refs", this.$refs);
     /**
      * После монтирования компоненты вызываем функцию расчета координат карты
      * и карточек относительно viewport.
      */
-    this.calcCoordinates();
+    this.mapRectPosition();
+    this.initialCardPosition();
     /**
      * Добавляем слушатель срабатывающий при окончании анимации карты.
      */
@@ -660,13 +670,14 @@ export default {
       this.calcCoordinates();
       this.isVisible = false;
       this.animationOn = false;
+      console.log("shirak", this.$refs.shirak.getScreenCTM());
     },
     /**
      * Функция расчета координат карты и карточек относительно viewport.
      */
     calcCoordinates() {
       this.mapRectPosition();
-      this.cardPosition();
+      this.calcCardPosition();
     },
     /**
      * Определяем и записываем позицию относительно viewport
@@ -682,11 +693,12 @@ export default {
       this.coordMap.top = getPoint("layer", "top");
     },
     /**
+     * Функция выполняется один раз при монтировании компоненты.
      * Определяем и записываем позицию карточек с информацией относительно
      * контейнера с картой. Плюс добавляем реактивные свойства в
-     * существующий объект.
+     * существующий объект data.pointsCityCoord.
      */
-    cardPosition() {
+    initialCardPosition() {
       const { circle } = this.$refs;
       circle.forEach((child) => {
         const { left, top } = child.getBoundingClientRect();
@@ -701,7 +713,47 @@ export default {
           "top",
           `${(top - this.coordMap.top).toFixed(0)}px`
         );
+        this.$set(
+          this.pointsCityCoord[child.dataset.key],
+          "area",
+          child.dataset.area
+        );
+        this.$set(
+          this.pointsCityCoord[child.dataset.key],
+          "home",
+          child.dataset.home
+        );
       });
+    },
+    /**
+     * Вычисляем и обновляем позицию карточек с информацией относительно
+     * контейнера с картой по выбранному району.
+     */
+    calcCardPosition() {
+      const { circle } = this.$refs;
+      console.log(circle);
+      circle
+        .filter(
+          (f) =>
+            f.dataset.area === this.selectedDistrict.name ||
+            (this.selectedDistrict.name === "home" && f.dataset.home)
+        )
+        .forEach((value) => {
+          const { left, top } = value.getBoundingClientRect();
+          this.pointsCityCoord[value.dataset.key].left = `${(
+            left - this.coordMap.left
+          ).toFixed(0)}px`;
+          this.pointsCityCoord[value.dataset.key].top = `${(
+            top - this.coordMap.top
+          ).toFixed(0)}px`;
+        });
+      console.log(
+        circle.filter(
+          (f) =>
+            f.dataset.area === this.selectedDistrict.name ||
+            (this.selectedDistrict.name === "home" && f.dataset.home)
+        )
+      );
     },
     /**
      * Колбэк-функция вызывается при клике на карту.
@@ -709,6 +761,7 @@ export default {
      * по которому кликнули.
      */
     districtShow(id) {
+      console.log("shirak", this.$refs.shirak.getScreenCTM());
       /**
        * Если пользователь кликает на область на карте, которая уже была
        * выбрана ранее или происходит анимация карты, то выходим из функции.
