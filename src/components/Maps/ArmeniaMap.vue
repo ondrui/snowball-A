@@ -731,7 +731,6 @@ export default {
      */
     calcCardPosition() {
       const { circle } = this.$refs;
-      console.log(circle);
       circle
         .filter(
           (f) =>
@@ -747,13 +746,6 @@ export default {
             top - this.coordMap.top
           ).toFixed(0)}px`;
         });
-      console.log(
-        circle.filter(
-          (f) =>
-            f.dataset.area === this.selectedDistrict.name ||
-            (this.selectedDistrict.name === "home" && f.dataset.home)
-        )
-      );
     },
     /**
      * Колбэк-функция вызывается при клике на карту.
@@ -761,7 +753,6 @@ export default {
      * по которому кликнули.
      */
     districtShow(id) {
-      console.log("shirak", this.$refs.shirak.getScreenCTM());
       /**
        * Если пользователь кликает на область на карте, которая уже была
        * выбрана ранее или происходит анимация карты, то выходим из функции.
