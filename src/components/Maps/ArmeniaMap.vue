@@ -570,11 +570,7 @@ export default {
     );
   },
   mounted() {
-    // console.log("shirak", this.$refs.shirak.getBoundingClientRect());
-    // console.log("shirak", this.$refs.shirak.getCTM());
-    // console.log("shirak", this.$refs.shirak.getScreenCTM());
-    // console.log("circle", this.$refs.circle[0].getScreenCTM());
-    // console.log("refs", this.$refs);
+    this.calcNewViewBox("shirak");
     /**
      * После монтирования компоненты вызываем функцию расчета координат карты
      * и карточек относительно viewport.
@@ -669,10 +665,10 @@ export default {
      * callback-функция обработчика события окончания анимации карты.
      */
     animateHandler() {
+      this.calcNewViewBox("shirak");
       this.calcCoordinates();
       this.isVisible = false;
       this.animationOn = false;
-      console.log("shirak", this.$refs.shirak.getScreenCTM());
     },
     /**
      * Функция расчета координат карты и карточек относительно viewport.
@@ -704,27 +700,34 @@ export default {
       const { circle } = this.$refs;
       circle.forEach((child) => {
         const { left, top } = child.getBoundingClientRect();
-        this.$set(this.pointsCityCoord, child.dataset.key, {});
-        this.$set(
-          this.pointsCityCoord[child.dataset.key],
-          "left",
-          `${(left - this.coordMap.left).toFixed(0)}px`
-        );
-        this.$set(
-          this.pointsCityCoord[child.dataset.key],
-          "top",
-          `${(top - this.coordMap.top).toFixed(0)}px`
-        );
-        this.$set(
-          this.pointsCityCoord[child.dataset.key],
-          "area",
-          child.dataset.area
-        );
-        this.$set(
-          this.pointsCityCoord[child.dataset.key],
-          "home",
-          child.dataset.home
-        );
+        const value = {
+          left: `${(left - this.coordMap.left).toFixed(0)}px`,
+          top: `${(top - this.coordMap.top).toFixed(0)}px`,
+          area: child.dataset.area,
+          home: child.dataset.home,
+        };
+        this.$set(this.pointsCityCoord, child.dataset.key, value);
+        // this.$set(this.pointsCityCoord, child.dataset.key, {});
+        // this.$set(
+        //   this.pointsCityCoord[child.dataset.key],
+        //   "left",
+        //   `${(left - this.coordMap.left).toFixed(0)}px`
+        // );
+        // this.$set(
+        //   this.pointsCityCoord[child.dataset.key],
+        //   "top",
+        //   `${(top - this.coordMap.top).toFixed(0)}px`
+        // );
+        // this.$set(
+        //   this.pointsCityCoord[child.dataset.key],
+        //   "area",
+        //   child.dataset.area
+        // );
+        // this.$set(
+        //   this.pointsCityCoord[child.dataset.key],
+        //   "home",
+        //   child.dataset.home
+        // );
       });
     },
     /**
@@ -765,7 +768,6 @@ export default {
         this.animationOn
       )
         return;
-      console.log(id);
       /**
        * Если пользователь кликает на область на карте, которая не была
        * выбрана ранее, то обновляем необходимые состояния компаненты и
@@ -800,15 +802,19 @@ export default {
       let k = 1;
       let xNew = 0;
       let yNew = 0;
+      const calcPosition = (coordinate, valueSVG, valueClient) =>
+        coordinate - valueSVG / k / 2 + valueClient / 2;
       const { x, y, width, height } = this.$refs[name].getBBox();
+      const { a } = this.$refs[name].getScreenCTM();
+      console.log(a);
       if (width - 20 >= height) {
         k = widthWin / width;
-        xNew = x - 60 / k;
-        yNew = y - heightSVG / k / 2 + height / 2;
+        xNew = x - ((widthSVG - widthWin) / 2) * k;
+        yNew = calcPosition(y, heightSVG, height);
       } else {
         k = heightWin / height;
-        yNew = y - 50 / k;
-        xNew = x - widthSVG / k / 2 + width / 2;
+        yNew = y - ((heightSVG - heightWin) / 2) * k;
+        xNew = calcPosition(x, widthSVG, width);
       }
       console.log(x, y, width, height, k);
       const widthNew = widthSVG / k;
