@@ -15,13 +15,9 @@
     <div class="map-wrapper">
       <div class="map-layer" ref="layer">
         <CityCard
-          :style="{
-            top: pointsCityCoord[item.name_en]?.top,
-            left: pointsCityCoord[item.name_en]?.left,
-            animationDelay: animeDelay(item),
-          }"
-          :class="['html-card', { hide: isVisible }]"
-          v-for="(item, index) in datasets"
+          :style="calcDinamicPos(item)"
+          :class="['html-card', { hide: animationOn }]"
+          v-for="(item, index) in finalDatasets"
           :key="`card-${item.name_en}-${index}`"
           :data="item"
           :indicator="selectedIndicator"
@@ -403,9 +399,7 @@
             v-for="(item, index) in data"
             :key="`c-${index}`"
             :data-key="item.name_en"
-            :data-area="item.area_en?.slice(0, -9).toLowerCase()"
-            :data-home="item.home"
-            ref="circle"
+            ref="circles"
             :cx="item.x_svg"
             :cy="item.y_svg"
             r="1"
@@ -461,7 +455,7 @@ export default {
        * для анимации выбранной территории.
        */
       selectedDistrict: {
-        name: "home",
+        name: "",
         from: "0 0 720 568;",
         to: "0 0 720 568;",
       },
@@ -473,27 +467,8 @@ export default {
         top: 0,
       },
       /**
-       * Объект включает данные с координатами погодных карточек
-       * относительно viewport для каждого города. Свойства реактивны.
-       * @example
-       * {
-       * "Garnarich":{
-       *  "left":"215px","top":"84px",
-       *  "area":"shirak", "home": "undefined"
-       * },
-       * "Bavra":{
-       *  "left":"354px","top":"61px",
-       *  "area":"shirak", "home": "undefined"
-       * },}
-       */
-      pointsCityCoord: {},
-      /**
-       * Определяет условие наличия CSS-класса hide, который отвечает за
-       * скрытие карточек.
-       */
-      isVisible: false,
-      /**
-       * Определяет происходит ли анимация карты в данный момент.
+       * Определяет происходит ли анимация карты в данный момент. Во время анимации
+       * скрываем карточки.
        */
       animationOn: false,
       /**
@@ -570,13 +545,16 @@ export default {
     );
   },
   mounted() {
-    this.calcNewViewBox("shirak");
     /**
-     * После монтирования компоненты вызываем функцию расчета координат карты
-     * и карточек относительно viewport.
+     * Задаем первоначальное значение выбранного района для того, чтобы запустить
+     * функцию пересчета координат карточек.
+     */
+    this.selectedDistrict.name = "home";
+    /**
+     * После монтирования компоненты вызываем функцию расчета координат
+     * элемента svg с картой.
      */
     this.mapRectPosition();
-    this.initialCardPosition();
     /**
      * Добавляем слушатель срабатывающий при окончании анимации карты.
      */
@@ -591,45 +569,60 @@ export default {
   },
   computed: {
     /**
-     * Возвращает данные для карточек с учетом примененных фильтров и
-     * выбранной области на карте.
+     * Фильтруем данные для отображения на карточках по выбранному
+     * району.
      */
-    datasets() {
+    districtFilteredData() {
+      return this.data.filter((f) =>
+        this.selectedDistrict.name === "home"
+          ? f.home === true
+          : f.area_en?.slice(0, -9).toLowerCase() === this.selectedDistrict.name
+      );
+    },
+    /**
+     * Фильтруем данные для отображения на карточках с учетом выбранного
+     * маркера дня.
+     */
+    dayMarkerFilteredData() {
       const dayMarker = this.selectedDayMarker ?? "now";
-      let count = 100;
-      return this.data
-        .filter((f) =>
-          this.selectedDistrict.name === "home"
-            ? f.home === true
-            : f.area_en?.slice(0, -9).toLowerCase() ===
-              this.selectedDistrict.name
-        )
-        .map(
-          ({
+      return this.districtFilteredData.map(
+        ({
+          home,
+          area_en,
+          name_ru,
+          name_en,
+          x_svg,
+          y_svg,
+          [dayMarker]: marker,
+        }) => {
+          return {
             home,
             area_en,
             name_ru,
             name_en,
             x_svg,
             y_svg,
-            [dayMarker]: marker,
-          }) => {
-            return {
-              home,
-              area_en,
-              name_ru,
-              name_en,
-              x_svg,
-              y_svg,
-              ...marker,
-              /**
-               * Свойство содержит значение времени задержки начала анимации
-               * появления карточек на карте.
-               */
-              delay: `${(count = count + 100)}ms`,
-            };
-          }
-        );
+            ...marker,
+          };
+        }
+      );
+    },
+    /**
+     * Возвращает данные для карточек с учетом примененных фильтров и
+     * выбранной области на карте.
+     */
+    finalDatasets() {
+      let count = 100;
+      return this.dayMarkerFilteredData.map((obj) => {
+        return {
+          ...obj,
+          /**
+           * Свойство содержит значение времени задержки начала анимации
+           * появления карточек на карте.
+           */
+          delay: `${(count = count + 100)}ms`,
+        };
+      });
     },
   },
   methods: {
@@ -665,17 +658,8 @@ export default {
      * callback-функция обработчика события окончания анимации карты.
      */
     animateHandler() {
-      this.calcNewViewBox("shirak");
-      this.calcCoordinates();
-      this.isVisible = false;
-      this.animationOn = false;
-    },
-    /**
-     * Функция расчета координат карты и карточек относительно viewport.
-     */
-    calcCoordinates() {
       this.mapRectPosition();
-      this.calcCardPosition();
+      this.animationOn = false;
     },
     /**
      * Определяем и записываем позицию относительно viewport
@@ -691,66 +675,26 @@ export default {
       this.coordMap.top = getPoint("layer", "top");
     },
     /**
-     * Функция выполняется один раз при монтировании компоненты.
-     * Определяем и записываем позицию карточек с информацией относительно
-     * контейнера с картой. Плюс добавляем реактивные свойства в
-     * существующий объект data.pointsCityCoord.
+     * Вычисляем и обновляем позицию карточек с информацией относительно
+     * контейнера с картой по выбранному району. А также устанавливаем значение
+     * длительности задержки появления карточек.
      */
-    initialCardPosition() {
-      const { circle } = this.$refs;
-      circle.forEach((child) => {
-        const { left, top } = child.getBoundingClientRect();
-        const value = {
+    calcDinamicPos(item) {
+      const { circles } = this.$refs;
+      if (circles) {
+        const circle = circles.find(
+          (elem) => elem.dataset.key === item.name_en
+        );
+        const { left, top } = circle.getBoundingClientRect();
+        return {
           left: `${(left - this.coordMap.left).toFixed(0)}px`,
           top: `${(top - this.coordMap.top).toFixed(0)}px`,
-          area: child.dataset.area,
-          home: child.dataset.home,
+          animationDelay:
+            this.selectedDistrict.name !== "home" ? item.delay : "0s",
         };
-        this.$set(this.pointsCityCoord, child.dataset.key, value);
-        // this.$set(this.pointsCityCoord, child.dataset.key, {});
-        // this.$set(
-        //   this.pointsCityCoord[child.dataset.key],
-        //   "left",
-        //   `${(left - this.coordMap.left).toFixed(0)}px`
-        // );
-        // this.$set(
-        //   this.pointsCityCoord[child.dataset.key],
-        //   "top",
-        //   `${(top - this.coordMap.top).toFixed(0)}px`
-        // );
-        // this.$set(
-        //   this.pointsCityCoord[child.dataset.key],
-        //   "area",
-        //   child.dataset.area
-        // );
-        // this.$set(
-        //   this.pointsCityCoord[child.dataset.key],
-        //   "home",
-        //   child.dataset.home
-        // );
-      });
-    },
-    /**
-     * Вычисляем и обновляем позицию карточек с информацией относительно
-     * контейнера с картой по выбранному району.
-     */
-    calcCardPosition() {
-      const { circle } = this.$refs;
-      circle
-        .filter(
-          (f) =>
-            f.dataset.area === this.selectedDistrict.name ||
-            (this.selectedDistrict.name === "home" && f.dataset.home)
-        )
-        .forEach((value) => {
-          const { left, top } = value.getBoundingClientRect();
-          this.pointsCityCoord[value.dataset.key].left = `${(
-            left - this.coordMap.left
-          ).toFixed(0)}px`;
-          this.pointsCityCoord[value.dataset.key].top = `${(
-            top - this.coordMap.top
-          ).toFixed(0)}px`;
-        });
+      } else {
+        return undefined;
+      }
     },
     /**
      * Колбэк-функция вызывается при клике на карту.
@@ -774,7 +718,6 @@ export default {
        * запускаем анимацию карты.
        */
       this.animationOn = true;
-      this.isVisible = true;
       this.selectedDistrict = {
         name: id,
         from: this.selectedDistrict.to,
