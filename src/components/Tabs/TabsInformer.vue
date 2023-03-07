@@ -76,9 +76,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tabs-container {
-  padding: 0 8px;
-}
 .tab {
   // padding: 22px 24px;
   background-color: #f0f7fc;
@@ -145,15 +142,6 @@ export default {
         padding: 11px 5px;
       }
     }
-  }
-}
-@media only screen and (max-width: 600px) {
-  // .tab {
-  //   padding: 22px 5px;
-  // }
-
-  .tabs-container {
-    padding: 0 4px;
   }
 }
 </style>

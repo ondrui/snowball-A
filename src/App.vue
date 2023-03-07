@@ -1,13 +1,25 @@
 <template>
   <div id="app">
+    <TheHeader class="header" />
+    <SectionOtherCities class="section" />
+    <TheAside class="sidebar" />
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
-    <router-view></router-view>
+    <router-view class="main"></router-view>
   </div>
 </template>
 
 <script>
+import SectionOtherCities from "./components/SectionOtherCities.vue";
+import TheAside from "./components/TheAside.vue";
+import TheHeader from "./components/TheHeader.vue";
+
 export default {
+  components: {
+    TheHeader,
+    TheAside,
+    SectionOtherCities,
+  },
   created() {
     this.getData();
   },
@@ -70,7 +82,32 @@ a {
   text-decoration: none;
 }
 #app {
-  background-color: #f5f5f5;
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-rows: 55px 100px 1fr;
+  grid-template-areas:
+    "header header"
+    "section section"
+    "content sidebar";
+  column-gap: 14px;
+  row-gap: 36px;
   scroll-behavior: smooth;
+  max-width: 1090px;
+  min-width: 420px;
+  margin: 0 auto;
+}
+.header {
+  grid-area: header;
+}
+.section {
+  grid-area: section;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.main {
+  grid-area: content;
+  width: -webkit-fill-available;
 }
 </style>

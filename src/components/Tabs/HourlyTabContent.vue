@@ -288,6 +288,7 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   padding: 20px;
+  width: 100%;
 }
 .hourly-tab-container {
   position: relative;

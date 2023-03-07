@@ -1,5 +1,5 @@
 <template>
-  <div class="p-20">
+  <div>
     <BreadcrumbsHeader />
     <SearchHeader />
     <ForecastHeader />

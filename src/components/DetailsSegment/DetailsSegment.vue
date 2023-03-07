@@ -80,7 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 .segment-container {
-  padding: 30px 32px 42px 32px;
+  padding: 30px 0;
 }
 .segment-title {
   padding-left: 26px;
@@ -148,11 +148,6 @@ export default {
   border-radius: 1px;
 }
 
-@media only screen and (max-width: 700px) {
-  .segment-container {
-    padding: 30px 8px 23px 8px;
-  }
-}
 @media only screen and (max-width: 600px) {
   .card::after {
     content: "";
