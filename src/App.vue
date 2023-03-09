@@ -120,6 +120,7 @@ a {
       "section"
       "content"
       "sidebar";
+    padding: 16px 0 70px 0;
   }
   .sidebar {
     min-height: 200px;
