@@ -551,19 +551,9 @@ export default {
      */
     this.selectedDistrict.name = "home";
     /**
-     * После монтирования компоненты вызываем функцию расчета координат
-     * элемента svg с картой.
-     */
-    this.mapRectPosition();
-    /**
      * Добавляем слушатель срабатывающий при окончании анимации карты.
      */
     this.$refs.animate.addEventListener("endEvent", this.animateHandler);
-    /**
-     * Устанавливаем оброботчик на событие resize, которое срабатывает при
-     * изменении размера окна. Функция обработчик описана выше.
-     */
-    window.addEventListener("resize", this.mapRectPosition);
   },
   beforeDestroy() {
     /**
@@ -571,10 +561,6 @@ export default {
      * окончании анимации карты.
      */
     this.$refs.animate.removeEventListener("endEvent", this.animateHandler);
-    /**
-     * Удаляем оброботчик на событие resize когда компонент размонтирован.
-     */
-    window.removeEventListener("resize", this.mapRectPosition);
   },
   computed: {
     /**
@@ -667,7 +653,6 @@ export default {
      * callback-функция обработчика события окончания анимации карты.
      */
     animateHandler() {
-      this.mapRectPosition();
       this.animationOn = false;
     },
     /**
@@ -689,14 +674,13 @@ export default {
      * длительности задержки появления карточек.
      */
     calcDinamicPos(item) {
-      console.log("calc");
+      this.mapRectPosition();
       const { circles } = this.$refs;
       if (circles) {
         const circle = circles.find(
           (elem) => elem.dataset.key === item.name_en
         );
         const { left, top } = circle.getBoundingClientRect();
-        console.log(left, top, this.coordMap);
         return {
           left: `${(left - this.coordMap.left).toFixed(0)}px`,
           top: `${(top - this.coordMap.top).toFixed(0)}px`,
