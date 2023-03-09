@@ -93,7 +93,7 @@ export default {
     }
   }
 }
-@media only screen and (max-width: 860px) {
+@media only screen and (max-width: 500px) {
   .table {
     grid-template-columns: repeat(2, 1fr);
   }

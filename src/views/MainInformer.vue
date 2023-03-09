@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .main-container {
-  margin: 0 auto;
+  // margin: 0 auto;
   background-color: #ffffff;
   // width: 800px;
   // max-width: 900px;

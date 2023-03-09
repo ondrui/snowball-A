@@ -120,7 +120,8 @@ a {
       "section"
       "content"
       "sidebar";
-    padding: 16px 0 70px 0;
+    padding: 16px 8px 70px 8px;
+    max-width: 640px;
   }
   .sidebar {
     min-height: 200px;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header-informer">
     <BreadcrumbsHeader />
     <SearchHeader />
     <ForecastHeader />
@@ -20,4 +20,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.header-informer {
+  padding: 0 10px;
+}
+</style>
