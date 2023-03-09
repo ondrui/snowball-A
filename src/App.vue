@@ -112,4 +112,17 @@ a {
   max-width: 100%;
   min-width: 420px;
 }
+@media only screen and (max-width: 1000px) {
+  #app {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "section"
+      "content"
+      "sidebar";
+  }
+  .sidebar {
+    min-height: 200px;
+  }
+}
 </style>

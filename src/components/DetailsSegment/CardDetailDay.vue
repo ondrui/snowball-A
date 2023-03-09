@@ -211,7 +211,7 @@ svg {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 652px) {
   .card-content__info {
     grid-area: e;
     justify-items: center;

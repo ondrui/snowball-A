@@ -80,7 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 .segment-title {
-  padding: 20px 0 20px 26px;
+  padding: 20px 0 8px 26px;
   font-weight: 300;
   font-size: 20px;
   line-height: 23px;
@@ -92,6 +92,7 @@ export default {
 }
 .wrapper-list {
   position: relative;
+  margin-top: 12px;
 }
 .wrapper-list:nth-child(-n + 11) .card {
   transition: box-shadow 0.3s ease-in-out;
