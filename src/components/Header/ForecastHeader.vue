@@ -84,7 +84,7 @@ export default {
   column-gap: 14px;
   row-gap: 22px;
   flex-wrap: nowrap;
-  // height: 88px;
+  margin-bottom: 20px;
 }
 .header-content-left {
   display: flex;
@@ -138,7 +138,7 @@ export default {
   align-items: center;
 }
 
-@media only screen and (max-width: 890px) {
+@media only screen and (max-width: 1106px) {
   .header-content-right {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

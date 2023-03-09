@@ -79,11 +79,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.segment-container {
-  padding: 30px 0;
-}
 .segment-title {
-  padding-left: 26px;
+  padding: 20px 0 20px 26px;
   font-weight: 300;
   font-size: 20px;
   line-height: 23px;
@@ -95,7 +92,6 @@ export default {
 }
 .wrapper-list {
   position: relative;
-  margin-top: 12px;
 }
 .wrapper-list:nth-child(-n + 11) .card {
   transition: box-shadow 0.3s ease-in-out;

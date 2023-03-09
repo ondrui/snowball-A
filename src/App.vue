@@ -2,10 +2,10 @@
   <div id="app">
     <TheHeader class="header" />
     <SectionOtherCities class="section" />
-    <TheAside class="sidebar" />
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
     <router-view class="main"></router-view>
+    <TheAside class="sidebar" />
   </div>
 </template>
 
@@ -84,7 +84,7 @@ a {
 #app {
   display: grid;
   min-height: 100vh;
-  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-columns: 1fr 300px;
   grid-template-rows: 55px 100px 1fr;
   grid-template-areas:
     "header header"
@@ -93,9 +93,10 @@ a {
   column-gap: 14px;
   row-gap: 36px;
   scroll-behavior: smooth;
-  max-width: 1090px;
+  max-width: 1142px;
   min-width: 420px;
   margin: 0 auto;
+  padding: 16px 26px 70px 26px;
 }
 .header {
   grid-area: header;
@@ -108,6 +109,7 @@ a {
 }
 .main {
   grid-area: content;
-  width: -webkit-fill-available;
+  max-width: 100%;
+  min-width: 420px;
 }
 </style>

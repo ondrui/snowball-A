@@ -54,7 +54,7 @@ export default {
   background-color: #ffffff;
   // width: 800px;
   // max-width: 900px;
-  min-width: 420px;
+  // min-width: 420px;
 }
 .hidden {
   display: none;

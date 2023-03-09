@@ -28,7 +28,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(15, auto);
-  padding: 50px 40px 108px 40px;
+  padding: 50px 40px 127px 40px;
 }
 .table-item {
   display: flex;
@@ -54,7 +54,7 @@ export default {
     text-decoration: underline;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1104px) {
   .table {
     padding: 30px 10px 108px 10px;
   }
@@ -65,6 +65,56 @@ export default {
     }
     &:nth-last-child(-n + 4) {
       padding: 9px 14px 0 10px;
+    }
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .table {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .table-item {
+    &:nth-child(-n + 4) {
+      padding: 9px 14px 9px 10px;
+    }
+    &:nth-last-child(-n + 4) {
+      padding: 9px 14px 9px 10px;
+    }
+    &:nth-child(-n + 3) {
+      padding: 0 14px 9px 10px;
+    }
+    &:nth-last-child(-n + 3) {
+      padding: 9px 14px 0 10px;
+    }
+    &:nth-child(4n) {
+      border-right: 1px solid #d6ebff;
+    }
+    &:nth-child(3n) {
+      border-right: none;
+    }
+  }
+}
+@media only screen and (max-width: 860px) {
+  .table {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .table-item {
+    &:nth-child(-n + 3) {
+      padding: 9px 14px 9px 10px;
+    }
+    &:nth-last-child(-n + 3) {
+      padding: 9px 14px 9px 10px;
+    }
+    &:nth-child(-n + 2) {
+      padding: 0 14px 9px 10px;
+    }
+    &:nth-last-child(-n + 2) {
+      padding: 9px 14px 0 10px;
+    }
+    &:nth-child(3n) {
+      border-right: 1px solid #d6ebff;
+    }
+    &:nth-child(2n) {
+      border-right: none;
     }
   }
 }

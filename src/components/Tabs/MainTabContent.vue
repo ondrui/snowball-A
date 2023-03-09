@@ -73,7 +73,6 @@ export default {
   position: relative;
   padding-top: 14px;
   text-align: center;
-  height: 726px;
 }
 .switcher {
   margin: 0 auto;
@@ -81,7 +80,7 @@ export default {
 .link-city {
   position: absolute;
   margin: 0 auto;
-  bottom: 50px;
+  bottom: 32px;
   left: 0;
   right: 0;
   width: max-content;
