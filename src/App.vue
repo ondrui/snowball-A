@@ -94,7 +94,7 @@ a {
   row-gap: 36px;
   scroll-behavior: smooth;
   max-width: 1142px;
-  min-width: 420px;
+  min-width: 400px;
   margin: 0 auto;
   padding: 16px 26px 70px 26px;
 }
@@ -110,7 +110,7 @@ a {
 .main {
   grid-area: content;
   max-width: 100%;
-  min-width: 420px;
+  min-width: 400px;
 }
 @media only screen and (max-width: 1000px) {
   #app {

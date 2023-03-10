@@ -6,6 +6,9 @@
       placeholder=""
       v-model="searchQuery"
     />
+    <div class="history-icon-container">
+      <BaseIcon name="history" pick="common" width="23" class="history-icon" />
+    </div>
     <div class="search-icon-container">
       <BaseIcon name="search" pick="common" width="23" class="search-icon" />
     </div>
@@ -43,6 +46,15 @@ export default {
 .search-icon-container {
   position: absolute;
   right: 13px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.history-icon-container {
+  position: absolute;
+  right: 45px;
   top: 0;
   display: flex;
   align-items: center;

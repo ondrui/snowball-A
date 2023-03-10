@@ -7,7 +7,10 @@
         v-for="(value, key) in tabsList"
         :key="key"
       >
-        <span>{{ showTitle(value, key) }}</span>
+        <span v-if="key === 'main'">
+          <BaseIcon name="home" pick="common" class="home-icon" />
+        </span>
+        <span v-else>{{ showTitle(value, key) }}</span>
       </button>
     </div>
     <div class="tab">
@@ -76,6 +79,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home-icon {
+  width: 18px;
+  height: 15px;
+}
 .tab {
   // padding: 22px 24px;
   background-color: #f0f7fc;
@@ -85,7 +92,7 @@ export default {
 .buttons-tabs {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: min-content 1fr 1fr;
   align-items: flex-end;
   column-gap: 2px;
   position: relative;
@@ -106,6 +113,10 @@ export default {
     border-radius: 4px 4px 0 0;
     // min-width: 10ch;
     min-height: 34px;
+    &:first-child span {
+      display: flex;
+      padding: 10px 10px;
+    }
 
     & span {
       display: inline-block;
@@ -135,6 +146,9 @@ export default {
       border-top: none;
       border-top: 3px solid #04569c;
       border-bottom: none;
+      &:first-child span {
+        padding: 11px 10px;
+      }
 
       & span {
         color: #000000;

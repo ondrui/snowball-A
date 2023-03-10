@@ -22,6 +22,8 @@ export default {
         "chevron-more-down-common",
         "chevron-scroll-left-common",
         "chevron-scroll-right-common",
+        "history-common",
+        "home-common",
         "humidity-common",
         "no-image-common",
         "pressure-common",
