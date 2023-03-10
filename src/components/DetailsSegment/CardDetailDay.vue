@@ -204,14 +204,14 @@ svg {
   text-align: center;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1000px) {
   .card-content {
     grid-template-columns: 0.2fr 0.8fr minmax(80px, 0.4fr) 1.2fr;
     padding: 0 8px 0 8px;
   }
 }
 
-@media only screen and (max-width: 652px) {
+@media only screen and (max-width: 600px) {
   .card-content__info {
     grid-area: e;
     justify-items: center;

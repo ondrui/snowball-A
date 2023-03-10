@@ -296,18 +296,10 @@ export default {
   .ten-days-container {
     border: 1px solid #d8e9f3;
   }
-  // .swiper-container {
-  //   overflow-x: scroll;
-  // }
 }
 @media only screen and (max-width: 600px) {
   .wrapper {
     padding: 20px 5px;
-  }
-}
-@media only screen and (max-width: 450px) {
-  .ten-days-icon svg {
-    width: 30px;
   }
 }
 </style>

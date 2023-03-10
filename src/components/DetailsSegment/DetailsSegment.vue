@@ -94,18 +94,18 @@ export default {
   position: relative;
   margin-top: 12px;
 }
-.wrapper-list:nth-child(-n + 11) .card {
+.card {
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
-.wrapper-list:nth-child(-n + 11) .card:hover {
+.card:hover {
   box-shadow: 0 0 0 2px #d2e7ff;
   border-radius: 1px;
 }
 .card:hover::after {
   transform: scale(2);
 }
-.wrapper-list:nth-child(-n + 11) .card::after {
+.card::after {
   content: "";
   display: inline-block;
   background: url("@/assets/images/common/chevron-more-down.svg?external")

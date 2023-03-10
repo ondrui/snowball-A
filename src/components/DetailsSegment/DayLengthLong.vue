@@ -85,7 +85,4 @@ svg {
   line-height: 12px;
   color: #4d4d4d;
 }
-
-@media only screen and (max-width: 600px) {
-}
 </style>

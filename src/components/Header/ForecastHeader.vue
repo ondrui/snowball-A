@@ -138,7 +138,7 @@ export default {
   align-items: center;
 }
 
-@media only screen and (max-width: 1106px) {
+@media only screen and (max-width: 1122px) {
   .header-content-right {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
