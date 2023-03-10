@@ -1,119 +1,27 @@
 <template>
-  <div class="wrapper">
-    <div ref="hourly-tab-container" class="hourly-tab-container">
-      <div class="scroll-button-container">
-        <button
-          :class="['btn', { hidden: side === 'left' }]"
-          @click="scroll('left')"
-        >
-          <BaseIcon width="7" name="chevron-scroll-left" pick="common" />
-        </button>
-        <button
-          :class="['btn', { hidden: side === 'right' }]"
-          @click="scroll('right')"
-        >
-          <BaseIcon width="7" name="chevron-scroll-right" pick="common" />
-        </button>
-      </div>
-      <RowCaption class="wind">
-        {{
-          languageExpressions(getLocales, "climateIndicators", "windDirSpeed")
-        }}
-      </RowCaption>
-      <RowCaption class="pressure">
-        {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
-        {{ languageExpressions(getLocales, "units", "pressure")[0] }}
-      </RowCaption>
-      <RowCaption class="humidity">
-        {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
-      </RowCaption>
-      <div class="swiper-container" ref="swiper-container">
-        <div
-          :class="['swiper-wrapper', { grabbing: dragMouseScroll.isDown }]"
-          @mousedown.prevent="mouseDown"
-          @mouseleave="mouseLeave"
-          @mouseup="mouseUp"
-          @mousemove.prevent="mouseMove"
-          ref="swiper-wrapper"
-        >
-          <div class="hourly-charts-temp">
-            <ChartHourlyTempList :datasets="datasetsForHourlyCharts" />
-          </div>
-          <div
-            class="date-container"
-            v-for="(date, indexParent) in hourlyTabTable"
-            :key="`d-${indexParent}`"
-          >
-            <div class="day-length-chart">
-              <DayLengthChart :datasets="date" />
-            </div>
-            <div class="date-header">
-              <div class="date-text">
-                <span
-                  ><b>{{ date.date[0] }}</b></span
-                >
-                <span>&nbsp; {{ date.date[1] }}</span>
-              </div>
-            </div>
-            <div class="hourly-data-container">
-              <div
-                class="hourly-item"
-                v-for="(value, index) in date.values"
-                :key="`h-${index}`"
-                :ref="addRef(indexParent, index, hourlyTabTable, date.values)"
-              >
-                <div class="time">{{ value.hour }}</div>
-                <div class="day-length"></div>
-                <div class="hourly-icon">
-                  <BaseIcon
-                    width="34"
-                    :name="value.condition"
-                    :pick="value.light"
-                  />
-                </div>
-                <div class="hourly-temp-item"></div>
-                <div class="hourly-wind-descr">
-                  <div>
-                    <div>
-                      <BaseIcon
-                        width="8"
-                        name="wind-direction-blue"
-                        pick="common"
-                        :style="windDirection(getLocales, value)"
-                      />
-                    </div>
-                    <span>{{ value.wind_dir[1] }}</span>
-                  </div>
-                  <div>{{ value.wind_speed }}</div>
-                </div>
-                <div class="hourly-pressure">
-                  {{ value.pressure }}
-                </div>
-                <div class="hourly-day-humidity">
-                  {{ value.humidity }}{{ value.humidity.unit }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container">
+    <div class="scroll-button-container">
+      <button
+        :class="['btn', { hidden: side === 'left' }]"
+        @click="scroll('left')"
+      >
+        <BaseIcon width="7" name="chevron-scroll-left" pick="common" />
+      </button>
+      <button
+        :class="['btn', { hidden: side === 'right' }]"
+        @click="scroll('right')"
+      >
+        <BaseIcon width="7" name="chevron-scroll-right" pick="common" />
+      </button>
+    </div>
+    <div class="swiper-container" ref="swiper-container">
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-import ChartHourlyTempList from "../SVGCharts/hourly/ChartHourlyTempList.vue";
-import DayLengthChart from "../SVGCharts/hourly/DayLengthChart.vue";
-import RowCaption from "@/components/RowCaption.vue";
-import { languageExpressions } from "@/constants/locales";
-import { windDirection } from "@/constants/functions";
-
 export default {
-  components: {
-    ChartHourlyTempList,
-    RowCaption,
-    DayLengthChart,
-  },
   data() {
     return {
       /**
@@ -160,34 +68,7 @@ export default {
      */
     this.observer.disconnect();
   },
-  computed: {
-    /**
-     * Возвращает объект данных для отображения графиков подробного
-     * почасового прогноза с разбивкой на часовые интервалы.
-
-     */
-    datasetsForHourlyCharts() {
-      return this.$store.getters.datasetsForHourlyCharts;
-    },
-    /**
-     * Возвращает данные для отображения таблицы подробного
-     * почасового прогноза с разбивкой на часовые интервалы.
-     */
-    hourlyTabTable() {
-      return this.$store.getters.hourlyTabTable;
-    },
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-  },
   methods: {
-    languageExpressions,
-    windDirection,
     /**
      * Функция отвечает за выбор элемента согласно условиям и регистрации ссылки на него.
      */
@@ -511,3 +392,4 @@ export default {
   }
 }
 </style>
+};

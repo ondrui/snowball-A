@@ -6,24 +6,36 @@
     <!-- component matched by the route will render here -->
     <router-view class="main"></router-view>
     <TheAside class="sidebar" />
+    <ScrollableMode class="slot"><ExpComp /></ScrollableMode>
   </div>
 </template>
 
 <script>
+import ScrollableMode from "./components/ScrollableMode.vue";
 import SectionOtherCities from "./components/SectionOtherCities.vue";
 import TheAside from "./components/TheAside.vue";
 import TheHeader from "./components/TheHeader.vue";
+import { languageExpressions } from "@/constants/locales";
+import ExpComp from "./components/ExpComp.vue";
 
 export default {
   components: {
     TheHeader,
     TheAside,
     SectionOtherCities,
+    ScrollableMode,
+    ExpComp,
   },
   created() {
     this.getData();
   },
+  computed: {
+    getLocales() {
+      return this.$store.getters.getLocales;
+    },
+  },
   methods: {
+    languageExpressions,
     /**
      * Get data from Internal vs External APIs.
      */
@@ -85,16 +97,17 @@ a {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 1fr 300px;
-  grid-template-rows: 55px 100px 1fr;
+  grid-template-rows: 55px 100px 1fr min-content;
   grid-template-areas:
     "header header"
     "section section"
-    "content sidebar";
+    "content sidebar"
+    "slot slot";
   column-gap: 14px;
   row-gap: 36px;
   scroll-behavior: smooth;
   max-width: 1142px;
-  min-width: 400px;
+  min-width: 390px;
   margin: 0 auto;
   padding: 16px 26px 70px 26px;
 }
@@ -110,7 +123,11 @@ a {
 .main {
   grid-area: content;
   max-width: 100%;
-  min-width: 400px;
+  min-width: 390px;
+}
+.slot {
+  grid-area: slot;
+  box-shadow: 0 0 0 2px teal;
 }
 @media only screen and (max-width: 940px) {
   #app {
@@ -119,7 +136,8 @@ a {
       "header"
       "section"
       "content"
-      "sidebar";
+      "sidebar"
+      "slot";
     padding: 16px 8px 70px 8px;
     max-width: 750px;
   }

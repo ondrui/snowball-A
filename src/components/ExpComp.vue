@@ -184,6 +184,16 @@ export default {
     getLocales() {
       return this.$store.getters.getLocales;
     },
+    /**
+     * Возвращает количество пикселей, на которое необходимо прокрутить график.
+     */
+    scrollSize() {
+      return (
+        (this.$refs["swiper-wrapper"].clientWidth /
+          this.datasetsForHourlyCharts.data[0].value.length) *
+        3
+      );
+    },
   },
   methods: {
     languageExpressions,
@@ -215,24 +225,13 @@ export default {
       }
     },
     /**
-     * Возвращает количество пикселей, на которое необходимо прокрутить график.
-     */
-    scrollSize() {
-      return (
-        (this.$refs["swiper-wrapper"].clientWidth /
-          this.datasetsForHourlyCharts.data[0].value.length) *
-        3
-      );
-    },
-    /**
      * Функция отвечает за прокручивание графика.
      * @param direction В параметр передается строка со стороной,
      * в которую нужно сдвинуть график.
      */
     scroll(direction) {
-      const num = this.scrollSize();
       this.$refs["swiper-container"].scrollBy({
-        left: direction === "right" ? num : -num,
+        left: direction === "right" ? this.scrollSize : -this.scrollSize,
         behavior: "smooth",
       });
     },
