@@ -40,7 +40,7 @@ export default {
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
     tenDaysDetailsCard() {
-      this.focus();
+      setTimeout(this.focus, 700);
     },
   },
   computed: {
@@ -97,6 +97,7 @@ export default {
 .card {
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
+  will-change: max-height;
 }
 .card:hover {
   box-shadow: 0 0 0 2px #d2e7ff;
