@@ -6,6 +6,7 @@
         pressure: '384px',
         humidity: '419px',
       }"
+      isGrabCursor
       ><TabInformerHourlyContent
     /></ScrollableModeInformer>
   </div>

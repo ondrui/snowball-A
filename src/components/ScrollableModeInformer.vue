@@ -20,7 +20,7 @@
     </RowCaptionInformer>
     <div class="swiper-container" ref="swiper-container">
       <div
-        :class="{ grabbing: dragMouseScroll.isDown }"
+        :class="{ grab: isGrabCursor, grabbing: dragMouseScroll.isDown }"
         @mousedown.prevent="mouseDown"
         @mouseleave="mouseLeave"
         @mouseup="mouseUp"
@@ -44,6 +44,9 @@ export default {
     labelCoordinates: {
       type: Object,
       required: true,
+    },
+    isGrabCursor: {
+      type: Boolean,
     },
   },
   data() {
@@ -297,11 +300,8 @@ export default {
   overflow-x: auto;
   position: relative;
 }
-.swiper-wrapper {
-  display: flex;
-  position: relative;
+.grab {
   cursor: grab;
-
   &.grabbing {
     cursor: grabbing;
   }

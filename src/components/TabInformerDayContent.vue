@@ -1,7 +1,8 @@
 <template>
   <div class="swiper-content">
     <div
-      @click="toggle(index)"
+      @mousedown="isMove"
+      @mouseup="toggle(index, $event)"
       :class="['item', { 'days-weekend': day.weekend === true }]"
       v-for="(day, index) in tenDaysTabTable"
       :key="`d-${index}`"
@@ -54,6 +55,14 @@ export default {
   components: {
     ChartsDayList,
   },
+  data() {
+    return {
+      /**
+       * Сохраняем в переменную значение координаты Х мышки при нажатии на элемент.
+       */
+      mouseStartX: 0,
+    };
+  },
   computed: {
     /**
      * Возвращает из store значения температур и другие данные для
@@ -80,16 +89,31 @@ export default {
      */
     windDirection,
     /**
+     * Обработчик вызывается когда нажали кнопку мыши на элементе.
+     * Сохраняем в переменную значение координаты Х.
+     * @param event Объект события.
+     */
+    isMove(event) {
+      console.log(event);
+      this.mouseStartX = event.x;
+    },
+    /**
      * Обработчик для перехода по клику на выбранный день.
      * @param index Порядковый намер (код) выбранного дня для перехода к карточке и
      * графику с подробным прогнозом.
+     * @param event Объект события.
      */
-    toggle(index) {
+    toggle(index, event) {
+      console.log(event);
       /**
+       * Обработчик вызывается когда отжали кнопку мыши на элементе.
+       * Сначала проверяем не произошло ли изменение координаты Х мыши после нажатия на
+       * элемент. Если координата изменилась, то выходим из функции.
        * Если выбран текущий день переходим на вкладку с часовым прогнозом. В остальных случаях
        * переходим  к карточке и графику с подробным прогнозом выбранного дня,
        * путем изменения значения флага isOpen в сторе store.state.datasetsTenDays.
        */
+      if (this.mouseStartX !== event.x) return;
       if (index === 0) {
         eventBus.$emit("go", "hourly");
       } else {
@@ -129,6 +153,10 @@ export default {
 
     &:nth-last-child(2) {
       border-right: none;
+    }
+
+    &:nth-child(n + 12) {
+      cursor: auto;
     }
 
     &:nth-child(n + 12) .days-chevron-down svg {

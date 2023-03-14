@@ -101,21 +101,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.swiper-container {
-  display: flex;
-  max-width: 100%;
-  overflow-y: hidden;
-  overflow-x: auto;
-  position: relative;
-}
 .swiper-content {
   display: flex;
   position: relative;
-  cursor: grab;
-
-  &.grabbing {
-    cursor: grabbing;
-  }
 }
 .date-container {
   position: relative;
