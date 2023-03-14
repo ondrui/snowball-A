@@ -101,7 +101,7 @@ a {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 1fr 300px;
-  grid-template-rows: 55px 100px 1fr min-content;
+  grid-template-rows: 55px min-content 1fr min-content;
   grid-template-areas:
     "header header"
     "section section"

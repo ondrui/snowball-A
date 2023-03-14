@@ -1,5 +1,6 @@
 const dataLocales = {
   ru: {
+    sectionOtherCities: "погода в городах армении",
     viewsSwitcher: ["карта", "города"],
     /**
      * Массив содержит слова-указатели времен.
@@ -17,7 +18,7 @@ const dataLocales = {
       weather: "погода",
       city: "Москва",
     },
-    header: {
+    headerInformer: {
       now: "сейчас в",
       forecast: "по прогнозу",
       feelsLike: "ощущается",

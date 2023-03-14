@@ -2990,9 +2990,13 @@ export default new Vuex.Store({
       return {
         timeText: `${languageExpressions(
           getLocales,
-          "header",
+          "headerInformer",
           "now"
-        )} ${time} ${languageExpressions(getLocales, "header", "forecast")}`,
+        )} ${time} ${languageExpressions(
+          getLocales,
+          "headerInformer",
+          "forecast"
+        )}`,
         icon: data.condition,
         descr: data.condition_s,
         temp: `${addPlus(data.temp)}${
@@ -3000,7 +3004,7 @@ export default new Vuex.Store({
         }`,
         realFeel: `${languageExpressions(
           getLocales,
-          "header",
+          "headerInformer",
           "feelsLike"
         )} ${addPlus(data.feels_like)}`,
       };

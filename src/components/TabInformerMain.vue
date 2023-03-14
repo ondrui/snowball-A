@@ -5,7 +5,7 @@
       :radioValues="getRadioValues"
       v-model="radio"
     />
-    <ArmeniaMap v-if="radio === 'map'" :data="cardMapData" />
+    <MapArmenia v-if="radio === 'map'" :data="cardMapData" />
     <ListCities v-if="radio === 'cities'" :list="getListCities" />
     <div class="link-city">
       <router-link to="/go">{{
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import ArmeniaMap from "@/components/Maps/ArmeniaMap.vue";
+import MapArmenia from "@/components/Maps/MapArmenia.vue";
 import ListCities from "@/components/ListCities.vue";
 import { languageExpressions } from "@/constants/locales";
 
 export default {
   name: "MainTabContent",
   components: {
-    ArmeniaMap,
+    MapArmenia,
     ListCities,
   },
   data() {

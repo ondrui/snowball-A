@@ -94,7 +94,6 @@ export default {
      * @param event Объект события.
      */
     isMove(event) {
-      console.log(event);
       this.mouseStartX = event.x;
     },
     /**
@@ -104,7 +103,6 @@ export default {
      * @param event Объект события.
      */
     toggle(index, event) {
-      console.log(event);
       /**
        * Обработчик вызывается когда отжали кнопку мыши на элементе.
        * Сначала проверяем не произошло ли изменение координаты Х мыши после нажатия на

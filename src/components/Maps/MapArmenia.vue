@@ -14,7 +14,7 @@
     </nav>
     <div class="map-wrapper">
       <div class="map-layer" ref="layer">
-        <CityCard
+        <MapCardCity
           :style="calcDinamicPos(item)"
           :class="['html-card', { hide: animationOn }]"
           v-for="(item, index) in finalDatasets"
@@ -411,13 +411,13 @@
 </template>
 
 <script>
-import CityCard from "./CityCard.vue";
+import MapCardCity from "./MapCardCity.vue";
 import MapMenu from "./MapMenu.vue";
 import { languageExpressions } from "@/constants/locales";
 
 export default {
   components: {
-    CityCard,
+    MapCardCity,
     MapMenu,
   },
   props: {
