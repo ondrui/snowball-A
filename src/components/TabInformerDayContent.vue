@@ -144,18 +144,6 @@ export default {
       z-index: 10;
     }
 
-    &:nth-child(-n + 11):hover::before {
-      box-shadow: inset 0 0 0 3px #d2e7ff;
-      border-radius: 1px;
-    }
-
-    &:nth-child(-n + 11):hover {
-      cursor: pointer;
-      & .days-chevron-down svg {
-        transform: scale(2);
-      }
-    }
-
     & > div {
       border-bottom: 1px solid #d8e9f3;
       position: relative;
@@ -167,8 +155,21 @@ export default {
     }
   }
 }
-.days-temp-item {
-  height: 170px;
+@media (hover: hover) and (pointer: fine) {
+  .item:nth-child(-n + 11):hover::before {
+    box-shadow: inset 0 0 0 3px #d2e7ff;
+    border-radius: 1px;
+  }
+
+  .item:nth-child(-n + 11):hover {
+    cursor: pointer;
+    & .days-chevron-down svg {
+      transform: scale(2);
+    }
+  }
+  .days-temp-item {
+    height: 170px;
+  }
 }
 .days-weekday {
   height: 64px;
