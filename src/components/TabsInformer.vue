@@ -16,13 +16,14 @@
     <div class="tab">
       <!-- route outlet -->
       <!-- component matched by the route will render here -->
-      <router-view @go="showContent('hourly')"></router-view>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { eventBus } from "../main.js";
 
 export default {
   data() {
@@ -35,6 +36,7 @@ export default {
   },
   created() {
     this.currentTab = this.$route.name;
+    eventBus.$on("go", this.showContent);
   },
   computed: {
     getLocales() {

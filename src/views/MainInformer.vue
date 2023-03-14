@@ -5,15 +5,14 @@
       <HeaderInformer />
       <TabsInformer />
       <DetailsSegment />
-      <!-- <br /> -->
       <AllSVGIcons class="hidden" />
     </div>
   </div>
 </template>
 
 <script>
-import HeaderInformer from "../components/Header/HeaderInformer.vue";
-import TabsInformer from "../components/Tabs/TabsInformer.vue";
+import HeaderInformer from "../components/HeaderInformer/HeaderInformer.vue";
+import TabsInformer from "../components/TabsInformer.vue";
 import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
 import AllSVGIcons from "../components/AllSVGIcons.vue";
 import { languageExpressions } from "@/constants/locales";

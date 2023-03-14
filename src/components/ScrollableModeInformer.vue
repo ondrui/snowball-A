@@ -1,33 +1,64 @@
 <template>
   <div class="container">
-    <div class="scroll-button-container">
-      <button
-        :class="['btn', { hidden: side === 'left' }]"
-        @click="scroll('left')"
-      >
+    <div v-show="isButtons" class="scroll-button-container">
+      <button :class="['btn', { hidden: side.left }]" @click="scroll('left')">
         <BaseIcon width="7" name="chevron-scroll-left" pick="common" />
       </button>
-      <button
-        :class="['btn', { hidden: side === 'right' }]"
-        @click="scroll('right')"
-      >
+      <button :class="['btn', { hidden: side.right }]" @click="scroll('right')">
         <BaseIcon width="7" name="chevron-scroll-right" pick="common" />
       </button>
     </div>
+    <RowCaptionInformer class="wind">
+      {{ languageExpressions(getLocales, "climateIndicators", "windDirSpeed") }}
+    </RowCaptionInformer>
+    <RowCaptionInformer class="pressure">
+      {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
+      {{ languageExpressions(getLocales, "units", "pressure")[0] }}
+    </RowCaptionInformer>
+    <RowCaptionInformer class="humidity">
+      {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
+    </RowCaptionInformer>
     <div class="swiper-container" ref="swiper-container">
-      <slot></slot>
+      <div
+        :class="{ grabbing: dragMouseScroll.isDown }"
+        @mousedown.prevent="mouseDown"
+        @mouseleave="mouseLeave"
+        @mouseup="mouseUp"
+        @mousemove.prevent="mouseMove"
+      >
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
+import { languageExpressions } from "@/constants/locales";
+
 export default {
+  components: {
+    RowCaptionInformer,
+  },
+  props: {
+    labelCoordinates: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
+      clientWidth: 0,
+      scrollWidth: 0,
+      firstItem: null,
+      lastItem: null,
       /**
        * Отвечает за скрытие кнопок скролла графика.
        */
-      side: "left",
+      side: {
+        left: true,
+        right: false,
+      },
       /**
        * Объект-наблюдатель за пересечением элемента который содержит график с боковыми
        * границами графика.
@@ -59,26 +90,48 @@ export default {
       root: this.$refs["swiper-container"],
       threshold: 0.99,
     });
-    const coolElement = this.$refs["item"];
-    coolElement.forEach((elem) => this.observer.observe(elem));
+    const coolElement = document.querySelectorAll(".item");
+    this.firstItem = [...coolElement][0];
+    this.lastItem = [...coolElement].at(-1);
+    this.observer.observe(this.firstItem);
+    this.observer.observe(this.lastItem);
+    /**
+     * После монтирования компоненты вызываем функцию обработчик, которая
+     * отвечает за вычисление и установку следующих значений поля data:
+     * width и height.
+     */
+    this.resizeBrowserHandler();
+    /**
+     * Устанавливаем оброботчик на событие resize, которое срабатывает при
+     * изменении размера окна. Функция обработчик описана выше.
+     */
+    window.addEventListener("resize", this.resizeBrowserHandler);
   },
   beforeDestroy() {
     /**
      * Отключаем объект-наблюдатель.
      */
     this.observer.disconnect();
+    /**
+     * Удаляем оброботчик на событие resize когда компонент размонтирован.
+     */
+    window.removeEventListener("resize", this.resizeBrowserHandler);
+  },
+  computed: {
+    /**
+     * Возвращает языковую метку.
+     * @example
+     * "ru"
+     */
+    getLocales() {
+      return this.$store.getters.getLocales;
+    },
+    isButtons() {
+      return this.scrollWidth > this.clientWidth;
+    },
   },
   methods: {
-    /**
-     * Функция отвечает за выбор элемента согласно условиям и регистрации ссылки на него.
-     */
-    addRef(indexParent, index, arrParent, arr) {
-      return (+indexParent === 0 && index === 0) ||
-        (+indexParent === Object.keys(arrParent).length - 1 &&
-          index === arr.length - 1)
-        ? "item"
-        : null;
-    },
+    languageExpressions,
     /**
      * Колбэк-функция вызывается при пересечении элемента, который содержит
      * график с боковыми границами графика.
@@ -86,24 +139,22 @@ export default {
      * и его корневым контейнером в определенный момент перехода.
      */
     observerCallback([entry]) {
-      const firstItem = this.$refs.item[0];
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
-        entry.target === firstItem
-          ? (this.side = "left")
-          : (this.side = "right");
+      if (entry.isIntersecting && entry.target === this.firstItem) {
+        this.side.left = true;
+      } else if (!entry.isIntersecting && entry.target === this.lastItem) {
+        this.side.right = false;
+      } else if (entry.isIntersecting && entry.target === this.lastItem) {
+        this.side.right = true;
       } else {
-        this.side = "";
+        this.side.left = false;
+        this.side.right = false;
       }
     },
     /**
      * Возвращает количество пикселей, на которое необходимо прокрутить график.
      */
     scrollSize() {
-      return (
-        (this.$refs["swiper-wrapper"].clientWidth /
-          this.datasetsForHourlyCharts.data[0].value.length) *
-        3
-      );
+      return this.firstItem.clientWidth * 3;
     },
     /**
      * Функция отвечает за прокручивание графика.
@@ -117,7 +168,17 @@ export default {
         behavior: "smooth",
       });
     },
-
+    /**
+     * Функция обработчик вызывается, когда изменяется размер окна страницы.
+     */
+    resizeBrowserHandler() {
+      /**
+       * Определяет и устанавливает требуемые для
+       */
+      const elem = this.$refs["swiper-container"];
+      this.clientWidth = Math.round(elem.clientWidth);
+      this.scrollWidth = Math.round(elem.scrollWidth);
+    },
     /**
      * Блок функций, отвечающий за реализацию кинетического скроллинга
      * при помощи мыши.
@@ -168,171 +229,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  padding: 20px;
-  width: 100%;
-}
-.hourly-tab-container {
+.container {
   position: relative;
   background-color: #ffffff;
   border: 1px solid #d8e9f3;
 }
-.swiper-container {
-  display: flex;
-  max-width: 100%;
-  overflow-y: hidden;
-  overflow-x: auto;
-  position: relative;
-}
-.swiper-wrapper {
-  display: flex;
-  position: relative;
-  cursor: grab;
-
-  &.grabbing {
-    cursor: grabbing;
-  }
-}
-.date-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-right: 2px solid #d8e9f3;
-}
-.date-text {
-  position: sticky;
-  left: 0;
-  top: 0;
-  display: inline;
-  padding: 0 13px;
-}
-.date-header {
-  white-space: nowrap;
-  padding: 9px 0;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 16px;
-  color: #333333;
-
-  &::first-letter {
-    text-transform: capitalize;
-  }
-}
-.date-container:last-child .date-header {
-  border-right: none;
-}
-.hourly-data-container {
-  display: flex;
-
-  & .hourly-item {
-    border-top: 1px solid #d8e9f3;
-    border-bottom: 1px solid #d8e9f3;
-    border-right: 1px solid #d8e9f3;
-
-    &:last-child {
-      border-right: none;
-    }
-    width: 56px;
-    & > div {
-      border-bottom: 1px solid #d8e9f3;
-      position: relative;
-
-      &:last-child,
-      &:nth-child(2),
-      &:nth-child(3) {
-        border-bottom: none;
-      }
-    }
-  }
-}
-.date-container:last-child,
-.date-container:last-child .hourly-item:last-child {
-  border-right: none;
-}
-.date-container .hourly-item:first-child {
-  border-left: none;
-}
-.time {
-  height: 33px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 16px;
-  color: #333333;
-}
-.day-length {
-  height: 30px;
-}
-.hourly-temp-item {
-  height: 180px;
-}
-.hourly-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 60px;
-  align-items: center;
-}
-.wind {
-  top: 330px;
-}
-.pressure {
-  top: 384px;
-}
-.humidity {
-  top: 419px;
-}
-.hourly-charts-temp {
-  position: absolute;
-  top: 146px;
-  width: 100%;
-  height: 170px;
-  z-index: 10;
-}
-.day-length-chart {
-  position: absolute;
-  top: 68px;
-  width: 100%;
-  height: 30px;
-  z-index: 10;
-}
-.hourly-wind-descr {
-  height: 53px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 14px;
-  text-align: center;
-  color: #333333;
-
-  & span {
-    text-transform: uppercase;
-    padding-left: 1px;
-  }
-
-  & > div:first-child {
-    display: flex;
-    column-gap: 3px;
-  }
-}
-.hourly-pressure,
-.hourly-day-humidity {
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 14px;
-  color: #333333;
-}
-
 .scroll-button-container {
   position: absolute;
   top: calc(50% - 18px);
@@ -376,19 +277,33 @@ export default {
       visibility: hidden;
       opacity: 0;
       cursor: auto;
-      // transition: opacity 0.3s, visibility 0.3s;
       transition: all 0.5s;
     }
   }
 }
-
-.adjust {
-  position: absolute;
-  left: 0;
+.wind {
+  top: v-bind("labelCoordinates.wind");
 }
-@media only screen and (max-width: 600px) {
-  .wrapper {
-    padding: 20px 5px;
+.pressure {
+  top: v-bind("labelCoordinates.pressure");
+}
+.humidity {
+  top: v-bind("labelCoordinates.humidity");
+}
+.swiper-container {
+  display: flex;
+  max-width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  position: relative;
+}
+.swiper-wrapper {
+  display: flex;
+  position: relative;
+  cursor: grab;
+
+  &.grabbing {
+    cursor: grabbing;
   }
 }
 </style>

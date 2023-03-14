@@ -10,6 +10,8 @@ components.forEach((component) => {
   Vue.component(component.name, component);
 });
 
+export const eventBus = new Vue();
+
 Vue.config.productionTip = false;
 
 new Vue({

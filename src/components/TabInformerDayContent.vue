@@ -1,83 +1,58 @@
 <template>
-  <div class="wrapper">
-    <div class="ten-days-container">
-      <RowCaption class="wind">
-        {{
-          languageExpressions(getLocales, "climateIndicators", "windDirSpeed")
-        }}
-      </RowCaption>
-      <RowCaption class="pressure">
-        {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
-        {{ languageExpressions(getLocales, "units", "pressure")[0] }}
-      </RowCaption>
-      <RowCaption class="humidity">
-        {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
-      </RowCaption>
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div
-            @click="toggle(index)"
-            :class="[
-              'ten-days-day',
-              { 'ten-days-weekend': day.weekend === true },
-            ]"
-            v-for="(day, index) in tenDaysTabTable"
-            :key="`d-${index}`"
-          >
-            <div class="ten-days-weekday">
-              <div>{{ day.weekday }}</div>
-              <div>{{ day.date }}</div>
-            </div>
-            <div class="ten-days-icon">
-              <BaseIcon width="100%" :name="day.condition" pick="light" />
-            </div>
-            <div class="ten-days-temp-item"></div>
-            <div class="ten-days-wind-descr">
-              <div>
-                <div>
-                  <BaseIcon
-                    width="8"
-                    name="wind-direction-blue"
-                    pick="common"
-                    :style="windDirection(getLocales, day.wind)"
-                  />
-                </div>
-                <span>{{ day.wind.wind_dir[1] }}</span>
-              </div>
-              <div>{{ day.wind.value }} {{ day.wind.unit }}</div>
-            </div>
-            <div class="ten-days-pressure">
-              {{ day.pressure.value }}
-            </div>
-            <div class="ten-day-humidity">
-              {{ day.humidity.value }}{{ day.humidity.unit }}
-            </div>
-            <div class="ten-days-chevron-down">
-              <BaseIcon width="7" name="chevron-more-down" pick="common" />
-            </div>
-          </div>
-          <div class="ten-days-charts-temp">
-            <ChartsDayList />
-          </div>
-        </div>
+  <div class="swiper-content">
+    <div
+      @click="toggle(index)"
+      :class="['item', { 'days-weekend': day.weekend === true }]"
+      v-for="(day, index) in tenDaysTabTable"
+      :key="`d-${index}`"
+    >
+      <div class="days-weekday">
+        <div>{{ day.weekday }}</div>
+        <div>{{ day.date }}</div>
       </div>
+      <div class="days-icon">
+        <BaseIcon width="100%" :name="day.condition" pick="light" />
+      </div>
+      <div class="days-temp-item"></div>
+      <div class="days-wind-descr">
+        <div>
+          <div>
+            <BaseIcon
+              width="8"
+              name="wind-direction-blue"
+              pick="common"
+              :style="windDirection(getLocales, day.wind)"
+            />
+          </div>
+          <span>{{ day.wind.wind_dir[1] }}</span>
+        </div>
+        <div>{{ day.wind.value }} {{ day.wind.unit }}</div>
+      </div>
+      <div class="days-pressure">
+        {{ day.pressure.value }}
+      </div>
+      <div class="ten-day-humidity">
+        {{ day.humidity.value }}{{ day.humidity.unit }}
+      </div>
+      <div class="days-chevron-down">
+        <BaseIcon width="7" name="chevron-more-down" pick="common" />
+      </div>
+    </div>
+    <div class="days-charts-temp">
+      <ChartsDayList />
     </div>
   </div>
 </template>
 
 <script>
-import ChartsDayList from "../SVGCharts/day/ChartsDayList.vue";
-/**
- * RowCaption.vue - компонента для отрисовки подписей погодных параметров.
- */
-import RowCaption from "@/components/RowCaption.vue";
+import ChartsDayList from "@/components/SVGCharts/day/ChartsDayList.vue";
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
+import { eventBus } from "../main.js";
 
 export default {
   components: {
     ChartsDayList,
-    RowCaption,
   },
   computed: {
     /**
@@ -116,7 +91,7 @@ export default {
        * путем изменения значения флага isOpen в сторе store.state.datasetsTenDays.
        */
       if (index === 0) {
-        this.$emit("go");
+        eventBus.$emit("go", "hourly");
       } else {
         this.$store.dispatch("index", index);
       }
@@ -126,34 +101,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  padding: 20px;
-}
-.ten-days-container {
-  position: relative;
-  background-color: #ffffff;
-  border: 1px solid #d8e9f3;
-  border-bottom: none;
-}
 .swiper-container {
   display: flex;
   max-width: 100%;
   overflow-y: hidden;
   overflow-x: auto;
 }
-.swiper-wrapper {
+.swiper-content {
   flex: 1 0;
   position: relative;
   display: flex;
   background-color: #ffffff;
-  .ten-days-weekend {
+  .days-weekend {
     background-color: #f7fafd;
 
-    & .ten-days-weekday > div:first-child {
+    & .days-weekday > div:first-child {
       color: #ff1616;
     }
   }
-  & .ten-days-day {
+  & .item {
     position: relative;
     flex: 1 0;
     min-width: 50px;
@@ -165,7 +131,7 @@ export default {
       border-right: none;
     }
 
-    &:nth-child(n + 12) .ten-days-chevron-down svg {
+    &:nth-child(n + 12) .days-chevron-down svg {
       display: none;
     }
 
@@ -185,7 +151,7 @@ export default {
 
     &:nth-child(-n + 11):hover {
       cursor: pointer;
-      & .ten-days-chevron-down svg {
+      & .days-chevron-down svg {
         transform: scale(2);
       }
     }
@@ -201,10 +167,10 @@ export default {
     }
   }
 }
-.ten-days-temp-item {
+.days-temp-item {
   height: 170px;
 }
-.ten-days-weekday {
+.days-weekday {
   height: 64px;
   display: flex;
   flex-direction: column;
@@ -214,15 +180,15 @@ export default {
   font-size: 12px;
   line-height: 16px;
 }
-.ten-days-weekday > div {
+.days-weekday > div {
   text-align: center;
 }
-.ten-days-weekday > div:first-child {
+.days-weekday > div:first-child {
   text-transform: uppercase;
   font-size: 16px;
   line-height: 21px;
 }
-.ten-days-icon {
+.days-icon {
   margin: 0 auto;
   height: 65px;
   width: 80%;
@@ -231,16 +197,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.wind {
-  top: 292px;
-}
-.pressure {
-  top: 345px;
-}
-.humidity {
-  top: 382px;
-}
-.ten-days-charts-temp {
+.days-charts-temp {
   height: 170px;
   position: absolute;
   top: 123px;
@@ -248,7 +205,7 @@ export default {
   // z-index: 10;
   cursor: pointer;
 }
-.ten-days-wind-descr {
+.days-wind-descr {
   height: 53px;
   display: flex;
   flex-direction: column;
@@ -270,7 +227,7 @@ export default {
     column-gap: 3px;
   }
 }
-.ten-days-pressure,
+.days-pressure,
 .ten-day-humidity {
   height: 36px;
   display: flex;
@@ -282,7 +239,7 @@ export default {
   line-height: 14px;
   color: #333333;
 }
-.ten-days-chevron-down {
+.days-chevron-down {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -290,16 +247,6 @@ export default {
 
   & svg {
     transition: transform 0.3s ease-in-out;
-  }
-}
-@media only screen and (max-width: 760px) {
-  .ten-days-container {
-    border: 1px solid #d8e9f3;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .wrapper {
-    padding: 20px 5px;
   }
 }
 </style>

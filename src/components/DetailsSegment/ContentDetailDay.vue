@@ -1,15 +1,15 @@
 <template>
   <div class="forecast-details-container">
-    <RowCaption class="wind">
+    <RowCaptionInformer class="wind">
       {{ languageExpressions(getLocales, "climateIndicators", "windDirSpeed") }}
-    </RowCaption>
-    <RowCaption class="pressure">
+    </RowCaptionInformer>
+    <RowCaptionInformer class="pressure">
       {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
       {{ languageExpressions(getLocales, "units", "pressure")[0] }}
-    </RowCaption>
-    <RowCaption class="humidity">
+    </RowCaptionInformer>
+    <RowCaptionInformer class="humidity">
       {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
-    </RowCaption>
+    </RowCaptionInformer>
     <div class="details-charts-temp">
       <ChartDetailsTemp :numData="data" />
     </div>
@@ -49,14 +49,14 @@
 
 <script>
 import ChartDetailsTemp from "@/components/SVGCharts/day-details/ChartDetailsTemp.vue";
-import RowCaption from "@/components/RowCaption.vue";
+import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
 
 export default {
   components: {
     ChartDetailsTemp,
-    RowCaption,
+    RowCaptionInformer,
   },
   /**
    * Масив с данными для отображения графика.

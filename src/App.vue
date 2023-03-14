@@ -1,30 +1,28 @@
 <template>
   <div id="app">
-    <TheHeader class="header" />
-    <SectionOtherCities class="section" />
-    <!-- route outlet -->
-    <!-- component matched by the route will render here -->
-    <router-view class="main"></router-view>
-    <TheAside class="sidebar" />
-    <ScrollableMode class="slot"><ExpComp /></ScrollableMode>
+    <div v-if="!loading">Loading...</div>
+    <div class="app-container" v-else>
+      <TheHeader class="header" />
+      <SectionOtherCities class="section" />
+      <!-- route outlet -->
+      <!-- component matched by the route will render here -->
+      <router-view class="main"></router-view>
+      <TheAside class="sidebar" />
+    </div>
   </div>
 </template>
 
 <script>
-import ScrollableMode from "./components/ScrollableMode.vue";
 import SectionOtherCities from "./components/SectionOtherCities.vue";
 import TheAside from "./components/TheAside.vue";
 import TheHeader from "./components/TheHeader.vue";
 import { languageExpressions } from "@/constants/locales";
-import ExpComp from "./components/ExpComp.vue";
 
 export default {
   components: {
     TheHeader,
     TheAside,
     SectionOtherCities,
-    ScrollableMode,
-    ExpComp,
   },
   created() {
     this.getData();
@@ -32,6 +30,12 @@ export default {
   computed: {
     getLocales() {
       return this.$store.getters.getLocales;
+    },
+    /**
+     * Возвращает булевое значение для лоадера.
+     */
+    loading() {
+      return this.$store.getters.loading;
     },
   },
   methods: {
@@ -93,7 +97,7 @@ export default {
 a {
   text-decoration: none;
 }
-#app {
+.app-container {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 1fr 300px;
@@ -130,7 +134,7 @@ a {
   box-shadow: 0 0 0 2px teal;
 }
 @media only screen and (max-width: 940px) {
-  #app {
+  .app-container {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
@@ -146,7 +150,7 @@ a {
   }
 }
 @media only screen and (max-width: 600px) {
-  #app {
+  .app-container {
     padding: 16px 4px 70px 4px;
   }
 }

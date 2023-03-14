@@ -3,9 +3,9 @@ import VueRouter from "vue-router";
 
 import MainInformer from "../views/MainInformer.vue";
 import NotFound from "@/components/NotFound.vue";
-import HourlyTabContent from "@/components/Tabs/HourlyTabContent.vue";
-import MainTabContent from "@/components/Tabs/MainTabContent.vue";
-import DayTabContent from "@/components/Tabs/DayTabContent.vue";
+import TabInformerHourly from "@/components/TabInformerHourly.vue";
+import MainTabContent from "@/components/TabInformerMain.vue";
+import TabInformerDay from "@/components/TabInformerDay.vue";
 
 Vue.use(VueRouter);
 
@@ -23,12 +23,12 @@ const routes = [
       {
         path: "/hourly",
         name: "hourly",
-        component: HourlyTabContent,
+        component: TabInformerHourly,
       },
       {
         path: "/days",
         name: "days",
-        component: DayTabContent,
+        component: TabInformerDay,
       },
     ],
   },
