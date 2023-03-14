@@ -167,9 +167,9 @@ export default {
       transform: scale(2);
     }
   }
-  .days-temp-item {
-    height: 170px;
-  }
+}
+.days-temp-item {
+  height: 170px;
 }
 .days-weekday {
   height: 64px;
