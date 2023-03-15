@@ -2,11 +2,20 @@
   <router-link to="/go" class="card-link">
     <div class="card-left-side">
       <div class="card-title">
-        <div class="card-title-icon">
+        <div class="card-title-marker">
           <BaseIcon name="map-marker" pick="common" width="8" />
         </div>
         <div class="card-title-text">
           <span>{{ data.name_ru }}</span>
+        </div>
+        <div class="card-title-arrow">
+          <BaseIcon
+            name="arrow-right"
+            pick="common"
+            width="9"
+            fill="#04569c"
+            fill-opacity="1"
+          />
         </div>
       </div>
       <div class="card-value">
@@ -56,8 +65,18 @@ export default {
   display: flex;
   column-gap: 6px;
 }
-.card-title-icon {
+.card-title-marker {
   display: flex;
+}
+.card-title-arrow {
+  width: 24px;
+  height: 16px;
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  background: #f0f7fc;
+  border-radius: 8px;
 }
 .card-title-text span {
   font-weight: 400;

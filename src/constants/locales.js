@@ -1,6 +1,7 @@
 const dataLocales = {
   ru: {
     sectionOtherCities: "погода в городах армении",
+    asideHistory: "история просмотров",
     viewsSwitcher: ["карта", "города"],
     /**
      * Массив содержит слова-указатели времен.

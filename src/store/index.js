@@ -84,13 +84,13 @@ export default new Vuex.Store({
         name_en: "Garnarich",
         area_en: "Shirak Province",
         now: {
-          temp: "-6°",
+          temp: "+11°",
           condition: "clear",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
         tomorrow: {
-          temp: "-3°",
+          temp: "3°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "ne",
           wind_descr: "3 м/с СВ",
@@ -109,13 +109,13 @@ export default new Vuex.Store({
         name_en: "Bavra",
         area_en: "Shirak Province",
         now: {
-          temp: "-6°",
+          temp: "+6°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
         tomorrow: {
-          temp: "-3°",
+          temp: "+3°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "ne",
           wind_descr: "3 м/с СВ",
@@ -134,13 +134,13 @@ export default new Vuex.Store({
         name_en: "Kaqavasar",
         area_en: "Shirak Province",
         now: {
-          temp: "-6°",
+          temp: "+4°",
           condition: "mostly-cloudy",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
         tomorrow: {
-          temp: "-3°",
+          temp: "+3°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "ne",
           wind_descr: "3 м/с СВ",
@@ -159,13 +159,13 @@ export default new Vuex.Store({
         name_en: "Amasia",
         area_en: "Shirak Province",
         now: {
-          temp: "-6°",
+          temp: "+6°",
           condition: "cloudy_snow_1",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
         tomorrow: {
-          temp: "-3°",
+          temp: "+3°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "ne",
           wind_descr: "3 м/с СВ",
@@ -184,13 +184,13 @@ export default new Vuex.Store({
         name_en: "Jajur",
         area_en: "Shirak Province",
         now: {
-          temp: "-6°",
+          temp: "+8°",
           condition: "clear",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
         tomorrow: {
-          temp: "-3°",
+          temp: "+9°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "ne",
           wind_descr: "3 м/с СВ",
@@ -209,13 +209,13 @@ export default new Vuex.Store({
         name_en: "Azatan",
         area_en: "Shirak Province",
         now: {
-          temp: "-6°",
+          temp: "+10°",
           condition: "clear",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
         tomorrow: {
-          temp: "-3°",
+          temp: "+3°",
           condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "ne",
           wind_descr: "3 м/с СВ",
@@ -2979,7 +2979,7 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      * @param getLocales Языковая метка.
      */
-    current(state, { getLocales }) {
+    current(state, { getLocales, datasetsForHourlyCharts }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       /**
        * Данные используемые для отоброжения. Берем прогнозные данные
@@ -2987,6 +2987,7 @@ export default new Vuex.Store({
        */
       const data = state.datasetsHourly[0][1];
       const time = setTimeFormat(new Date(), "H:i", getLocales);
+      const tempData = datasetsForHourlyCharts.data[1].value[0];
       return {
         timeText: `${languageExpressions(
           getLocales,
@@ -2999,14 +3000,14 @@ export default new Vuex.Store({
         )}`,
         icon: data.condition,
         descr: data.condition_s,
-        temp: `${addPlus(data.temp)}${
+        temp: `${addPlus(tempData.temp.value)}${
           languageExpressions(getLocales, "units", "temp")[0]
         }`,
         realFeel: `${languageExpressions(
           getLocales,
           "headerInformer",
           "feelsLike"
-        )} ${addPlus(data.feels_like)}`,
+        )} ${addPlus(tempData.feels_like.value)}`,
       };
     },
     /**
@@ -3572,7 +3573,6 @@ export default new Vuex.Store({
             },
           };
         });
-
         return {
           value: ajustingDataArr,
           descr: elem.title,
