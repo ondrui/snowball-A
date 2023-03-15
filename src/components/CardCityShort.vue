@@ -1,15 +1,20 @@
 <template>
   <router-link to="/go" class="card-link">
-    <div class="city-title">
-      <span>{{ data.name_ru }}</span>
+    <div class="card-left-side">
+      <div class="card-title">
+        <div class="card-title-icon">
+          <BaseIcon name="map-marker" pick="common" width="8" />
+        </div>
+        <div class="card-title-text">
+          <span>{{ data.name_ru }}</span>
+        </div>
+      </div>
+      <div class="card-value">
+        <span>{{ data.now.temp }}C</span>
+      </div>
     </div>
-    <div class="card-body-temp">
-      <div class="icon-temp">
-        <BaseIcon width="32" :name="data.now.condition" pick="light" />
-      </div>
-      <div class="value-temp">
-        <span>{{ data.now.temp }}</span>
-      </div>
+    <div class="card-right-side">
+      <BaseIcon width="40" :name="data.now.condition" pick="light" />
     </div>
   </router-link>
 </template>
@@ -27,11 +32,11 @@ export default {
 
 <style lang="scss" scoped>
 .card-link {
-  display: block;
+  display: flex;
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
-  padding: 4px;
+  padding: 9px 16px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
@@ -40,50 +45,33 @@ export default {
   &:hover {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
   }
-  & .city-title {
-    display: flex;
-    justify-content: center;
-    & span {
-      font-weight: 400;
-      font-size: 9px;
-      line-height: 11px;
-      text-align: center;
-      text-transform: uppercase;
-      color: #04569c;
-    }
-  }
-  & .card-body-temp {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    & svg {
-      display: block;
-      width: 32px;
-    }
-    & .value-temp span {
-      font-weight: 500;
-      font-size: 15px;
-      line-height: 18px;
-      text-align: center;
-      color: #333333;
-    }
-  }
-  & .card-body-wind {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 4px;
-    & svg {
-      width: 10px;
-      display: block;
-    }
-    & .value-wind span {
-      font-weight: 500;
-      font-size: 11px;
-      line-height: 13px;
-      text-align: center;
-      color: #333333;
-    }
-  }
+}
+.card-left-side {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-title {
+  display: flex;
+  column-gap: 6px;
+}
+.card-title-icon {
+  display: flex;
+}
+.card-title-text span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #04569c;
+  text-transform: capitalize;
+}
+.card-value span {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #333333;
+}
+.card-right-side {
+  display: flex;
 }
 </style>

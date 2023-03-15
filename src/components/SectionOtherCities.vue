@@ -66,12 +66,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   column-gap: 10px;
-  margin: 0;
-  padding: 0;
+  overflow: auto;
+  margin: -8px;
+  padding: 8px;
   list-style: none;
   margin-top: 16px;
 }
 .cities-item {
-  flex: 1;
+  min-width: 210px;
+  flex: 1 0;
 }
 </style>

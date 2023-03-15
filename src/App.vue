@@ -135,7 +135,7 @@ a {
 }
 @media only screen and (max-width: 940px) {
   .app-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "header"
       "section"

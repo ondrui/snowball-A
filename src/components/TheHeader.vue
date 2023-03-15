@@ -1,5 +1,7 @@
 <template>
-  <header class="header"></header>
+  <header class="header">
+    <BaseIcon name="country-logo" pick="common" width="150" />
+  </header>
 </template>
 
 <script>
@@ -31,8 +33,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.header {
-  box-shadow: inset 0 0 0 2px rgb(163, 192, 192);
-}
-</style>
+<style lang="scss" scoped></style>

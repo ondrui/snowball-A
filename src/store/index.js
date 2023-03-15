@@ -110,7 +110,7 @@ export default new Vuex.Store({
         area_en: "Shirak Province",
         now: {
           temp: "-6°",
-          condition: "clear",
+          condition: "cloudy_rain_1_thunderstorm_1",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -135,7 +135,7 @@ export default new Vuex.Store({
         area_en: "Shirak Province",
         now: {
           temp: "-6°",
-          condition: "clear",
+          condition: "mostly-cloudy",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -160,7 +160,7 @@ export default new Vuex.Store({
         area_en: "Shirak Province",
         now: {
           temp: "-6°",
-          condition: "clear",
+          condition: "cloudy_snow_1",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
