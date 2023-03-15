@@ -50,6 +50,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
+  row-gap: 6px;
 }
 .card-title {
   display: flex;

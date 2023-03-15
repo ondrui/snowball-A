@@ -86,6 +86,9 @@ export default {
     border: 4px solid #cfd6e4;
     background: #cfd6e4;
   }
+  & {
+    scrollbar-width: thin;
+  }
 }
 // *::-webkit-scrollbar {
 //   width: 4px;
@@ -152,6 +155,10 @@ a {
 @media only screen and (max-width: 600px) {
   .app-container {
     padding: 16px 4px 70px 4px;
+  }
+  .header,
+  .section {
+    padding: 0 10px;
   }
 }
 </style>

@@ -70,7 +70,7 @@ export default {
   margin: -8px;
   padding: 8px;
   list-style: none;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 .cities-item {
   min-width: 210px;
