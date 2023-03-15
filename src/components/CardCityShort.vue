@@ -5,10 +5,10 @@
     </div>
     <div class="card-body-temp">
       <div class="icon-temp">
-        <BaseIcon width="32" :name="data.condition" pick="light" />
+        <BaseIcon width="32" :name="data.now.condition" pick="light" />
       </div>
       <div class="value-temp">
-        <span>{{ data.temp }}</span>
+        <span>{{ data.now.temp }}</span>
       </div>
     </div>
   </router-link>
@@ -32,9 +32,14 @@ export default {
   background-color: #ffffff;
   cursor: pointer;
   padding: 4px;
-  border-radius: 3px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
   width: 100%;
   height: 100%;
+  transition: 200ms box-shadow ease-in-out;
+  &:hover {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
+  }
   & .city-title {
     display: flex;
     justify-content: center;

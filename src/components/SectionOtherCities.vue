@@ -71,4 +71,7 @@ export default {
   list-style: none;
   margin-top: 16px;
 }
+.cities-item {
+  flex: 1;
+}
 </style>

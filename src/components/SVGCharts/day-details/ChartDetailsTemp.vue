@@ -124,15 +124,12 @@ export default {
         (total, { temp, feels_like }, index) => {
           if (temp.value !== undefined && temp.value !== null) {
             let x1 = index === 0 ? x : 2 * x * index + x;
+            const valY = this.normalizedY(temp.value, max, min);
             const obj = {
               x: x1,
-              y: this.calcY(temp.value, max, min),
-              textYMax:
-                this.calcY(temp.value, max, min) -
-                (this.circleRadius + this.marginText + 2),
-              textYFeels:
-                this.calcY(temp.value, max, min) +
-                (this.circleRadius + this.textSize + 2),
+              y: valY,
+              textYMax: valY - (this.circleRadius + this.marginText + 2),
+              textYFeels: valY + (this.circleRadius + this.textSize + 2),
               temp: addPlus(temp.value),
               feels_like: addPlus(feels_like.value),
               unit: temp.unit,
@@ -145,8 +142,6 @@ export default {
       );
       return dataset;
     },
-  },
-  methods: {
     /**
      * Вычисление общего отступа графика от
      * соседних ячеек.
@@ -159,17 +154,23 @@ export default {
         this.circleRadius / 2
       );
     },
+  },
+  methods: {
     /**
-     * Переводит принимаемый параметр в координату У элемента svg
+     * Переводит принимаемый параметр в координату Y элемента svg
      * с учетом текстовой метки и других маржинов.
      * @param temp - Значение температуры.
-     *  @param max - Максимальное количество осадков за выбранный период.
+     * @param max - Максимальное количество осадков за выбранный период.
+     * @param min - Минимальное количество осадков за выбранный период.
      */
-    calcY(temp, max, min) {
+    normalizedY(temp, max, min) {
+      const margin = this.totalYMargin;
+      const diff = max - min;
       const y =
-        Math.round(
-          ((this.height - 2 * this.totalYMargin()) * (max - temp)) / (max - min)
-        ) + this.totalYMargin();
+        diff === 0
+          ? Math.round(this.height / 2)
+          : Math.round(((this.height - 2 * margin) * (max - temp)) / diff) +
+            margin;
       return y;
     },
     /**
