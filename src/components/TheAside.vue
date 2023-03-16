@@ -71,25 +71,33 @@ export default {
   font-size: 16px;
   line-height: 19px;
   color: #9cabbe;
+  margin-bottom: 16px;
   & span {
     color: #000000;
   }
 }
 .history-list {
-  min-width: 300px;
+  max-width: 300px;
   min-height: 490px;
   display: flex;
-  flex-direction: column;
-  justify-content: end;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // flex-direction: column;
+  // justify-content: end;
   row-gap: 12px;
+  column-gap: 6px;
   list-style: none;
 }
-.history-item:first-child {
+.history-item {
   display: flex;
-  flex: 1;
+  flex: 1 0 100%;
+  height: min-content;
+  &:first-child {
+    height: 200px;
+  }
 }
-// .history-item:nth-child(n + 4) {
-//   display: flex;
-//   flex: 2;
-// }
+.history-item:nth-child(n + 4) {
+  display: flex;
+  flex: 1 0 calc(100% / 2 - 6px);
+}
 </style>

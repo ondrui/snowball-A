@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/go" class="card-link">
+  <div @mousedown="isMove" @mouseup="go" class="card-link">
     <div class="card-left-side">
       <div class="card-title">
         <div class="card-title-marker">
@@ -25,15 +25,52 @@
     <div class="card-right-side">
       <BaseIcon width="40" :name="data.now.condition" pick="light" />
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
+import { eventBus } from "../main.js";
+
 export default {
   props: {
     data: {
       type: Object,
       require: true,
+    },
+  },
+  data() {
+    return {
+      /**
+       * Сохраняем в переменную значение координаты Х мышки при нажатии на элемент.
+       */
+      mouseStartX: 0,
+    };
+  },
+  methods: {
+    /**
+     * Обработчик вызывается когда нажали кнопку мыши на элементе.
+     * Сохраняем в переменную значение координаты Х.
+     * @param event Объект события.
+     */
+    isMove(event) {
+      this.mouseStartX = event.x;
+    },
+    /**
+     * Обработчик для осуществления маршрутизации на главную страницу.
+     * В дальнейшем этот обработчик будет отвечать за переход на город.
+     * @param event Объект события.
+     */
+    go(event) {
+      /**
+       * Обработчик вызывается когда отжали кнопку мыши на элементе.
+       * Сначала проверяем не произошло ли изменение координаты Х мыши после нажатия на
+       * элемент. Если координата изменилась, то выходим из функции.
+       * Если выбран текущий день переходим на вкладку с часовым прогнозом. В остальных случаях
+       * переходим  к карточке и графику с подробным прогнозом выбранного дня,
+       * путем изменения значения флага isOpen в сторе store.state.datasetsTenDays.
+       */
+      if (this.mouseStartX !== event.x) return;
+      eventBus.$emit("go", "main");
     },
   },
 };

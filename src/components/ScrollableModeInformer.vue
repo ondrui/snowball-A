@@ -19,6 +19,7 @@
       {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
     </RowCaptionInformer>
     <div class="swiper-container" ref="swiper-container">
+      <DragScrolling />
       <div
         :class="{ grab: isGrabCursor, grabbing: dragMouseScroll.isDown }"
         @mousedown.prevent="mouseDown"
@@ -35,10 +36,14 @@
 <script>
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { languageExpressions } from "@/constants/locales";
+import DragScrolling from "./DragScrolling.vue";
+import dragScrolling from "@/mixins/drag-scrolling";
 
 export default {
+  mixins: [dragScrolling],
   components: {
     RowCaptionInformer,
+    DragScrolling,
   },
   props: {
     labelCoordinates: {
@@ -86,11 +91,12 @@ export default {
     };
   },
   mounted() {
+    this.elemNameScroll = "swiper-container";
     /**
      * Создаем объект-наблюдатель и задаем целевые наблюдаемые элементы.
      */
     this.observer = new IntersectionObserver(this.observerCallback, {
-      root: this.$refs["swiper-container"],
+      root: this.$refs[this.elemNameScroll],
       threshold: 0.99,
     });
     const coolElement = document.querySelectorAll(".item");
@@ -166,7 +172,7 @@ export default {
      */
     scroll(direction) {
       const num = this.scrollSize();
-      this.$refs["swiper-container"].scrollBy({
+      this.$refs[this.elemNameScroll].scrollBy({
         left: direction === "right" ? num : -num,
         behavior: "smooth",
       });
@@ -178,7 +184,7 @@ export default {
       /**
        * Определяет и устанавливает требуемые для
        */
-      const elem = this.$refs["swiper-container"];
+      const elem = this.$refs[this.elemNameScroll];
       this.clientWidth = Math.round(elem.clientWidth);
       this.scrollWidth = Math.round(elem.scrollWidth);
     },
@@ -186,47 +192,47 @@ export default {
      * Блок функций, отвечающий за реализацию кинетического скроллинга
      * при помощи мыши.
      */
-    mouseDown(event) {
-      this.dragMouseScroll.isDown = true;
-      this.dragMouseScroll.startX =
-        event.pageX - this.$refs["swiper-container"].offsetLeft;
-      this.dragMouseScroll.scrollLeft =
-        this.$refs["swiper-container"].scrollLeft;
-      this.cancelMomentumTracking();
-    },
-    mouseLeave() {
-      this.dragMouseScroll.isDown = false;
-    },
-    mouseUp() {
-      this.dragMouseScroll.isDown = false;
-      this.beginMomentumTracking();
-    },
-    mouseMove(event) {
-      if (!this.dragMouseScroll.isDown) return;
-      const x = event.pageX - this.$refs["swiper-container"].offsetLeft;
-      const walk = x - this.dragMouseScroll.startX;
-      let prevScrollLeft = this.$refs["swiper-container"].scrollLeft;
-      this.$refs["swiper-container"].scrollLeft =
-        this.dragMouseScroll.scrollLeft - walk;
-      this.momentum.velX =
-        this.$refs["swiper-container"].scrollLeft - prevScrollLeft;
-    },
-    beginMomentumTracking() {
-      this.cancelMomentumTracking();
-      this.momentummomentumID = requestAnimationFrame(this.momentumLoop);
-    },
-    cancelMomentumTracking() {
-      cancelAnimationFrame(this.momentum.momentumID);
-    },
-    momentumLoop() {
-      if (this.$refs["swiper-container"]) {
-        this.$refs["swiper-container"].scrollLeft += this.momentum.velX * 2;
-        this.momentum.velX *= 0.95;
-        if (Math.abs(this.momentum.velX) > 0.5) {
-          this.momentum.momentumID = requestAnimationFrame(this.momentumLoop);
-        }
-      }
-    },
+    // mouseDown(event) {
+    //   this.dragMouseScroll.isDown = true;
+    //   this.dragMouseScroll.startX =
+    //     event.pageX - this.$refs["swiper-container"].offsetLeft;
+    //   this.dragMouseScroll.scrollLeft =
+    //     this.$refs["swiper-container"].scrollLeft;
+    //   this.cancelMomentumTracking();
+    // },
+    // mouseLeave() {
+    //   this.dragMouseScroll.isDown = false;
+    // },
+    // mouseUp() {
+    //   this.dragMouseScroll.isDown = false;
+    //   this.beginMomentumTracking();
+    // },
+    // mouseMove(event) {
+    //   if (!this.dragMouseScroll.isDown) return;
+    //   const x = event.pageX - this.$refs["swiper-container"].offsetLeft;
+    //   const walk = x - this.dragMouseScroll.startX;
+    //   let prevScrollLeft = this.$refs["swiper-container"].scrollLeft;
+    //   this.$refs["swiper-container"].scrollLeft =
+    //     this.dragMouseScroll.scrollLeft - walk;
+    //   this.momentum.velX =
+    //     this.$refs["swiper-container"].scrollLeft - prevScrollLeft;
+    // },
+    // beginMomentumTracking() {
+    //   this.cancelMomentumTracking();
+    //   this.momentummomentumID = requestAnimationFrame(this.momentumLoop);
+    // },
+    // cancelMomentumTracking() {
+    //   cancelAnimationFrame(this.momentum.momentumID);
+    // },
+    // momentumLoop() {
+    //   if (this.$refs["swiper-container"]) {
+    //     this.$refs["swiper-container"].scrollLeft += this.momentum.velX * 2;
+    //     this.momentum.velX *= 0.95;
+    //     if (Math.abs(this.momentum.velX) > 0.5) {
+    //       this.momentum.momentumID = requestAnimationFrame(this.momentumLoop);
+    //     }
+    //   }
+    // },
   },
 };
 </script>

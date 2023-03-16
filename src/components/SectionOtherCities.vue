@@ -6,11 +6,15 @@
       }}</span
       >{{ languageExpressions(getLocales, "sectionOtherCities").slice(6) }}
     </h2>
-    <ul class="cities-list" role="list">
+    <ul ref="list" class="cities-list" role="list">
       <li
         v-for="item in cardMapData"
         :key="`c-${item.name_en}`"
         class="cities-item"
+        @mousedown.prevent="mouseDown"
+        @mouseleave="mouseLeave"
+        @mouseup="mouseUp"
+        @mousemove.prevent="mouseMove"
       >
         <CardCityShort :data="item" />
       </li>
@@ -21,10 +25,15 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 import CardCityShort from "./CardCityShort.vue";
+import dragScrolling from "@/mixins/drag-scrolling";
 
 export default {
+  mixins: [dragScrolling],
   components: {
     CardCityShort,
+  },
+  mounted() {
+    this.elemNameScroll = "list";
   },
   computed: {
     /**
