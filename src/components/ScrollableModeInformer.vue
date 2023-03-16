@@ -19,7 +19,6 @@
       {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
     </RowCaptionInformer>
     <div class="swiper-container" ref="swiper-container">
-      <DragScrolling />
       <div
         :class="{ grab: isGrabCursor, grabbing: dragMouseScroll.isDown }"
         @mousedown.prevent="mouseDown"
@@ -36,14 +35,12 @@
 <script>
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { languageExpressions } from "@/constants/locales";
-import DragScrolling from "./DragScrolling.vue";
 import dragScrolling from "@/mixins/drag-scrolling";
 
 export default {
   mixins: [dragScrolling],
   components: {
     RowCaptionInformer,
-    DragScrolling,
   },
   props: {
     labelCoordinates: {

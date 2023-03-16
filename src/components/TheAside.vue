@@ -93,7 +93,7 @@ export default {
   flex: 1 0 100%;
   height: min-content;
   &:first-child {
-    height: 200px;
+    min-height: 200px;
   }
 }
 .history-item:nth-child(n + 4) {

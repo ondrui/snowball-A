@@ -86,7 +86,6 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
-  height: 100%;
   transition: 200ms box-shadow ease-in-out;
   &:hover {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
