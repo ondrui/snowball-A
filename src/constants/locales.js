@@ -27,7 +27,7 @@ const dataLocales = {
     headerInformer: {
       now: "сейчас в",
       forecast: "по прогнозу",
-      feelsLike: "ощущается",
+      feelsLike: "ощущается как",
     },
     tabsDescr: {
       main: "главная",

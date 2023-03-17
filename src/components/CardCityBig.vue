@@ -19,13 +19,14 @@
       </div>
     </div>
     <div class="card-middle">
-      <div>
+      <div class="card-icon">
         <BaseIcon :name="data.now.condition" pick="light" width="50" />
       </div>
       <div class="card-middle-temp">{{ data.now.temp }}</div>
       <div class="card-middle-descr">
         <div class="card-middle-text">{{ data.now.condition_s }}</div>
         <div class="card-middle-feeling">
+          {{ languageExpressions(getLocales, "headerInformer", "feelsLike") }}
           {{ data.now.feels_like }}
         </div>
       </div>
@@ -98,11 +99,10 @@ export default {
 .card-link {
   display: flex;
   flex-direction: column;
-  row-gap: 3px;
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
-  padding: 16px 20px;
+  padding: 16px 20px 16px 25px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
@@ -143,15 +143,52 @@ export default {
     text-transform: capitalize;
   }
 }
-.card-value span {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 23px;
-  color: #333333;
-}
-.card-bottom {
+.card-middle {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin: 18px auto 0 0;
+  & .card-icon {
+    display: flex;
+  }
+
+  & .card-middle-temp {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 33px;
+    color: #333333;
+    padding-left: 10px;
+  }
+
+  & .card-middle-descr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    row-gap: 2px;
+    padding-left: 12px;
+
+    & .card-middle-text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+    }
+
+    & .card-middle-text::first-letter {
+      text-transform: capitalize;
+    }
+
+    & .card-middle-feeling {
+      white-space: nowrap;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: #9f9f9f;
+    }
+
+    & .card-middle-feeling::first-letter {
+      text-transform: capitalize;
+    }
+  }
 }
 </style>

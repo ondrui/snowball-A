@@ -86,8 +86,8 @@ export default new Vuex.Store({
         now: {
           temp: "+11°",
           feels_like: "+10°",
-          condition: "clear",
-          condition_s: "ясно",
+          condition: "cloudy",
+          condition_s: "переменная облачность, небольшой дождь, возможна гроза",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -3026,7 +3026,7 @@ export default new Vuex.Store({
           getLocales,
           "headerInformer",
           "feelsLike"
-        )} ${addPlus(tempData.feels_like.value)}`,
+        ).slice(0, -3)} ${addPlus(tempData.feels_like.value)}`,
       };
     },
     /**
