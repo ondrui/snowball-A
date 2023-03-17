@@ -31,7 +31,27 @@
         </div>
       </div>
     </div>
-    <div class="card-bottom"></div>
+    <div class="card-bottom">
+      <div
+        v-for="(item, index) in data.details"
+        :key="`i-${index}`"
+        class="card-bottom-item"
+      >
+        <div class="item-text">
+          <span>{{ item.name }}</span>
+        </div>
+        <div class="item-block">
+          <div class="item-block-icon">
+            <BaseIcon :name="item.condition" pick="light" width="34" />
+          </div>
+          <div class="item-block-temp">
+            <span>
+              {{ item.temp }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -188,6 +208,41 @@ export default {
 
     & .card-middle-feeling::first-letter {
       text-transform: capitalize;
+    }
+  }
+}
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+.card-bottom-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  & .item-text {
+    display: flex;
+    align-self: center;
+    & span {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.4);
+      text-transform: capitalize;
+    }
+  }
+  & .item-block {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    & .item-block-icon {
+      display: flex;
+    }
+    & .item-block-temp span {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      color: #333333;
     }
   }
 }

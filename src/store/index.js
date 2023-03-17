@@ -87,7 +87,7 @@ export default new Vuex.Store({
           temp: "+11°",
           feels_like: "+10°",
           condition: "cloudy",
-          condition_s: "переменная облачность, небольшой дождь, возможна гроза",
+          condition_s: "облачно",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -103,23 +103,23 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
-        details: {
-          morning: {
+        details: [
+          {
             name: "утро",
             temp: "+3°",
             condition: "cloudy_rain_1_thunderstorm_1",
           },
-          day: {
+          {
             name: "день",
             temp: "+17°",
             condition: "cloudy",
           },
-          evening: {
+          {
             name: "вечер",
             temp: "+13°",
             condition: "clear",
           },
-        },
+        ],
         x_svg: 19,
         y_svg: 44,
       },
