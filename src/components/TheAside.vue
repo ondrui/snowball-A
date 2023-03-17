@@ -115,4 +115,9 @@ export default {
   display: flex;
   flex: 1 0 calc(100% / 2 - 12px);
 }
+@media only screen and (max-width: 600px) {
+  .history {
+    padding: 0 10px;
+  }
+}
 </style>
