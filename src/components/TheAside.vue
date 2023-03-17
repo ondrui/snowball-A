@@ -1,7 +1,7 @@
 <template>
   <aside class="asidebar">
     <div class="asidebar-ad"></div>
-    <div class="history">
+    <div v-if="cardMapData.length" class="history">
       <h2 class="history-title">
         <span>{{
           languageExpressions(getLocales, "asideHistory").slice(0, 7)
@@ -10,11 +10,14 @@
       </h2>
       <ul class="history-list" role="list">
         <li
-          v-for="item in cardMapData"
+          v-for="(item, index) in cardMapData"
           :key="`c-${item.name_en}`"
           class="history-item"
         >
-          <CardCityShort :data="item" />
+          <component
+            :data="item"
+            :is="showComponent(index, cardMapData.length)"
+          />
         </li>
       </ul>
     </div>
@@ -25,10 +28,14 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 import CardCityShort from "./CardCityShort.vue";
+import CardCityBig from "./CardCityBig.vue";
+import CardCityMiddle from "./CardCityMiddle.vue";
 
 export default {
   components: {
     CardCityShort,
+    CardCityBig,
+    CardCityMiddle,
   },
   computed: {
     /**
@@ -50,6 +57,14 @@ export default {
      * Возвращает строковые константы с учетом локали.
      */
     languageExpressions,
+    /**
+     *
+     */
+    showComponent(index, length) {
+      if (index === 0) return "CardCityBig";
+      if (index === 4 || (index === 3 && length === 5)) return "CardCityShort";
+      if (index > 0 && index < 4) return "CardCityMiddle";
+    },
   },
 };
 </script>
@@ -77,15 +92,15 @@ export default {
   }
 }
 .history-list {
-  max-width: 300px;
-  min-height: 490px;
+  // max-width: 300px;
+  // min-height: 490px;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
   // flex-direction: column;
   // justify-content: end;
   row-gap: 12px;
-  column-gap: 6px;
+  column-gap: 12px;
   list-style: none;
 }
 .history-item {
@@ -98,6 +113,6 @@ export default {
 }
 .history-item:nth-child(n + 4) {
   display: flex;
-  flex: 1 0 calc(100% / 2 - 6px);
+  flex: 1 0 calc(100% / 2 - 12px);
 }
 </style>

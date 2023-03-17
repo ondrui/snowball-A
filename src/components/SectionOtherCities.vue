@@ -16,7 +16,7 @@
         @mouseup="mouseUp"
         @mousemove.prevent="mouseMove"
       >
-        <CardCityShort :data="item" />
+        <CardCityMiddle :data="item" />
       </li>
     </ul>
   </div>
@@ -24,13 +24,13 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import CardCityShort from "./CardCityShort.vue";
+import CardCityMiddle from "./CardCityMiddle.vue";
 import dragScrolling from "@/mixins/drag-scrolling";
 
 export default {
   mixins: [dragScrolling],
   components: {
-    CardCityShort,
+    CardCityMiddle,
   },
   mounted() {
     this.elemNameScroll = "list";

@@ -3,6 +3,7 @@ const dataLocales = {
     sectionOtherCities: "погода в городах армении",
     asideHistory: "история просмотров",
     viewsSwitcher: ["карта", "города"],
+    LinkTitleCardCity: "подробнее",
     /**
      * Массив содержит слова-указатели времен.
      */
@@ -12,6 +13,10 @@ const dataLocales = {
       ["today", "сегодня"],
       ["tomorrow", "завтра"],
       ["overmorrow", "послезавтра"],
+      ["morning", "утро"],
+      ["day", "день"],
+      ["evening", "вечер"],
+      ["night", "ночь"],
     ],
     allCityBtnCaption: "Все 1036 населенных пункта Армении",
     breadcrumbs: {

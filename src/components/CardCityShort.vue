@@ -1,29 +1,27 @@
 <template>
   <div @mousedown="isMove" @mouseup="go" class="card-link">
-    <div class="card-left-side">
-      <div class="card-title">
-        <div class="card-title-marker">
-          <BaseIcon name="map-marker" pick="common" width="8" />
-        </div>
-        <div class="card-title-text">
-          <span>{{ data.name_ru }}</span>
-        </div>
-        <div class="card-title-arrow">
-          <BaseIcon
-            name="arrow-right"
-            pick="common"
-            width="9"
-            fill="#04569c"
-            fill-opacity="1"
-          />
-        </div>
+    <div class="card-top">
+      <div class="card-top-marker">
+        <BaseIcon name="map-marker" pick="common" width="8" />
       </div>
+      <div class="card-top-text">
+        <span>{{ data.name_ru }}</span>
+      </div>
+      <div class="card-top-arrow">
+        <BaseIcon
+          name="arrow-right"
+          pick="common"
+          width="9"
+          fill="#04569c"
+          fill-opacity="1"
+        />
+      </div>
+    </div>
+    <div class="card-bottom">
       <div class="card-value">
         <span>{{ data.now.temp }}C</span>
       </div>
-    </div>
-    <div class="card-right-side">
-      <BaseIcon width="40" :name="data.now.condition" pick="light" />
+      <BaseIcon width="34" :name="data.now.condition" pick="light" />
     </div>
   </div>
 </template>
@@ -79,10 +77,12 @@ export default {
 <style lang="scss" scoped>
 .card-link {
   display: flex;
+  flex-direction: column;
+  row-gap: 3px;
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
-  padding: 9px 16px;
+  padding: 6px 10px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
@@ -91,43 +91,42 @@ export default {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
   }
 }
-.card-left-side {
+.card-top {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  row-gap: 6px;
-}
-.card-title {
-  display: flex;
+  align-items: center;
   column-gap: 6px;
 }
-.card-title-marker {
+.card-top-marker {
   display: flex;
 }
-.card-title-arrow {
+.card-top-arrow {
   width: 24px;
-  height: 16px;
+  height: 14px;
   margin-left: 4px;
   display: flex;
   justify-content: center;
-  align-self: center;
   background: #f0f7fc;
   border-radius: 8px;
 }
-.card-title-text span {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  color: #04569c;
-  text-transform: capitalize;
+.card-top-text {
+  display: flex;
+  & span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #04569c;
+    text-transform: capitalize;
+  }
 }
 .card-value span {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 23px;
   color: #333333;
 }
-.card-right-side {
+.card-bottom {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

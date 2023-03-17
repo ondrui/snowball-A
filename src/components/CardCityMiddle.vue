@@ -1,42 +1,35 @@
 <template>
   <div @mousedown="isMove" @mouseup="go" class="card-link">
-    <div class="card-top">
-      <div class="card-top-marker">
-        <BaseIcon name="map-marker" pick="common" width="9" />
-      </div>
-      <div class="card-top-text">
-        <span>{{ data.name_ru }}</span>
-      </div>
-      <div class="card-top-arrow">
-        <span>{{ languageExpressions(getLocales, "LinkTitleCardCity") }}</span>
-        <BaseIcon
-          name="arrow-right"
-          pick="common"
-          width="9"
-          fill="#04569c"
-          fill-opacity="1"
-        />
-      </div>
-    </div>
-    <div class="card-middle">
-      <div>
-        <BaseIcon :name="data.now.condition" pick="light" width="50" />
-      </div>
-      <div class="card-middle-temp">{{ data.now.temp }}</div>
-      <div class="card-middle-descr">
-        <div class="card-middle-text">{{ data.now.condition_s }}</div>
-        <div class="card-middle-feeling">
-          {{ data.now.feels_like }}
+    <div class="card-left-side">
+      <div class="card-title">
+        <div class="card-title-marker">
+          <BaseIcon name="map-marker" pick="common" width="8" />
+        </div>
+        <div class="card-title-text">
+          <span>{{ data.name_ru }}</span>
+        </div>
+        <div class="card-title-arrow">
+          <BaseIcon
+            name="arrow-right"
+            pick="common"
+            width="9"
+            fill="#04569c"
+            fill-opacity="1"
+          />
         </div>
       </div>
+      <div class="card-value">
+        <span>{{ data.now.temp }}C</span>
+      </div>
     </div>
-    <div class="card-bottom"></div>
+    <div class="card-right-side">
+      <BaseIcon width="40" :name="data.now.condition" pick="light" />
+    </div>
   </div>
 </template>
 
 <script>
 import { eventBus } from "../main.js";
-import { languageExpressions } from "@/constants/locales";
 
 export default {
   props: {
@@ -53,18 +46,7 @@ export default {
       mouseStartX: 0,
     };
   },
-  computed: {
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-  },
   methods: {
-    languageExpressions,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.
@@ -97,12 +79,10 @@ export default {
 <style lang="scss" scoped>
 .card-link {
   display: flex;
-  flex-direction: column;
-  row-gap: 3px;
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
-  padding: 16px 20px;
+  padding: 9px 16px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
@@ -111,47 +91,43 @@ export default {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
   }
 }
-.card-top {
+.card-left-side {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  row-gap: 6px;
+}
+.card-title {
+  display: flex;
   column-gap: 6px;
 }
-.card-top-marker {
+.card-title-marker {
   display: flex;
 }
-.card-top-arrow {
-  margin-left: auto;
+.card-title-arrow {
+  width: 24px;
+  height: 16px;
+  margin-left: 4px;
   display: flex;
-  column-gap: 10px;
-  padding: 2px 8px;
+  justify-content: center;
+  align-self: center;
   background: #f0f7fc;
   border-radius: 8px;
-  & span {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    color: #04569c;
-  }
 }
-.card-top-text {
-  display: flex;
-  & span {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #04569c;
-    text-transform: capitalize;
-  }
+.card-title-text span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #04569c;
+  text-transform: capitalize;
 }
 .card-value span {
   font-weight: 500;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 24px;
+  line-height: 28px;
   color: #333333;
 }
-.card-bottom {
+.card-right-side {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 </style>

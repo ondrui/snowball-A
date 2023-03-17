@@ -85,7 +85,9 @@ export default new Vuex.Store({
         area_en: "Shirak Province",
         now: {
           temp: "+11°",
+          feels_like: "+10°",
           condition: "clear",
+          condition_s: "ясно",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -100,6 +102,23 @@ export default new Vuex.Store({
           condition: "cloudy_snow_1",
           wind_dir: "w",
           wind_descr: "7 м/с З",
+        },
+        details: {
+          morning: {
+            name: "утро",
+            temp: "+3°",
+            condition: "cloudy_rain_1_thunderstorm_1",
+          },
+          day: {
+            name: "день",
+            temp: "+17°",
+            condition: "cloudy",
+          },
+          evening: {
+            name: "вечер",
+            temp: "+13°",
+            condition: "clear",
+          },
         },
         x_svg: 19,
         y_svg: 44,
