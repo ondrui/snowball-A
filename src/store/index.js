@@ -87,7 +87,7 @@ export default new Vuex.Store({
           temp: "+11°",
           feels_like: "+10°",
           condition: "cloudy",
-          condition_s: "облачно",
+          condition_s: "переменная облачность, небольшой дождь, возможна гроза",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },

@@ -166,9 +166,10 @@ export default {
 .card-middle {
   display: flex;
   align-items: center;
-  margin: 18px auto 0 0;
+  min-height: 86px;
   & .card-icon {
     display: flex;
+    align-self: end;
   }
 
   & .card-middle-temp {
@@ -184,13 +185,15 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-self: center;
+    flex-basis: 170px;
     row-gap: 2px;
+    padding-top: 6px;
     padding-left: 12px;
 
     & .card-middle-text {
       font-weight: 500;
-      font-size: 14px;
-      line-height: 16px;
+      font-size: 12px;
+      line-height: 14px;
       color: #000000;
     }
 
@@ -214,6 +217,7 @@ export default {
 .card-bottom {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
 }
 .card-bottom-item {
   display: flex;
