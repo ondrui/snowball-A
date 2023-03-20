@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <BaseIcon name="country-logo" pick="common" width="150" />
+    <div class="container">
+      <BaseIcon name="country-logo" pick="common" width="150" />
+    </div>
   </header>
 </template>
 
@@ -33,4 +35,24 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.header {
+  border-bottom: 1px solid rgba(160, 184, 212, 0.4);
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 36px;
+  min-height: 56px;
+  padding-top: 14px;
+}
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+}
+@media only screen and (max-width: 940px) {
+  .container {
+    max-width: 750px;
+  }
+}
+</style>

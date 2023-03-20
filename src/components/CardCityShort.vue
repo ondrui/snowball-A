@@ -79,6 +79,7 @@ export default {
   display: flex;
   flex-direction: column;
   row-gap: 3px;
+  height: 70px;
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
@@ -112,16 +113,16 @@ export default {
   display: flex;
   & span {
     font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 14px;
+    line-height: 16px;
     color: #04569c;
     text-transform: capitalize;
   }
 }
 .card-value span {
   font-weight: 500;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 24px;
+  line-height: 28px;
   color: #333333;
 }
 .card-bottom {

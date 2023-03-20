@@ -122,7 +122,7 @@ export default {
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
-  padding: 16px 20px 16px 25px;
+  padding: 16px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
@@ -169,7 +169,6 @@ export default {
   min-height: 86px;
   & .card-icon {
     display: flex;
-    align-self: end;
   }
 
   & .card-middle-temp {
@@ -177,18 +176,16 @@ export default {
     font-size: 30px;
     line-height: 33px;
     color: #333333;
-    padding-left: 10px;
+    padding-left: 6px;
   }
 
   & .card-middle-descr {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-self: center;
-    flex-basis: 170px;
-    row-gap: 2px;
+    row-gap: 4px;
     padding-top: 6px;
-    padding-left: 12px;
+    padding-left: 8px;
 
     & .card-middle-text {
       font-weight: 500;

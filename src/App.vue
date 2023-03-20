@@ -1,14 +1,16 @@
 <template>
   <div id="app">
     <div v-if="!loading">Loading...</div>
-    <div class="app-container" v-else>
-      <TheHeader class="header" />
+    <template v-else>
+      <TheHeader />
       <SectionOtherCities class="section" />
-      <!-- route outlet -->
-      <!-- component matched by the route will render here -->
-      <router-view class="main"></router-view>
-      <TheAside class="sidebar" />
-    </div>
+      <div class="page-wrapper">
+        <!-- route outlet -->
+        <!-- component matched by the route will render here -->
+        <router-view class="main"></router-view>
+        <TheAside class="sidebar" />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -100,29 +102,20 @@ export default {
 a {
   text-decoration: none;
 }
-.app-container {
+.page-wrapper {
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 1fr 300px;
-  grid-template-rows: 55px min-content 1fr min-content;
-  grid-template-areas:
-    "header header"
-    "section section"
-    "content sidebar"
-    "slot slot";
+  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-areas: "content sidebar";
   column-gap: 14px;
   row-gap: 36px;
+  max-width: 1140px;
+  padding: 0 10px;
+  width: 100%;
   scroll-behavior: smooth;
-  max-width: 1142px;
   min-width: 390px;
   margin: 0 auto;
-  padding: 16px 26px 70px 26px;
-}
-.header {
-  grid-area: header;
-}
-.section {
-  grid-area: section;
+  margin-bottom: 40px;
 }
 .sidebar {
   grid-area: sidebar;
@@ -132,33 +125,16 @@ a {
   max-width: 100%;
   min-width: 390px;
 }
-.slot {
-  grid-area: slot;
-  box-shadow: 0 0 0 2px teal;
-}
 @media only screen and (max-width: 940px) {
-  .app-container {
+  .page-wrapper {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "header"
-      "section"
       "content"
-      "sidebar"
-      "slot";
-    padding: 16px 8px 70px 8px;
+      "sidebar";
     max-width: 750px;
   }
   .sidebar {
     min-height: 200px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .app-container {
-    padding: 16px 4px 70px 4px;
-  }
-  .header,
-  .section {
-    padding: 0 10px;
   }
 }
 </style>
