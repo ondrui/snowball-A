@@ -43,9 +43,6 @@ export default {
       },
     };
   },
-  mounted() {
-    console.log(document.querySelector(".swiper-container"));
-  },
   methods: {
     /**
      * Блок функций, отвечающий за реализацию кинетического скроллинга

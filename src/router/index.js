@@ -6,6 +6,7 @@ import NotFound from "@/components/NotFound.vue";
 import TabInformerHourly from "@/components/TabInformerHourly.vue";
 import MainTabContent from "@/components/TabInformerMain.vue";
 import TabInformerDay from "@/components/TabInformerDay.vue";
+import ListAllCities from "@/components/ListAllCities.vue";
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const routes = [
         component: TabInformerDay,
       },
     ],
+  },
+  {
+    path: "/cities",
+    name: "cities",
+    component: ListAllCities,
   },
   {
     path: "/:pathMatch(.*)*",

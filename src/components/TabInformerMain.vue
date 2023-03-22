@@ -6,9 +6,9 @@
       v-model="radio"
     />
     <MapArmenia v-if="radio === 'map'" :datasetCard="cardMapData" />
-    <ListCities v-if="radio === 'cities'" :itemList="getListCities" />
+    <ListTopCities v-if="radio === 'cities'" :itemList="getListTopCities" />
     <div class="link-city">
-      <router-link to="/go">{{
+      <router-link to="/cities">{{
         languageExpressions(getLocales, "allCityBtnCaption")
       }}</router-link>
     </div>
@@ -17,14 +17,14 @@
 
 <script>
 import MapArmenia from "@/components/Maps/MapArmenia.vue";
-import ListCities from "@/components/ListCities.vue";
+import ListTopCities from "@/components/ListTopCities.vue";
 import { languageExpressions } from "@/constants/locales";
 
 export default {
   name: "MainTabContent",
   components: {
     MapArmenia,
-    ListCities,
+    ListTopCities,
   },
   data() {
     return {
@@ -43,8 +43,8 @@ export default {
     /**
      * Возвращает список городов.
      */
-    getListCities() {
-      return this.$store.getters.getListCities;
+    getListTopCities() {
+      return this.$store.getters.getListTopCities;
     },
     /**
      * Возвращает настройки отрисовки радио кнопок в компоненте Navbar.vue.

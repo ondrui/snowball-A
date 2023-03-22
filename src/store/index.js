@@ -2799,9 +2799,19 @@ export default new Vuex.Store({
       },
     ],
     /**
-     * Список городов Армении.
+     * Список всех городов Армении.
      */
-    listOfCities: [
+    listAllCities: [
+      {
+        name_loc: "Գյումրի",
+        name_ru: "Ереван",
+        name_en: "Yerevan",
+      },
+    ],
+    /**
+     * Самые населенные города Армении.
+     */
+    listTopCities: [
       { temp: "+6°", name_loc: "Երևան", name_ru: "Гюмри", name_en: "Gyumri" },
       {
         temp: "+6°",
@@ -3748,12 +3758,15 @@ export default new Vuex.Store({
     cardMapData: ({ datasetsMap }) => {
       return datasetsMap;
     },
+    getListAllCities: ({ listAllCities }) => {
+      console.log(listAllCities);
+    },
     /**
      *
-     * Возвращает список городов.
+     * Возвращает самые населенные города Армении.
      */
-    getListCities: ({ listOfCities }) => {
-      return listOfCities
+    getListTopCities: ({ listTopCities }) => {
+      return listTopCities
         .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
         .map((e) => {
           return { ...e, name_en: e.name_en.toLocaleLowerCase() };
