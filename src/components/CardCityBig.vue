@@ -2,15 +2,15 @@
   <div @mousedown="isMove" @mouseup="go" class="card-link">
     <div class="card-top">
       <div class="card-top-marker">
-        <BaseIcon name="map-marker" pick="common" width="9" />
+        <BaseIcon nameIcon="map-marker" pick="common" width="9" />
       </div>
       <div class="card-top-text">
-        <span>{{ data.name_ru }}</span>
+        <span>{{ itemDataset.name_ru }}</span>
       </div>
       <div class="card-top-arrow">
         <span>{{ languageExpressions(getLocales, "LinkTitleCardCity") }}</span>
         <BaseIcon
-          name="arrow-right"
+          nameIcon="arrow-right"
           pick="common"
           width="9"
           fill="#04569c"
@@ -20,20 +20,24 @@
     </div>
     <div class="card-middle">
       <div class="card-icon">
-        <BaseIcon :name="data.now.condition" pick="light" width="50" />
+        <BaseIcon
+          :nameIcon="itemDataset.now.condition"
+          pick="light"
+          width="50"
+        />
       </div>
-      <div class="card-middle-temp">{{ data.now.temp }}</div>
+      <div class="card-middle-temp">{{ itemDataset.now.temp }}</div>
       <div class="card-middle-descr">
-        <div class="card-middle-text">{{ data.now.condition_s }}</div>
+        <div class="card-middle-text">{{ itemDataset.now.condition_s }}</div>
         <div class="card-middle-feeling">
           {{ languageExpressions(getLocales, "headerInformer", "feelsLike") }}
-          {{ data.now.feels_like }}
+          {{ itemDataset.now.feels_like }}
         </div>
       </div>
     </div>
     <div class="card-bottom">
       <div
-        v-for="(item, index) in data.details"
+        v-for="(item, index) in itemDataset.details"
         :key="`i-${index}`"
         class="card-bottom-item"
       >
@@ -42,7 +46,7 @@
         </div>
         <div class="item-block">
           <div class="item-block-icon">
-            <BaseIcon :name="item.condition" pick="light" width="34" />
+            <BaseIcon :nameIcon="item.condition" pick="light" width="34" />
           </div>
           <div class="item-block-temp">
             <span>
@@ -61,7 +65,7 @@ import { languageExpressions } from "@/constants/locales";
 
 export default {
   props: {
-    data: {
+    itemDataset: {
       type: Object,
       require: true,
     },

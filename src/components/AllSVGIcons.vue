@@ -1,7 +1,7 @@
 <template>
   <div class="p-20">
     <div class="p-10" v-for="icon in icons" :key="icon">
-      <BaseIcon :name="icon" isTest />
+      <BaseIcon :nameIcon="icon" isTest />
       <div>{{ icon }}</div>
     </div>
   </div>

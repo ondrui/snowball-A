@@ -1,7 +1,7 @@
 <template>
   <ul class="menu">
     <li
-      v-for="(item, index) in list"
+      v-for="(item, index) in menuItemName"
       :key="`i-${index}`"
       :class="{ active: isActive(item[0]) }"
     >
@@ -17,7 +17,7 @@
 <script>
 export default {
   props: {
-    list: {
+    menuItemName: {
       type: Array,
       required: true,
     },

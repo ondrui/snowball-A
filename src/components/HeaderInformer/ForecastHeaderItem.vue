@@ -2,14 +2,14 @@
   <div class="climate-index">
     <div class="block-icon">
       <BaseIcon
-        name="rect-background"
+        nameIcon="rect-background"
         pick="common"
         class="background"
         width="40"
       />
       <BaseIcon
-        :style="windDirection(getLocales, value)"
-        :name="value.icon"
+        :style="windDirection(getLocales, dataValue)"
+        :nameIcon="dataValue.icon"
         pick="common"
         class="icon"
         width="14"
@@ -17,11 +17,11 @@
     </div>
     <div class="descr">
       <div class="title">
-        {{ value.title }}
+        {{ dataValue.title }}
       </div>
       <div class="value">
-        {{ value.value }}
-        <span v-if="value.wind_dir">{{ value.wind_dir[1] }}</span>
+        {{ dataValue.value }}
+        <span v-if="dataValue.wind_dir">{{ dataValue.wind_dir[1] }}</span>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@ import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
 
 export default {
-  props: ["value"],
+  props: { dataValue: Object },
   computed: {
     /**
      * Возвращает языковую метку для определения локали.

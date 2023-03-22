@@ -18,7 +18,7 @@
       </div>
       <div class="card-content__condition">
         <div>
-          <BaseIcon :name="value.condition" pick="light" width="46" />
+          <BaseIcon :nameIcon="value.condition" pick="light" width="46" />
         </div>
         <div class="card-content__text">
           <div>
@@ -204,14 +204,14 @@ svg {
   text-align: center;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: $media-width-xl) {
   .card-content {
     grid-template-columns: 0.2fr 0.8fr minmax(80px, 0.4fr) 1.2fr;
     padding: 0 8px 0 8px;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .card-content__info {
     grid-area: e;
     justify-items: center;

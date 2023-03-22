@@ -12,7 +12,7 @@
         <div>{{ day.date }}</div>
       </div>
       <div class="days-icon">
-        <BaseIcon width="100%" :name="day.condition" pick="light" />
+        <BaseIcon width="100%" :nameIcon="day.condition" pick="light" />
       </div>
       <div class="days-temp-item"></div>
       <div class="days-wind-descr">
@@ -20,7 +20,7 @@
           <div>
             <BaseIcon
               width="8"
-              name="wind-direction-blue"
+              nameIcon="wind-direction-blue"
               pick="common"
               :style="windDirection(getLocales, day.wind)"
             />
@@ -36,7 +36,7 @@
         {{ day.humidity.value }}{{ day.humidity.unit }}
       </div>
       <div class="days-chevron-down">
-        <BaseIcon width="7" name="chevron-more-down" pick="common" />
+        <BaseIcon width="7" nameIcon="chevron-more-down" pick="common" />
       </div>
     </div>
     <div class="days-charts-temp">

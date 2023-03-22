@@ -114,9 +114,9 @@ a {
   display: grid;
   min-height: 100vh;
   grid-template-columns: minmax(0, 1fr) 300px;
-  column-gap: 14px;
+  column-gap: 48px;
   row-gap: 36px;
-  max-width: 1140px;
+  max-width: $width-page-xl;
   padding: 0 10px;
   width: 100%;
   scroll-behavior: smooth;
@@ -133,10 +133,10 @@ a {
   display: none;
   margin-bottom: 50px;
 }
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: $media-width-xl) {
   .page-wrapper {
     display: block;
-    max-width: 750px;
+    max-width: $width-page-lg;
     .sidebar {
       display: none;
     }
@@ -145,7 +145,7 @@ a {
     display: block;
   }
 }
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: $media-width-sm) {
   .mob-section {
     display: block;
     padding: 0 10px;

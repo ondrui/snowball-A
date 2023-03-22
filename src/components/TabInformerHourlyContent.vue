@@ -28,7 +28,11 @@
           <div class="time">{{ value.hour }}</div>
           <div class="day-length"></div>
           <div class="hourly-icon">
-            <BaseIcon width="34" :name="value.condition" :pick="value.light" />
+            <BaseIcon
+              width="34"
+              :nameIcon="value.condition"
+              :pick="value.light"
+            />
           </div>
           <div class="hourly-temp-item"></div>
           <div class="hourly-wind-descr">
@@ -36,7 +40,7 @@
               <div>
                 <BaseIcon
                   width="8"
-                  name="wind-direction-blue"
+                  nameIcon="wind-direction-blue"
                   pick="common"
                   :style="windDirection(getLocales, value)"
                 />

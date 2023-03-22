@@ -2,10 +2,10 @@
   <div class="container">
     <div v-show="isButtons" class="scroll-button-container">
       <button :class="['btn', { hidden: side.left }]" @click="scroll('left')">
-        <BaseIcon width="7" name="chevron-scroll-left" pick="common" />
+        <BaseIcon width="7" nameIcon="chevron-scroll-left" pick="common" />
       </button>
       <button :class="['btn', { hidden: side.right }]" @click="scroll('right')">
-        <BaseIcon width="7" name="chevron-scroll-right" pick="common" />
+        <BaseIcon width="7" nameIcon="chevron-scroll-right" pick="common" />
       </button>
     </div>
     <RowCaptionInformer class="wind">

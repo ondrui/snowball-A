@@ -37,7 +37,7 @@ import {
 } from "@/constants/functions";
 export default {
   props: {
-    numData: {
+    datasetChart: {
       type: Array,
       required: true,
     },
@@ -116,11 +116,11 @@ export default {
      *];
      */
     dataPoints() {
-      let max = Math.max(...this.numData.map((e) => e.temp.value));
-      let min = Math.min(...this.numData.map((e) => e.temp.value));
-      let x = this.width / (this.numData.length * 2);
+      let max = Math.max(...this.datasetChart.map((e) => e.temp.value));
+      let min = Math.min(...this.datasetChart.map((e) => e.temp.value));
+      let x = this.width / (this.datasetChart.length * 2);
 
-      const dataset = this.numData.reduce(
+      const dataset = this.datasetChart.reduce(
         (total, { temp, feels_like }, index) => {
           if (temp.value !== undefined && temp.value !== null) {
             let x1 = index === 0 ? x : 2 * x * index + x;

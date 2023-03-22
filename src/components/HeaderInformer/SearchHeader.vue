@@ -7,10 +7,20 @@
       v-model="searchQuery"
     />
     <div class="history-icon-container">
-      <BaseIcon name="history" pick="common" width="23" class="history-icon" />
+      <BaseIcon
+        nameIcon="history"
+        pick="common"
+        width="23"
+        class="history-icon"
+      />
     </div>
     <div class="search-icon-container">
-      <BaseIcon name="search" pick="common" width="23" class="search-icon" />
+      <BaseIcon
+        nameIcon="search"
+        pick="common"
+        width="23"
+        class="search-icon"
+      />
     </div>
   </div>
 </template>

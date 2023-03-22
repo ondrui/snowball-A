@@ -24,7 +24,14 @@ export default {
     prop: "checked",
     event: "change",
   },
-  props: ["radioValues", "checked"],
+  props: {
+    radioValues: {
+      type: Array,
+    },
+    checked: {
+      type: String,
+    },
+  },
   methods: {
     /**
      * Используется для указания стилей внешнего вида кнопок при их выборе.

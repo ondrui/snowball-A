@@ -2,7 +2,7 @@
   <div class="day-length-block">
     <div v-show="isShowSunrise" class="time">{{ value.dayLength.sunrise }}</div>
     <div v-show="isShowSunrise" class="icon">
-      <BaseIcon name="sunrise-1" pick="common" width="20" />
+      <BaseIcon nameIcon="sunrise-1" pick="common" width="20" />
     </div>
     <div v-show="isShowLine" class="line"></div>
     <div v-show="isShowDayLength" class="day-length">
@@ -13,7 +13,7 @@
     </div>
     <div v-show="isShowLine" class="line"></div>
     <div v-show="isShowSunset" class="icon">
-      <BaseIcon name="sunset-1" pick="common" width="20" />
+      <BaseIcon nameIcon="sunset-1" pick="common" width="20" />
     </div>
     <div v-show="isShowSunset" class="time">{{ value.dayLength.sunset }}</div>
   </div>

@@ -3,7 +3,7 @@
     <router-link
       :to="`/${item.name_en}`"
       class="table-item"
-      v-for="(item, index) in list"
+      v-for="(item, index) in itemList"
       :key="`l-${index}`"
     >
       <span>{{ item.name_ru }}</span
@@ -15,7 +15,7 @@
 <script>
 export default {
   props: {
-    list: {
+    itemList: {
       type: Array,
       required: true,
     },
@@ -54,7 +54,7 @@ export default {
     text-decoration: underline;
   }
 }
-@media only screen and (max-width: 1104px) {
+@media only screen and (max-width: $media-width-2xl) {
   .table {
     padding: 30px 10px 108px 10px;
   }
@@ -68,7 +68,7 @@ export default {
     }
   }
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: $media-width-xl) {
   .table {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -93,7 +93,7 @@ export default {
     }
   }
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .table {
     grid-template-columns: repeat(2, 1fr);
   }

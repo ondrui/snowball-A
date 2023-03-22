@@ -6,7 +6,7 @@
       :d="svgPath"
     ></path>
     <circle
-      v-for="(p, index) in points.dataset"
+      v-for="(p, index) in datasetChart.dataset"
       :key="`c-${index}`"
       :cx="p.x"
       :cy="p.y"
@@ -26,7 +26,7 @@ export default {
     /**
      * Объект с данными для отображения графика.
      */
-    points: {
+    datasetChart: {
       type: Object,
       required: true,
     },
@@ -44,7 +44,7 @@ export default {
      * Составляет и возвращает строку с командами для атрибута d элемента path графика.
      */
     svgPath() {
-      const d = this.points.dataset.reduce(
+      const d = this.datasetChart.dataset.reduce(
         (acc, point, i, a) =>
           i === 0
             ? `M ${point.x},${point.y}`
@@ -58,7 +58,7 @@ export default {
      * стиль линии графика.
      */
     classChart() {
-      return this.points.descr === "night" ? "dotted" : "";
+      return this.datasetChart.descr === "night" ? "dotted" : "";
     },
   },
   methods: {

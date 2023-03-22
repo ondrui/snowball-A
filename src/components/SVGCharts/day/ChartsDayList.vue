@@ -8,12 +8,12 @@
     <ChartsDayItem
       v-for="(points, index) in dataPoints"
       :key="`ch-${index}`"
-      :points="points"
+      :datasetChart="points"
     />
     <ChartsDayTextItem
       v-for="(value, index) in dataPoints"
       :key="`tx-${index}`"
-      :points="value"
+      :datasetChart="value"
       :textSize="textSize"
       :marginText="marginText"
     />

@@ -19,7 +19,7 @@
       <BaseIcon
         y="0"
         :x="calcCoordinates.sunriseIcon"
-        name="sunrise-1"
+        nameIcon="sunrise-1"
         pick="common"
         width="20"
       />
@@ -34,7 +34,7 @@
       <BaseIcon
         y="0"
         :x="calcCoordinates.sunsetIcon"
-        name="sunset-1"
+        nameIcon="sunset-1"
         pick="common"
         width="20"
       />
@@ -52,7 +52,7 @@ export default {
   /**
    * Объект с данными для отображения блока восход/заход солнца.
    */
-  props: ["datasets"],
+  props: { datasets: Object },
   data() {
     return {
       /**

@@ -6,7 +6,7 @@
     <div class="header-content">
       <div class="header-content-left">
         <div>
-          <BaseIcon :name="current.icon" pick="light" width="49" />
+          <BaseIcon :nameIcon="current.icon" pick="light" width="49" />
         </div>
         <div class="header-content-left-temp">{{ current.temp }}</div>
         <div class="header-content-left-descr">
@@ -20,7 +20,7 @@
         <ForecastHeaderItem
           v-for="(value, index) in forecastForItemHeader"
           :key="`cn-${index}`"
-          :value="value"
+          :dataValue="value"
         />
       </div>
     </div>
@@ -138,7 +138,7 @@ export default {
   align-items: center;
 }
 
-@media only screen and (max-width: 1122px) {
+@media only screen and (max-width: $media-width-2xl) {
   .header-content-right {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

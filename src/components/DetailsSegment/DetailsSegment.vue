@@ -18,7 +18,7 @@
       <Transition>
         <ContentDetailDay
           v-if="isOpen(index)"
-          :data="tenDaysDetailsChart[`${index + 1}`]"
+          :datasetChart="tenDaysDetailsChart[`${index + 1}`]"
         />
       </Transition>
     </div>
@@ -111,6 +111,7 @@ export default {
   display: inline-block;
   background: url("@/assets/images/common/chevron-more-down.svg?external")
     no-repeat;
+  pointer-events: all;
   background-size: 6px 4px;
   transition: transform 0.3s ease-in-out;
   width: 6px;
@@ -146,7 +147,7 @@ export default {
   border-radius: 1px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .card::after {
     content: "";
     bottom: 12px;

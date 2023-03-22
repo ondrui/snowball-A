@@ -32,7 +32,7 @@ export default {
     /**
      * Имя иконки должно совпадать с названием файла svg в папке \src\assets\images
      */
-    name: {
+    nameIcon: {
       type: String,
       required: true,
     },
@@ -51,8 +51,8 @@ export default {
      */
     iconComponent() {
       const nameComponent = !this.isTest
-        ? this.name + "-" + this.pick
-        : this.name;
+        ? this.nameIcon + "-" + this.pick
+        : this.nameIcon;
       if (!Object.prototype.hasOwnProperty.call(icons, nameComponent)) {
         return (
           console.log(`${nameComponent} иконка с таким именем не найдена!!!`),

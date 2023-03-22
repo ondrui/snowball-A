@@ -17,8 +17,7 @@
           @mouseup="mouseUp"
           @mousemove.prevent="mouseMove"
         >
-          <!-- <CardCityMiddle :data="item" /> -->
-          <CardCityGrid :data="item" />
+          <CardCityGrid :itemDataset="item" />
         </li>
       </ul>
     </div>
@@ -70,7 +69,7 @@ export default {
   margin-bottom: 52px;
 }
 .container {
-  max-width: 1140px;
+  max-width: $width-page-xl;
   margin: 0 auto;
   padding: 0 10px;
   width: 100%;
@@ -100,9 +99,9 @@ export default {
   // min-width: 210px;
   flex: 1 0;
 }
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: $media-width-xl) {
   .container {
-    max-width: 750px;
+    max-width: $width-page-lg;
   }
 }
 </style>

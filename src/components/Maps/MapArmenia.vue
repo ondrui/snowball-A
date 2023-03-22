@@ -2,12 +2,12 @@
   <div class="map-container">
     <nav class="navigation">
       <MapMenu
-        :list="dayMarkers"
+        :menuItemName="dayMarkers"
         :selected="selectedDayMarker"
         @select="selectDayMarker"
       />
       <MapMenu
-        :list="indicators"
+        :menuItemName="indicators"
         :selected="selectedIndicator"
         @select="selectIndicator"
       />
@@ -19,7 +19,7 @@
           :class="['html-card', { hide: animationOn }]"
           v-for="(item, index) in finalDatasets"
           :key="`card-${item.name_en}-${index}`"
-          :data="item"
+          :datasetItem="item"
           :indicator="selectedIndicator"
         />
         <svg
@@ -396,7 +396,7 @@
             />
           </g>
           <circle
-            v-for="(item, index) in data"
+            v-for="(item, index) in datasetCard"
             :key="`c-${index}`"
             :data-key="item.name_en"
             ref="circles"
@@ -425,7 +425,7 @@ export default {
      * Массив с данными для отображения карточек на карте.
      * Получен через пропсы.
      */
-    data: {
+    datasetCard: {
       type: Array,
       required: true,
     },
@@ -568,7 +568,7 @@ export default {
      * району.
      */
     districtFilteredData() {
-      return this.data.filter((f) =>
+      return this.datasetCard.filter((f) =>
         this.selectedDistrict.name === "home"
           ? f.home === true
           : f.area_en?.slice(0, -9).toLowerCase() === this.selectedDistrict.name
@@ -843,7 +843,7 @@ export default {
     }
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .map-container {
     margin: 14px 5px;
     & .navigation {

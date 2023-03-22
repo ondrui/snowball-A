@@ -29,7 +29,7 @@ export default {
   padding: 20px;
   width: 100%;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .wrapper {
     padding: 20px 5px;
   }

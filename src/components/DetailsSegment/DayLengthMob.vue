@@ -2,17 +2,17 @@
   <div class="day-length-block">
     <div>
       <div v-show="isShowPolar">
-        <BaseIcon :name="namePolarIcon" pick="common" width="20" />
+        <BaseIcon :nameIcon="namePolarIcon" pick="common" width="20" />
         <div class="polar-text">
           {{ languageExpressions(getLocales, "polar", value.dayLength?.polar) }}
         </div>
       </div>
       <div v-show="isShowSunrise">
-        <BaseIcon name="sunrise-1" pick="common" width="20" />
+        <BaseIcon nameIcon="sunrise-1" pick="common" width="20" />
         {{ value.dayLength.sunrise }}
       </div>
       <div v-show="isShowSunset">
-        <BaseIcon name="sunset-1" pick="common" width="20" />
+        <BaseIcon nameIcon="sunset-1" pick="common" width="20" />
         {{ value.dayLength.sunset }}
       </div>
     </div>
@@ -96,7 +96,7 @@ svg {
 .polar-text::first-letter {
   text-transform: capitalize;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .day-length-block span {
     font-size: 14px;
     line-height: 16px;

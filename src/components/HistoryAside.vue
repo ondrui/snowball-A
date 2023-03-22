@@ -13,7 +13,7 @@
         class="history-item"
       >
         <component
-          :data="item"
+          :itemDataset="item"
           :is="showComponent(index, cardMapData.length)"
         />
       </li>

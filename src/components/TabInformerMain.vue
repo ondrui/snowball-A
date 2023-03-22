@@ -5,8 +5,8 @@
       :radioValues="getRadioValues"
       v-model="radio"
     />
-    <MapArmenia v-if="radio === 'map'" :data="cardMapData" />
-    <ListCities v-if="radio === 'cities'" :list="getListCities" />
+    <MapArmenia v-if="radio === 'map'" :datasetCard="cardMapData" />
+    <ListCities v-if="radio === 'cities'" :itemList="getListCities" />
     <div class="link-city">
       <router-link to="/go">{{
         languageExpressions(getLocales, "allCityBtnCaption")

@@ -1,7 +1,7 @@
 <template>
   <g>
     <text
-      v-for="(p, index) in points.dataset"
+      v-for="(p, index) in datasetChart.dataset"
       :key="`c-${index}`"
       :class="['text-meter', textMeter(index).thin]"
       :x="p.x"
@@ -22,7 +22,7 @@ export default {
     /**
      * Объект с данными для отображения блока восход/заход солнца.
      */
-    points: {
+    datasetChart: {
       type: Object,
       required: true,
     },
@@ -47,13 +47,18 @@ export default {
      * необходимые для отображения текстовых меток.
      */
     textMeter(index) {
-      const value = addPlus(this.points.dataset[index].temp);
-      const unit = this.points.unit;
+      const value = addPlus(this.datasetChart.dataset[index].temp);
+      const unit = this.datasetChart.unit;
       const y =
-        this.points.descr === "night"
-          ? this.points.dataset[index].y + this.marginText + this.textSize + 2
-          : this.points.dataset[index].y + this.marginText - this.textSize;
-      const thin = this.points.descr === "night" ? "thin" : "";
+        this.datasetChart.descr === "night"
+          ? this.datasetChart.dataset[index].y +
+            this.marginText +
+            this.textSize +
+            2
+          : this.datasetChart.dataset[index].y +
+            this.marginText -
+            this.textSize;
+      const thin = this.datasetChart.descr === "night" ? "thin" : "";
 
       return {
         value,

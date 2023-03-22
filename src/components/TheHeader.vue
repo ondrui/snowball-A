@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="container">
-      <BaseIcon name="country-logo" pick="common" width="150" />
+      <BaseIcon nameIcon="country-logo" pick="common" width="150" />
     </div>
   </header>
 </template>
@@ -45,14 +45,14 @@ export default {
   padding-top: 14px;
 }
 .container {
-  max-width: 1140px;
+  max-width: $width-page-xl;
   margin: 0 auto;
   padding: 0 10px;
   width: 100%;
 }
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: $media-width-xl) {
   .container {
-    max-width: 750px;
+    max-width: $width-page-lg;
   }
 }
 </style>

@@ -8,7 +8,7 @@
         :key="key"
       >
         <span v-if="key === 'main'">
-          <BaseIcon name="home" pick="common" class="home-icon" />
+          <BaseIcon nameIcon="home" pick="common" class="home-icon" />
         </span>
         <span v-else>{{ showTitle(value, key) }}</span>
       </button>

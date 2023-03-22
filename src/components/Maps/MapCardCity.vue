@@ -1,27 +1,27 @@
 <template>
   <router-link to="/go" class="card-link">
     <div class="city-title">
-      <span>{{ data.name_ru }}</span>
+      <span>{{ datasetItem.name_ru }}</span>
     </div>
     <div v-if="indicator === 'temp'" class="card-body-temp">
       <div class="icon-temp">
-        <BaseIcon width="32" :name="data.condition" pick="light" />
+        <BaseIcon width="32" :nameIcon="datasetItem.condition" pick="light" />
       </div>
       <div class="value-temp">
-        <span>{{ data.temp }}</span>
+        <span>{{ datasetItem.temp }}</span>
       </div>
     </div>
     <div v-if="indicator === 'wind'" class="card-body-wind">
       <div class="icon-wind">
         <BaseIcon
           width="10"
-          name="wind-direction-blue"
+          nameIcon="wind-direction-blue"
           pick="common"
-          :style="windDirection(getLocales, data.wind_dir)"
+          :style="windDirection(getLocales, datasetItem.wind_dir)"
         />
       </div>
       <div class="value-wind">
-        <span>{{ data.wind_descr }}</span>
+        <span>{{ datasetItem.wind_descr }}</span>
       </div>
     </div>
   </router-link>
@@ -33,7 +33,7 @@ import { windDirection } from "@/constants/functions";
 
 export default {
   props: {
-    data: {
+    datasetItem: {
       type: Object,
       required: true,
     },

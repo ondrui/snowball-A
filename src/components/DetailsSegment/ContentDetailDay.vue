@@ -11,16 +11,16 @@
       {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
     </RowCaptionInformer>
     <div class="details-charts-temp">
-      <ChartDetailsTemp :numData="data" />
+      <ChartDetailsTemp :datasetChart="datasetChart" />
     </div>
     <div
       class="details-item"
-      v-for="(value, index) in data"
+      v-for="(value, index) in datasetChart"
       :key="`th-${index}`"
     >
       <div class="time">{{ value.hour }}</div>
       <div class="details-icon">
-        <BaseIcon width="40" :name="value.condition" :pick="value.light" />
+        <BaseIcon width="40" :nameIcon="value.condition" :pick="value.light" />
       </div>
       <div class="details-temp-item"></div>
       <div class="details-wind-descr">
@@ -28,7 +28,7 @@
           <div>
             <BaseIcon
               width="8"
-              name="wind-direction-blue"
+              nameIcon="wind-direction-blue"
               pick="common"
               :style="windDirection(getLocales, value.wind)"
             />
@@ -61,7 +61,7 @@ export default {
   /**
    * Масив с данными для отображения графика.
    */
-  props: ["data"],
+  props: { datasetChart: Array },
   computed: {
     /**
      * Возвращает языковую метку для определения локали.
@@ -199,7 +199,7 @@ export default {
   color: #333333;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .forecast-details-container {
     padding-top: 0;
     border-top: none;

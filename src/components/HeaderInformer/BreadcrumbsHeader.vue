@@ -5,7 +5,7 @@
         <router-link v-if="isLast(index)" to="/go">{{ item }}</router-link>
         <span v-else>{{ item }}</span>
         <BaseIcon
-          name="chevron-breadcrumb-right"
+          nameIcon="chevron-breadcrumb-right"
           width="5"
           pick="common"
           v-if="isLast(index)"
@@ -102,7 +102,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .breadcrumbs-header {
     margin-bottom: 16px;
   }

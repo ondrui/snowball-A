@@ -2,14 +2,14 @@
   <div @mousedown="isMove" @mouseup="go" class="card-link">
     <div class="card-top">
       <div class="card-top-marker">
-        <BaseIcon name="map-marker" pick="common" width="8" />
+        <BaseIcon nameIcon="map-marker" pick="common" width="8" />
       </div>
       <div class="card-top-text">
-        <span>{{ data.name_ru }}</span>
+        <span>{{ itemDataset.name_ru }}</span>
       </div>
       <div class="card-top-arrow">
         <BaseIcon
-          name="arrow-right"
+          nameIcon="arrow-right"
           pick="common"
           width="9"
           fill="#04569c"
@@ -18,10 +18,10 @@
       </div>
     </div>
     <div class="card-temp">
-      <span>{{ data.now.temp }}C</span>
+      <span>{{ itemDataset.now.temp }}C</span>
     </div>
     <div class="card-icon">
-      <BaseIcon :name="data.now.condition" pick="light" />
+      <BaseIcon :nameIcon="itemDataset.now.condition" pick="light" />
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ import { eventBus } from "../main.js";
 
 export default {
   props: {
-    data: {
+    itemDataset: {
       type: Object,
       require: true,
     },
@@ -141,7 +141,7 @@ export default {
     width: 100%;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $media-width-lg) {
   .card-link {
     min-width: 180px;
     padding: 4px 12px;

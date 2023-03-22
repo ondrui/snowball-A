@@ -1,9 +1,9 @@
 <template>
   <g>
-    <g :class="[points.descr, 'color-path']" stroke-width="1">
+    <g :class="[datasetChart.descr, 'color-path']" stroke-width="1">
       <path :d="svgPath"></path>
       <circle
-        v-for="(p, index) in points.dataset"
+        v-for="(p, index) in datasetChart.dataset"
         :key="`c-${index}`"
         :cx="p.x"
         :cy="p.y"
@@ -11,7 +11,7 @@
         fill="#ffffff"
       />
     </g>
-    <g v-for="(p, index) in points.dataset" :key="`c-${index}`">
+    <g v-for="(p, index) in datasetChart.dataset" :key="`c-${index}`">
       <text class="temp-max" text-anchor="middle" :x="p.x" :y="p.textYMax">
         {{ `${p.temp}${p.unit}` }}
       </text>
@@ -28,7 +28,7 @@ export default {
   /**
    * Объект с данными для отображения графика.
    */
-  props: ["points"],
+  props: { datasetChart: Object },
   data() {
     return {
       circleRadius: 3,
@@ -39,7 +39,7 @@ export default {
      * Составляет строку с командами для атрибута d элемента path графика.
      */
     svgPath() {
-      const d = this.points.dataset.reduce(
+      const d = this.datasetChart.dataset.reduce(
         (acc, point, i, a) =>
           i === 0
             ? `M ${point.x},${point.y}`

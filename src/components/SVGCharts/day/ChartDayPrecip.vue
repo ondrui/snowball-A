@@ -22,7 +22,7 @@
 <script>
 export default {
   props: {
-    data: {
+    datasetChart: {
       type: Array,
       required: true,
     },

@@ -8,7 +8,7 @@
     <ChartHourlyTempItem
       v-for="(points, index) in dataPoints"
       :key="`ch-${index}`"
-      :points="points"
+      :datasetChart="points"
     />
   </svg>
 </template>
@@ -24,7 +24,7 @@ export default {
   /**
    * Объект с данными для отображения графика.
    */
-  props: ["datasets"],
+  props: { datasets: Object },
   data() {
     return {
       /**

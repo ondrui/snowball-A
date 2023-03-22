@@ -21,7 +21,7 @@
           class="history-item"
         >
           <component
-            :data="item"
+            :itemDataset="item"
             :is="showComponent(index, cardMapData.length)"
           />
         </div>
@@ -50,7 +50,7 @@ export default {
      * Возвращает список городов.
      */
     cardMapData() {
-      return this.$store.getters.cardMapData.slice(0, 3);
+      return this.$store.getters.cardMapData.slice(0, 5);
     },
     /**
      * Возвращает языковую метку для определения локали.
@@ -80,14 +80,14 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  max-width: 1140px;
+  max-width: $width-page-xl;
   margin: 0 auto;
   padding: 0 10px;
   width: 100%;
 }
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: $media-width-xl) {
   .container {
-    max-width: 750px;
+    max-width: $width-page-lg;
   }
 }
 .ad {
