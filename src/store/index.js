@@ -130,6 +130,7 @@ export default new Vuex.Store({
         now: {
           temp: "+6°",
           condition: "cloudy_rain_1_thunderstorm_1",
+          condition_s: "переменная облачность",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -145,6 +146,23 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
+        details: [
+          {
+            name: "утро",
+            temp: "+3°",
+            condition: "cloudy_rain_1_thunderstorm_1",
+          },
+          {
+            name: "день",
+            temp: "+17°",
+            condition: "cloudy",
+          },
+          {
+            name: "вечер",
+            temp: "+13°",
+            condition: "clear",
+          },
+        ],
         x_svg: 73,
         y_svg: 35,
       },
@@ -155,6 +173,7 @@ export default new Vuex.Store({
         now: {
           temp: "+4°",
           condition: "mostly-cloudy",
+          condition_s: "облачно, небольшой дождь",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -170,6 +189,23 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
+        details: [
+          {
+            name: "утро",
+            temp: "+3°",
+            condition: "cloudy_rain_1_thunderstorm_1",
+          },
+          {
+            name: "день",
+            temp: "+17°",
+            condition: "cloudy",
+          },
+          {
+            name: "вечер",
+            temp: "+13°",
+            condition: "clear",
+          },
+        ],
         x_svg: 101,
         y_svg: 76,
       },
@@ -180,6 +216,7 @@ export default new Vuex.Store({
         now: {
           temp: "+6°",
           condition: "cloudy_snow_1",
+          condition_s: "облачно, дождь",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -195,6 +232,23 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
+        details: [
+          {
+            name: "утро",
+            temp: "+3°",
+            condition: "cloudy_rain_1_thunderstorm_1",
+          },
+          {
+            name: "день",
+            temp: "+17°",
+            condition: "cloudy",
+          },
+          {
+            name: "вечер",
+            temp: "+13°",
+            condition: "clear",
+          },
+        ],
         x_svg: 50,
         y_svg: 80,
       },
@@ -205,6 +259,7 @@ export default new Vuex.Store({
         now: {
           temp: "+8°",
           condition: "clear",
+          condition_s: "облачно, дождь",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },
@@ -220,6 +275,23 @@ export default new Vuex.Store({
           wind_dir: "w",
           wind_descr: "7 м/с З",
         },
+        details: [
+          {
+            name: "утро",
+            temp: "+3°",
+            condition: "cloudy_rain_1_thunderstorm_1",
+          },
+          {
+            name: "день",
+            temp: "+17°",
+            condition: "cloudy",
+          },
+          {
+            name: "вечер",
+            temp: "+13°",
+            condition: "clear",
+          },
+        ],
         x_svg: 96,
         y_svg: 110,
       },
@@ -230,6 +302,7 @@ export default new Vuex.Store({
         now: {
           temp: "+10°",
           condition: "clear",
+          condition_s: "облачно, дождь",
           wind_dir: "se",
           wind_descr: "13 м/с ЮВ",
         },

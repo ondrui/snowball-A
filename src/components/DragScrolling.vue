@@ -1,14 +1,14 @@
 <template>
-  <div class="swiper-container" ref="swiper-container">
-    <div
-      :class="{ grab: isGrabCursor, grabbing: dragMouseScroll.isDown }"
-      @mousedown.prevent="mouseDown"
-      @mouseleave="mouseLeave"
-      @mouseup="mouseUp"
-      @mousemove.prevent="mouseMove"
-    >
-      <slot></slot>
-    </div>
+  <div
+    class="swiper-container"
+    ref="swiper-container"
+    :class="{ grab: isGrabCursor, grabbing: dragMouseScroll.isDown }"
+    @mousedown.prevent="mouseDown"
+    @mouseleave="mouseLeave"
+    @mouseup="mouseUp"
+    @mousemove.prevent="mouseMove"
+  >
+    <slot></slot>
   </div>
 </template>
 
@@ -45,7 +45,6 @@ export default {
   },
   mounted() {
     console.log(document.querySelector(".swiper-container"));
-    console.log(this.$root);
   },
   methods: {
     /**

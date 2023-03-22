@@ -116,7 +116,6 @@ export default {
      *];
      */
     dataPoints() {
-      console.log("details");
       let max = Math.max(...this.numData.map((e) => e.temp.value));
       let min = Math.min(...this.numData.map((e) => e.temp.value));
       let x = this.width / (this.numData.length * 2);

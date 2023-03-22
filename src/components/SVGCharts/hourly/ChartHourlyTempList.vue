@@ -99,7 +99,6 @@ export default {
      *];
      */
     dataPoints() {
-      console.log("go");
       let max = this.datasets.max;
       let min = this.datasets.min;
       const colCount = this.datasets.data[0].value.length;

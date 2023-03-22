@@ -3,13 +3,17 @@
     <div v-if="!loading">Loading...</div>
     <template v-else>
       <TheHeader />
-      <SectionOtherCities class="section" />
+      <SectionOtherCities />
       <div class="page-wrapper">
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
         <router-view class="main"></router-view>
-        <TheAside class="sidebar" />
+        <TheAside class="sidebar">
+          <HistoryAside />
+        </TheAside>
       </div>
+      <SectionHistoryCities class="middle-section" />
+      <HistoryAside class="mob-section" />
     </template>
   </div>
 </template>
@@ -18,13 +22,17 @@
 import SectionOtherCities from "./components/SectionOtherCities.vue";
 import TheAside from "./components/TheAside.vue";
 import TheHeader from "./components/TheHeader.vue";
+import HistoryAside from "./components/HistoryAside.vue";
 import { languageExpressions } from "@/constants/locales";
+import SectionHistoryCities from "./components/SectionHistoryCities.vue";
 
 export default {
   components: {
     TheHeader,
     TheAside,
     SectionOtherCities,
+    HistoryAside,
+    SectionHistoryCities,
   },
   created() {
     this.getData();
@@ -106,7 +114,6 @@ a {
   display: grid;
   min-height: 100vh;
   grid-template-columns: minmax(0, 1fr) 300px;
-  grid-template-areas: "content sidebar";
   column-gap: 14px;
   row-gap: 36px;
   max-width: 1140px;
@@ -117,24 +124,34 @@ a {
   margin: 0 auto;
   margin-bottom: 40px;
 }
-.sidebar {
-  grid-area: sidebar;
-}
 .main {
-  grid-area: content;
   max-width: 100%;
   min-width: 390px;
 }
+.mob-section,
+.middle-section {
+  display: none;
+  margin-bottom: 50px;
+}
 @media only screen and (max-width: 940px) {
   .page-wrapper {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "content"
-      "sidebar";
+    display: block;
     max-width: 750px;
+    .sidebar {
+      display: none;
+    }
   }
-  .sidebar {
-    min-height: 200px;
+  .middle-section {
+    display: block;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .mob-section {
+    display: block;
+    padding: 0 10px;
+  }
+  .middle-section {
+    display: none;
   }
 }
 </style>

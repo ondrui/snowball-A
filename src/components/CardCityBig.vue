@@ -119,6 +119,7 @@ export default {
 .card-link {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   text-decoration: none;
   background-color: #ffffff;
   cursor: pointer;
@@ -214,7 +215,6 @@ export default {
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: auto;
 }
 .card-bottom-item {
   display: flex;

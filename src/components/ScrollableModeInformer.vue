@@ -69,22 +69,6 @@ export default {
        * границами графика.
        */
       observer: null,
-      /**
-       * Объект со свойствами отвечающие за перемещение графика с помощью
-       * мыши.
-       */
-      dragMouseScroll: {
-        isDown: false,
-        startX: 0,
-        scrollLeft: 0,
-      },
-      /**
-       * Объект со свойствами отвечающие за кинетический (инерционный) скроллинг.
-       */
-      momentum: {
-        velX: 0,
-        momentumID: null,
-      },
     };
   },
   mounted() {
