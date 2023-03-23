@@ -14,6 +14,16 @@
       </div>
       <SectionHistoryCities class="middle-section" />
       <HistoryAside class="mob-section" />
+      <transition name="btn-fade">
+        <router-link
+          v-scroll="handleScroll"
+          v-show="isVisible"
+          to="#top"
+          class="top-of-site-link"
+        >
+          <BaseIcon width="7" nameIcon="chevron-scroll-left" pick="common" />
+        </router-link>
+      </transition>
     </template>
   </div>
 </template>
@@ -34,6 +44,11 @@ export default {
     HistoryAside,
     SectionHistoryCities,
   },
+  data() {
+    return {
+      isVisible: false,
+    };
+  },
   created() {
     this.getData();
   },
@@ -50,6 +65,10 @@ export default {
   },
   methods: {
     languageExpressions,
+    handleScroll() {
+      let coordinateY = window.scrollY;
+      this.isVisible = coordinateY >= 100 ? true : false;
+    },
     /**
      * Get data from Internal vs External APIs.
      */
@@ -110,6 +129,17 @@ export default {
 a {
   text-decoration: none;
 }
+.btn-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.btn-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.btn-fade-enter,
+.btn-fade-leave-to {
+  transform: translateX(100px);
+  opacity: 0;
+}
 .page-wrapper {
   display: grid;
   min-height: 100vh;
@@ -133,8 +163,35 @@ a {
   display: none;
   margin-bottom: 50px;
 }
+.top-of-site-link {
+  position: fixed;
+  right: 5vw;
+  bottom: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  pointer-events: auto;
+  background-color: rgba(29, 125, 188, 0.08);
+  border-radius: 50px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  touch-action: manipulation;
+  transition: all 0.5s;
+  & svg {
+    transform: rotate(90deg);
+  }
+  &:hover {
+    background-color: rgba(29, 125, 188, 0.16);
+  }
+  &:active {
+    background-color: rgba(29, 125, 188, 0.24);
+  }
+}
 @media only screen and (max-width: $media-width-xl) {
-  .page-wrapper {
+  .page-wrapper,
+  .app-container {
     display: block;
     max-width: $width-page-lg;
     .sidebar {

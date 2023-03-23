@@ -49,6 +49,14 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior(to) {
+    if (to.name === "cities" || to.hash === "#top") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  },
 });
 
 export default router;

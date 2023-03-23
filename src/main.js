@@ -3,11 +3,16 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import components from "./components/UI";
+import directives from "./directives";
 /**
- * Регистрация часто используемых компонент глобально.
+ * Регистрация часто используемых компонент и директив глобально.
  */
 components.forEach((component) => {
   Vue.component(component.name, component);
+});
+
+directives.forEach((directive) => {
+  Vue.directive(directive.name, directive);
 });
 
 export const eventBus = new Vue();

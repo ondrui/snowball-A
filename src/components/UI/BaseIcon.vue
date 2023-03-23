@@ -8,7 +8,7 @@
  */
 const icons = {};
 const requireComponents = require.context(
-  "../assets/images?inline",
+  "../../assets/images?inline",
   true,
   /.svg$/
 );
