@@ -14,12 +14,7 @@
       </div>
       <SectionHistoryCities class="middle-section" />
       <HistoryAside class="mob-section" />
-      <router-link
-        v-scroll="handleScroll"
-        v-show="isVisible"
-        to="#top"
-        class="top-of-site-link"
-      >
+      <router-link v-observe="handleScroll" to="#top" class="top-of-site-link">
         <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
       </router-link>
     </template>
@@ -66,18 +61,22 @@ export default {
     /**
      * Обработчик
      */
-    handleScroll(evt, el) {
+    handleScroll(el) {
       let coordinateY = window.scrollY;
-      if (coordinateY >= 100) {
-        el.style.cssText = `
+      console.log(el, coordinateY);
+      el.style.cssText = `
         opacity: 1;
         `;
-      } else {
-        el.style.cssText = `
-        opacity: 0;
-        transform: translateX(60px);
-        `;
-      }
+      // if (coordinateY >= 100) {
+      //   el.style.cssText = `
+      //   opacity: 1;
+      //   `;
+      // } else {
+      //   el.style.cssText = `
+      //   opacity: 0;
+      //   transform: translateX(60px);
+      //   `;
+      // }
     },
     /**
      * Get data from Internal vs External APIs.
