@@ -1,9 +1,11 @@
 <template>
   <div class="breadcrumbs-header">
     <div class="crumbs">
-      <div v-for="(item, index) in crumbs" :key="item">
-        <router-link v-if="isLast(index)" to="/go">{{ item }}</router-link>
-        <span v-else>{{ item }}</span>
+      <div v-for="(item, index) in crumbs" :key="item[0]">
+        <router-link v-if="isLast(index)" :to="{ name: crumbs[0][0] }">{{
+          item[1]
+        }}</router-link>
+        <span v-else>{{ item[1] }}</span>
         <BaseIcon
           nameIcon="chevron-breadcrumb-right"
           width="5"
@@ -60,7 +62,10 @@ export default {
      */
     breadcrumbs(key, arr) {
       arr.forEach((element) => {
-        this.crumbs.push(languageExpressions(this.getLocales, key, element));
+        this.crumbs.push([
+          element,
+          languageExpressions(this.getLocales, key, element),
+        ]);
       });
     },
   },

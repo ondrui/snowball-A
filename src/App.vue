@@ -14,16 +14,14 @@
       </div>
       <SectionHistoryCities class="middle-section" />
       <HistoryAside class="mob-section" />
-      <transition name="btn-fade">
-        <router-link
-          v-scroll="handleScroll"
-          v-show="isVisible"
-          to="#top"
-          class="top-of-site-link"
-        >
-          <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
-        </router-link>
-      </transition>
+      <router-link
+        v-scroll="handleScroll"
+        v-show="isVisible"
+        to="#top"
+        class="top-of-site-link"
+      >
+        <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
+      </router-link>
     </template>
   </div>
 </template>
@@ -65,9 +63,21 @@ export default {
   },
   methods: {
     languageExpressions,
-    handleScroll() {
+    /**
+     * Обработчик
+     */
+    handleScroll(evt, el) {
       let coordinateY = window.scrollY;
-      this.isVisible = coordinateY >= 100 ? true : false;
+      if (coordinateY >= 100) {
+        el.style.cssText = `
+        opacity: 1;
+        `;
+      } else {
+        el.style.cssText = `
+        opacity: 0;
+        transform: translateX(60px);
+        `;
+      }
     },
     /**
      * Get data from Internal vs External APIs.
@@ -129,17 +139,6 @@ export default {
 a {
   text-decoration: none;
 }
-.btn-fade-enter-active {
-  transition: all 0.3s ease;
-}
-.btn-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.btn-fade-enter,
-.btn-fade-leave-to {
-  transform: translateX(100px);
-  opacity: 0;
-}
 .page-wrapper {
   display: grid;
   min-height: 100vh;
@@ -164,29 +163,31 @@ a {
   margin-bottom: 50px;
 }
 .top-of-site-link {
+  opacity: 0;
   position: fixed;
-  right: 4vw;
-  bottom: 4vw;
+  right: 15vw;
+  bottom: 3vw;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 20;
   pointer-events: auto;
-  background-color: rgba(29, 125, 188, 0.08);
+  background-color: #dbeaf4;
+  box-shadow: 0 0 10px 10px white;
   border-radius: 50px;
   cursor: pointer;
   width: 40px;
   height: 40px;
   touch-action: manipulation;
-  transition: all 0.5s;
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
   & svg {
     transform: rotate(90deg);
   }
   &:hover {
-    background-color: rgba(29, 125, 188, 0.16);
+    background-color: #a6d3f1;
   }
   &:active {
-    background-color: rgba(29, 125, 188, 0.24);
+    background-color: #76bff0;
   }
 }
 @media only screen and (max-width: $media-width-xl) {
@@ -209,6 +210,10 @@ a {
   }
   .middle-section {
     display: none;
+  }
+  .top-of-site-link {
+    right: 9vw;
+    bottom: 9vw;
   }
 }
 </style>

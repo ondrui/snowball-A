@@ -50,7 +50,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior(to) {
-    if (to.name === "cities" || to.hash === "#top") {
+    if (
+      to.name === "cities" ||
+      to.hash === "#top" ||
+      to.redirectedFrom === "/go"
+    ) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",

@@ -49,7 +49,6 @@
 import ChartsDayList from "@/components/SVGCharts/day/ChartsDayList.vue";
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
-import { eventBus } from "../main.js";
 
 export default {
   components: {
@@ -113,7 +112,7 @@ export default {
        */
       if (this.mouseStartX !== event.x) return;
       if (index === 0) {
-        eventBus.$emit("go", "hourly");
+        this.$router.push({ name: "hourly" });
       } else {
         this.$store.dispatch("index", index);
       }

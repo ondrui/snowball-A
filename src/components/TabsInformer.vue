@@ -23,7 +23,6 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import { eventBus } from "../main.js";
 
 export default {
   data() {
@@ -33,10 +32,6 @@ export default {
        */
       currentTab: "main",
     };
-  },
-  created() {
-    this.currentTab = this.$route.name;
-    eventBus.$on("go", this.showContent);
   },
   computed: {
     getLocales() {
@@ -52,6 +47,11 @@ export default {
       return this.$store.getters.tenDaysTabTable;
     },
   },
+  watch: {
+    $route() {
+      this.currentTab = this.$route.name;
+    },
+  },
   methods: {
     languageExpressions,
     /**
@@ -61,7 +61,6 @@ export default {
      */
     showContent(key) {
       if (key !== this.$route.name) this.$router.push({ name: key });
-      this.currentTab = this.$route.name;
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.

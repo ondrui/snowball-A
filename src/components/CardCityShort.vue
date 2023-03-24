@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import { eventBus } from "../main.js";
-
 export default {
   props: {
     itemDataset: {
@@ -68,7 +66,7 @@ export default {
        * путем изменения значения флага isOpen в сторе store.state.datasetsTenDays.
        */
       if (this.mouseStartX !== event.x) return;
-      eventBus.$emit("go", "main");
+      this.$router.push("go").catch(() => {});
     },
   },
 };

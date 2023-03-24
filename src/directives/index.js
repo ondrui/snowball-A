@@ -1,5 +1,5 @@
 import VFocus from "./VFocus";
-import Vintersection from "./Vintersection";
+import VObserve from "./VObserve";
 import VScroll from "./VScroll";
 
-export default [VFocus, Vintersection, VScroll];
+export default [VFocus, VObserve, VScroll];

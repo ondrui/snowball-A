@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="container">
-      <BaseIcon nameIcon="country-logo" pick="common" width="150" />
+      <router-link to="/">
+        <BaseIcon nameIcon="country-logo" pick="common" width="150" />
+      </router-link>
     </div>
   </header>
 </template>
