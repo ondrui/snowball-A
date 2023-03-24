@@ -21,7 +21,7 @@
           to="#top"
           class="top-of-site-link"
         >
-          <BaseIcon width="7" nameIcon="chevron-scroll-left" pick="common" />
+          <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
         </router-link>
       </transition>
     </template>
@@ -165,8 +165,8 @@ a {
 }
 .top-of-site-link {
   position: fixed;
-  right: 5vw;
-  bottom: 2vh;
+  right: 4vw;
+  bottom: 4vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,8 +175,8 @@ a {
   background-color: rgba(29, 125, 188, 0.08);
   border-radius: 50px;
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   touch-action: manipulation;
   transition: all 0.5s;
   & svg {
