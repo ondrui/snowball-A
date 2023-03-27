@@ -7,10 +7,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      viewportHeight: "",
+    };
+  },
+  mounted() {
+    this.viewportHeight = `${window.innerHeight}px`;
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+$view-height: v-bind(viewportHeight);
+
 .scrolltop-wrap {
   position: absolute;
   top: 104vh;
@@ -23,19 +34,20 @@ export default {};
   @supports (-moz-appearance: meterbar) {
     clip: rect(0, 40px, auto, 0);
   }
+  outline: 1px solid teal;
 }
 .top-of-site-link {
   position: fixed;
   position: -webkit-sticky;
   position: sticky;
-  top: calc(100% - 5rem);
+  top: calc(#{$view-height} - 4rem);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 20;
   pointer-events: auto;
-  background-color: #dbeaf4;
-  box-shadow: 0 0 5px 5px white;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.21);
   border-radius: 50px;
   cursor: pointer;
   width: 40px;
@@ -48,10 +60,10 @@ export default {};
 }
 @media (hover: hover) and (pointer: fine) {
   .top-of-site-link:hover {
-    background-color: #a6d3f1;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.36);
   }
   .top-of-site-link:active {
-    background-color: #76bff0;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.45);
   }
 }
 @media only screen and (max-width: $media-width-xl) {
