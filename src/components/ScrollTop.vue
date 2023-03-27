@@ -23,9 +23,12 @@ export default {};
   @supports (-moz-appearance: meterbar) {
     clip: rect(0, 40px, auto, 0);
   }
+  background-color: teal;
+  opacity: 0.3;
 }
 .top-of-site-link {
   position: fixed;
+  position: -webkit-sticky;
   position: sticky;
   top: calc(100vh - 5rem);
   display: flex;
