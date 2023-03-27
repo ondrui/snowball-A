@@ -30,6 +30,7 @@ export default {};
   position: fixed;
   position: -webkit-sticky;
   position: sticky;
+  padding-bottom: 5rem;
   top: calc(100vh - 5rem);
   display: flex;
   justify-content: center;
