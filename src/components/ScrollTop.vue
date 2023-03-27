@@ -1,5 +1,5 @@
 <template>
-  <div class="scrolltop-wrap">
+  <div class="scrolltop-wrap" v-resize="calcSize">
     <router-link to="#top" class="top-of-site-link">
       <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
     </router-link>
@@ -14,8 +14,13 @@ export default {
     };
   },
   mounted() {
-    // this.viewportHeight = `${window.innerHeight}px`;
-    this.viewportHeight = `${document.documentElement.clientHeight}px`;
+    this.calcSize();
+  },
+  methods: {
+    calcSize() {
+      this.viewportHeight = `${window.innerHeight}px`;
+      // this.viewportHeight = `${document.documentElement.clientHeight}px`;
+    },
   },
 };
 </script>
@@ -27,7 +32,7 @@ $view-height: v-bind(viewportHeight);
   position: absolute;
   top: 104vh;
   right: 16vw;
-  bottom: -10px;
+  bottom: -4px;
   pointer-events: none;
   backface-visibility: hidden;
   // prevent extra page height if content is smaller than viewport
@@ -35,13 +40,14 @@ $view-height: v-bind(viewportHeight);
   @supports (-moz-appearance: meterbar) {
     clip: rect(0, 40px, auto, 0);
   }
-  outline: 1px solid teal;
+  // outline: 1px solid teal;
 }
 .top-of-site-link {
   position: fixed;
   position: -webkit-sticky;
   position: sticky;
   top: calc(#{$view-height} - 5rem);
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;

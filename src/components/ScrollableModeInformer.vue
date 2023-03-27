@@ -55,6 +55,8 @@ export default {
     return {
       clientWidth: 0,
       scrollWidth: 0,
+      dalay: 200,
+      timeout: null,
       firstItem: null,
       lastItem: null,
       /**
