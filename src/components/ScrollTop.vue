@@ -40,14 +40,16 @@ export default {};
   width: 40px;
   height: 40px;
   touch-action: manipulation;
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.3s;
   & svg {
     transform: rotate(90deg);
   }
-  &:hover {
+}
+@media (hover: hover) and (pointer: fine) {
+  .top-of-site-link:hover {
     background-color: #a6d3f1;
   }
-  &:active {
+  .top-of-site-link:active {
     background-color: #76bff0;
   }
 }
