@@ -40,9 +40,6 @@ export default {
   created() {
     this.getData();
   },
-  mounted() {
-    window.scrollTo(0, 1);
-  },
   computed: {
     getLocales() {
       return this.$store.getters.getLocales;
