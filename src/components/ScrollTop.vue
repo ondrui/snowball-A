@@ -14,7 +14,8 @@ export default {
     };
   },
   mounted() {
-    this.viewportHeight = `${window.innerHeight}px`;
+    // this.viewportHeight = `${window.innerHeight}px`;
+    this.viewportHeight = `${document.documentElement.clientHeight}px`;
   },
 };
 </script>
@@ -40,7 +41,7 @@ $view-height: v-bind(viewportHeight);
   position: fixed;
   position: -webkit-sticky;
   position: sticky;
-  top: calc(#{$view-height} - 4rem);
+  top: calc(#{$view-height} - 5rem);
   display: flex;
   justify-content: center;
   align-items: center;
