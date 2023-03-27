@@ -14,9 +14,7 @@
       </div>
       <SectionHistoryCities class="middle-section" />
       <HistoryAside class="mob-section" />
-      <router-link v-observe="handleScroll" to="#top" class="top-of-site-link">
-        <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
-      </router-link>
+      <ScrollTop />
     </template>
   </div>
 </template>
@@ -28,6 +26,7 @@ import TheHeader from "./components/TheHeader.vue";
 import HistoryAside from "./components/HistoryAside.vue";
 import { languageExpressions } from "@/constants/locales";
 import SectionHistoryCities from "./components/SectionHistoryCities.vue";
+import ScrollTop from "./components/ScrollTop.vue";
 
 export default {
   components: {
@@ -36,11 +35,7 @@ export default {
     SectionOtherCities,
     HistoryAside,
     SectionHistoryCities,
-  },
-  data() {
-    return {
-      isVisible: false,
-    };
+    ScrollTop,
   },
   created() {
     this.getData();
@@ -58,26 +53,6 @@ export default {
   },
   methods: {
     languageExpressions,
-    /**
-     * Обработчик
-     */
-    handleScroll(el) {
-      let coordinateY = window.scrollY;
-      console.log(el, coordinateY);
-      el.style.cssText = `
-        opacity: 1;
-        `;
-      // if (coordinateY >= 100) {
-      //   el.style.cssText = `
-      //   opacity: 1;
-      //   `;
-      // } else {
-      //   el.style.cssText = `
-      //   opacity: 0;
-      //   transform: translateX(60px);
-      //   `;
-      // }
-    },
     /**
      * Get data from Internal vs External APIs.
      */
@@ -128,15 +103,17 @@ export default {
     scrollbar-width: thin;
   }
 }
-// *::-webkit-scrollbar {
-//   width: 4px;
-// }
-// *::-webkit-scrollbar-thumb {
-//   border-radius: 10px;
-//   background: #cfd6e4;
-// }
+/* Smooth scrolling IF user doesn't have a preference due to motion sensitivities */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
 a {
   text-decoration: none;
+}
+#app {
+  position: relative;
 }
 .page-wrapper {
   display: grid;
@@ -147,7 +124,6 @@ a {
   max-width: $width-page-xl;
   padding: 0 10px;
   width: 100%;
-  scroll-behavior: smooth;
   min-width: 390px;
   margin: 0 auto;
   margin-bottom: 40px;
@@ -160,34 +136,6 @@ a {
 .middle-section {
   display: none;
   margin-bottom: 50px;
-}
-.top-of-site-link {
-  opacity: 0;
-  position: fixed;
-  right: 15vw;
-  bottom: 3vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 20;
-  pointer-events: auto;
-  background-color: #dbeaf4;
-  box-shadow: 0 0 10px 10px white;
-  border-radius: 50px;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  touch-action: manipulation;
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-  & svg {
-    transform: rotate(90deg);
-  }
-  &:hover {
-    background-color: #a6d3f1;
-  }
-  &:active {
-    background-color: #76bff0;
-  }
 }
 @media only screen and (max-width: $media-width-xl) {
   .page-wrapper,
@@ -209,10 +157,6 @@ a {
   }
   .middle-section {
     display: none;
-  }
-  .top-of-site-link {
-    right: 9vw;
-    bottom: 9vw;
   }
 }
 </style>
