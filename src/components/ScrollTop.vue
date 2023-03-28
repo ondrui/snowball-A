@@ -1,5 +1,5 @@
 <template>
-  <div class="scrolltop-wrap" v-resize="calcSize">
+  <div class="scrolltop-wrap" v-resize:debounce.200="calcSize">
     <router-link to="#top" class="top-of-site-link">
       <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
     </router-link>
