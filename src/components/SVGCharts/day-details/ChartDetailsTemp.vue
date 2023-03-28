@@ -1,5 +1,6 @@
 <template>
   <svg
+    v-resize="resizeBrowserHandler"
     :view-box.camel="viewbox"
     ref="svg-temp-details"
     class="svg-temp-details"
@@ -59,17 +60,6 @@ export default {
      * width и height.
      */
     this.resizeBrowserHandler();
-    /**
-     * Устанавливаем оброботчик на событие resize, которое срабатывает при
-     * изменении размера окна. Функция обработчик описана выше.
-     */
-    window.addEventListener("resize", this.resizeBrowserHandler);
-  },
-  destroyed() {
-    /**
-     * Удаляем оброботчик на событие resize когда компонент размонтирован.
-     */
-    window.removeEventListener("resize", this.resizeBrowserHandler);
   },
   watch: {
     /**
@@ -195,7 +185,6 @@ export default {
      * Функция обработчик вызывается, когда изменяется размер окна страницы.
      */
     resizeBrowserHandler() {
-      console.log("resize");
       /**
        * Определяет и устанавливает требуемые для отрисовки графика параметры.
        * @param element - строка содержит ключ ссылку $refs на элемент в шаблоне

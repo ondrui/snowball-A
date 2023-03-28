@@ -1,16 +1,20 @@
 <template>
   <aside class="asidebar">
-    <div class="asidebar-ad-1"></div>
-    <slot />
-    <div class="asidebar-ad-2"></div>
+    <div class="sticky">
+      <div class="asidebar-ad-1"></div>
+      <slot />
+      <div class="asidebar-ad-2"></div>
+    </div>
   </aside>
 </template>
 
 <style lang="scss" scoped>
-.asidebar {
+.sticky {
   display: flex;
   flex-direction: column;
   row-gap: 30px;
+  position: sticky;
+  top: -1300px;
 }
 .asidebar-ad-1 {
   min-width: 300px;

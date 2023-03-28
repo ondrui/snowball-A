@@ -2801,13 +2801,7 @@ export default new Vuex.Store({
     /**
      * Список всех городов Армении.
      */
-    listAllCities: [
-      {
-        name_loc: "Գյումրի",
-        name_ru: "Ереван",
-        name_en: "Yerevan",
-      },
-    ],
+    listAllCities: [],
     /**
      * Самые населенные города Армении.
      */
@@ -3758,9 +3752,6 @@ export default new Vuex.Store({
     cardMapData: ({ datasetsMap }) => {
       return datasetsMap;
     },
-    getListAllCities: ({ listAllCities }) => {
-      console.log(listAllCities);
-    },
     /**
      *
      * Возвращает самые населенные города Армении.
@@ -3771,6 +3762,30 @@ export default new Vuex.Store({
         .map((e) => {
           return { ...e, name_en: e.name_en.toLocaleLowerCase() };
         });
+    },
+    /**
+     * Возвращает сгрупированный список городов.
+     */
+    getGroupListAllCities: ({ listAllCities }) => {
+      return listAllCities
+        .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
+        .reduce((acc, cur) => {
+          if (!cur.name_ru) return acc;
+          const firstLetter = cur.name_ru[0].toLowerCase();
+          return { ...acc, [firstLetter]: [...(acc[firstLetter] || []), cur] };
+        }, {});
+    },
+    /**
+     * Возвращает список областей.
+     */
+    getListArea: ({ listAllCities }) => {
+      const arr = [
+        ...listAllCities.reduce((acc, { area_ru }) => {
+          if (!area_ru) return acc;
+          return acc.add(area_ru);
+        }, new Set()),
+      ].sort((a, b) => a.localeCompare(b));
+      return arr;
     },
   },
   mutations: {
@@ -3879,6 +3894,14 @@ export default new Vuex.Store({
         );
         state.datasetsTenDays[index].isOpen = true;
       }
+    },
+    /**
+     * Данные с сервера с городами.
+     * @param state Текущее состояние store.state.
+     * @param cities Массив с данными по городам.
+     */
+    setListCities(state, { cities }) {
+      state.listAllCities = cities;
     },
   },
   actions: {

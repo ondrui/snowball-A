@@ -61,13 +61,16 @@ export default {
         const res = await Promise.all([
           fetch("/forecast.json"),
           fetch("/forecastFromAPI.json"),
+          fetch("/cities_all.json"),
         ]);
-        const [a, b] = res.map((e) => e.json());
+        const [a, b, c] = res.map((e) => e.json());
         const total = await a;
         const data = await b;
+        const cities = await c;
         setTimeout(() => {
           this.$store.commit("setData", total);
           this.$store.commit("setDataAPI", data);
+          this.$store.commit("setListCities", cities);
         }, 300);
       } catch (error) {
         this.answer = "Error! Could not reach the API. " + error;

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="card-container">
+    <div class="card-chevron" v-show="!value.isOpen">
+      <BaseIcon nameIcon="chevron-more-down" width="8" pick="common" />
+    </div>
     <div
       @click="toggle(index)"
       :class="['card-content', { weekend: value.weekend === true }]"
@@ -203,6 +206,19 @@ svg {
 .card-content__date > div {
   text-align: center;
 }
+.card-chevron {
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out;
+  width: 8px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+}
+.card-container:hover .card-chevron {
+  transform: scale(2);
+}
 
 @media only screen and (max-width: $media-width-xl) {
   .card-content {
@@ -212,6 +228,9 @@ svg {
 }
 
 @media only screen and (max-width: $media-width-lg) {
+  .card-chevron {
+    bottom: 12px;
+  }
   .card-content__info {
     grid-area: e;
     justify-items: center;

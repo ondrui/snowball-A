@@ -103,26 +103,6 @@ export default {
   box-shadow: 0 0 0 2px #d2e7ff;
   border-radius: 1px;
 }
-.card:hover::after {
-  transform: scale(2);
-}
-.card::after {
-  content: "";
-  display: inline-block;
-  background: url("@/assets/images/common/chevron-more-down.svg?external")
-    no-repeat;
-  pointer-events: all;
-  background-size: 6px 4px;
-  transition: transform 0.3s ease-in-out;
-  width: 6px;
-  height: 4px;
-  position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  // left: 50%;
-  bottom: 6px;
-}
 /* we will explain what these classes do next! */
 .v-enter-active,
 .v-leave-active {
@@ -145,12 +125,5 @@ export default {
   // border: 2px solid #d2e7ff;
   box-shadow: 0 0 0 2px #d2e7ff;
   border-radius: 1px;
-}
-
-@media only screen and (max-width: $media-width-lg) {
-  .card::after {
-    content: "";
-    bottom: 12px;
-  }
 }
 </style>

@@ -33,6 +33,9 @@ export default {
       currentTab: "main",
     };
   },
+  mounted() {
+    this.currentTab = this.$route.name;
+  },
   computed: {
     getLocales() {
       return this.$store.getters.getLocales;

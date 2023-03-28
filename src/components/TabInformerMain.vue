@@ -11,6 +11,9 @@
       <router-link to="/cities">{{
         languageExpressions(getLocales, "allCityBtnCaption")
       }}</router-link>
+      <div class="arrow-icon">
+        <BaseIcon width="9" nameIcon="arrow-right" pick="common" />
+      </div>
     </div>
   </div>
 </template>
@@ -85,11 +88,8 @@ export default {
   right: 0;
   width: max-content;
 
-  &::after {
-    content: "";
-    display: inline-block;
-    background: url("@/assets/images/common/arrow-right.svg?external") no-repeat;
-    background-size: 9px 9px;
+  & .arrow-icon {
+    display: flex;
     transition: transform 0.3s ease-in-out;
     width: 9px;
     height: 9px;
@@ -98,6 +98,9 @@ export default {
     right: 14px;
     bottom: 0;
     top: 0;
+  }
+  &:hover .arrow-icon {
+    transform: scale(1.2);
   }
 
   & a {

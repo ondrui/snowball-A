@@ -1,5 +1,5 @@
 <template>
-  <div class="scrolltop-wrap" v-resize:debounce.200="calcSize">
+  <div class="scrolltop-wrap" v-resize:debounce.100="calcSize">
     <router-link to="#top" class="top-of-site-link">
       <BaseIcon width="10" nameIcon="chevron-scroll-left" pick="common" />
     </router-link>
@@ -35,12 +35,6 @@ $view-height: v-bind(viewportHeight);
   bottom: -4px;
   pointer-events: none;
   backface-visibility: hidden;
-  // prevent extra page height if content is smaller than viewport
-  // Firefox only
-  @supports (-moz-appearance: meterbar) {
-    clip: rect(0, 40px, auto, 0);
-  }
-  // outline: 1px solid teal;
 }
 .top-of-site-link {
   position: fixed;
