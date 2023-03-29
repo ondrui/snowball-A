@@ -1,11 +1,11 @@
 <template>
   <div class="cities">
-    <div class="sticky">
+    <div class="cities-sticky">
       <span>Область </span>
       <select name="" id="" v-model="selected" class="cities-select">
-        <option disabled value="">Выберите область</option>
+        <option value="def">выберите область</option>
         <option
-          :value="index"
+          :value="item"
           v-for="(item, index) in getListArea"
           :key="`opt-${index}`"
         >
@@ -13,13 +13,15 @@
         </option>
       </select>
       <div class="cities-abc">
-        <div
+        <button
+          @click="scrollToCity"
+          :data-name="item"
           class="cities-abc-item"
           v-for="(item, index) in getABC"
           :key="`i-${index}`"
         >
           {{ item }}
-        </div>
+        </button>
       </div>
     </div>
     <div class="cities-table">
@@ -28,15 +30,19 @@
         v-for="(item, index) in getABC"
         :key="`b-${index}`"
       >
-        <h2>{{ item }}</h2>
+        <h2 :data-letter="item">{{ item }}</h2>
         <div class="cities-table-list">
-          <div
+          <router-link
+            :to="`/${value.name_en}`"
             class="cities-table-item"
-            v-for="(value, index) in getGroupListAllCities[item]"
+            v-for="(value, index) in getFormatedFilteredCities[item]"
             :key="`city-${index}`"
           >
-            {{ value.name_ru }}
-          </div>
+            <div>
+              {{ value.name_ru }}
+            </div>
+            <div>{{ value.area_ru }}, {{ value.area_ru_l5 }}</div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -48,7 +54,7 @@ export default {
   name: "ListAllCities",
   data() {
     return {
-      selected: "",
+      selected: "def",
     };
   },
   computed: {
@@ -67,10 +73,35 @@ export default {
       return this.$store.getters.getListArea;
     },
     getABC() {
-      return Object.keys(this.getGroupListAllCities);
+      return Object.keys(this.getFormatedFilteredCities);
     },
     getFilteredCities() {
-      return this.getGroupListAllCities;
+      const entries = Object.entries(this.getGroupListAllCities);
+      console.log(entries);
+      const filtred = entries.map(([key, value]) => {
+        const filtredValue =
+          this.selected === "def"
+            ? value
+            : value.filter((f) => f.area_ru === this.selected);
+        return [key, filtredValue];
+      });
+      const filtredObj = Object.fromEntries(filtred);
+      console.log(filtredObj);
+      return filtredObj;
+    },
+    getFormatedFilteredCities() {
+      return this.getFilteredCities;
+    },
+  },
+  methods: {
+    scrollToCity(event) {
+      const el = document.querySelector(
+        `[data-letter=${event.target.dataset.name}]`
+      );
+      el.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
     },
   },
 };
@@ -81,7 +112,7 @@ export default {
   box-shadow: 0 0 0 2px teal;
   padding: 10px;
 }
-.sticky {
+.cities-sticky {
   position: sticky;
   top: 0;
   background-color: #fff;
@@ -89,15 +120,15 @@ export default {
 }
 .cities-select {
   margin-bottom: 20px;
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 .cities-abc {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 10px;
-}
-.cities-abc-item {
-  text-transform: capitalize;
 }
 .cities-table-list {
   display: flex;
@@ -109,10 +140,11 @@ export default {
   margin-bottom: 20px;
   & h2 {
     margin-bottom: 10px;
-    text-transform: uppercase;
   }
 }
 .cities-table-item {
   flex: 0 1 30%;
+  text-transform: capitalize;
+  padding: 10px;
 }
 </style>

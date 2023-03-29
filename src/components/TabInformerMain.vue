@@ -89,6 +89,7 @@ export default {
   width: max-content;
 
   & .arrow-icon {
+    pointer-events: none;
     display: flex;
     transition: transform 0.3s ease-in-out;
     width: 9px;

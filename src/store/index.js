@@ -3735,14 +3735,36 @@ export default new Vuex.Store({
         return {};
       const data = chartSettings.map((e) => calcAdjustingForecast(e));
       data.push(datasetsAPI);
-      const arr = data.reduce((total, current) => {
-        return [...total, ...current.value];
-      }, []);
-      const min = Math.min(...arr.map((e) => e.temp.value));
-      const max = Math.max(...arr.map((e) => e.temp.value));
+
+      //---finding min max
+      // const redArr = data.map(({ value }) => {
+      //   const arr = value.map((e) => e.temp.value);
+      //   const min = Math.min(...arr);
+      //   const max = Math.max(...arr);
+      //   return { min, max };
+      // });
+
+      // const min = Math.min(...redArr.map((e) => e.min));
+      // const max = Math.max(...redArr.map((e) => e.max));
+
+      const obj = data.reduce((total, { value }) => {
+        const arr = value.map((e) => e.temp.value);
+        const min = Math.min(...arr);
+        const max = Math.max(...arr);
+        total.min < min ? total.min : min;
+        total.max > max ? total.max : max;
+        // total.min = total.min < min ? total.min : min;
+        // total.max = total.max > max ? total.max : max;
+        // return total;
+        return {
+          ...total,
+          min: total.min < min ? total.min : min,
+          max: total.max > max ? total.max : max,
+        };
+      }, {});
       return {
-        min,
-        max,
+        min: obj.min,
+        max: obj.max,
         data,
       };
     },
@@ -3767,24 +3789,53 @@ export default new Vuex.Store({
      * Возвращает сгрупированный список городов.
      */
     getGroupListAllCities: ({ listAllCities }) => {
-      return listAllCities
+      const transformedArr = listAllCities.map(
+        ({
+          area_en,
+          area_ru,
+          area_en_l5,
+          area_ru_l5,
+          name_en,
+          name_ru,
+          name_loc,
+        }) => {
+          return {
+            area_en,
+            area_ru,
+            area_en_l5,
+            area_ru_l5,
+            name_en,
+            name_ru: name_ru.toLocaleLowerCase(),
+            name_loc,
+          };
+        }
+      );
+      const callback = (acc, cur) => {
+        if (cur.name_ru) {
+          const firstLetter = cur.name_ru[0].toUpperCase();
+          // if (!Object.hasOwn(acc, firstLetter)) {
+          //   acc[firstLetter] = [];
+          // }
+          // acc[firstLetter].push(cur);
+
+          acc[firstLetter] === undefined
+            ? (acc[firstLetter] = [cur])
+            : acc[firstLetter].push(cur);
+          // { ...acc, [firstLetter]: [...(acc[firstLetter] || []), cur] };
+        }
+        return acc;
+      };
+      return transformedArr
         .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
-        .reduce((acc, cur) => {
-          if (!cur.name_ru) return acc;
-          const firstLetter = cur.name_ru[0].toLowerCase();
-          return { ...acc, [firstLetter]: [...(acc[firstLetter] || []), cur] };
-        }, {});
+        .reduce(callback, {});
     },
     /**
      * Возвращает список областей.
      */
     getListArea: ({ listAllCities }) => {
-      const arr = [
-        ...listAllCities.reduce((acc, { area_ru }) => {
-          if (!area_ru) return acc;
-          return acc.add(area_ru);
-        }, new Set()),
-      ].sort((a, b) => a.localeCompare(b));
+      const obj = {};
+      listAllCities.map(({ area_ru }) => (obj[area_ru] = true));
+      const arr = Object.keys(obj).sort((a, b) => a.localeCompare(b));
       return arr;
     },
   },

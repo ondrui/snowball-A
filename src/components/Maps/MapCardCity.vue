@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/go" class="card-link" @click.native="click">
+  <router-link to="/go" class="card-link">
     <div class="city-title">
       <span>{{ datasetItem.name_ru }}</span>
     </div>
@@ -55,9 +55,6 @@ export default {
   methods: {
     languageExpressions,
     windDirection,
-    click() {
-      console.log("click");
-    },
   },
 };
 </script>

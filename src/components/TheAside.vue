@@ -1,6 +1,6 @@
 <template>
   <aside class="asidebar">
-    <div class="sticky">
+    <div class="asidebar-sticky">
       <div class="asidebar-ad-1"></div>
       <slot />
       <div class="asidebar-ad-2"></div>
@@ -8,13 +8,30 @@
   </aside>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      heightSidebarContent: "",
+    };
+  },
+  mounted() {
+    const height = document
+      .querySelector(".asidebar-sticky")
+      .getBoundingClientRect().height;
+    this.heightSidebarContent = `${height}px`;
+  },
+};
+</script>
+
 <style lang="scss" scoped>
-.sticky {
+$height: v-bind(heightSidebarContent);
+.asidebar-sticky {
   display: flex;
   flex-direction: column;
   row-gap: 30px;
   position: sticky;
-  top: -1300px;
+  top: calc(90vh - #{$height});
 }
 .asidebar-ad-1 {
   min-width: 300px;

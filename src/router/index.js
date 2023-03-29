@@ -51,6 +51,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior(to) {
     if (
+      to.name === "not-found" ||
       to.name === "cities" ||
       to.hash === "#top" ||
       to.redirectedFrom === "/go"
