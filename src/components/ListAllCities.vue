@@ -3,7 +3,7 @@
     <div class="cities-sticky">
       <span>Область </span>
       <select name="" id="" v-model="selected" class="cities-select">
-        <option value="def">выберите область</option>
+        <option value="all">выберите область</option>
         <option
           :value="item"
           v-for="(item, index) in getListArea"
@@ -54,7 +54,7 @@ export default {
   name: "ListAllCities",
   data() {
     return {
-      selected: "def",
+      selected: "all",
     };
   },
   computed: {
@@ -77,15 +77,19 @@ export default {
     },
     getFilteredCities() {
       const entries = Object.entries(this.getGroupListAllCities);
-      console.log(entries);
-      const filtred = entries.map(([key, value]) => {
-        const filtredValue =
-          this.selected === "def"
-            ? value
-            : value.filter((f) => f.area_ru === this.selected);
-        return [key, filtredValue];
-      });
-      const filtredObj = Object.fromEntries(filtred);
+      const filtered = entries
+        .map(([key, value]) => {
+          const filteredValue =
+            this.selected === "all"
+              ? value
+              : value.filter((f) => f.area_ru === this.selected);
+          return [key, filteredValue];
+        })
+        .filter(([_, value]) => {
+          console.log(_);
+          return value.length !== 0;
+        });
+      const filtredObj = Object.fromEntries(filtered);
       console.log(filtredObj);
       return filtredObj;
     },
@@ -127,7 +131,8 @@ export default {
 .cities-abc {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  column-gap: 6px;
+  // justify-content: space-between;
   margin-bottom: 10px;
 }
 .cities-table-list {
