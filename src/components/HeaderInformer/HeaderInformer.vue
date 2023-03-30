@@ -1,21 +1,26 @@
 <template>
   <div class="header-informer">
-    <BreadcrumbsHeader />
-    <SearchHeader />
+    <BreadCrumbs :crumbsKeys="crumbsKeys" />
+    <SearchBar />
     <ForecastHeader />
   </div>
 </template>
 
 <script>
-import BreadcrumbsHeader from "./BreadcrumbsHeader.vue";
-import SearchHeader from "./SearchHeader.vue";
 import ForecastHeader from "./ForecastHeader.vue";
 
 export default {
   components: {
-    BreadcrumbsHeader,
-    SearchHeader,
     ForecastHeader,
+  },
+  data() {
+    return {
+      crumbsKeys: [],
+    };
+  },
+  created() {
+    const VALID_KEYS_CRUMBS = ["main", "weather", "city"];
+    this.crumbsKeys = VALID_KEYS_CRUMBS;
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumbs-header">
+  <div class="breadcrumbs">
     <div class="crumbs">
       <div v-for="(item, index) in crumbs" :key="item[0]">
         <router-link v-if="isLast(index)" :to="{ name: crumbs[0][0] }">{{
@@ -21,6 +21,13 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 export default {
+  name: "BreadCrumbs",
+  props: {
+    crumbsKeys: {
+      type: Array,
+      require: true,
+    },
+  },
   data() {
     return {
       /**
@@ -33,7 +40,7 @@ export default {
     /**
      * Задоем имена ссылок.
      */
-    this.breadcrumbs("breadcrumbs", ["main", "weather", "city"]);
+    this.breadcrumbs("breadcrumbs", this.crumbsKeys);
   },
   computed: {
     /**
@@ -73,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.breadcrumbs-header {
+.breadcrumbs {
   display: flex;
   align-items: center;
   margin-bottom: 22px;

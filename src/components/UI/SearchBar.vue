@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  name: "SearchBar",
   data() {
     return {
       searchQuery: "Москва",

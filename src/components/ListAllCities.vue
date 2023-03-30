@@ -1,17 +1,21 @@
 <template>
   <div class="cities">
     <div class="cities-sticky">
-      <span>Область </span>
-      <select name="" id="" v-model="selected" class="cities-select">
-        <option value="all">выберите область</option>
-        <option
-          :value="item"
-          v-for="(item, index) in getListArea"
-          :key="`opt-${index}`"
-        >
-          {{ item }}
-        </option>
-      </select>
+      <BreadCrumbs :crumbsKeys="crumbsKeys" />
+      <SearchBar class="cities-search" />
+      <div class="cities-select">
+        <span>Область: </span>
+        <select name="" id="" v-model="selected">
+          <option value="all">Все</option>
+          <option
+            :value="item"
+            v-for="(item, index) in getListArea"
+            :key="`opt-${index}`"
+          >
+            {{ item }}
+          </option>
+        </select>
+      </div>
       <div class="cities-abc">
         <button
           @click="scrollToCity"
@@ -55,7 +59,20 @@ export default {
   data() {
     return {
       selected: "all",
+      crumbsKeys: [],
     };
+  },
+  created() {
+    const VALID_KEYS_CRUMBS = ["main", "citiesList"];
+    this.crumbsKeys = VALID_KEYS_CRUMBS;
+  },
+  watch: {
+    selected() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
   },
   computed: {
     /**
@@ -85,9 +102,9 @@ export default {
               : value.filter((f) => f.area_ru === this.selected);
           return [key, filteredValue];
         })
-        .filter(([_, value]) => {
-          console.log(_);
-          return value.length !== 0;
+        .filter((f) => {
+          console.log(f);
+          return f[1].length !== 0;
         });
       const filtredObj = Object.fromEntries(filtered);
       console.log(filtredObj);
@@ -99,9 +116,9 @@ export default {
   },
   methods: {
     scrollToCity(event) {
-      const el = document.querySelector(
-        `[data-letter=${event.target.dataset.name}]`
-      );
+      const el = event
+        ? document.querySelector(`[data-letter=${event.target.dataset.name}]`)
+        : document.querySelector("[data-letter=A]");
       el.scrollIntoView({
         block: "center",
         behavior: "smooth",
@@ -112,44 +129,117 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* remove the original arrow */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #04569c;
+  min-width: 264px;
+  padding: 8px 0 8px 14px;
+  border: 1px solid #b2d3e8;
+  border-radius: 4px;
+  background: url(@/assets/images/common/triangle-select.svg?external) no-repeat
+    right #f0f7fc;
+  background-position-x: calc(100% - 12px);
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
 .cities {
-  box-shadow: 0 0 0 2px teal;
   padding: 10px;
+  & .cities-search {
+    margin-bottom: 61px;
+  }
 }
 .cities-sticky {
   position: sticky;
   top: 0;
   background-color: #fff;
-  padding: 20px;
+  padding: 20px 0;
 }
 .cities-select {
-  margin-bottom: 20px;
-  &::first-letter {
-    text-transform: capitalize;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 32px;
+  & span {
+    margin-right: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #9c9c9c;
   }
 }
 .cities-abc {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 6px;
+  align-content: space-between;
+  column-gap: 10px;
+  row-gap: 12px;
+  margin-bottom: 50px;
   // justify-content: space-between;
-  margin-bottom: 10px;
+  & button {
+    background: #f0f7fc;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #04569c;
+    &:hover {
+      background: #e1ecf9;
+    }
+  }
 }
 .cities-table-list {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 6px;
+  column-gap: 20px;
+  & a {
+    text-decoration: none;
+  }
   // justify-content: space-between;
 }
 .cities-table-block {
   margin-bottom: 20px;
   & h2 {
-    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    margin-bottom: 18px;
   }
 }
 .cities-table-item {
   flex: 0 1 30%;
   text-transform: capitalize;
-  padding: 10px;
+  padding-bottom: 16px;
+  border-right: 1px solid #d6ebff;
+  & div:first-child {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #04569c;
+    margin-bottom: 4px;
+  }
+  & div:nth-child(2) {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #9c9c9c;
+  }
+  &:nth-child(4n) {
+    border-right: 1px solid #d6ebff;
+  }
+  &:nth-child(3n) {
+    border-right: none;
+  }
 }
 </style>

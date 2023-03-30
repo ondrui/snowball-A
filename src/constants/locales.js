@@ -22,7 +22,8 @@ const dataLocales = {
     breadcrumbs: {
       main: "главная",
       weather: "погода",
-      city: "Москва",
+      city: "москва",
+      citiesList: "список городов",
     },
     headerInformer: {
       now: "сейчас в",
