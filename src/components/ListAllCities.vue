@@ -68,8 +68,10 @@ export default {
   },
   watch: {
     selected() {
-      window.scrollTo({
-        top: 0,
+      const el = document.querySelector("[data-letter='А']");
+      console.log(el);
+      el.scrollIntoView({
+        block: "center",
         behavior: "smooth",
       });
     },
@@ -103,11 +105,9 @@ export default {
           return [key, filteredValue];
         })
         .filter((f) => {
-          console.log(f);
           return f[1].length !== 0;
         });
       const filtredObj = Object.fromEntries(filtered);
-      console.log(filtredObj);
       return filtredObj;
     },
     getFormatedFilteredCities() {
@@ -151,7 +151,6 @@ select {
   }
 }
 .cities {
-  padding: 10px;
   & .cities-search {
     margin-bottom: 61px;
   }
@@ -235,11 +234,13 @@ select {
     line-height: 13px;
     color: #9c9c9c;
   }
-  &:nth-child(4n) {
-    border-right: 1px solid #d6ebff;
-  }
   &:nth-child(3n) {
     border-right: none;
+  }
+}
+@media only screen and (max-width: $media-width-lg) {
+  .cities-table-list {
+    column-gap: 10px;
   }
 }
 </style>
