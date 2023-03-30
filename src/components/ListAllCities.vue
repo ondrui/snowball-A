@@ -242,5 +242,13 @@ select {
   .cities-table-list {
     column-gap: 10px;
   }
+  .cities-abc {
+    margin-bottom: 20px;
+  }
+  .cities {
+    & .cities-search {
+      margin-bottom: 20px;
+    }
+  }
 }
 </style>
