@@ -68,12 +68,7 @@ export default {
   },
   watch: {
     selected() {
-      const el = document.querySelector("[data-letter='А']");
-      console.log(el);
-      el.scrollIntoView({
-        block: "center",
-        behavior: "smooth",
-      });
+      this.scrollSel();
     },
   },
   computed: {
@@ -111,10 +106,19 @@ export default {
       return filtredObj;
     },
     getFormatedFilteredCities() {
+      console.log(this.getFilteredCities);
       return this.getFilteredCities;
     },
   },
   methods: {
+    scrollSel() {
+      const el = document.querySelector("[data-letter='А']");
+      console.log(el);
+      el.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
+    },
     scrollToCity(event) {
       const el = event
         ? document.querySelector(`[data-letter=${event.target.dataset.name}]`)
@@ -218,7 +222,6 @@ select {
 }
 .cities-table-item {
   flex: 0 1 30%;
-  text-transform: capitalize;
   padding-bottom: 16px;
   border-right: 1px solid #d6ebff;
   & div:first-child {
@@ -227,12 +230,18 @@ select {
     line-height: 16px;
     color: #04569c;
     margin-bottom: 4px;
+    &::first-letter {
+      text-transform: capitalize;
+    }
   }
   & div:nth-child(2) {
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
     color: #9c9c9c;
+    &::first-letter {
+      text-transform: capitalize;
+    }
   }
   &:nth-child(3n) {
     border-right: none;

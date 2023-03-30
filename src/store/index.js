@@ -3789,6 +3789,13 @@ export default new Vuex.Store({
      * Возвращает сгрупированный список городов.
      */
     getGroupListAllCities: ({ listAllCities }) => {
+      const formatArea_ru = (str) => `${str.slice(0, -4)}.`;
+      const formatArea_ru_l5 = (str) => {
+        if (str === "") return "";
+        const arr = str.split("");
+        arr.splice(-4, 3, "-");
+        return arr.join("");
+      };
       const transformedArr = listAllCities.map(
         ({
           area_en,
@@ -3801,9 +3808,9 @@ export default new Vuex.Store({
         }) => {
           return {
             area_en,
-            area_ru,
+            area_ru: formatArea_ru(area_ru),
             area_en_l5,
-            area_ru_l5,
+            area_ru_l5: formatArea_ru_l5(area_ru_l5),
             name_en,
             name_ru: name_ru.toLocaleLowerCase(),
             name_loc,
