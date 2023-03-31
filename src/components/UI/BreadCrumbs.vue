@@ -96,8 +96,15 @@ export default {
   font-size: 12px;
   line-height: 14px;
 
-  & div::first-letter {
+  & a::first-letter {
     text-transform: capitalize;
+  }
+  & span::first-letter {
+    text-transform: capitalize;
+  }
+  & > div {
+    display: flex;
+    flex-wrap: nowrap;
   }
 
   & a {

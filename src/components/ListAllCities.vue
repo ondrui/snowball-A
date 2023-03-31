@@ -5,7 +5,7 @@
       <SearchBar class="cities-search" />
       <div class="cities-select">
         <span>Область: </span>
-        <select name="" id="" v-model="selected">
+        <select name="" id="" v-model="selected" @change="scrollTTT">
           <option value="all">Все</option>
           <option
             :value="item"
@@ -66,11 +66,13 @@ export default {
     const VALID_KEYS_CRUMBS = ["main", "citiesList"];
     this.crumbsKeys = VALID_KEYS_CRUMBS;
   },
-  watch: {
-    selected() {
-      this.scrollSel();
-    },
-  },
+  // watch: {
+  //   selected: function () {
+  //     console.log("watch", window.scrollY);
+  //     window.scroll(0, 0);
+  //     console.log("watch", window.scrollY);
+  //   },
+  // },
   computed: {
     /**
      * Возвращает языковую метку.
@@ -96,7 +98,11 @@ export default {
           const filteredValue =
             this.selected === "all"
               ? value
-              : value.filter((f) => f.area_ru === this.selected);
+              : value.filter((f) => {
+                  return (
+                    f.area_ru.split(" ")[0] === this.selected.split(" ")[0]
+                  );
+                });
           return [key, filteredValue];
         })
         .filter((f) => {
@@ -111,11 +117,10 @@ export default {
     },
   },
   methods: {
-    scrollSel() {
-      const el = document.querySelector("[data-letter='А']");
-      console.log(el);
-      el.scrollIntoView({
-        block: "center",
+    scrollTTT(event) {
+      console.log(event);
+      window.scroll({
+        top: 0,
         behavior: "smooth",
       });
     },
@@ -169,7 +174,7 @@ select {
   display: flex;
   justify-content: end;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
   & span {
     margin-right: 16px;
     font-weight: 400;
@@ -252,12 +257,15 @@ select {
     column-gap: 10px;
   }
   .cities-abc {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .cities {
     & .cities-search {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
+  }
+  .cities-select {
+    margin-bottom: 20px;
   }
 }
 </style>

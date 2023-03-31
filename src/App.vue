@@ -106,6 +106,22 @@ export default {
     scrollbar-width: thin;
   }
 }
+/*
+focus
+ */
+*:focus {
+  outline: 2px solid $color-filter-font-focus;
+}
+/* Hide focus styles if they're not needed, for example,
+when an element receives focus via the mouse. */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Show focus styles on keyboard focus. */
+*:focus-visible {
+  outline: 2px solid $color-filter-font-focus;
+}
 /* Smooth scrolling IF user doesn't have a preference due to motion sensitivities */
 @media screen and (prefers-reduced-motion: no-preference) {
   html {

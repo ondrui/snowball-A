@@ -16,10 +16,20 @@ export default {
     };
   },
   mounted() {
-    const height = document
-      .querySelector(".asidebar-sticky")
-      .getBoundingClientRect().height;
-    this.heightSidebarContent = `${height}px`;
+    this.calcHeightAsidebar();
+  },
+  methods: {
+    /**
+     * Находим высоту блока.
+     * Нужно для правильного позиционирования
+     * блока при скролле страницы.
+     */
+    calcHeightAsidebar() {
+      const height = document
+        .querySelector(".asidebar-sticky")
+        .getBoundingClientRect().height;
+      this.heightSidebarContent = `${height}px`;
+    },
   },
 };
 </script>

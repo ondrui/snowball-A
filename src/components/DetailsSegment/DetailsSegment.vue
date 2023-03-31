@@ -16,10 +16,11 @@
     >
       <CardDetailDay class="card" :value="item" :index="index" />
       <Transition>
-        <ContentDetailDay
-          v-if="isOpen(index)"
-          :datasetChart="tenDaysDetailsChart[`${index + 1}`]"
-        />
+        <div :class="['one', { too: isOpen(index) }]">
+          <ContentDetailDay
+            :datasetChart="tenDaysDetailsChart[`${index + 1}`]"
+          />
+        </div>
       </Transition>
     </div>
   </div>
@@ -79,6 +80,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.one {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.7s ease;
+}
+.too {
+  max-height: 500px;
+  opacity: 1;
+}
 .segment-title {
   padding: 20px 0 8px 26px;
   font-weight: 300;
