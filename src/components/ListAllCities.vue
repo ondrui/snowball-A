@@ -1,11 +1,11 @@
 <template>
   <div class="cities">
+    <BreadCrumbs :crumbsKeys="crumbsKeys" />
+    <SearchBar class="cities-search" />
     <div class="cities-sticky">
-      <BreadCrumbs :crumbsKeys="crumbsKeys" />
-      <SearchBar class="cities-search" />
       <div class="cities-select">
         <span>Область: </span>
-        <select name="" id="" v-model="selected" @change="scrollTTT">
+        <select name="" id="" v-model="selected">
           <option value="all">Все</option>
           <option
             :value="item"
@@ -66,13 +66,11 @@ export default {
     const VALID_KEYS_CRUMBS = ["main", "citiesList"];
     this.crumbsKeys = VALID_KEYS_CRUMBS;
   },
-  // watch: {
-  //   selected: function () {
-  //     console.log("watch", window.scrollY);
-  //     window.scroll(0, 0);
-  //     console.log("watch", window.scrollY);
-  //   },
-  // },
+  watch: {
+    selected() {
+      this.scrollSel();
+    },
+  },
   computed: {
     /**
      * Возвращает языковую метку.
@@ -103,23 +101,22 @@ export default {
                     f.area_ru.split(" ")[0] === this.selected.split(" ")[0]
                   );
                 });
-          return [key, filteredValue];
+          return filteredValue.length > 0 ? [key, filteredValue] : undefined;
         })
-        .filter((f) => {
-          return f[1].length !== 0;
-        });
+        .filter((f) => f);
       const filtredObj = Object.fromEntries(filtered);
       return filtredObj;
     },
     getFormatedFilteredCities() {
-      console.log(this.getFilteredCities);
       return this.getFilteredCities;
     },
   },
   methods: {
-    scrollTTT() {
-      console.log("A");
-      document.querySelector("header").focus();
+    scrollSel() {
+      window.scroll({
+        top: 389,
+        behavior: "smooth",
+      });
     },
     scrollToCity(event) {
       const el = document.querySelector(
