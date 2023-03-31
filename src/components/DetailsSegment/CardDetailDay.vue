@@ -1,12 +1,14 @@
 <template>
   <div class="card-container">
-    <div class="card-chevron" v-show="!value.isOpen">
-      <BaseIcon nameIcon="chevron-more-down" width="8" pick="common" />
-    </div>
     <div
       @click="toggle(index)"
       :class="['card-content', { weekend: value.weekend === true }]"
     >
+      <Transition>
+        <div class="card-chevron" v-show="!value.isOpen">
+          <BaseIcon nameIcon="chevron-more-down" width="8" pick="common" />
+        </div>
+      </Transition>
       <div class="card-content__date">
         <div class="date-text-short">
           <div>{{ value.weekday[0] }}</div>
@@ -92,6 +94,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-leave-active {
+  transition: all 0.5s ease;
+}
+.v-leave-to {
+  opacity: 0;
+}
 svg {
   display: block;
 }
@@ -107,6 +115,7 @@ svg {
   display: none;
 }
 .card-content {
+  position: relative;
   display: grid;
   grid-template-columns: 0.2fr 0.8fr minmax(80px, 0.4fr) 1.2fr;
   align-items: center;
@@ -208,7 +217,6 @@ svg {
 }
 .card-chevron {
   pointer-events: none;
-  transition: transform 0.3s ease-in-out;
   width: 8px;
   position: absolute;
   margin: 0 auto;

@@ -15,13 +15,12 @@
       tabindex="0"
     >
       <CardDetailDay class="card" :value="item" :index="index" />
-      <Transition>
-        <div :class="['one', { too: isOpen(index) }]">
-          <ContentDetailDay
-            :datasetChart="tenDaysDetailsChart[`${index + 1}`]"
-          />
-        </div>
-      </Transition>
+      <div :class="['chart-wrapper', { visible: isOpen(index) }]">
+        <ContentDetailDay
+          class="chart-content"
+          :datasetChart="tenDaysDetailsChart[`${index + 1}`]"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -62,12 +61,7 @@ export default {
      */
     focus() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
-      // if (index !== -1) this.$refs.item[index].focus();
-      if (index !== -1)
-        this.$refs.item[index].scrollIntoView({
-          block: "center",
-          behavior: "smooth",
-        });
+      if (index !== -1) this.$refs.item[index].focus();
     },
     /**
      * Отображает график и рамку вокруг элемента если свойство isOpen равно true.
@@ -80,15 +74,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.one {
-  opacity: 0;
-  max-height: 0;
+.chart-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: all 0.7s ease;
+  transition: grid-template-rows 0.5s;
+  &.visible {
+    grid-template-rows: 1fr;
+    & .chart-content {
+      visibility: visible;
+    }
+  }
 }
-.too {
-  max-height: 500px;
-  opacity: 1;
+.chart-content {
+  min-height: 0;
+  transition: visibility 1s;
+  visibility: hidden;
 }
 .segment-title {
   padding: 20px 0 8px 26px;
@@ -113,24 +114,6 @@ export default {
 .card:hover {
   box-shadow: 0 0 0 2px #d2e7ff;
   border-radius: 1px;
-}
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: all 0.7s ease;
-}
-
-.v-enter-to,
-.v-leave {
-  max-height: 500px;
-}
-
-.v-enter,
-.v-leave-to {
-  position: relative;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
 }
 .open {
   // border: 2px solid #d2e7ff;

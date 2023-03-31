@@ -117,17 +117,14 @@ export default {
     },
   },
   methods: {
-    scrollTTT(event) {
-      console.log(event);
-      window.scroll({
-        top: 0,
-        behavior: "smooth",
-      });
+    scrollTTT() {
+      console.log("A");
+      document.querySelector("header").focus();
     },
     scrollToCity(event) {
-      const el = event
-        ? document.querySelector(`[data-letter=${event.target.dataset.name}]`)
-        : document.querySelector("[data-letter=A]");
+      const el = document.querySelector(
+        `[data-letter=${event.target.dataset.name}]`
+      );
       el.scrollIntoView({
         block: "center",
         behavior: "smooth",
