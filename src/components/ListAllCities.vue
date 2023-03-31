@@ -246,7 +246,8 @@ select {
     border-right: none;
   }
 }
-@media only screen and (max-width: $media-width-lg) {
+@media only screen and (max-width: $media-width-lg),
+  only screen and (orientation: landscape) {
   .cities-table-list {
     column-gap: 10px;
   }
