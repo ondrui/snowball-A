@@ -1,47 +1,55 @@
 <template>
-  <div class="forecast-details-container">
-    <RowCaptionInformer class="wind">
-      {{ languageExpressions(getLocales, "climateIndicators", "windDirSpeed") }}
-    </RowCaptionInformer>
-    <RowCaptionInformer class="pressure">
-      {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
-      {{ languageExpressions(getLocales, "units", "pressure")[0] }}
-    </RowCaptionInformer>
-    <RowCaptionInformer class="humidity">
-      {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
-    </RowCaptionInformer>
-    <div class="details-charts-temp">
-      <ChartDetailsTemp :datasetChart="datasetChart" />
-    </div>
-    <div
-      class="details-item"
-      v-for="(value, index) in datasetChart"
-      :key="`th-${index}`"
-    >
-      <div class="time">{{ value.hour }}</div>
-      <div class="details-icon">
-        <BaseIcon width="40" :nameIcon="value.condition" :pick="value.light" />
+  <div>
+    <div class="forecast-details-container">
+      <RowCaptionInformer class="wind">
+        {{
+          languageExpressions(getLocales, "climateIndicators", "windDirSpeed")
+        }}
+      </RowCaptionInformer>
+      <RowCaptionInformer class="pressure">
+        {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
+        {{ languageExpressions(getLocales, "units", "pressure")[0] }}
+      </RowCaptionInformer>
+      <RowCaptionInformer class="humidity">
+        {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
+      </RowCaptionInformer>
+      <div class="details-charts-temp">
+        <ChartDetailsTemp :datasetChart="datasetChart" />
       </div>
-      <div class="details-temp-item"></div>
-      <div class="details-wind-descr">
-        <div>
-          <div>
-            <BaseIcon
-              width="8"
-              nameIcon="wind-direction-blue"
-              pick="common"
-              :style="windDirection(getLocales, value.wind)"
-            />
-          </div>
-          <span>{{ value.wind.wind_dir[1] }}</span>
+      <div
+        class="details-item"
+        v-for="(value, index) in datasetChart"
+        :key="`th-${index}`"
+      >
+        <div class="time">{{ value.hour }}</div>
+        <div class="details-icon">
+          <BaseIcon
+            width="40"
+            :nameIcon="value.condition"
+            :pick="value.light"
+          />
         </div>
-        <div>{{ value.wind.value }} {{ value.wind.unit }}</div>
-      </div>
-      <div class="details-pressure">
-        {{ value.pressure.value }}
-      </div>
-      <div class="details-day-humidity">
-        {{ value.humidity.value }}{{ value.humidity.unit }}
+        <div class="details-temp-item"></div>
+        <div class="details-wind-descr">
+          <div>
+            <div>
+              <BaseIcon
+                width="8"
+                nameIcon="wind-direction-blue"
+                pick="common"
+                :style="windDirection(getLocales, value.wind)"
+              />
+            </div>
+            <span>{{ value.wind.wind_dir[1] }}</span>
+          </div>
+          <div>{{ value.wind.value }} {{ value.wind.unit }}</div>
+        </div>
+        <div class="details-pressure">
+          {{ value.pressure.value }}
+        </div>
+        <div class="details-day-humidity">
+          {{ value.humidity.value }}{{ value.humidity.unit }}
+        </div>
       </div>
     </div>
   </div>
