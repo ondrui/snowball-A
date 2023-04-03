@@ -2,7 +2,11 @@
   <div class="tabs-container">
     <div class="buttons-tabs">
       <button
-        :class="['button-tab', { active: currentTab === key }]"
+        :class="[
+          'button-tab',
+          { active: currentTab === key },
+          { hover: isHover(key) },
+        ]"
         @click="showContent(key)"
         v-for="(value, key) in tabsList"
         :key="key"
@@ -23,6 +27,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { eventBus } from "../main.js";
 
 export default {
   data() {
@@ -31,7 +36,12 @@ export default {
        * @param currentTab Имя открытой вкладки (кампоненты).
        */
       currentTab: "main",
+      hover: false,
     };
+  },
+  created() {
+    this.currentTab = this.$route.name;
+    eventBus.$on("go", (bol) => (this.hover = bol));
   },
   mounted() {
     this.currentTab = this.$route.name;
@@ -53,6 +63,7 @@ export default {
   watch: {
     $route() {
       this.currentTab = this.$route.name;
+      this.hover = false;
     },
   },
   methods: {
@@ -77,6 +88,9 @@ export default {
             30
           )}`
         : value;
+    },
+    isHover(val) {
+      return val === "hourly" && this.hover;
     },
   },
 };
@@ -136,7 +150,7 @@ export default {
     }
 
     &:hover {
-      background-color: #d6e8f3;
+      background-color: #f0f7fc;
 
       & span {
         color: #04569c;
@@ -160,6 +174,14 @@ export default {
         padding: 11px 5px;
       }
     }
+  }
+}
+.button-tab.hover {
+  background-color: #f0f7fc;
+  transition: all 0.3s ease-in-out;
+  & span {
+    color: #04569c;
+    text-decoration: underline;
   }
 }
 </style>

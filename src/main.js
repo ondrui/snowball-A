@@ -15,6 +15,8 @@ directives.forEach((directive) => {
   Vue.directive(directive.name, directive);
 });
 
+export const eventBus = new Vue();
+
 Vue.config.productionTip = false;
 
 new Vue({

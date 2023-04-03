@@ -1,14 +1,16 @@
 <template>
-  <div class="table">
-    <router-link
-      :to="`/${item.name_en}`"
-      class="table-item"
-      v-for="(item, index) in itemList"
-      :key="`l-${index}`"
-    >
-      <span>{{ item.name_ru }}</span
-      ><span>-2°</span>
-    </router-link>
+  <div class="table-wrapper">
+    <div class="table">
+      <router-link
+        :to="`/${item.name_en}`"
+        :class="['table-item', { 'empty-cell': !item }]"
+        v-for="(item, index) in addEmptyCell"
+        :key="`l-${index}`"
+      >
+        <span>{{ item.name_ru }}</span
+        ><span>{{ item.temp }}</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -20,102 +22,52 @@ export default {
       required: true,
     },
   },
+  computed: {
+    addEmptyCell() {
+      const expArr = this.itemList.slice(0, -3);
+      const remainder = 4 - (expArr.length % 4);
+      console.log(expArr.length % 4, remainder);
+      return remainder < 4 ? [...expArr, ...Array(remainder).fill("")] : expArr;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.table-wrapper {
+  padding: 50px 40px 127px 40px;
+  background-color: #f0f7fc;
+}
 .table {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(15, auto);
-  padding: 50px 40px 127px 40px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+
+  column-gap: 1px;
+  background-color: #d6ebff;
 }
 .table-item {
   display: flex;
   justify-content: space-between;
   padding: 9px 24px 9px 18px;
-  border-right: 1px solid #d6ebff;
-  &:nth-child(-n + 4) {
-    padding: 0 24px 9px 18px;
-  }
-  &:nth-last-child(-n + 4) {
-    padding: 9px 24px 0 18px;
-  }
-  &:nth-child(4n) {
-    border-right: none;
+  background-color: #f0f7fc;
+  &.empty-cell {
+    padding: 0;
+    pointer-events: none;
   }
   & span {
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #04569c;
+    white-space: nowrap;
   }
   &:hover > span:first-child {
     text-decoration: underline;
   }
 }
 @media only screen and (max-width: $media-width-2xl) {
-  .table {
+  .table-wrapper {
     padding: 30px 10px 108px 10px;
-  }
-  .table-item {
-    padding: 9px 14px 9px 10px;
-    &:nth-child(-n + 4) {
-      padding: 0 14px 9px 10px;
-    }
-    &:nth-last-child(-n + 4) {
-      padding: 9px 14px 0 10px;
-    }
-  }
-}
-@media only screen and (max-width: $media-width-xl) {
-  .table {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .table-item {
-    &:nth-child(-n + 4) {
-      padding: 9px 14px 9px 10px;
-    }
-    &:nth-last-child(-n + 4) {
-      padding: 9px 14px 9px 10px;
-    }
-    &:nth-child(-n + 3) {
-      padding: 0 14px 9px 10px;
-    }
-    &:nth-last-child(-n + 3) {
-      padding: 9px 14px 0 10px;
-    }
-    &:nth-child(4n) {
-      border-right: 1px solid #d6ebff;
-    }
-    &:nth-child(3n) {
-      border-right: none;
-    }
-  }
-}
-@media only screen and (max-width: $media-width-lg) {
-  .table {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .table-item {
-    &:nth-child(-n + 3) {
-      padding: 9px 14px 9px 10px;
-    }
-    &:nth-last-child(-n + 3) {
-      padding: 9px 14px 9px 10px;
-    }
-    &:nth-child(-n + 2) {
-      padding: 0 14px 9px 10px;
-    }
-    &:nth-last-child(-n + 2) {
-      padding: 9px 14px 0 10px;
-    }
-    &:nth-child(3n) {
-      border-right: 1px solid #d6ebff;
-    }
-    &:nth-child(2n) {
-      border-right: none;
-    }
   }
 }
 </style>

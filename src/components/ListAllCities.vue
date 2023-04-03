@@ -1,6 +1,6 @@
 <template>
   <div class="cities">
-    <BreadCrumbs :crumbsKeys="crumbsKeys" />
+    <BreadCrumbs class="cities-crumbs" :crumbsKeys="crumbsKeys" />
     <SearchBar class="cities-search" />
     <div class="cities-sticky">
       <div class="cities-select">
@@ -38,14 +38,14 @@
         <div class="cities-table-list">
           <router-link
             :to="`/${value.name_en}`"
-            class="cities-table-item"
-            v-for="(value, index) in getFormatedFilteredCities[item]"
+            :class="['cities-table-item', { 'empty-cell': !value }]"
+            v-for="(value, index) in addEmptyCell(item)"
             :key="`city-${index}`"
           >
             <div>
               {{ value.name_ru }}
             </div>
-            <div>{{ value.area_ru }}, {{ value.area_ru_l5 }}</div>
+            <div>{{ value.area_ru }} {{ value.area_ru_l5 }}</div>
           </router-link>
         </div>
       </div>
@@ -127,6 +127,12 @@ export default {
         behavior: "smooth",
       });
     },
+    addEmptyCell(item) {
+      const expArr = this.getFormatedFilteredCities[item];
+      const remainder = 4 - (expArr.length % 4);
+      console.log(item, expArr.length % 4, remainder);
+      return remainder < 4 ? [...expArr, ...Array(remainder).fill("")] : expArr;
+    },
   },
 };
 </script>
@@ -154,6 +160,10 @@ select {
   }
 }
 .cities {
+  & .cities-search,
+  & .cities-crumbs {
+    padding: 0 10px;
+  }
   & .cities-search {
     margin-bottom: 61px;
   }
@@ -162,7 +172,7 @@ select {
   position: sticky;
   top: 0;
   background-color: #fff;
-  padding: 20px 0;
+  padding: 20px 30px;
 }
 .cities-select {
   display: flex;
@@ -184,7 +194,6 @@ select {
   column-gap: 10px;
   row-gap: 12px;
   margin-bottom: 50px;
-  // justify-content: space-between;
   & button {
     background: #f0f7fc;
     border-radius: 50%;
@@ -200,17 +209,9 @@ select {
     }
   }
 }
-.cities-table-list {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 20px;
-  & a {
-    text-decoration: none;
-  }
-  // justify-content: space-between;
-}
 .cities-table-block {
   margin-bottom: 20px;
+  padding: 0 30px;
   & h2 {
     font-weight: 700;
     font-size: 20px;
@@ -219,16 +220,33 @@ select {
     margin-bottom: 18px;
   }
 }
+.cities-table-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  column-gap: 1px;
+  background-color: #d6ebff;
+  margin-left: -20px;
+  & a {
+    text-decoration: none;
+  }
+  // justify-content: space-between;
+}
 .cities-table-item {
-  flex: 0 1 30%;
-  padding-bottom: 16px;
-  border-right: 1px solid #d6ebff;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  padding: 0 20px 16px 16px;
+  background-color: #fff;
+  &.empty-cell {
+    padding: 0;
+    pointer-events: none;
+    display: block;
+  }
   & div:first-child {
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #04569c;
-    margin-bottom: 4px;
     &::first-letter {
       text-transform: capitalize;
     }
@@ -238,19 +256,14 @@ select {
     font-size: 11px;
     line-height: 13px;
     color: #9c9c9c;
+    white-space: nowrap;
     &::first-letter {
       text-transform: capitalize;
     }
   }
-  &:nth-child(3n) {
-    border-right: none;
-  }
 }
 @media only screen and (max-width: $media-width-lg),
   only screen and (orientation: landscape) {
-  .cities-table-list {
-    column-gap: 10px;
-  }
   .cities-abc {
     margin-bottom: 10px;
   }

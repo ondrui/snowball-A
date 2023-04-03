@@ -3,6 +3,8 @@
     <div
       @mousedown="isMove"
       @mouseup="toggle(index, $event)"
+      @mouseover="hover(index, true)"
+      @mouseleave="hover(index, false)"
       :class="['item', { 'days-weekend': day.weekend === true }]"
       v-for="(day, index) in tenDaysTabTable"
       :key="`d-${index}`"
@@ -49,6 +51,7 @@
 import ChartsDayList from "@/components/SVGCharts/day/ChartsDayList.vue";
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
+import { eventBus } from "../main.js";
 
 export default {
   components: {
@@ -117,6 +120,11 @@ export default {
         this.$store.dispatch("index", index);
       }
     },
+    hover(index, bol) {
+      if (index === 0) {
+        eventBus.$emit("go", bol);
+      }
+    },
   },
 };
 </script>
@@ -147,6 +155,9 @@ export default {
     transition: box-shadow 0.5s ease-in-out;
     border-bottom: 1px solid #d8e9f3;
     border-right: 1px solid #d8e9f3;
+    &:first-child .days-chevron-down svg {
+      transform: rotate(180deg);
+    }
 
     &:nth-last-child(2) {
       border-right: none;
@@ -190,6 +201,9 @@ export default {
     cursor: pointer;
     & .days-chevron-down svg {
       transform: scale(2);
+    }
+    &:first-child .days-chevron-down svg {
+      transform: rotate(180deg) scale(2);
     }
   }
 }

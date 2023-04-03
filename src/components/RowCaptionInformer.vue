@@ -17,5 +17,6 @@
   color: #333333;
   white-space: nowrap;
   left: 6px;
+  pointer-events: none;
 }
 </style>
