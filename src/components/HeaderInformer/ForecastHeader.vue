@@ -82,9 +82,9 @@ export default {
 .header-content {
   display: flex;
   column-gap: 14px;
-  row-gap: 22px;
+  row-gap: 12px;
   flex-wrap: nowrap;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .header-content-left {
   display: flex;

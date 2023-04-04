@@ -39,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 .search-header {
   position: relative;
-  margin-bottom: 26px;
+  margin-bottom: 50px;
 }
 .input-search-header {
   height: 50px;

@@ -185,7 +185,7 @@ select {
 }
 .cities-select {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 30px;
   & span {

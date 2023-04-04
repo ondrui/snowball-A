@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     addEmptyCell() {
-      const expArr = this.itemList.slice(0, -2);
+      const expArr = this.itemList;
       return [...expArr, ...Array(4).fill("")];
     },
   },

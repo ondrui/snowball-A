@@ -92,7 +92,7 @@ export default {
   visibility: hidden;
 }
 .segment-title {
-  padding: 20px 0 8px 26px;
+  padding: 46px 0 8px 0;
   font-weight: 300;
   font-size: 20px;
   line-height: 23px;
