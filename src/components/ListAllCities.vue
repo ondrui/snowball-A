@@ -88,9 +88,6 @@ export default {
     getABC() {
       return Object.keys(this.getGroupListAllCities);
     },
-    getFormatedFilteredCities() {
-      return this.getFilteredCities;
-    },
   },
   methods: {
     languageExpressions,
