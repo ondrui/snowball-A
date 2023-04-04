@@ -37,7 +37,7 @@
             begin="indefinite"
             :values="`${selectedDistrict.from} ${selectedDistrict.to}`"
             repeatCount="1"
-            dur="0.5s"
+            dur="0.25s"
             fill="freeze"
           />
           <g>
@@ -607,7 +607,7 @@ export default {
      * выбранной области на карте.
      */
     finalDatasets() {
-      let count = 100;
+      let count = 50;
       return this.dayMarkerFilteredData.map((obj) => {
         return {
           ...obj,
@@ -615,7 +615,7 @@ export default {
            * Свойство содержит значение времени задержки начала анимации
            * появления карточек на карте.
            */
-          delay: `${(count = count + 100)}ms`,
+          delay: `${(count = count + 65)}ms`,
         };
       });
     },
@@ -781,7 +781,7 @@ export default {
 }
 .html-card {
   animation-name: appear;
-  animation-duration: 500ms;
+  animation-duration: 50ms;
   animation-timing-function: ease;
   animation-fill-mode: backwards;
   position: absolute;

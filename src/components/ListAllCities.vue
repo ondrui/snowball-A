@@ -210,7 +210,7 @@ select {
     cursor: pointer;
     padding: 5px 10px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
     color: #04569c;
     &:hover {
@@ -218,9 +218,11 @@ select {
     }
   }
 }
+.cities-table {
+  padding: 0 30px;
+}
 .cities-table-block {
   margin-bottom: 20px;
-  padding: 0 30px;
   & h2 {
     font-weight: 700;
     font-size: 20px;
@@ -256,8 +258,8 @@ select {
   }
   & div:first-child {
     font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 15px;
+    line-height: 17px;
     color: #04569c;
     &::first-letter {
       text-transform: capitalize;
@@ -265,8 +267,8 @@ select {
   }
   & div:nth-child(2) {
     font-weight: 400;
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 12px;
+    line-height: 14px;
     color: #9c9c9c;
     white-space: nowrap;
     &::first-letter {
@@ -289,11 +291,17 @@ select {
   }
 }
 @media only screen and (max-width: $media-width-sm) {
+  .cities-sticky {
+    padding: 20px 10px;
+  }
   .cities-abc {
     & button {
       font-size: 16px;
       line-height: 19px;
     }
+  }
+  .cities-table {
+    padding: 0 10px;
   }
   .cities-table-item {
     & div:first-child {
