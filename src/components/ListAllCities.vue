@@ -4,9 +4,11 @@
     <SearchBar class="cities-search" />
     <div class="cities-sticky">
       <div class="cities-select">
-        <span>Область: </span>
+        <span>{{ languageExpressions(getLocales, "listAllCities")[0] }}: </span>
         <select name="" id="" v-model="selected">
-          <option value="all">Все</option>
+          <option value="all">
+            {{ languageExpressions(getLocales, "listAllCities")[1] }}
+          </option>
           <option
             :value="item"
             v-for="(item, index) in getListArea"
@@ -41,9 +43,9 @@
             :class="[
               'cities-table-item',
               { 'empty-cell': !value },
-              { 'hidden-gap': addEmptyCell(item).hiddenGap },
+              { 'hidden-gap': formatedListCities(item).hiddenGap },
             ]"
-            v-for="(value, index) in addEmptyCell(item).list"
+            v-for="(value, index) in formatedListCities(item).list"
             :key="`city-${index}`"
           >
             <div>
@@ -58,6 +60,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { languageExpressions } from "@/constants/locales";
+
 export default {
   name: "ListAllCities",
   data() {
@@ -76,46 +81,19 @@ export default {
     },
   },
   computed: {
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["getLocales", "getListArea"]),
     getGroupListAllCities() {
-      return this.$store.getters.getGroupListAllCities;
-    },
-    getListArea() {
-      return this.$store.getters.getListArea;
+      return this.$store.getters.getGroupListAllCities(this.selected);
     },
     getABC() {
-      return Object.keys(this.getFormatedFilteredCities);
-    },
-    getFilteredCities() {
-      const entries = Object.entries(this.getGroupListAllCities);
-      const filtered = entries
-        .map(([key, value]) => {
-          const filteredValue =
-            this.selected === "all"
-              ? value
-              : value.filter((f) => {
-                  return (
-                    f.area_ru.split(" ")[0] === this.selected.split(" ")[0]
-                  );
-                });
-          return filteredValue.length > 0 ? [key, filteredValue] : undefined;
-        })
-        .filter((f) => f);
-      const filtredObj = Object.fromEntries(filtered);
-      return filtredObj;
+      return Object.keys(this.getGroupListAllCities);
     },
     getFormatedFilteredCities() {
       return this.getFilteredCities;
     },
   },
   methods: {
+    languageExpressions,
     scrollSel() {
       window.scroll({
         top: 389,
@@ -131,16 +109,12 @@ export default {
         behavior: "smooth",
       });
     },
-    addEmptyCell(item) {
-      const expArr = this.getFormatedFilteredCities[item];
-      console.log(expArr.length < 2);
+    formatedListCities(item) {
+      const expArr = this.getGroupListAllCities[item];
       return {
         list: [...expArr, ...Array(2).fill("")],
         hiddenGap: expArr.length < 2,
       };
-    },
-    hiddenGap() {
-      return false;
     },
   },
 };
@@ -164,9 +138,6 @@ select {
   background: url(@/assets/images/common/triangle-select.svg?external) no-repeat
     right #f0f7fc;
   background-position-x: calc(100% - 12px);
-  &::first-letter {
-    text-transform: capitalize;
-  }
 }
 .cities {
   & .cities-search,
@@ -194,6 +165,7 @@ select {
     font-size: 14px;
     line-height: 16px;
     color: #9c9c9c;
+    text-transform: capitalize;
   }
 }
 .cities-abc {

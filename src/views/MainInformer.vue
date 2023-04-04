@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import HeaderInformer from "../components/HeaderInformer.vue";
 import TabsInformer from "../components/TabsInformer.vue";
 import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
@@ -26,19 +27,7 @@ export default {
     DetailsSegment,
   },
   computed: {
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-    /**
-     * Возвращает булевое значение для лоадера.
-     */
-    loading() {
-      return this.$store.getters.loading;
-    },
+    ...mapGetters(["getLocales", "loading"]),
   },
   methods: {
     languageExpressions,

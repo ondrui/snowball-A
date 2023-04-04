@@ -1,24 +1,24 @@
 <template>
   <div>
-    <div class="header-date-info">
-      {{ current.timeText }}
+    <div class="date-info">
+      {{ currentBlock.timeText }}
     </div>
-    <div class="header-content">
-      <div class="header-content-left">
+    <div class="content">
+      <div class="content-left">
         <div>
-          <BaseIcon :nameIcon="current.icon" pick="light" width="49" />
+          <BaseIcon :nameIcon="currentBlock.icon" pick="light" width="49" />
         </div>
-        <div class="header-content-left-temp">{{ current.temp }}</div>
-        <div class="header-content-left-descr">
-          <div class="header-content-left-text">{{ current.descr }}</div>
+        <div class="content-left-temp">{{ currentBlock.temp }}</div>
+        <div class="content-left-descr">
+          <div class="content-left-text">{{ currentBlock.descr }}</div>
           <div class="feeling">
-            {{ current.realFeel }}
+            {{ currentBlock.realFeel }}
           </div>
         </div>
       </div>
-      <div class="header-content-right">
+      <div class="content-right">
         <CurrentBlockItem
-          v-for="(value, index) in forecastForItemHeader"
+          v-for="(value, index) in datasetCurrentBlockItem"
           :key="`cn-${index}`"
           :dataValue="value"
         />
@@ -30,33 +30,14 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 import CurrentBlockItem from "./CurrentBlockItem.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     CurrentBlockItem,
   },
   computed: {
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-    /**
-     * Возвращает данные для отображения в шапке виджета.
-     * Правая часть.
-     */
-    forecastForItemHeader() {
-      return this.$store.getters.forecastForItemHeader;
-    },
-    /**
-     * Возвращает данные для отображения в шапке виджета.
-     * Левая часть.
-     */
-    current() {
-      return this.$store.getters.current;
-    },
+    ...mapGetters(["getLocales", "datasetCurrentBlockItem", "currentBlock"]),
   },
   methods: {
     /**
@@ -68,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-date-info {
+.date-info {
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
@@ -79,18 +60,18 @@ export default {
     text-transform: capitalize;
   }
 }
-.header-content {
+.content {
   display: flex;
   column-gap: 14px;
   row-gap: 12px;
   flex-wrap: nowrap;
   margin-bottom: 40px;
 }
-.header-content-left {
+.content-left {
   display: flex;
   align-items: center;
 
-  & .header-content-left-temp {
+  & .content-left-temp {
     font-weight: 400;
     font-size: 48px;
     line-height: 56px;
@@ -98,7 +79,7 @@ export default {
     padding-left: 8px;
   }
 
-  & .header-content-left-descr {
+  & .content-left-descr {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,14 +88,14 @@ export default {
     width: 160px;
     padding-left: 15px;
 
-    & .header-content-left-text {
+    & .content-left-text {
       font-weight: 400;
       font-size: 12px;
       line-height: 14px;
       color: #9c9c9c;
     }
 
-    & .header-content-left-text::first-letter {
+    & .content-left-text::first-letter {
       text-transform: capitalize;
     }
 
@@ -130,7 +111,7 @@ export default {
     }
   }
 }
-.header-content-right {
+.content-right {
   display: flex;
   flex: 1;
   column-gap: 8px;
@@ -139,12 +120,12 @@ export default {
 }
 
 @media only screen and (max-width: $media-width-2xl) {
-  .header-content-right {
+  .content-right {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 8px 17px;
   }
-  .header-content {
+  .content {
     flex-wrap: wrap;
   }
 }

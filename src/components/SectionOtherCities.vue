@@ -1,17 +1,17 @@
 <template>
-  <div class="cities">
+  <div class="other-cities">
     <div class="container">
-      <h2 class="cities-title">
+      <h2 class="other-cities-title">
         <span>{{
           languageExpressions(getLocales, "sectionOtherCities").slice(0, 6)
         }}</span
         >{{ languageExpressions(getLocales, "sectionOtherCities").slice(6) }}
       </h2>
-      <ul ref="list" class="cities-list" role="list">
+      <ul ref="list" class="other-cities-list" role="list">
         <li
           v-for="item in cardMapData"
           :key="`c-${item.name_en}`"
-          class="cities-item"
+          class="other-cities-item"
           @mousedown.prevent="mouseDown"
           @mouseleave="mouseLeave"
           @mouseup="mouseUp"
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cities {
+.other-cities {
   width: 100%;
   margin-bottom: 52px;
 }
@@ -74,7 +74,7 @@ export default {
   padding: 0 10px;
   width: 100%;
 }
-.cities-title {
+.other-cities-title {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 14px;
@@ -84,7 +84,7 @@ export default {
     color: #000000;
   }
 }
-.cities-list {
+.other-cities-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,7 +95,7 @@ export default {
   list-style: none;
   margin-top: 8px;
 }
-.cities-item {
+.other-cities-item {
   // min-width: 210px;
   flex: 1 0;
 }

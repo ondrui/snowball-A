@@ -29,6 +29,7 @@
 import { languageExpressions } from "@/constants/locales";
 import CardDetailDay from "./CardDetailDay.vue";
 import ContentDetailDay from "./ContentDetailDay.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -44,15 +45,7 @@ export default {
     },
   },
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-    tenDaysDetailsCard() {
-      return this.$store.getters.tenDaysDetailsCard;
-    },
-    tenDaysDetailsChart() {
-      return this.$store.getters.tenDaysDetailsChart;
-    },
+    ...mapGetters(["getLocales", "tenDaysDetailsCard", "tenDaysDetailsChart"]),
   },
   methods: {
     languageExpressions,

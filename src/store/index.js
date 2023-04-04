@@ -3075,7 +3075,7 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      * @param getLocales Языковая метка.
      */
-    current(state, { getLocales, datasetsForHourlyCharts }) {
+    currentBlock(state, { getLocales, datasetsForHourlyCharts }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       /**
        * Данные используемые для отоброжения. Берем прогнозные данные
@@ -3112,7 +3112,7 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      * @param getLocales Языковая метка.
      */
-    forecastForItemHeader(state, { getLocales }) {
+    datasetCurrentBlockItem(state, { getLocales }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       const data = state.datasetsHourly[0][1];
       return [
@@ -3788,55 +3788,73 @@ export default new Vuex.Store({
     /**
      * Возвращает сгрупированный список городов.
      */
-    getGroupListAllCities: ({ listAllCities }) => {
-      const formatArea_ru = (str) =>
-        str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
-      const formatArea_ru_l5 = (str) => {
-        if (str === "") return "";
-        const arr = str.split("");
-        arr.splice(-4, 3, "-");
-        return arr.join("");
-      };
-      const transformedArr = listAllCities.map(
-        ({
-          area_en,
-          area_ru,
-          area_en_l5,
-          area_ru_l5,
-          name_en,
-          name_ru,
-          name_loc,
-        }) => {
-          return {
+    getGroupListAllCities:
+      ({ listAllCities }) =>
+      (name) => {
+        const formatArea_ru = (str) =>
+          str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
+        const formatArea_ru_l5 = (str) => {
+          if (str === "") return "";
+          const arr = str.split("");
+          arr.splice(-4, 3, "-");
+          return arr.join("");
+        };
+        const transformedArr = listAllCities.map(
+          ({
             area_en,
-            area_ru: formatArea_ru(area_ru),
+            area_ru,
             area_en_l5,
-            area_ru_l5: formatArea_ru_l5(area_ru_l5),
-            name_en: name_en.toLocaleLowerCase(),
+            area_ru_l5,
+            name_en,
             name_ru,
             name_loc,
-          };
-        }
-      );
-      const callback = (acc, cur) => {
-        if (cur.name_ru) {
-          const firstLetter = cur.name_ru[0].toUpperCase();
-          // if (!Object.hasOwn(acc, firstLetter)) {
-          //   acc[firstLetter] = [];
-          // }
-          // acc[firstLetter].push(cur);
+          }) => {
+            return {
+              area_en,
+              area_ru: formatArea_ru(area_ru),
+              area_en_l5,
+              area_ru_l5: formatArea_ru_l5(area_ru_l5),
+              name_en: name_en.toLocaleLowerCase(),
+              name_ru,
+              name_loc,
+            };
+          }
+        );
+        const callback = (acc, cur) => {
+          if (cur.name_ru) {
+            const firstLetter = cur.name_ru[0].toUpperCase();
+            // if (!Object.hasOwn(acc, firstLetter)) {
+            //   acc[firstLetter] = [];
+            // }
+            // acc[firstLetter].push(cur);
 
-          acc[firstLetter] === undefined
-            ? (acc[firstLetter] = [cur])
-            : acc[firstLetter].push(cur);
-          // { ...acc, [firstLetter]: [...(acc[firstLetter] || []), cur] };
-        }
-        return acc;
-      };
-      return transformedArr
-        .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
-        .reduce(callback, {});
-    },
+            acc[firstLetter] === undefined
+              ? (acc[firstLetter] = [cur])
+              : acc[firstLetter].push(cur);
+            // { ...acc, [firstLetter]: [...(acc[firstLetter] || []), cur] };
+          }
+          return acc;
+        };
+        const obj = transformedArr
+          .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
+          .reduce(callback, {});
+
+        const entries = Object.entries(obj);
+        const formatStr = (str) => str.toLocaleLowerCase().split(" ")[0];
+        const filtered = entries
+          .map(([key, value]) => {
+            const filteredValue =
+              name === "all"
+                ? value
+                : value.filter((f) => {
+                    return formatStr(f.area_ru) === formatStr(name);
+                  });
+            return filteredValue.length > 0 ? [key, filteredValue] : undefined;
+          })
+          .filter((f) => f);
+        const filtredObj = Object.fromEntries(filtered);
+        return filtredObj;
+      },
     /**
      * Возвращает список областей.
      */

@@ -22,6 +22,7 @@
 import MapArmenia from "@/components/Maps/MapArmenia.vue";
 import ListTopCities from "@/components/ListTopCities.vue";
 import { languageExpressions } from "@/constants/locales";
+import { mapGetters } from "vuex";
 
 export default {
   name: "MainTabContent",
@@ -35,20 +36,7 @@ export default {
     };
   },
   computed: {
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-    /**
-     * Возвращает список городов.
-     */
-    getListTopCities() {
-      return this.$store.getters.getListTopCities;
-    },
+    ...mapGetters(["getLocales", "getListTopCities", "cardMapData"]),
     /**
      * Возвращает настройки отрисовки радио кнопок в компоненте Navbar.vue.
      */
@@ -57,12 +45,6 @@ export default {
         ["map", languageExpressions(this.getLocales, "viewsSwitcher")[0]],
         ["cities", languageExpressions(this.getLocales, "viewsSwitcher")[1]],
       ];
-    },
-    /**
-     * Возвращает данные для карточек на корте из стора.
-     */
-    cardMapData() {
-      return this.$store.getters.cardMapData;
     },
   },
   methods: {

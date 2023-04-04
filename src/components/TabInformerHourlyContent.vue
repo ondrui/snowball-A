@@ -66,6 +66,7 @@ import ChartHourlyTempList from "@/components/SVGCharts/hourly/ChartHourlyTempLi
 import DayLengthChart from "@/components/SVGCharts/hourly/DayLengthChart.vue";
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -73,29 +74,7 @@ export default {
     DayLengthChart,
   },
   computed: {
-    /**
-     * Возвращает объект данных для отображения графиков подробного
-     * почасового прогноза с разбивкой на часовые интервалы.
-
-     */
-    datasetsForHourlyCharts() {
-      return this.$store.getters.datasetsForHourlyCharts;
-    },
-    /**
-     * Возвращает данные для отображения таблицы подробного
-     * почасового прогноза с разбивкой на часовые интервалы.
-     */
-    hourlyTabTable() {
-      return this.$store.getters.hourlyTabTable;
-    },
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["datasetsForHourlyCharts", "hourlyTabTable", "getLocales"]),
   },
   methods: {
     languageExpressions,

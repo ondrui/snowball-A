@@ -20,11 +20,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { languageExpressions } from "@/constants/locales";
 import SectionOtherCities from "./components/SectionOtherCities.vue";
 import TheAside from "./components/TheAside.vue";
 import TheHeader from "./components/TheHeader.vue";
 import HistoryAside from "./components/HistoryAside.vue";
-import { languageExpressions } from "@/constants/locales";
 import SectionHistoryCities from "./components/SectionHistoryCities.vue";
 import ScrollTop from "./components/ScrollTop.vue";
 
@@ -42,15 +43,7 @@ export default {
     this.getData();
   },
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
-    /**
-     * Возвращает булевое значение для лоадера.
-     */
-    loading() {
-      return this.$store.getters.loading;
-    },
+    ...mapGetters(["getLocales", "loading"]),
   },
   methods: {
     languageExpressions,

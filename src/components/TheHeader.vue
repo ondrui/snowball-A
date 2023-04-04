@@ -10,23 +10,11 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    /**
-     * Возвращает из store значения температур и другие данные для
-     * таблицы и графика на вкладке "Прогноз погоды на 7-14 дней".
-     */
-    tenDaysTabTable() {
-      return this.$store.getters.tenDaysTabTable;
-    },
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["tenDaysTabTable", "getLocales"]),
   },
   methods: {
     /**

@@ -76,6 +76,7 @@ const dataLocales = {
       day: "полярный день",
       night: "полярная ночь",
     },
+    listAllCities: ["область", "все"],
   },
   en: {
     en: {

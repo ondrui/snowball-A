@@ -28,6 +28,7 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 import { eventBus } from "../main.js";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -47,17 +48,12 @@ export default {
     this.currentTab = this.$route.name;
   },
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["getLocales", "tenDaysTabTable"]),
     /**
      * Подписи для вкладок.
      */
     tabsList() {
       return languageExpressions(this.getLocales, "tabsDescr");
-    },
-    tenDaysTabTable() {
-      return this.$store.getters.tenDaysTabTable;
     },
   },
   watch: {
