@@ -3789,7 +3789,8 @@ export default new Vuex.Store({
      * Возвращает сгрупированный список городов.
      */
     getGroupListAllCities: ({ listAllCities }) => {
-      const formatArea_ru = (str) => `${str.slice(0, -4)}.`;
+      const formatArea_ru = (str) =>
+        str.split(" ").length > 1 ? `${str.slice(0, -4)}.` : str;
       const formatArea_ru_l5 = (str) => {
         if (str === "") return "";
         const arr = str.split("");
@@ -3811,8 +3812,8 @@ export default new Vuex.Store({
             area_ru: formatArea_ru(area_ru),
             area_en_l5,
             area_ru_l5: formatArea_ru_l5(area_ru_l5),
-            name_en,
-            name_ru: name_ru.toLocaleLowerCase(),
+            name_en: name_en.toLocaleLowerCase(),
+            name_ru,
             name_loc,
           };
         }

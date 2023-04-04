@@ -18,7 +18,7 @@
       </div>
       <div class="cities-abc">
         <button
-          @click="scrollToCity"
+          @click="scrollToLetter"
           :data-name="item"
           class="cities-abc-item"
           v-for="(item, index) in getABC"
@@ -38,8 +38,12 @@
         <div class="cities-table-list">
           <router-link
             :to="`/${value.name_en}`"
-            :class="['cities-table-item', { 'empty-cell': !value }]"
-            v-for="(value, index) in addEmptyCell(item)"
+            :class="[
+              'cities-table-item',
+              { 'empty-cell': !value },
+              { 'hidden-gap': addEmptyCell(item).hiddenGap },
+            ]"
+            v-for="(value, index) in addEmptyCell(item).list"
             :key="`city-${index}`"
           >
             <div>
@@ -118,7 +122,7 @@ export default {
         behavior: "smooth",
       });
     },
-    scrollToCity(event) {
+    scrollToLetter(event) {
       const el = document.querySelector(
         `[data-letter=${event.target.dataset.name}]`
       );
@@ -129,9 +133,14 @@ export default {
     },
     addEmptyCell(item) {
       const expArr = this.getFormatedFilteredCities[item];
-      const remainder = 4 - (expArr.length % 4);
-      console.log(item, expArr.length % 4, remainder);
-      return remainder < 4 ? [...expArr, ...Array(remainder).fill("")] : expArr;
+      console.log(expArr.length < 2);
+      return {
+        list: [...expArr, ...Array(2).fill("")],
+        hiddenGap: expArr.length < 2,
+      };
+    },
+    hiddenGap() {
+      return false;
     },
   },
 };
@@ -222,7 +231,7 @@ select {
 }
 .cities-table-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   column-gap: 1px;
   background-color: #d6ebff;
   margin-left: -20px;
@@ -241,6 +250,9 @@ select {
     padding: 0;
     pointer-events: none;
     display: block;
+    &.hidden-gap {
+      width: calc(100% + 1px);
+    }
   }
   & div:first-child {
     font-weight: 400;
@@ -274,6 +286,24 @@ select {
   }
   .cities-select {
     margin-bottom: 20px;
+  }
+}
+@media only screen and (max-width: $media-width-sm) {
+  .cities-abc {
+    & button {
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+  .cities-table-item {
+    & div:first-child {
+      font-size: 16px;
+      line-height: 18px;
+    }
+    & div:nth-child(2) {
+      font-size: 13px;
+      line-height: 15px;
+    }
   }
 }
 </style>

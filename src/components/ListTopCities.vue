@@ -24,10 +24,8 @@ export default {
   },
   computed: {
     addEmptyCell() {
-      const expArr = this.itemList.slice(0, -3);
-      const remainder = 4 - (expArr.length % 4);
-      console.log(expArr.length % 4, remainder);
-      return remainder < 4 ? [...expArr, ...Array(remainder).fill("")] : expArr;
+      const expArr = this.itemList.slice(0, -2);
+      return [...expArr, ...Array(4).fill("")];
     },
   },
 };
