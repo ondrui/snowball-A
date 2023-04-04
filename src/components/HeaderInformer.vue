@@ -2,16 +2,16 @@
   <div class="header-informer">
     <BreadCrumbs :crumbsKeys="crumbsKeys" />
     <SearchBar />
-    <ForecastHeader />
+    <CurrentBlock />
   </div>
 </template>
 
 <script>
-import ForecastHeader from "./ForecastHeader.vue";
+import CurrentBlock from "./CurrentBlock.vue";
 
 export default {
   components: {
-    ForecastHeader,
+    CurrentBlock,
   },
   data() {
     return {

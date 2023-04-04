@@ -1,5 +1,5 @@
 <template>
-  <aside class="asidebar">
+  <aside class="asidebar" v-observe="calcHeightAsidebar">
     <div class="asidebar-sticky">
       <div class="asidebar-ad-1"></div>
       <slot />

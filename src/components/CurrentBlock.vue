@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="header-content-right">
-        <ForecastHeaderItem
+        <CurrentBlockItem
           v-for="(value, index) in forecastForItemHeader"
           :key="`cn-${index}`"
           :dataValue="value"
@@ -29,11 +29,11 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import ForecastHeaderItem from "./ForecastHeaderItem.vue";
+import CurrentBlockItem from "./CurrentBlockItem.vue";
 
 export default {
   components: {
-    ForecastHeaderItem,
+    CurrentBlockItem,
   },
   computed: {
     /**

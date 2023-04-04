@@ -1,17 +1,17 @@
 <template>
   <div class="main-container">
     <div v-if="!loading">Loading...</div>
-    <div v-else>
+    <template v-else>
       <HeaderInformer />
       <TabsInformer />
       <DetailsSegment />
       <AllSVGIcons class="hidden" />
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
-import HeaderInformer from "../components/HeaderInformer/HeaderInformer.vue";
+import HeaderInformer from "../components/HeaderInformer.vue";
 import TabsInformer from "../components/TabsInformer.vue";
 import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
 import AllSVGIcons from "../components/AllSVGIcons.vue";

@@ -29,6 +29,7 @@ import SectionHistoryCities from "./components/SectionHistoryCities.vue";
 import ScrollTop from "./components/ScrollTop.vue";
 
 export default {
+  name: "App",
   components: {
     TheHeader,
     TheAside,
