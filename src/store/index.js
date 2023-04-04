@@ -3790,7 +3790,7 @@ export default new Vuex.Store({
      */
     getGroupListAllCities: ({ listAllCities }) => {
       const formatArea_ru = (str) =>
-        str.split(" ").length > 1 ? `${str.slice(0, -4)}.` : str;
+        str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
       const formatArea_ru_l5 = (str) => {
         if (str === "") return "";
         const arr = str.split("");
