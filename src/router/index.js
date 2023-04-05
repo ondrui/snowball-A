@@ -11,7 +11,6 @@ import ListAllCities from "@/components/ListAllCities.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/go", redirect: "/" },
   {
     path: "/",
     component: MainInformer,
@@ -22,12 +21,17 @@ const routes = [
         component: MainTabContent,
       },
       {
-        path: "/hourly",
+        path: "/pogoda/:name/hourly",
         name: "hourly",
         component: TabInformerHourly,
       },
       {
-        path: "/days",
+        path: "/pogoda/",
+        name: "pogoda",
+        component: MainTabContent,
+      },
+      {
+        path: "/pogoda/:name/days",
         name: "days",
         component: TabInformerDay,
       },
@@ -60,7 +64,6 @@ const router = new VueRouter({
         top: 0,
         behavior: "smooth",
       });
-      // router.push({ hash: "" }).catch(() => {});
     }
   },
 });

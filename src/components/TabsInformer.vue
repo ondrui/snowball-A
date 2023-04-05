@@ -42,10 +42,15 @@ export default {
   },
   created() {
     this.currentTab = this.$route.name;
-    eventBus.$on("go", (bol) => (this.hover = bol));
+    eventBus.$on("go", (bol) => {
+      this.hover = bol;
+    });
   },
   mounted() {
     this.currentTab = this.$route.name;
+  },
+  destroyed() {
+    eventBus.$off();
   },
   computed: {
     ...mapGetters(["getLocales", "tenDaysTabTable"]),
@@ -70,7 +75,8 @@ export default {
      * @param key Строка содержит имя вкладки.
      */
     showContent(key) {
-      if (key !== this.$route.name) this.$router.push({ name: key });
+      if (key !== this.$route.name)
+        this.$router.push({ name: key, params: { name: "moscow" } });
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.

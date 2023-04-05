@@ -14,9 +14,11 @@ components.forEach((component) => {
 directives.forEach((directive) => {
   Vue.directive(directive.name, directive);
 });
-
+/**
+ * Создаем
+ */
 export const eventBus = new Vue();
-
+window.bus = eventBus;
 Vue.config.productionTip = false;
 
 new Vue({
