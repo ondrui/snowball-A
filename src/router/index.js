@@ -60,7 +60,7 @@ const router = new VueRouter({
         top: 0,
         behavior: "smooth",
       });
-      router.push({ hash: "" }).catch(() => {});
+      // router.push({ hash: "" }).catch(() => {});
     }
   },
 });

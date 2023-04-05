@@ -63,12 +63,12 @@ export default new Vuex.Store({
         func: (periodAdjusted, diffTime, index) =>
           (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
       },
-      {
-        title: "linear_8",
-        periodAdjusted: 8,
-        func: (periodAdjusted, diffTime, index) =>
-          (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
-      },
+      // {
+      //   title: "linear_8",
+      //   periodAdjusted: 8,
+      //   func: (periodAdjusted, diffTime, index) =>
+      //     (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
+      // },
       // {
       //   title: "exp_12",
       //   periodAdjusted: 12,
@@ -3612,7 +3612,7 @@ export default new Vuex.Store({
           (new Date(firstForecastTime.time) - new Date(obsTimeFact.time)) /
             (1000 * 60 * 60) -
           1;
-        const deltaTemp = Math.abs(firstForecastTime.temp - obsTimeFact.temp);
+        const deltaTemp = obsTimeFact.temp - firstForecastTime.temp;
         const indexPointMerge = periodAdjusted - diffTime;
 
         const sortData = (el) => {
@@ -3635,7 +3635,7 @@ export default new Vuex.Store({
                 },
                 feels_like: {
                   value:
-                    periodAdjusted !== 0 && deltaTemp > 1
+                    periodAdjusted !== 0 && Math.abs(deltaTemp) > 1
                       ? feels_like + deltaTemp
                       : feels_like,
                   unit: languageExpressions(getLocales, "units", "temp")[0],
@@ -3653,7 +3653,7 @@ export default new Vuex.Store({
           if (
             index < indexPointMerge &&
             periodAdjusted !== 0 &&
-            deltaTemp > 1
+            Math.abs(deltaTemp) > 1
           ) {
             calcTemp =
               e.temp.value +

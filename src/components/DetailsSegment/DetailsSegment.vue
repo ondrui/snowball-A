@@ -36,12 +36,15 @@ export default {
     CardDetailDay,
     ContentDetailDay,
   },
+  updated() {
+    setTimeout(this.focus, 500);
+  },
   watch: {
     /**
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
     tenDaysDetailsCard() {
-      setTimeout(this.focus, 700);
+      // setTimeout(this.focus, 500);
     },
   },
   computed: {
@@ -54,7 +57,12 @@ export default {
      */
     focus() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
-      if (index !== -1) this.$refs.item[index].focus();
+      // if (index !== -1) this.$refs.item[index].focus();
+      if (index !== -1)
+        this.$refs.item[index].scrollIntoView({
+          block: "nearest",
+          behavior: "smooth",
+        });
     },
     /**
      * Отображает график и рамку вокруг элемента если свойство isOpen равно true.

@@ -75,10 +75,8 @@ export default {
     const VALID_KEYS_CRUMBS = ["main", "citiesList"];
     this.crumbsKeys = VALID_KEYS_CRUMBS;
   },
-  watch: {
-    selected() {
-      this.scrollSel();
-    },
+  updated() {
+    this.scrollSel();
   },
   computed: {
     ...mapGetters(["getLocales", "getListArea"]),
@@ -93,7 +91,7 @@ export default {
     languageExpressions,
     scrollSel() {
       window.scroll({
-        top: 389,
+        top: 364,
         behavior: "smooth",
       });
     },
