@@ -4,7 +4,8 @@
       type="text"
       class="input-search-header"
       placeholder=""
-      v-model="searchQuery"
+      :value="getCitySelected"
+      @change="handler"
     />
     <div class="history-icon-container">
       <BaseIcon
@@ -28,10 +29,19 @@
 <script>
 export default {
   name: "SearchBar",
-  data() {
-    return {
-      searchQuery: "Москва",
-    };
+  computed: {
+    getCitySelected() {
+      return this.$store.getters.getCitySelected;
+    },
+  },
+  methods: {
+    handler(e) {
+      const city = e.target.value;
+      if (!city) return;
+      this.$store.commit("setCity", city);
+      localStorage.setItem("cities", JSON.stringify({ default: city }));
+      this.$router.push({ path: `/pogoda/${city}/hourly` });
+    },
   },
 };
 </script>

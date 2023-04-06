@@ -18,8 +18,6 @@
       </button>
     </div>
     <div class="tab">
-      <!-- route outlet -->
-      <!-- component matched by the route will render here -->
       <router-view></router-view>
     </div>
   </div>
@@ -41,6 +39,7 @@ export default {
     };
   },
   created() {
+    console.log("created tabInformer");
     this.currentTab = this.$route.name;
     eventBus.$on("go", (bol) => {
       this.hover = bol;

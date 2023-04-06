@@ -41,12 +41,8 @@ export default {
   },
   created() {
     this.getData();
-    localStorage.setItem("cities", JSON.stringify({ default: "moscow" }));
-  },
-  mounted() {
     const city = JSON.parse(localStorage.getItem("cities")).default;
-    console.log(city);
-    // this.$router.push({ name: "pogoda", params: { name: city } });
+    if (city) this.$store.commit("setCity", city);
   },
   computed: {
     ...mapGetters(["getLocales", "loading"]),

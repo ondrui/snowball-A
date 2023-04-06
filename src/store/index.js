@@ -21,6 +21,14 @@ export default new Vuex.Store({
      */
     locales: "ru",
     /**
+     * Город для которого выводится прогноз погоды.
+     */
+    citySelected: "Ереван",
+    /**
+     * Список самых крупных городов.
+     */
+    listLargestcities: [],
+    /**
      * Объект с фактическими погодными данными, которые приходят с сервера.
      */
     datasetsFact: {},
@@ -3070,6 +3078,13 @@ export default new Vuex.Store({
       );
     },
     /**
+     * Возвращает город для которого будет выводится прогноз.
+     * @param citySelected Текущее значение store.citySelected.
+     */
+    getCitySelected({ citySelected }) {
+      return citySelected;
+    },
+    /**
      * Возвращает данные для отображения в шапке виджета.
      * Левая часть.
      * @param state Текущее состояние store.
@@ -3734,7 +3749,7 @@ export default new Vuex.Store({
       )
         return {};
       const data = chartSettings.map((e) => calcAdjustingForecast(e));
-      data.push(datasetsAPI);
+      // data.push(datasetsAPI);
 
       //---finding min max
       // const redArr = data.map(({ value }) => {
@@ -3979,6 +3994,9 @@ export default new Vuex.Store({
      */
     setListCities(state, { cities }) {
       state.listAllCities = cities;
+    },
+    setCity(state, city) {
+      state.citySelected = city;
     },
   },
   actions: {

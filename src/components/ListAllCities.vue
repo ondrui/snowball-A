@@ -39,7 +39,7 @@
         <h2 :data-letter="item">{{ item }}</h2>
         <div class="cities-table-list">
           <router-link
-            :to="`/pogoda/moscow/hourly`"
+            :to="`/pogoda/${value.name_en}/hourly`"
             :class="[
               'cities-table-item',
               { 'empty-cell': !value },

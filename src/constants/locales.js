@@ -35,7 +35,7 @@ const dataLocales = {
       hourly: "почасовой прогноз",
       days: "прогноз погоды на дней",
     },
-    detailsSegmentTitle: "погода в Москве - подробный прогноз на дней",
+    detailsSegmentTitle: "погода в - подробный прогноз на дней",
     climateIndicators: {
       temp: "температура",
       pressure: "давление",

@@ -1,11 +1,7 @@
 <template>
   <div class="segment-container">
     <h1 class="segment-title">
-      {{ languageExpressions(getLocales, "detailsSegmentTitle").slice(0, 39)
-      }}{{ tenDaysDetailsCard.length
-      }}{{
-        languageExpressions(getLocales, "detailsSegmentTitle").slice(38, 43)
-      }}
+      {{ segmentTitle }}
     </h1>
     <div
       ref="item"
@@ -30,25 +26,52 @@ import { languageExpressions } from "@/constants/locales";
 import CardDetailDay from "./CardDetailDay.vue";
 import ContentDetailDay from "./ContentDetailDay.vue";
 import { mapGetters } from "vuex";
+import { cityIn } from "lvovich";
 
 export default {
   components: {
     CardDetailDay,
     ContentDetailDay,
   },
-  updated() {
-    setTimeout(this.focus, 500);
-  },
   watch: {
     /**
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
     tenDaysDetailsCard() {
-      // setTimeout(this.focus, 500);
+      setTimeout(this.focus, 500);
     },
   },
   computed: {
-    ...mapGetters(["getLocales", "tenDaysDetailsCard", "tenDaysDetailsChart"]),
+    ...mapGetters([
+      "getLocales",
+      "tenDaysDetailsCard",
+      "tenDaysDetailsChart",
+      "getCitySelected",
+    ]),
+    inflectCityName() {
+      return cityIn(this.getCitySelected);
+    },
+    segmentTitle() {
+      const start = this.languageExpressions(
+        this.getLocales,
+        "detailsSegmentTitle"
+      ).slice(0, 9);
+      const end = this.languageExpressions(
+        this.getLocales,
+        "detailsSegmentTitle"
+      ).slice(31, 40);
+      const middle = this.languageExpressions(
+        this.getLocales,
+        "detailsSegmentTitle"
+      ).slice(8, 32);
+      return (
+        start +
+        this.inflectCityName +
+        middle +
+        this.tenDaysDetailsCard.length +
+        end
+      );
+    },
   },
   methods: {
     languageExpressions,

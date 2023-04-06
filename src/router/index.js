@@ -7,6 +7,7 @@ import TabInformerHourly from "@/components/TabInformerHourly.vue";
 import MainTabContent from "@/components/TabInformerMain.vue";
 import TabInformerDay from "@/components/TabInformerDay.vue";
 import ListAllCities from "@/components/ListAllCities.vue";
+import store from "@/store/index";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,10 @@ const routes = [
         path: "/pogoda/:name/hourly",
         name: "hourly",
         component: TabInformerHourly,
+        beforeEnter: (to, from, next) => {
+          store.commit("setCity", to.params.name);
+          next();
+        },
       },
       {
         path: "/pogoda/",
@@ -34,6 +39,10 @@ const routes = [
         path: "/pogoda/:name/days",
         name: "days",
         component: TabInformerDay,
+        beforeEnter: (to, from, next) => {
+          store.commit("setCity", to.params.name);
+          next();
+        },
       },
     ],
   },

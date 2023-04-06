@@ -20,6 +20,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
   props: {
@@ -42,14 +43,14 @@ export default {
      */
     this.breadcrumbs("breadcrumbs", this.crumbsKeys);
   },
-  computed: {
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
+  watch: {
+    getCitySelected(value) {
+      const a = this.crumbs[this.crumbs.length - 1][0];
+      this.crumbs.splice(-1, 1, [a, value]);
     },
+  },
+  computed: {
+    ...mapGetters(["getLocales", "getCitySelected"]),
   },
   methods: {
     /**
@@ -64,15 +65,19 @@ export default {
     },
     /**
      * Функция для создания массива с именами ссылок.
-     * @param key Ключ 1-го уровнядля объекта со строковыми константами.
+     * @param key Ключ 1-го уровня для объекта со строковыми константами.
      * @param arr Массив с ключами 2-го уровня для объекта со строковыми константами.
      */
     breadcrumbs(key, arr) {
       arr.forEach((element) => {
-        this.crumbs.push([
-          element,
-          languageExpressions(this.getLocales, key, element),
-        ]);
+        if (element !== "city") {
+          this.crumbs.push([
+            element,
+            languageExpressions(this.getLocales, key, element),
+          ]);
+        } else {
+          this.crumbs.push([element, this.getCitySelected]);
+        }
       });
     },
   },
