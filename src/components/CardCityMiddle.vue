@@ -84,6 +84,12 @@ export default {
   transition: 200ms box-shadow ease-in-out;
   &:hover {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
+    .card-title-text span {
+      color: #0bc2ff;
+    }
+    .card-title-arrow svg {
+      fill: #0bc2ff;
+    }
   }
 }
 .card-left-side {
@@ -108,6 +114,9 @@ export default {
   align-self: center;
   background: #f0f7fc;
   border-radius: 8px;
+  & svg {
+    transition: 200ms all ease-in-out;
+  }
 }
 .card-title-text span {
   font-weight: 400;
@@ -115,6 +124,7 @@ export default {
   line-height: 16px;
   color: #04569c;
   text-transform: capitalize;
+  transition: 200ms all ease-in-out;
 }
 .card-value span {
   font-weight: 500;

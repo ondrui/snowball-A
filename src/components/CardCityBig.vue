@@ -126,9 +126,16 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   width: 100%;
-  transition: 200ms box-shadow ease-in-out;
+  transition: 200ms all ease-in-out;
   &:hover {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
+    .card-top-text span,
+    .card-top-arrow span {
+      color: #0bc2ff;
+    }
+    .card-top-arrow svg {
+      fill: #0bc2ff;
+    }
   }
 }
 .card-top {
@@ -146,11 +153,15 @@ export default {
   padding: 2px 8px;
   background: #f0f7fc;
   border-radius: 8px;
+  & svg {
+    transition: 200ms all ease-in-out;
+  }
   & span {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
     color: #04569c;
+    transition: 200ms all ease-in-out;
   }
 }
 .card-top-text {
@@ -161,6 +172,7 @@ export default {
     line-height: 19px;
     color: #04569c;
     text-transform: capitalize;
+    transition: 200ms all ease-in-out;
   }
 }
 .card-middle {

@@ -92,6 +92,12 @@ export default {
   transition: 200ms box-shadow ease-in-out;
   &:hover {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.31);
+    .card-top-text span {
+      color: #0bc2ff;
+    }
+    .card-top-arrow svg {
+      fill: #0bc2ff;
+    }
   }
 }
 .card-top {
@@ -110,6 +116,9 @@ export default {
   justify-content: center;
   background: #f0f7fc;
   border-radius: 8px;
+  & svg {
+    transition: 200ms all ease-in-out;
+  }
 }
 .card-top-text {
   display: flex;
@@ -119,6 +128,7 @@ export default {
     line-height: 16px;
     color: #04569c;
     text-transform: capitalize;
+    transition: 200ms all ease-in-out;
   }
 }
 .card-value span {

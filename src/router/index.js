@@ -61,8 +61,6 @@ const router = new VueRouter({
       (from.name === "cities" && to.name === "hourly") ||
       from.params.name !== to.params.name
     ) {
-      console.log("to", to);
-      console.log("from", from);
       window.scrollTo({
         top: 0,
         behavior: "smooth",
