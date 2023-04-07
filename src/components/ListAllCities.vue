@@ -39,7 +39,7 @@
         <h2 :data-letter="item">{{ item }}</h2>
         <div class="cities-table-list">
           <router-link
-            :to="`/pogoda/${value.name_en}/hourly`"
+            :to="linkToCity(value.name_en)"
             :class="[
               'cities-table-item',
               { 'empty-cell': !value },
@@ -62,6 +62,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { languageExpressions } from "@/constants/locales";
+import { linkToCity } from "@/constants/functions";
 
 export default {
   name: "ListAllCities",
@@ -89,6 +90,7 @@ export default {
   },
   methods: {
     languageExpressions,
+    linkToCity,
     scrollSel() {
       window.scroll({
         top: 364,

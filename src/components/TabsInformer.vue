@@ -39,7 +39,6 @@ export default {
     };
   },
   created() {
-    console.log("created tabInformer");
     this.currentTab = this.$route.name;
     eventBus.$on("go", (bol) => {
       this.hover = bol;
@@ -52,7 +51,7 @@ export default {
     eventBus.$off();
   },
   computed: {
-    ...mapGetters(["getLocales", "tenDaysTabTable"]),
+    ...mapGetters(["getLocales", "tenDaysTabTable", "getCitySelected"]),
     /**
      * Подписи для вкладок.
      */
@@ -75,7 +74,10 @@ export default {
      */
     showContent(key) {
       if (key !== this.$route.name)
-        this.$router.push({ name: key, params: { name: "moscow" } });
+        this.$router.push({
+          name: key,
+          params: { name: this.getCitySelected.name_url },
+        });
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.

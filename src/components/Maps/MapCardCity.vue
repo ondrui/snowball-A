@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/go" class="card-link">
+  <router-link :to="linkToCity(datasetItem.name_en)" class="card-link">
     <div class="city-title">
       <span>{{ datasetItem.name_ru }}</span>
     </div>
@@ -30,6 +30,7 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
+import { linkToCity } from "@/constants/functions";
 
 export default {
   props: {
@@ -55,6 +56,7 @@ export default {
   methods: {
     languageExpressions,
     windDirection,
+    linkToCity,
   },
 };
 </script>

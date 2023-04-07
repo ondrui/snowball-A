@@ -49,7 +49,7 @@ export default {
       "getCitySelected",
     ]),
     inflectCityName() {
-      return cityIn(this.getCitySelected);
+      return cityIn(this.getCitySelected.name_loc);
     },
     segmentTitle() {
       const start = this.languageExpressions(

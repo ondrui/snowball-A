@@ -46,7 +46,7 @@ export default {
   watch: {
     getCitySelected(value) {
       const a = this.crumbs[this.crumbs.length - 1][0];
-      this.crumbs.splice(-1, 1, [a, value]);
+      this.crumbs.splice(-1, 1, [a, value.name_loc]);
     },
   },
   computed: {
@@ -76,7 +76,7 @@ export default {
             languageExpressions(this.getLocales, key, element),
           ]);
         } else {
-          this.crumbs.push([element, this.getCitySelected]);
+          this.crumbs.push([element, this.getCitySelected.name_loc]);
         }
       });
     },

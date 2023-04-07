@@ -7,7 +7,6 @@ import TabInformerHourly from "@/components/TabInformerHourly.vue";
 import MainTabContent from "@/components/TabInformerMain.vue";
 import TabInformerDay from "@/components/TabInformerDay.vue";
 import ListAllCities from "@/components/ListAllCities.vue";
-import store from "@/store/index";
 
 Vue.use(VueRouter);
 
@@ -25,10 +24,6 @@ const routes = [
         path: "/pogoda/:name/hourly",
         name: "hourly",
         component: TabInformerHourly,
-        beforeEnter: (to, from, next) => {
-          store.commit("setCity", to.params.name);
-          next();
-        },
       },
       {
         path: "/pogoda/",
@@ -39,10 +34,6 @@ const routes = [
         path: "/pogoda/:name/days",
         name: "days",
         component: TabInformerDay,
-        beforeEnter: (to, from, next) => {
-          store.commit("setCity", to.params.name);
-          next();
-        },
       },
     ],
   },
@@ -62,13 +53,16 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior(to) {
+  scrollBehavior(to, from) {
     if (
       to.name === "not-found" ||
       to.name === "cities" ||
       to.hash === "#top" ||
-      to.redirectedFrom === "/go"
+      (from.name === "cities" && to.name === "hourly") ||
+      from.params.name !== to.params.name
     ) {
+      console.log("to", to);
+      console.log("from", from);
       window.scrollTo({
         top: 0,
         behavior: "smooth",

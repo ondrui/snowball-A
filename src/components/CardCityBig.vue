@@ -61,6 +61,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { linkToCity } from "@/constants/functions";
 
 export default {
   props: {
@@ -89,6 +90,7 @@ export default {
   },
   methods: {
     languageExpressions,
+    linkToCity,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.
@@ -104,7 +106,9 @@ export default {
      */
     go(event) {
       if (this.mouseStartX !== event.x) return;
-      this.$router.push("go").catch(() => {});
+      this.$router
+        .push(this.linkToCity(this.itemDataset.name_en))
+        .catch(() => {});
     },
   },
 };

@@ -23,7 +23,7 @@ export default new Vuex.Store({
     /**
      * Город для которого выводится прогноз погоды.
      */
-    citySelected: "Ереван",
+    citySelected: "yerevan",
     /**
      * Список самых крупных городов.
      */
@@ -3081,8 +3081,14 @@ export default new Vuex.Store({
      * Возвращает город для которого будет выводится прогноз.
      * @param citySelected Текущее значение store.citySelected.
      */
-    getCitySelected({ citySelected }) {
-      return citySelected;
+    getCitySelected({ listAllCities, citySelected }) {
+      const city = listAllCities.find(
+        ({ name_en }) => name_en.toLowerCase() === citySelected
+      );
+      return { name_loc: city.name_ru, name_url: citySelected };
+    },
+    getListAllCities({ listAllCities }) {
+      return listAllCities;
     },
     /**
      * Возвращает данные для отображения в шапке виджета.
@@ -3685,7 +3691,10 @@ export default new Vuex.Store({
           };
         });
         return {
-          value: ajustingDataArr,
+          value:
+            elem.title === "linear_6"
+              ? ajustingDataArr.slice(0, 7)
+              : ajustingDataArr,
           descr: elem.title,
         };
       },
@@ -3996,7 +4005,7 @@ export default new Vuex.Store({
       state.listAllCities = cities;
     },
     setCity(state, city) {
-      state.citySelected = city;
+      state.citySelected = city.toLowerCase();
     },
   },
   actions: {

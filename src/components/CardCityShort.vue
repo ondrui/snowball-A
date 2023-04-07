@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { linkToCity } from "@/constants/functions";
 export default {
   props: {
     itemDataset: {
@@ -43,6 +44,7 @@ export default {
     };
   },
   methods: {
+    linkToCity,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.
@@ -66,7 +68,9 @@ export default {
        * путем изменения значения флага isOpen в сторе store.state.datasetsTenDays.
        */
       if (this.mouseStartX !== event.x) return;
-      this.$router.push("go").catch(() => {});
+      this.$router
+        .push(this.linkToCity(this.itemDataset.name_en))
+        .catch(() => {});
     },
   },
 };

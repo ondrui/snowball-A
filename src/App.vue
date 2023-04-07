@@ -44,6 +44,13 @@ export default {
     const city = JSON.parse(localStorage.getItem("cities")).default;
     if (city) this.$store.commit("setCity", city);
   },
+  watch: {
+    "$route.params"(to) {
+      if (!to.name) return;
+      this.$store.commit("setCity", to.name);
+      localStorage.setItem("cities", JSON.stringify({ default: to.name }));
+    },
+  },
   computed: {
     ...mapGetters(["getLocales", "loading"]),
   },

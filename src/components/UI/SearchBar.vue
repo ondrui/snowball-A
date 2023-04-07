@@ -4,7 +4,7 @@
       type="text"
       class="input-search-header"
       placeholder=""
-      :value="getCitySelected"
+      :value="getCitySelected.name_loc"
       @change="handler"
     />
     <div class="history-icon-container">
@@ -27,20 +27,27 @@
 </template>
 
 <script>
+import { chipsURL, informerTabsTitle } from "@/constants/locales";
+import { mapGetters } from "vuex";
+
 export default {
   name: "SearchBar",
   computed: {
-    getCitySelected() {
-      return this.$store.getters.getCitySelected;
-    },
+    ...mapGetters(["getListAllCities", "getCitySelected"]),
   },
   methods: {
     handler(e) {
       const city = e.target.value;
-      if (!city) return;
+      const hasCity = this.getListAllCities.find(
+        ({ name_en }) => name_en.toLowerCase() === city
+      );
+      if (!city || !hasCity) return;
       this.$store.commit("setCity", city);
       localStorage.setItem("cities", JSON.stringify({ default: city }));
-      this.$router.push({ path: `/pogoda/${city}/hourly` });
+      this.$router.push({ path: this.linkToCity(city) }).catch(() => {});
+    },
+    linkToCity(city) {
+      return `/${chipsURL}/${city}/${informerTabsTitle[1]}`;
     },
   },
 };
