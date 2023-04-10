@@ -20,6 +20,11 @@ export default new Vuex.Store({
      * Свойство определяет языковую локаль. Значение по умолчанию "ru".
      */
     locales: "ru",
+    country_loc: {
+      ru: "Армения",
+      en: "Armenia",
+      am: "Հայաստանի",
+    },
     /**
      * Город для которого выводится прогноз погоды.
      */
@@ -3077,6 +3082,9 @@ export default new Vuex.Store({
         state.datasetsHourly.constructor === Object
       );
     },
+    getCountryNameLoc({ locales, country_loc }) {
+      return country_loc[locales];
+    },
     /**
      * Возвращает город для которого будет выводится прогноз.
      * @param citySelected Текущее значение store.citySelected.
@@ -3115,8 +3123,11 @@ export default new Vuex.Store({
           "headerInformer",
           "forecast"
         )}`,
-        icon: data.condition,
-        descr: data.condition_s,
+        condition: data.condition,
+        condition_s:
+          getLocales !== "ru"
+            ? languageExpressions(getLocales, "weather_sign", data.condition)
+            : data.condition_s,
         temp: `${addPlus(tempData.temp.value)}${
           languageExpressions(getLocales, "units", "temp")[0]
         }`,
@@ -3124,7 +3135,7 @@ export default new Vuex.Store({
           getLocales,
           "headerInformer",
           "feelsLike"
-        ).slice(0, -3)} ${addPlus(tempData.feels_like.value)}`,
+        )} ${addPlus(tempData.feels_like.value)}`,
       };
     },
     /**
@@ -3154,13 +3165,11 @@ export default new Vuex.Store({
         },
         {
           icon: "wind-gust",
-          title: `${
-            languageExpressions(
-              getLocales,
-              "climateIndicators",
-              "windGust_1"
-            ).split(" ")[0]
-          }:`,
+          title: `${languageExpressions(
+            getLocales,
+            "climateIndicators",
+            "windGust_1"
+          )}:`,
           value: `${data.wind_gust} ${
             languageExpressions(getLocales, "units", "speed")[0]
           }`,
@@ -3423,7 +3432,14 @@ export default new Vuex.Store({
             isOpen: e.isOpen,
             weekend: weekday[0] === "сб" || weekday[0] === "вс",
             condition: e.day.condition,
-            condition_s: e.day.condition_s,
+            condition_s:
+              getLocales !== "ru"
+                ? languageExpressions(
+                    getLocales,
+                    "weather_sign",
+                    e.day.condition
+                  )
+                : e.day.condition_s,
             precProb: {
               title: languageExpressions(
                 getLocales,

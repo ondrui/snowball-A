@@ -2,10 +2,7 @@
   <div class="other-cities">
     <div class="container">
       <h2 class="other-cities-title">
-        <span>{{
-          languageExpressions(getLocales, "sectionOtherCities").slice(0, 6)
-        }}</span
-        >{{ languageExpressions(getLocales, "sectionOtherCities").slice(6) }}
+        <span>{{ getHistoryTitle[0] }}&nbsp;</span>{{ getHistoryTitle[1] }}
       </h2>
       <ul ref="list" class="other-cities-list" role="list">
         <li
@@ -29,6 +26,7 @@ import { languageExpressions } from "@/constants/locales";
 // import CardCityMiddle from "./CardCityMiddle.vue";
 import dragScrolling from "@/mixins/drag-scrolling";
 import CardCityGrid from "./CardCityGrid.vue";
+import { cityIn } from "lvovich";
 
 export default {
   mixins: [dragScrolling],
@@ -52,6 +50,17 @@ export default {
      */
     getLocales() {
       return this.$store.getters.getLocales;
+    },
+    getCountryNameLoc() {
+      return this.$store.getters.getCountryNameLoc;
+    },
+    getHistoryTitle() {
+      const country = cityIn(this.getCountryNameLoc);
+      const arr = this.languageExpressions(
+        this.getLocales,
+        "sectionOtherCities"
+      ).split(" ");
+      return [arr.shift(), arr.join(" ").replace("$", country)];
     },
   },
   methods: {

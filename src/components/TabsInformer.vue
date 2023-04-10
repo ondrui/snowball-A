@@ -86,10 +86,7 @@ export default {
      */
     showTitle(value, key) {
       return key === "days"
-        ? `${value.slice(0, 18)}${this.tenDaysTabTable.length}${value.slice(
-            17,
-            30
-          )}`
+        ? value.replace("$", this.tenDaysTabTable.length)
         : value;
     },
     isHover(val) {

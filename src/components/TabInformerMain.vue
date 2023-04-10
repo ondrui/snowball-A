@@ -8,9 +8,7 @@
     <MapArmenia v-if="radio === 'map'" :datasetCard="cardMapData" />
     <ListTopCities v-if="radio === 'cities'" :itemList="getListTopCities" />
     <div class="link-city">
-      <router-link to="/cities">{{
-        languageExpressions(getLocales, "allCityBtnCaption")
-      }}</router-link>
+      <router-link to="/cities">{{ getTitleLink }}</router-link>
       <div class="arrow-icon">
         <BaseIcon width="9" nameIcon="arrow-right" pick="common" />
       </div>
@@ -23,6 +21,7 @@ import MapArmenia from "@/components/Maps/MapArmenia.vue";
 import ListTopCities from "@/components/ListTopCities.vue";
 import { languageExpressions } from "@/constants/locales";
 import { mapGetters } from "vuex";
+import { cityIn } from "lvovich";
 
 export default {
   name: "MainTabContent",
@@ -36,7 +35,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLocales", "getListTopCities", "cardMapData"]),
+    ...mapGetters([
+      "getLocales",
+      "getListTopCities",
+      "cardMapData",
+      "getCountryNameLoc",
+      "getListAllCities",
+    ]),
     /**
      * Возвращает настройки отрисовки радио кнопок в компоненте Navbar.vue.
      */
@@ -45,6 +50,12 @@ export default {
         ["map", languageExpressions(this.getLocales, "viewsSwitcher")[0]],
         ["cities", languageExpressions(this.getLocales, "viewsSwitcher")[1]],
       ];
+    },
+    getTitleLink() {
+      const country = cityIn(this.getCountryNameLoc);
+      return this.languageExpressions(this.getLocales, "allCityBtnCaption")
+        .replace("$", this.getListAllCities.length)
+        .replace("$", country);
     },
   },
   methods: {

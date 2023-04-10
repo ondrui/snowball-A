@@ -5,13 +5,13 @@
     </h1>
     <div
       ref="item"
-      :class="['wrapper-list', { open: isOpen(index) }]"
+      :class="['wrapper-list', { open: activeIndex === index }]"
       v-for="(item, index) in tenDaysDetailsCard"
       :key="`s-${index}`"
       tabindex="0"
     >
       <CardDetailDay class="card" :value="item" :index="index" />
-      <div :class="['chart-wrapper', { visible: isOpen(index) }]">
+      <div :class="['chart-wrapper', { visible: activeIndex === index }]">
         <ContentDetailDay
           class="chart-content"
           :datasetChart="tenDaysDetailsChart[`${index + 1}`]"
@@ -33,12 +33,22 @@ export default {
     CardDetailDay,
     ContentDetailDay,
   },
+  data() {
+    return {
+      activeItemIndex: 1,
+    };
+  },
   watch: {
     /**
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
     tenDaysDetailsCard() {
-      setTimeout(this.focus, 500);
+      console.log("index");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(this.focus);
+      });
+      // this.$nextTick().then(this.focus);
+      // setTimeout(this.focus, 0);
     },
   },
   computed: {
@@ -52,25 +62,18 @@ export default {
       return cityIn(this.getCitySelected.name_loc);
     },
     segmentTitle() {
-      const start = this.languageExpressions(
+      const str = this.languageExpressions(
         this.getLocales,
         "detailsSegmentTitle"
-      ).slice(0, 9);
-      const end = this.languageExpressions(
-        this.getLocales,
-        "detailsSegmentTitle"
-      ).slice(31, 40);
-      const middle = this.languageExpressions(
-        this.getLocales,
-        "detailsSegmentTitle"
-      ).slice(8, 32);
-      return (
-        start +
-        this.inflectCityName +
-        middle +
-        this.tenDaysDetailsCard.length +
-        end
-      );
+      )
+        .replace("$", this.inflectCityName)
+        .replace("$", this.tenDaysDetailsCard.length);
+      return str;
+    },
+    activeIndex() {
+      const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
+      console.log(index);
+      return index;
     },
   },
   methods: {
@@ -81,11 +84,13 @@ export default {
     focus() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
       // if (index !== -1) this.$refs.item[index].focus();
-      if (index !== -1)
+      if (index !== -1) {
+        console.log("scroll");
         this.$refs.item[index].scrollIntoView({
           block: "nearest",
           behavior: "smooth",
         });
+      }
     },
     /**
      * Отображает график и рамку вокруг элемента если свойство isOpen равно true.

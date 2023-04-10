@@ -6,11 +6,15 @@
     <div class="content">
       <div class="content-left">
         <div>
-          <BaseIcon :nameIcon="currentBlock.icon" pick="light" width="49" />
+          <BaseIcon
+            :nameIcon="currentBlock.condition"
+            pick="light"
+            width="49"
+          />
         </div>
         <div class="content-left-temp">{{ currentBlock.temp }}</div>
         <div class="content-left-descr">
-          <div class="content-left-text">{{ currentBlock.descr }}</div>
+          <div class="content-left-text">{{ currentBlock.condition_s }}</div>
           <div class="feeling">
             {{ currentBlock.realFeel }}
           </div>

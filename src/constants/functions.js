@@ -267,3 +267,7 @@ export const linkToCity = (name) => {
     ? `/${chipsURL}/${name.toLowerCase()}/${informerTabsTitle[1]}`
     : "";
 };
+
+export const transtateCondition = (local, data) => {
+  return languageExpressions(local, "weather_sign", data);
+};

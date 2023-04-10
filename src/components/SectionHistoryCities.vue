@@ -2,10 +2,7 @@
   <div v-if="cardMapData.length" class="history">
     <div class="container">
       <h2 class="history-title">
-        <span>{{
-          languageExpressions(getLocales, "asideHistory").slice(0, 7)
-        }}</span
-        >{{ languageExpressions(getLocales, "asideHistory").slice(7) }}
+        <span>{{ getHistoryTitle[0] }}&nbsp;</span>{{ getHistoryTitle[1] }}
       </h2>
       <DragScrolling
         :class="[
@@ -58,6 +55,13 @@ export default {
      */
     getLocales() {
       return this.$store.getters.getLocales;
+    },
+    getHistoryTitle() {
+      const arr = this.languageExpressions(
+        this.getLocales,
+        "asideHistory"
+      ).split(" ");
+      return [arr[0], arr[1]];
     },
   },
   methods: {
