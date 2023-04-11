@@ -4023,6 +4023,9 @@ export default new Vuex.Store({
     setCity(state, city) {
       state.citySelected = city.toLowerCase();
     },
+    setLocale(state, localeStr) {
+      state.locales = localeStr;
+    },
   },
   actions: {
     /**

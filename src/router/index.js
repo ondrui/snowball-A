@@ -3,44 +3,23 @@ import VueRouter from "vue-router";
 
 import MainInformer from "../views/MainInformer.vue";
 import NotFound from "@/components/NotFound.vue";
-import TabInformerHourly from "@/components/TabInformerHourly.vue";
-import MainTabContent from "@/components/TabInformerMain.vue";
-import TabInformerDay from "@/components/TabInformerDay.vue";
+// import TabInformerHourly from "@/components/TabInformerHourly.vue";
+// import MainTabContent from "@/components/TabInformerMain.vue";
+// import TabInformerDay from "@/components/TabInformerDay.vue";
 import ListAllCities from "@/components/ListAllCities.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    component: MainInformer,
-    children: [
-      {
-        path: "/",
-        name: "main",
-        component: MainTabContent,
-      },
-      {
-        path: "/:locale/pogoda/:city/hourly",
-        name: "hourly",
-        component: TabInformerHourly,
-      },
-      {
-        path: "/:locale/pogoda/",
-        name: "pogoda",
-        component: MainTabContent,
-      },
-      {
-        path: "/:locale/pogoda/:city/days",
-        name: "days",
-        component: TabInformerDay,
-      },
-    ],
-  },
-  {
     path: "/cities",
     name: "cities",
     component: ListAllCities,
+  },
+  {
+    path: "/:locale/pogoda/:city/:tab",
+    name: "informer",
+    component: MainInformer,
   },
   {
     path: "/:pathMatch(.*)*",
@@ -58,8 +37,8 @@ const router = new VueRouter({
       to.name === "not-found" ||
       to.name === "cities" ||
       to.hash === "#top" ||
-      (from.name === "cities" && to.name === "hourly") ||
-      from.params.name !== to.params.name
+      (from.name === "cities" && to.params.tab === "hourly") ||
+      from.params.city !== to.params.city
     ) {
       window.scrollTo({
         top: 0,

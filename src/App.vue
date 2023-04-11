@@ -40,7 +40,7 @@ export default {
     ScrollTop,
   },
   created() {
-    console.log("created app");
+    console.log(this.$route);
     this.getData();
     const city = JSON.parse(localStorage.getItem("cities")).default;
     if (city) this.$store.commit("setCity", city);
@@ -53,6 +53,11 @@ export default {
         console.log("city");
         this.$store.commit("setCity", to.city);
         localStorage.setItem("cities", JSON.stringify({ default: to.city }));
+      }
+      if (to.locale !== from.locale) {
+        console.log("locale");
+        this.$store.commit("setLocale", to.locale);
+        localStorage.setItem("cities", JSON.stringify({ locale: to.locale }));
       }
     },
   },

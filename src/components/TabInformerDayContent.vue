@@ -103,7 +103,7 @@ export default {
        */
       if (this.mouseStartX !== event.x) return;
       if (index === 0) {
-        this.$router.push({ name: "hourly" }).catch(() => {});
+        this.$router.push({ params: { tab: "hourly" } }).catch(() => {});
       } else {
         this.$store.dispatch("index", index);
       }

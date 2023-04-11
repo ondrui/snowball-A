@@ -33,7 +33,7 @@ const dataLocales = {
     tabsDescr: {
       main: "տուն",
       hourly: "ժամային կանխատեսում",
-      days: "եղանակի կանխատեսում $ օրվա համար",
+      day: "եղանակի կանխատեսում $ օրվա համար",
     },
     detailsSegmentTitle: "եղանակը $ - մանրամասն կանխատեսում $ օրվա համար",
     climateIndicators: {
@@ -148,7 +148,7 @@ const dataLocales = {
     tabsDescr: {
       main: "главная",
       hourly: "почасовой прогноз",
-      days: "прогноз погоды на $ дней",
+      day: "прогноз погоды на $ дней",
     },
     detailsSegmentTitle: "погода в $ - подробный прогноз на $ дней",
     climateIndicators: {
@@ -263,7 +263,7 @@ const dataLocales = {
     tabsDescr: {
       main: "main",
       hourly: "hourly",
-      days: "$ day forecast",
+      day: "$ day forecast",
     },
     detailsSegmentTitle: "weather in $ - detailed forecast for $ days",
     climateIndicators: {
@@ -405,4 +405,4 @@ export const defaultOptionsDateTimeFormat = {
 };
 
 export const chipsURL = ["pogoda"];
-export const informerTabsTitle = ["main", "hourly", "days"];
+export const informerTabsTitle = ["main", "hourly", "day"];

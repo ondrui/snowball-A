@@ -262,9 +262,9 @@ export const bezierCommand = (point, i, a) => {
  * @param name Название города на английском.
  * @example "/pogoda/Garnarich/hourly"
  */
-export const linkToCity = (name) => {
+export const linkToCity = (name, locale) => {
   return name
-    ? `/${chipsURL}/${name.toLowerCase()}/${informerTabsTitle[1]}`
+    ? `/${locale}/${chipsURL}/${name.toLowerCase()}/${informerTabsTitle[1]}`
     : "";
 };
 

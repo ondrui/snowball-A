@@ -18,17 +18,24 @@
       </button>
     </div>
     <div class="tab">
-      <router-view></router-view>
+      <component :is="currentTabComponent"></component>
     </div>
   </div>
 </template>
-
 <script>
 import { languageExpressions } from "@/constants/locales";
 import { eventBus } from "../main.js";
 import { mapGetters } from "vuex";
+import TabInformerDay from "./TabInformerDay.vue";
+import TabInformerHourly from "./TabInformerHourly.vue";
+import TabInformerMain from "./TabInformerMain.vue";
 
 export default {
+  components: {
+    TabInformerDay,
+    TabInformerHourly,
+    TabInformerMain,
+  },
   data() {
     return {
       /**
@@ -39,13 +46,10 @@ export default {
     };
   },
   created() {
-    this.currentTab = this.$route.name;
+    this.currentTab = this.$route.params.tab;
     eventBus.$on("go", (bol) => {
       this.hover = bol;
     });
-  },
-  mounted() {
-    this.currentTab = this.$route.name;
   },
   destroyed() {
     eventBus.$off();
@@ -58,10 +62,14 @@ export default {
     tabsList() {
       return languageExpressions(this.getLocales, "tabsDescr");
     },
+    currentTabComponent() {
+      const string = this.currentTab;
+      return `TabInformer${string.charAt(0).toUpperCase() + string.slice(1)}`;
+    },
   },
   watch: {
     $route() {
-      this.currentTab = this.$route.name;
+      this.currentTab = this.$route.params.tab;
       this.hover = false;
     },
   },
@@ -73,11 +81,11 @@ export default {
      * @param key Строка содержит имя вкладки.
      */
     showContent(key) {
-      if (key !== this.$route.name)
-        this.$router.push({
-          name: key,
-          params: { name: this.getCitySelected.name_url },
-        });
+      this.$router
+        .push({
+          params: { city: this.getCitySelected.name_url, tab: key },
+        })
+        .catch(() => {});
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.
@@ -85,7 +93,7 @@ export default {
      * @param key Имя свойства, котороое содержит название вкладки.
      */
     showTitle(value, key) {
-      return key === "days"
+      return key === "day"
         ? value.replace("$", this.tenDaysTabTable.length)
         : value;
     },

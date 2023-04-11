@@ -5,6 +5,13 @@
         <BaseIcon nameIcon="country-logo" pick="common" width="150" />
       </router-link>
     </div>
+    <div>
+      <select name="locale" v-model="select">
+        <option value="ru">ru</option>
+        <option value="en">en</option>
+        <option value="am">am</option>
+      </select>
+    </div>
   </header>
 </template>
 
@@ -13,6 +20,19 @@ import { languageExpressions } from "@/constants/locales";
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      select: "ru",
+    };
+  },
+  created() {
+    this.$router.push({ params: { locale: this.select } }).catch(() => {});
+  },
+  watch: {
+    select(value) {
+      this.$router.push({ params: { locale: value } }).catch(() => {});
+    },
+  },
   computed: {
     ...mapGetters(["tenDaysTabTable", "getLocales"]),
   },
@@ -27,6 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  display: flex;
   border-bottom: 1px solid rgba(160, 184, 212, 0.4);
   width: 100%;
   margin: 0 auto;
