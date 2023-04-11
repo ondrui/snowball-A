@@ -21,17 +21,17 @@ const routes = [
         component: MainTabContent,
       },
       {
-        path: "/pogoda/:name/hourly",
+        path: "/:locale/pogoda/:city/hourly",
         name: "hourly",
         component: TabInformerHourly,
       },
       {
-        path: "/pogoda/",
+        path: "/:locale/pogoda/",
         name: "pogoda",
         component: MainTabContent,
       },
       {
-        path: "/pogoda/:name/days",
+        path: "/:locale/pogoda/:city/days",
         name: "days",
         component: TabInformerDay,
       },

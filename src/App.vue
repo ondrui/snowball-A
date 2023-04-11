@@ -40,15 +40,20 @@ export default {
     ScrollTop,
   },
   created() {
+    console.log("created app");
     this.getData();
     const city = JSON.parse(localStorage.getItem("cities")).default;
     if (city) this.$store.commit("setCity", city);
   },
   watch: {
-    "$route.params"(to) {
-      if (!to.name) return;
-      this.$store.commit("setCity", to.name);
-      localStorage.setItem("cities", JSON.stringify({ default: to.name }));
+    "$route.params"(to, from) {
+      console.log(to, from);
+      if (!to.city || !to.locale) return;
+      if (to.city !== from.city) {
+        console.log("city");
+        this.$store.commit("setCity", to.city);
+        localStorage.setItem("cities", JSON.stringify({ default: to.city }));
+      }
     },
   },
   computed: {

@@ -35,20 +35,18 @@ export default {
   },
   data() {
     return {
-      activeItemIndex: 1,
+      locale: "",
     };
+  },
+  created() {
+    this.locale = this.getLocales;
   },
   watch: {
     /**
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
-    tenDaysDetailsCard() {
-      console.log("index");
-      requestAnimationFrame(() => {
-        requestAnimationFrame(this.focus);
-      });
-      // this.$nextTick().then(this.focus);
-      // setTimeout(this.focus, 0);
+    tenDaysDetailsCard(value) {
+      if (value && this.locale === this.getLocales) setTimeout(this.focus, 500);
     },
   },
   computed: {
@@ -72,7 +70,6 @@ export default {
     },
     activeIndex() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
-      console.log(index);
       return index;
     },
   },
@@ -83,9 +80,7 @@ export default {
      */
     focus() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
-      // if (index !== -1) this.$refs.item[index].focus();
       if (index !== -1) {
-        console.log("scroll");
         this.$refs.item[index].scrollIntoView({
           block: "nearest",
           behavior: "smooth",
@@ -107,7 +102,7 @@ export default {
   display: grid;
   grid-template-rows: 0fr;
   overflow: hidden;
-  transition: grid-template-rows 0.5s;
+  transition: grid-template-rows 0.4s;
   &.visible {
     grid-template-rows: 1fr;
     & .chart-content {
@@ -117,7 +112,7 @@ export default {
 }
 .chart-content {
   min-height: 0;
-  transition: visibility 1s;
+  transition: visibility 0.4s;
   visibility: hidden;
 }
 .segment-title {
