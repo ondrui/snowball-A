@@ -403,6 +403,3 @@ export const defaultOptionsDateTimeFormat = {
   minute: "2-digit",
   second: "2-digit",
 };
-
-export const chipsURL = ["pogoda"];
-export const informerTabsTitle = ["main", "hourly", "day"];

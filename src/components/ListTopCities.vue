@@ -2,7 +2,7 @@
   <div class="table-wrapper">
     <div class="table">
       <router-link
-        :to="linkToCity(item.name_en)"
+        :to="{ name: 'informer', params: { city: item.name_en } }"
         :class="['table-item', { 'empty-cell': !item }]"
         v-for="(item, index) in addEmptyCell"
         :key="`l-${index}`"
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { linkToCity } from "@/constants/functions";
 export default {
   props: {
     itemList: {
@@ -28,9 +27,6 @@ export default {
       const expArr = this.itemList;
       return [...expArr, ...Array(4).fill("")];
     },
-  },
-  methods: {
-    linkToCity,
   },
 };
 </script>

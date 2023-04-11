@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import { chipsURL, informerTabsTitle } from "@/constants/locales";
 import { mapGetters } from "vuex";
 
 export default {
@@ -44,10 +43,9 @@ export default {
       if (!city || !hasCity) return;
       this.$store.commit("setCity", city);
       localStorage.setItem("cities", JSON.stringify({ default: city }));
-      this.$router.push({ path: this.linkToCity(city) }).catch(() => {});
-    },
-    linkToCity(city) {
-      return `/${chipsURL}/${city}/${informerTabsTitle[1]}`;
+      this.$router
+        .push({ name: "informer", params: { city: city } })
+        .catch(() => {});
     },
   },
 };

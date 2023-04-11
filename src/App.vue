@@ -40,10 +40,9 @@ export default {
     ScrollTop,
   },
   created() {
-    console.log(this.$route);
+    console.log(this.$router);
     this.getData();
-    const city = JSON.parse(localStorage.getItem("cities")).default;
-    if (city) this.$store.commit("setCity", city);
+    this.init();
   },
   watch: {
     "$route.params"(to, from) {
@@ -52,12 +51,12 @@ export default {
       if (to.city !== from.city) {
         console.log("city");
         this.$store.commit("setCity", to.city);
-        localStorage.setItem("cities", JSON.stringify({ default: to.city }));
+        localStorage.setItem("cities", JSON.stringify(to));
       }
       if (to.locale !== from.locale) {
         console.log("locale");
         this.$store.commit("setLocale", to.locale);
-        localStorage.setItem("cities", JSON.stringify({ locale: to.locale }));
+        localStorage.setItem("cities", JSON.stringify(to));
       }
     },
   },
@@ -87,6 +86,27 @@ export default {
         }, 300);
       } catch (error) {
         this.answer = "Error! Could not reach the API. " + error;
+      }
+    },
+    init() {
+      const cities = JSON.parse(localStorage.getItem("cities"));
+      if (!cities) {
+        const initValue = {
+          city: "yerevan",
+          locale: "ru",
+          tab: "main",
+        };
+        this.$store.commit("setCity", initValue.city);
+        this.$store.commit("setLocale", initValue.locale);
+        localStorage.setItem("cities", JSON.stringify(initValue));
+        this.$router
+          .push({ name: "informer", params: initValue })
+          .catch(() => {});
+      } else {
+        const value = JSON.parse(localStorage.getItem("cities"));
+        this.$store.commit("setCity", value.city);
+        this.$store.commit("setLocale", value.locale);
+        this.$router.push({ name: "informer", params: value }).catch(() => {});
       }
     },
   },

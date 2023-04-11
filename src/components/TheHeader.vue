@@ -26,11 +26,15 @@ export default {
     };
   },
   created() {
-    this.$router.push({ params: { locale: this.select } }).catch(() => {});
+    this.$router
+      .push({ name: "informer", params: { locale: this.select } })
+      .catch(() => {});
   },
   watch: {
     select(value) {
-      this.$router.push({ params: { locale: value } }).catch(() => {});
+      this.$router
+        .push({ name: "informer", params: { locale: value } })
+        .catch(() => {});
     },
   },
   computed: {

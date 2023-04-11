@@ -2,8 +2,6 @@ import {
   defaultOptionsDateTimeFormat,
   formatListDateTime,
   languageExpressions,
-  chipsURL,
-  informerTabsTitle,
 } from "./locales";
 /**
  * Возвращает строку с датой и временем в заданном формате.
@@ -256,16 +254,6 @@ export const bezierCommand = (point, i, a) => {
   const cps = controlPoint(a[i - 1], a[i - 2], point);
   const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
   return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point.x},${point.y}`;
-};
-/**
- * Возвращает строку описывающую маршрут для роутера.
- * @param name Название города на английском.
- * @example "/pogoda/Garnarich/hourly"
- */
-export const linkToCity = (name, locale) => {
-  return name
-    ? `/${locale}/${chipsURL}/${name.toLowerCase()}/${informerTabsTitle[1]}`
-    : "";
 };
 
 export const transtateCondition = (local, data) => {

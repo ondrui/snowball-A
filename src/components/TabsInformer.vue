@@ -41,15 +41,16 @@ export default {
       /**
        * @param currentTab Имя открытой вкладки (кампоненты).
        */
-      currentTab: "main",
+      currentTab: "",
       hover: false,
     };
   },
   created() {
-    this.currentTab = this.$route.params.tab;
     eventBus.$on("go", (bol) => {
       this.hover = bol;
     });
+    if (!this.$route.params.tab) return;
+    this.currentTab = this.$route.params.tab;
   },
   destroyed() {
     eventBus.$off();
@@ -68,8 +69,8 @@ export default {
     },
   },
   watch: {
-    $route() {
-      this.currentTab = this.$route.params.tab;
+    "$route.params"(to) {
+      this.currentTab = to.tab;
       this.hover = false;
     },
   },
@@ -83,7 +84,12 @@ export default {
     showContent(key) {
       this.$router
         .push({
-          params: { city: this.getCitySelected.name_url, tab: key },
+          name: "informer",
+          params: {
+            locale: this.getLocales,
+            city: this.getCitySelected.name_url,
+            tab: key,
+          },
         })
         .catch(() => {});
     },

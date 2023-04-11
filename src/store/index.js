@@ -3093,6 +3093,11 @@ export default new Vuex.Store({
       const city = listAllCities.find(
         ({ name_en }) => name_en.toLowerCase() === citySelected
       );
+      console.log(city);
+      console.log("getcityselected", {
+        name_loc: city.name_ru,
+        name_url: citySelected,
+      });
       return { name_loc: city.name_ru, name_url: citySelected };
     },
     getListAllCities({ listAllCities }) {
@@ -4021,10 +4026,14 @@ export default new Vuex.Store({
       state.listAllCities = cities;
     },
     setCity(state, city) {
+      console.log("setcity", city);
       state.citySelected = city.toLowerCase();
     },
     setLocale(state, localeStr) {
-      state.locales = localeStr;
+      if (localeStr !== "undefined") {
+        console.log(localeStr);
+        state.locales = localeStr;
+      }
     },
   },
   actions: {
