@@ -41,7 +41,7 @@ export default {
       /**
        * @param currentTab Имя открытой вкладки (кампоненты).
        */
-      currentTab: "",
+      currentTab: "main",
       hover: false,
     };
   },
@@ -49,8 +49,7 @@ export default {
     eventBus.$on("go", (bol) => {
       this.hover = bol;
     });
-    if (!this.$route.params.tab) return;
-    this.currentTab = this.$route.params.tab;
+    this.currentTab = this.$route.params.tab ?? "main";
   },
   destroyed() {
     eventBus.$off();
@@ -70,7 +69,7 @@ export default {
   },
   watch: {
     "$route.params"(to) {
-      this.currentTab = to.tab;
+      this.currentTab = to.tab ?? "main";
       this.hover = false;
     },
   },

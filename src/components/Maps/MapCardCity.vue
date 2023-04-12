@@ -1,9 +1,6 @@
 <template>
   <router-link
-    :to="{
-      name: 'main',
-      params: { city: datasetItem.name_en.toLowerCase() },
-    }"
+    :to="URLBuilder(getLocales, datasetItem.name_en, 'hourly')"
     class="card-link"
   >
     <div class="city-title">
@@ -36,6 +33,7 @@
 <script>
 import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
+import { URLBuilder } from "@/constants/functions";
 
 export default {
   props: {
@@ -61,6 +59,7 @@ export default {
   methods: {
     languageExpressions,
     windDirection,
+    URLBuilder,
   },
 };
 </script>

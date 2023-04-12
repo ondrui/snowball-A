@@ -47,13 +47,13 @@ export default {
     "$route.params"(to, from) {
       console.log("to", to);
       console.log("from", from);
-      if (!to.city || !to.locale) return;
-      if (to.city !== from.city) {
+      // if (!to.city || !to.locale) return;
+      if (to.city !== from.city && to.city) {
         console.log("city");
         this.$store.commit("setCity", to.city);
         localStorage.setItem("cities", JSON.stringify(to));
       }
-      if (to.locale !== from.locale) {
+      if (to.locale !== from.locale && to.locale) {
         console.log("locale");
         this.$store.commit("setLocale", to.locale);
         localStorage.setItem("cities", JSON.stringify(to));
@@ -99,12 +99,12 @@ export default {
         this.$store.commit("setCity", initValue.city);
         this.$store.commit("setLocale", initValue.locale);
         localStorage.setItem("cities", JSON.stringify(initValue));
-        this.$router.push({ name: "main", params: initValue }).catch(() => {});
+        // this.$router.push({ name: "main", params: initValue }).catch(() => {});
       } else {
         const value = JSON.parse(localStorage.getItem("cities"));
         this.$store.commit("setCity", value.city);
         this.$store.commit("setLocale", value.locale);
-        this.$router.push({ name: "main", params: value }).catch(() => {});
+        // this.$router.push({ name: "main", params: value }).catch(() => {});
       }
     },
   },

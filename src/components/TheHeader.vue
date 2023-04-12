@@ -25,15 +25,18 @@ export default {
       select: "ru",
     };
   },
-  created() {
-    this.$router
-      .push({ name: "main", params: { locale: this.select } })
-      .catch(() => {});
-  },
+  // created() {
+  //   this.$router
+  //     .push({ name: "main", params: { locale: this.select } })
+  //     .catch(() => {});
+  // },
   watch: {
     select(value) {
       this.$router
-        .push({ name: "main", params: { locale: value } })
+        .push({
+          name: "main",
+          params: { locale: value === "ru" ? undefined : value },
+        })
         .catch(() => {});
     },
   },

@@ -2,7 +2,7 @@
   <div class="table-wrapper">
     <div class="table">
       <router-link
-        :to="URLBuilder(item)"
+        :to="URLBuilder(getLocales, item.name_en, 'hourly')"
         :class="['table-item', { 'empty-cell': !item }]"
         v-for="(item, index) in addEmptyCell"
         :key="`l-${index}`"
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { URLBuilder } from "@/constants/functions";
+
 export default {
   props: {
     itemList: {
@@ -23,15 +25,16 @@ export default {
     },
   },
   computed: {
+    getLocales() {
+      return this.$store.getters.getLocales;
+    },
     addEmptyCell() {
       const expArr = this.itemList;
       return [...expArr, ...Array(4).fill("")];
     },
   },
   methods: {
-    URLBuilder(item) {
-      return { name: "main", params: { city: item.name_en ?? " " } };
-    },
+    URLBuilder,
   },
 };
 </script>

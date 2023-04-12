@@ -16,11 +16,15 @@ const routes = [
   },
   {
     path: "/",
-    name: "main1",
+    name: "mainTo",
     component: MainInformer,
   },
   {
-    path: "/:locale/pogoda/:city/:tab",
+    path: "/pogoda",
+    redirect: "/",
+  },
+  {
+    path: "/:locale?/pogoda/:city?/:tab?",
     name: "main",
     component: MainInformer,
   },

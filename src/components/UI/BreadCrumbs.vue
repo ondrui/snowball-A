@@ -2,9 +2,7 @@
   <div class="breadcrumbs">
     <div class="crumbs">
       <div v-for="(item, index) in crumbs" :key="item[0]">
-        <router-link v-if="isLast(index)" :to="{ name: crumbs[0][0] }">{{
-          item[1]
-        }}</router-link>
+        <router-link v-if="isLast(index)" to="/">{{ item[1] }}</router-link>
         <span v-else>{{ item[1] }}</span>
         <BaseIcon
           nameIcon="chevron-breadcrumb-right"
@@ -20,6 +18,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { URLBuilder } from "@/constants/functions";
 import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
@@ -57,6 +56,7 @@ export default {
      * Возвращает строковые константы с учетом локали.
      */
     languageExpressions,
+    URLBuilder,
     /**
      * По условию отображает элемент ссылка.
      */
