@@ -123,7 +123,7 @@ export default {
   align-items: center;
 }
 
-@media only screen and (max-width: $media-width-2xl) {
+@media only screen and (max-width: $media-width-3xl) {
   .content-right {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

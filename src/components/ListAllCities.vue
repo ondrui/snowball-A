@@ -39,7 +39,7 @@
         <h2 :data-letter="item">{{ item }}</h2>
         <div class="cities-table-list">
           <router-link
-            :to="{ name: 'informer', params: { city: value.name_en } }"
+            :to="URLBuilder(value)"
             :class="[
               'cities-table-item',
               { 'empty-cell': !value },
@@ -110,6 +110,9 @@ export default {
         list: [...expArr, ...Array(2).fill("")],
         hiddenGap: expArr.length < 2,
       };
+    },
+    URLBuilder(value) {
+      return { name: "main", params: { city: value.name_en ?? " " } };
     },
   },
 };

@@ -104,7 +104,7 @@ export default {
       if (this.mouseStartX !== event.x) return;
       if (index === 0) {
         this.$router
-          .push({ name: "informer", params: { tab: "hourly" } })
+          .push({ name: "main", params: { tab: "hourly" } })
           .catch(() => {});
       } else {
         this.$store.dispatch("index", index);
@@ -220,7 +220,7 @@ export default {
 }
 .days-icon {
   margin: 0 auto;
-  height: 65px;
+  height: 82px;
   width: 80%;
   display: flex;
   flex-direction: column;

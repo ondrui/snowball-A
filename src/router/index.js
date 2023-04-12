@@ -15,8 +15,13 @@ const routes = [
     component: ListAllCities,
   },
   {
+    path: "/",
+    name: "main1",
+    component: MainInformer,
+  },
+  {
     path: "/:locale/pogoda/:city/:tab",
-    name: "informer",
+    name: "main",
     component: MainInformer,
   },
   {

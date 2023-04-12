@@ -84,7 +84,7 @@ export default {
     showContent(key) {
       this.$router
         .push({
-          name: "informer",
+          name: "main",
           params: {
             locale: this.getLocales,
             city: this.getCitySelected.name_url,

@@ -2,7 +2,7 @@
   <div class="table-wrapper">
     <div class="table">
       <router-link
-        :to="{ name: 'informer', params: { city: item.name_en } }"
+        :to="URLBuilder(item)"
         :class="['table-item', { 'empty-cell': !item }]"
         v-for="(item, index) in addEmptyCell"
         :key="`l-${index}`"
@@ -26,6 +26,11 @@ export default {
     addEmptyCell() {
       const expArr = this.itemList;
       return [...expArr, ...Array(4).fill("")];
+    },
+  },
+  methods: {
+    URLBuilder(item) {
+      return { name: "main", params: { city: item.name_en ?? " " } };
     },
   },
 };

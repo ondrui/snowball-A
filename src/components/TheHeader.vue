@@ -27,13 +27,13 @@ export default {
   },
   created() {
     this.$router
-      .push({ name: "informer", params: { locale: this.select } })
+      .push({ name: "main", params: { locale: this.select } })
       .catch(() => {});
   },
   watch: {
     select(value) {
       this.$router
-        .push({ name: "informer", params: { locale: value } })
+        .push({ name: "main", params: { locale: value } })
         .catch(() => {});
     },
   },

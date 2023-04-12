@@ -59,7 +59,7 @@ export default {
     go(event) {
       if (this.mouseStartX !== event.x) return;
       this.$router
-        .push({ name: "informer", params: { city: this.itemDataset.name_en } })
+        .push({ name: "main", params: { city: this.itemDataset.name_en } })
         .catch(() => {});
     },
   },

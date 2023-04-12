@@ -40,13 +40,13 @@ export default {
     ScrollTop,
   },
   created() {
-    console.log(this.$router);
     this.getData();
     this.init();
   },
   watch: {
     "$route.params"(to, from) {
-      console.log(to, from);
+      console.log("to", to);
+      console.log("from", from);
       if (!to.city || !to.locale) return;
       if (to.city !== from.city) {
         console.log("city");
@@ -90,7 +90,7 @@ export default {
     },
     init() {
       const cities = JSON.parse(localStorage.getItem("cities"));
-      if (!cities) {
+      if (!cities || !cities.city || !cities.locale) {
         const initValue = {
           city: "yerevan",
           locale: "ru",
@@ -99,14 +99,12 @@ export default {
         this.$store.commit("setCity", initValue.city);
         this.$store.commit("setLocale", initValue.locale);
         localStorage.setItem("cities", JSON.stringify(initValue));
-        this.$router
-          .push({ name: "informer", params: initValue })
-          .catch(() => {});
+        this.$router.push({ name: "main", params: initValue }).catch(() => {});
       } else {
         const value = JSON.parse(localStorage.getItem("cities"));
         this.$store.commit("setCity", value.city);
         this.$store.commit("setLocale", value.locale);
-        this.$router.push({ name: "informer", params: value }).catch(() => {});
+        this.$router.push({ name: "main", params: value }).catch(() => {});
       }
     },
   },

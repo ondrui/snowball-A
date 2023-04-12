@@ -44,7 +44,7 @@ export default {
       this.$store.commit("setCity", city);
       localStorage.setItem("cities", JSON.stringify({ default: city }));
       this.$router
-        .push({ name: "informer", params: { city: city } })
+        .push({ name: "main", params: { city: city } })
         .catch(() => {});
     },
   },

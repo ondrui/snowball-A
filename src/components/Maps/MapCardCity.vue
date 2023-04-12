@@ -1,6 +1,9 @@
 <template>
   <router-link
-    :to="{ name: 'informer', params: { city: datasetItem.name_en } }"
+    :to="{
+      name: 'main',
+      params: { city: datasetItem.name_en.toLowerCase() },
+    }"
     class="card-link"
   >
     <div class="city-title">

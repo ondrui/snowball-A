@@ -20,6 +20,7 @@ import { languageExpressions } from "@/constants/locales";
 import { setTimeFormat } from "@/constants/functions";
 
 export default {
+  name: "MainInformer",
   components: {
     HeaderInformer,
     TabsInformer,
