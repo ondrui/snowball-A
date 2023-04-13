@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 /**
  * @func languageExpressions Функция возвращает зодонную порометрами языковую константу.
  */
@@ -3116,11 +3117,11 @@ export default new Vuex.Store({
       return {
         timeText: `${languageExpressions(
           getLocales,
-          "headerInformer",
+          "currentBlock",
           "now"
         )} ${time} ${languageExpressions(
           getLocales,
-          "headerInformer",
+          "currentBlock",
           "forecast"
         )}`,
         condition: data.condition,
@@ -3133,7 +3134,7 @@ export default new Vuex.Store({
         }`,
         realFeel: `${languageExpressions(
           getLocales,
-          "headerInformer",
+          "currentBlock",
           "feelsLike"
         )} ${addPlus(tempData.feels_like.value)}`,
       };
@@ -4047,6 +4048,32 @@ export default new Vuex.Store({
     index({ commit, getters }, index) {
       const num = getters.tenDaysDetailsChart.length + 1;
       commit("toggleDetails", [index, num]);
+    },
+    /**
+     * Get data from Internal vs External APIs.
+     */
+    initialDataLoad: async ({ commit }) => {
+      console.log("data load");
+      try {
+        const res = await Promise.all([
+          axios.get("/forecast.json"),
+          axios.get("/forecastFromAPI.json"),
+          axios.get("/cities_all.json"),
+          new Promise((resolve) => setTimeout(() => resolve("done"), 1000)),
+        ]);
+        console.log(res);
+        const [total, data, cities] = res.map(({ data }) => data);
+
+        commit("setData", total);
+        commit("setDataAPI", data);
+        commit("setListCities", cities);
+      } catch (error) {
+        console.error("Error! Could not reach the API. " + error);
+      }
+    },
+    setCity: async ({ commit, dispatch }, city) => {
+      await dispatch("initialDataLoad");
+      commit("setCity", city);
     },
   },
 });

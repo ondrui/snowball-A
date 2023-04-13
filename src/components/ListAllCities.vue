@@ -1,7 +1,5 @@
 <template>
   <div class="cities">
-    <BreadCrumbs class="cities-crumbs" :crumbsKeys="crumbsKeys" />
-    <SearchBar class="cities-search" />
     <div class="cities-sticky">
       <div class="cities-select">
         <span>{{ languageExpressions(getLocales, "listAllCities")[0] }}: </span>
@@ -137,15 +135,6 @@ select {
     right #f0f7fc;
   background-position-x: calc(100% - 12px);
 }
-.cities {
-  & .cities-search,
-  & .cities-crumbs {
-    padding: 0 10px;
-  }
-  & .cities-search {
-    margin-bottom: 61px;
-  }
-}
 .cities-sticky {
   position: sticky;
   top: 0;
@@ -250,11 +239,6 @@ select {
   only screen and (orientation: landscape) {
   .cities-abc {
     margin-bottom: 10px;
-  }
-  .cities {
-    & .cities-search {
-      margin-bottom: 30px;
-    }
   }
   .cities-select {
     margin-bottom: 20px;

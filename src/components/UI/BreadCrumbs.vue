@@ -1,7 +1,7 @@
 <template>
-  <div class="breadcrumbs">
-    <div class="crumbs">
-      <div v-for="(item, index) in crumbs" :key="item[0]">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="crumbs">
+      <li v-for="(item, index) in breadcrumbList" :key="item[0]">
         <router-link v-if="isLast(index)" to="/">{{ item[1] }}</router-link>
         <span v-else>{{ item[1] }}</span>
         <BaseIcon
@@ -9,11 +9,11 @@
           width="5"
           pick="common"
           v-if="isLast(index)"
-          class="breadcrumbs-chevron"
+          class="separator"
         />
-      </div>
-    </div>
-  </div>
+      </li>
+    </ol>
+  </nav>
 </template>
 
 <script>
@@ -22,30 +22,25 @@ import { URLBuilder } from "@/constants/functions";
 import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
-  props: {
-    crumbsKeys: {
-      type: Array,
-      require: true,
-    },
-  },
   data() {
     return {
       /**
        * Массив содержит имена ссылок.
        */
-      crumbs: [],
+      breadcrumbList: [],
     };
   },
   mounted() {
+    console.log("mount");
     /**
      * Задоем имена ссылок.
      */
-    this.breadcrumbs("breadcrumbs", this.crumbsKeys);
+    this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb);
   },
   watch: {
-    getCitySelected(value) {
-      const a = this.crumbs[this.crumbs.length - 1][0];
-      this.crumbs.splice(-1, 1, [a, value.name_loc]);
+    $route() {
+      console.log("breadcramb");
+      this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb);
     },
   },
   computed: {
@@ -61,7 +56,7 @@ export default {
      * По условию отображает элемент ссылка.
      */
     isLast(index) {
-      return index !== this.crumbs.length - 1;
+      return index !== this.breadcrumbList.length - 1;
     },
     /**
      * Функция для создания массива с именами ссылок.
@@ -70,13 +65,16 @@ export default {
      */
     breadcrumbs(key, arr) {
       arr.forEach((element) => {
-        if (element !== "city") {
-          this.crumbs.push([
-            element,
-            languageExpressions(this.getLocales, key, element),
+        if (element.name !== "cities") {
+          this.breadcrumbList.push([
+            element.name,
+            languageExpressions(this.getLocales, key, element.name),
           ]);
         } else {
-          this.crumbs.push([element, this.getCitySelected.name_loc]);
+          this.breadcrumbList.push([
+            element.name,
+            this.getCitySelected.name_loc,
+          ]);
         }
       });
     },
@@ -85,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.breadcrumbs {
+.breadcrumb {
   display: flex;
   align-items: center;
   margin-bottom: 22px;
@@ -100,6 +98,7 @@ export default {
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+  list-style: none;
 
   & a::first-letter {
     text-transform: capitalize;
@@ -120,15 +119,9 @@ export default {
     color: #9c9c9c;
   }
 
-  & .breadcrumbs-chevron,
+  & .separator,
   & a {
     margin-right: 8px;
-  }
-}
-
-@media only screen and (max-width: $media-width-lg) {
-  .breadcrumbs-header {
-    margin-bottom: 16px;
   }
 }
 </style>

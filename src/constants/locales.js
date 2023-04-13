@@ -22,10 +22,9 @@ const dataLocales = {
     breadcrumbs: {
       main: "տուն",
       weather: "եղանակ",
-      city: "москва",
-      citiesList: "քաղաքների ցանկը",
+      cities: "քաղաքների ցանկը",
     },
-    headerInformer: {
+    currentBlock: {
       now: "հիմա",
       forecast: "ըստ կանխատեսման",
       feelsLike: "Զգում է",
@@ -137,10 +136,9 @@ const dataLocales = {
     breadcrumbs: {
       main: "главная",
       weather: "погода",
-      city: "москва",
-      citiesList: "список городов",
+      cities: "список городов",
     },
-    headerInformer: {
+    currentBlock: {
       now: "сейчас в",
       forecast: "по прогнозу",
       feelsLike: "ощущается",
@@ -252,10 +250,9 @@ const dataLocales = {
     breadcrumbs: {
       main: "home",
       weather: "weather",
-      city: "москва",
-      citiesList: "list of cities",
+      cities: "list of cities",
     },
-    headerInformer: {
+    currentBlock: {
       now: "now at",
       forecast: "according to the forecast",
       feelsLike: "feels like",

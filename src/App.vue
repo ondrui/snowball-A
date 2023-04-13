@@ -7,7 +7,11 @@
       <div class="page-wrapper">
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
-        <router-view class="main"></router-view>
+        <div class="main">
+          <BreadCrumbs />
+          <SearchBar />
+          <router-view></router-view>
+        </div>
         <TheAside class="sidebar">
           <HistoryAside />
         </TheAside>
@@ -40,54 +44,31 @@ export default {
     ScrollTop,
   },
   created() {
-    this.getData();
+    // this.$store.dispatch("initialDataLoad");
     this.init();
   },
-  watch: {
-    "$route.params"(to, from) {
-      console.log("to", to);
-      console.log("from", from);
-      // if (!to.city || !to.locale) return;
-      if (to.city !== from.city && to.city) {
-        console.log("city");
-        this.$store.commit("setCity", to.city);
-        localStorage.setItem("cities", JSON.stringify(to));
-      }
-      if (to.locale !== from.locale && to.locale) {
-        console.log("locale");
-        this.$store.commit("setLocale", to.locale);
-        localStorage.setItem("cities", JSON.stringify(to));
-      }
-    },
-  },
+  // watch: {
+  //   "$route.params"(to, from) {
+  //     console.log("to", to);
+  //     console.log("from", from);
+  //     // if (!to.city || !to.locale) return;
+  //     if (to.city !== from.city && to.city) {
+  //       console.log("city");
+  //       this.$store.commit("setCity", to.city);
+  //       localStorage.setItem("cities", JSON.stringify(to));
+  //     }
+  //     if (to.locale !== from.locale && to.locale) {
+  //       console.log("locale");
+  //       this.$store.commit("setLocale", to.locale);
+  //       localStorage.setItem("cities", JSON.stringify(to));
+  //     }
+  //   },
+  // },
   computed: {
     ...mapGetters(["getLocales", "loading"]),
   },
   methods: {
     languageExpressions,
-    /**
-     * Get data from Internal vs External APIs.
-     */
-    async getData() {
-      try {
-        const res = await Promise.all([
-          fetch("/forecast.json"),
-          fetch("/forecastFromAPI.json"),
-          fetch("/cities_all.json"),
-        ]);
-        const [a, b, c] = res.map((e) => e.json());
-        const total = await a;
-        const data = await b;
-        const cities = await c;
-        setTimeout(() => {
-          this.$store.commit("setData", total);
-          this.$store.commit("setDataAPI", data);
-          this.$store.commit("setListCities", cities);
-        }, 300);
-      } catch (error) {
-        this.answer = "Error! Could not reach the API. " + error;
-      }
-    },
     init() {
       const cities = JSON.parse(localStorage.getItem("cities"));
       if (!cities || !cities.city || !cities.locale) {
@@ -96,13 +77,13 @@ export default {
           locale: "ru",
           tab: "main",
         };
-        this.$store.commit("setCity", initValue.city);
+        this.$store.dispatch("setCity", initValue.city);
         this.$store.commit("setLocale", initValue.locale);
         localStorage.setItem("cities", JSON.stringify(initValue));
         // this.$router.push({ name: "main", params: initValue }).catch(() => {});
       } else {
         const value = JSON.parse(localStorage.getItem("cities"));
-        this.$store.commit("setCity", value.city);
+        this.$store.dispatch("setCity", value.city);
         this.$store.commit("setLocale", value.locale);
         // this.$router.push({ name: "main", params: value }).catch(() => {});
       }

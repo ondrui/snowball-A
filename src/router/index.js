@@ -10,23 +10,36 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/cities",
-    name: "cities",
-    component: ListAllCities,
-  },
-  {
     path: "/",
-    name: "mainTo",
-    component: MainInformer,
-  },
-  {
-    path: "/pogoda",
-    redirect: "/",
-  },
-  {
-    path: "/:locale?/pogoda/:city?/:tab?",
     name: "main",
     component: MainInformer,
+    meta: {
+      breadcrumb: [{ name: "main" }],
+    },
+  },
+  {
+    path: "/:locale?/cities",
+    name: "cities",
+    component: ListAllCities,
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "cities" }],
+    },
+  },
+  {
+    path: "/:locale?/pogoda/:city?/day",
+    name: "pogodaDay",
+    component: MainInformer,
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "weather" }],
+    },
+  },
+  {
+    path: "/:locale?/pogoda/:city?/hourly",
+    name: "pogodaHourly",
+    component: MainInformer,
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "weather" }],
+    },
   },
   {
     path: "/:pathMatch(.*)*",

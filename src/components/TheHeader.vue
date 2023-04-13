@@ -30,16 +30,16 @@ export default {
   //     .push({ name: "main", params: { locale: this.select } })
   //     .catch(() => {});
   // },
-  watch: {
-    select(value) {
-      this.$router
-        .push({
-          name: "main",
-          params: { locale: value === "ru" ? undefined : value },
-        })
-        .catch(() => {});
-    },
-  },
+  // watch: {
+  //   select(value) {
+  //     this.$router
+  //       .push({
+  //         name: "main",
+  //         params: { locale: value === "ru" ? undefined : value },
+  //       })
+  //       .catch(() => {});
+  //   },
+  // },
   computed: {
     ...mapGetters(["tenDaysTabTable", "getLocales"]),
   },

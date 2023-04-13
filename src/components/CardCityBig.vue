@@ -30,7 +30,7 @@
       <div class="card-middle-descr">
         <div class="card-middle-text">{{ itemDataset.now.condition_s }}</div>
         <div class="card-middle-feeling">
-          {{ languageExpressions(getLocales, "headerInformer", "feelsLike") }}
+          {{ languageExpressions(getLocales, "currentBlock", "feelsLike") }}
           {{ itemDataset.now.feels_like }}
         </div>
       </div>
