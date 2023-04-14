@@ -4,38 +4,29 @@
       <h2 class="other-cities-title">
         <span>{{ getHistoryTitle[0] }}&nbsp;</span>{{ getHistoryTitle[1] }}
       </h2>
-      <ul ref="list" class="other-cities-list" role="list">
-        <li
+      <DragScrolling class="other-cities-list" role="list">
+        <div
           v-for="item in cardMapData"
           :key="`c-${item.name_en}`"
           class="other-cities-item"
-          @mousedown.prevent="mouseDown"
-          @mouseleave="mouseLeave"
-          @mouseup="mouseUp"
-          @mousemove.prevent="mouseMove"
         >
           <CardCityGrid :itemDataset="item" />
-        </li>
-      </ul>
+        </div>
+      </DragScrolling>
     </div>
   </div>
 </template>
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-// import CardCityMiddle from "./CardCityMiddle.vue";
-import dragScrolling from "@/mixins/drag-scrolling";
 import CardCityGrid from "./CardCityGrid.vue";
+import DragScrolling from "./DragScrolling.vue";
 import { cityIn } from "lvovich";
 
 export default {
-  mixins: [dragScrolling],
   components: {
-    // CardCityMiddle,
     CardCityGrid,
-  },
-  mounted() {
-    this.elemNameScroll = "list";
+    DragScrolling,
   },
   computed: {
     /**
@@ -101,7 +92,6 @@ export default {
   overflow: auto;
   margin: -8px;
   padding: 8px;
-  list-style: none;
   margin-top: 8px;
 }
 .other-cities-item {

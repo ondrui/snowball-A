@@ -23,15 +23,9 @@
       ref="swiper-container"
       v-resize:debounce.100="resizeBrowserHandler"
     >
-      <div
-        :class="{ grab: isGrabCursor, grabbing: dragMouseScroll.isDown }"
-        @mousedown.prevent="mouseDown"
-        @mouseleave="mouseLeave"
-        @mouseup="mouseUp"
-        @mousemove.prevent="mouseMove"
-      >
+      <DragScrolling>
         <slot></slot>
-      </div>
+      </DragScrolling>
     </div>
   </div>
 </template>
@@ -39,12 +33,12 @@
 <script>
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { languageExpressions } from "@/constants/locales";
-import dragScrolling from "@/mixins/drag-scrolling";
+import DragScrolling from "./DragScrolling.vue";
 
 export default {
-  mixins: [dragScrolling],
   components: {
     RowCaptionInformer,
+    DragScrolling,
   },
   props: {
     labelCoordinates: {
@@ -59,8 +53,6 @@ export default {
     return {
       clientWidth: 0,
       scrollWidth: 0,
-      dalay: 200,
-      timeout: null,
       firstItem: null,
       lastItem: null,
       /**

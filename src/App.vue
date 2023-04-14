@@ -5,8 +5,6 @@
       <TheHeader />
       <SectionOtherCities />
       <div class="page-wrapper">
-        <!-- route outlet -->
-        <!-- component matched by the route will render here -->
         <div class="main">
           <BreadCrumbs />
           <SearchBar />

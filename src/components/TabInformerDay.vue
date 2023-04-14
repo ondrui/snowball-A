@@ -2,9 +2,9 @@
   <div class="wrapper">
     <ScrollableModeInformer
       :labelCoordinates="{
-        wind: '292px',
-        pressure: '345px',
-        humidity: '382px',
+        wind: '308px',
+        pressure: '361px',
+        humidity: '398px',
       }"
       ><TabInformerDayContent
     /></ScrollableModeInformer>

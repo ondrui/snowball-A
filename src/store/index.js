@@ -4053,7 +4053,6 @@ export default new Vuex.Store({
      * Get data from Internal vs External APIs.
      */
     initialDataLoad: async ({ commit }) => {
-      console.log("data load");
       try {
         const res = await Promise.all([
           axios.get("/forecast.json"),
@@ -4061,7 +4060,6 @@ export default new Vuex.Store({
           axios.get("/cities_all.json"),
           new Promise((resolve) => setTimeout(() => resolve("done"), 1000)),
         ]);
-        console.log(res);
         const [total, data, cities] = res.map(({ data }) => data);
 
         commit("setData", total);
