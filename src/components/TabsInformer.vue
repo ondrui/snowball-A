@@ -18,15 +18,23 @@
       </button>
     </div>
     <div class="tab">
-      <!-- <component :is="currentTabComponent"></component> -->
-      <TabInformerForecast
+      <component
         :labelCoordinates="{
           wind: '330px',
           pressure: '384px',
           humidity: '419px',
         }"
         isGrabCursor
-      />
+        :is="currentTabComponent"
+      ></component>
+      <!-- <TabInformerForecast
+        :labelCoordinates="{
+          wind: '330px',
+          pressure: '384px',
+          humidity: '419px',
+        }"
+        isGrabCursor
+      /> -->
     </div>
   </div>
 </template>
@@ -37,13 +45,13 @@ import { mapGetters } from "vuex";
 import TabInformerForecast from "./TabInformerForecast.vue";
 // import TabInformerDay from "./TabInformerDay.vue";
 // import TabInformerHourly from "./TabInformerHourly.vue";
-// import TabInformerMain from "./TabInformerMain.vue";
+import TabInformerMain from "./TabInformerMain.vue";
 
 export default {
   components: {
     // TabInformerDay,
     // TabInformerHourly,
-    // TabInformerMain,
+    TabInformerMain,
     TabInformerForecast,
   },
   data() {
@@ -94,7 +102,7 @@ export default {
       if (key === "main") {
         this.$router.push({ path: `/` }).catch(() => {});
       } else {
-        this.$router.push({ path: `/ru/pogoda/avan/${key}` }).catch(() => {});
+        this.$router.push({ path: `/pogoda/avan/${key}` }).catch(() => {});
       }
     },
     /**

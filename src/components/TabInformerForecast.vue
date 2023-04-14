@@ -28,14 +28,13 @@
         ref="wrapper-content"
         class="wrapper-content"
         v-resize:debounce.100="resizeBrowserHandler"
-        ><TabInformerHourlyContent />
+        ><router-view></router-view>
       </DragScrolling>
     </div>
   </div>
 </template>
 
 <script>
-import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { languageExpressions } from "@/constants/locales";
 import DragScrolling from "./DragScrolling.vue";
@@ -44,7 +43,6 @@ export default {
   components: {
     RowCaptionInformer,
     DragScrolling,
-    TabInformerHourlyContent,
   },
   props: {
     labelCoordinates: {
