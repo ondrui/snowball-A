@@ -114,7 +114,7 @@ export default {
   & span::first-letter {
     text-transform: capitalize;
   }
-  & > div {
+  & > li {
     display: flex;
     flex-wrap: nowrap;
   }

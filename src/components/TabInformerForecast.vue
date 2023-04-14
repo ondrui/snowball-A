@@ -24,13 +24,12 @@
       <RowCaptionInformer class="humidity">
         {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
       </RowCaptionInformer>
-      <div
-        class="swiper-container"
-        ref="swiper-container"
+      <DragScrolling
+        ref="wrapper-content"
+        class="wrapper-content"
         v-resize:debounce.100="resizeBrowserHandler"
-      >
-        <DragScrolling><TabInformerHourlyContent /> </DragScrolling>
-      </div>
+        ><TabInformerHourlyContent />
+      </DragScrolling>
     </div>
   </div>
 </template>
@@ -77,12 +76,13 @@ export default {
     };
   },
   mounted() {
-    this.elemNameScroll = "swiper-container";
+    this.elemNameScroll = "wrapper-content";
+    console.log(this.$refs[this.elemNameScroll].$el);
     /**
      * Создаем объект-наблюдатель и задаем целевые наблюдаемые элементы.
      */
     this.observer = new IntersectionObserver(this.observerCallback, {
-      root: this.$refs[this.elemNameScroll],
+      root: this.$refs[this.elemNameScroll].$el,
       threshold: 0.99,
     });
     const coolElement = document.querySelectorAll(".item");
@@ -149,7 +149,7 @@ export default {
      */
     scroll(direction) {
       const num = this.scrollSize();
-      this.$refs[this.elemNameScroll].scrollBy({
+      this.$refs[this.elemNameScroll].$el.scrollBy({
         left: direction === "right" ? num : -num,
         behavior: "smooth",
       });
@@ -161,7 +161,7 @@ export default {
       /**
        * Определяет и устанавливает требуемые для
        */
-      const elem = this.$refs[this.elemNameScroll];
+      const elem = this.$refs[this.elemNameScroll].$el;
       this.clientWidth = Math.round(elem.clientWidth);
       this.scrollWidth = Math.round(elem.scrollWidth);
     },
@@ -235,7 +235,7 @@ export default {
 .humidity {
   top: v-bind("labelCoordinates.humidity");
 }
-.swiper-container {
+.wrapper-content {
   display: flex;
   max-width: 100%;
   overflow-y: hidden;

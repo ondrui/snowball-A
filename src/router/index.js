@@ -26,7 +26,7 @@ const routes = [
     },
   },
   {
-    path: "/:locale?/pogoda/:city?/day",
+    path: "/:locale?/pogoda/:city/day",
     name: "pogodaDay",
     component: WeatherInformer,
     meta: {
@@ -34,7 +34,7 @@ const routes = [
     },
   },
   {
-    path: "/:locale?/pogoda/:city?/hourly",
+    path: "/:locale?/pogoda/:city/hourly",
     name: "pogodaHourly",
     component: WeatherInformer,
     meta: {
