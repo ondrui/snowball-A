@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import MainInformer from "../views/MainInformer.vue";
+import WeatherInformer from "../views/WeatherInformer.vue";
 import NotFound from "@/components/NotFound.vue";
 
 import ListAllCities from "@/components/ListAllCities.vue";
@@ -10,9 +10,9 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/:locale?",
     name: "main",
-    component: MainInformer,
+    component: WeatherInformer,
     meta: {
       breadcrumb: [{ name: "main" }],
     },
@@ -28,7 +28,7 @@ const routes = [
   {
     path: "/:locale?/pogoda/:city?/day",
     name: "pogodaDay",
-    component: MainInformer,
+    component: WeatherInformer,
     meta: {
       breadcrumb: [{ name: "main" }, { name: "weather" }],
     },
@@ -36,7 +36,7 @@ const routes = [
   {
     path: "/:locale?/pogoda/:city?/hourly",
     name: "pogodaHourly",
-    component: MainInformer,
+    component: WeatherInformer,
     meta: {
       breadcrumb: [{ name: "main" }, { name: "weather" }],
     },
@@ -67,5 +67,10 @@ const router = new VueRouter({
     }
   },
 });
-
+router.beforeEach((to, from, next) => {
+  console.log("to", to);
+  console.log("from", from);
+  console.log("next", next);
+  next();
+});
 export default router;

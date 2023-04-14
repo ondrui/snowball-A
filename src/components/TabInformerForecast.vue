@@ -1,36 +1,42 @@
 <template>
-  <div class="container">
-    <div v-show="isButtons" class="scroll-button-container">
-      <button :class="['btn', { hidden: side.left }]" @click="scroll('left')">
-        <BaseIcon width="7" nameIcon="chevron-scroll-left" pick="common" />
-      </button>
-      <button :class="['btn', { hidden: side.right }]" @click="scroll('right')">
-        <BaseIcon width="7" nameIcon="chevron-scroll-right" pick="common" />
-      </button>
-    </div>
-    <RowCaptionInformer class="wind">
-      {{ languageExpressions(getLocales, "climateIndicators", "windDirSpeed") }}
-    </RowCaptionInformer>
-    <RowCaptionInformer class="pressure">
-      {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
-      {{ languageExpressions(getLocales, "units", "pressure")[0] }}
-    </RowCaptionInformer>
-    <RowCaptionInformer class="humidity">
-      {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
-    </RowCaptionInformer>
-    <div
-      class="swiper-container"
-      ref="swiper-container"
-      v-resize:debounce.100="resizeBrowserHandler"
-    >
-      <DragScrolling>
-        <slot></slot>
-      </DragScrolling>
+  <div class="wrapper">
+    <div class="container">
+      <div v-show="isButtons" class="scroll-button-container">
+        <button :class="['btn', { hidden: side.left }]" @click="scroll('left')">
+          <BaseIcon width="7" nameIcon="chevron-scroll-left" pick="common" />
+        </button>
+        <button
+          :class="['btn', { hidden: side.right }]"
+          @click="scroll('right')"
+        >
+          <BaseIcon width="7" nameIcon="chevron-scroll-right" pick="common" />
+        </button>
+      </div>
+      <RowCaptionInformer class="wind">
+        {{
+          languageExpressions(getLocales, "climateIndicators", "windDirSpeed")
+        }}
+      </RowCaptionInformer>
+      <RowCaptionInformer class="pressure">
+        {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
+        {{ languageExpressions(getLocales, "units", "pressure")[0] }}
+      </RowCaptionInformer>
+      <RowCaptionInformer class="humidity">
+        {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
+      </RowCaptionInformer>
+      <div
+        class="swiper-container"
+        ref="swiper-container"
+        v-resize:debounce.100="resizeBrowserHandler"
+      >
+        <DragScrolling><TabInformerHourlyContent /> </DragScrolling>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { languageExpressions } from "@/constants/locales";
 import DragScrolling from "./DragScrolling.vue";
@@ -39,6 +45,7 @@ export default {
   components: {
     RowCaptionInformer,
     DragScrolling,
+    TabInformerHourlyContent,
   },
   props: {
     labelCoordinates: {
@@ -163,6 +170,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  padding: 20px;
+  width: 100%;
+}
 .container {
   position: relative;
   background-color: #ffffff;
@@ -235,6 +246,11 @@ export default {
   cursor: grab;
   &.grabbing {
     cursor: grabbing;
+  }
+}
+@media only screen and (max-width: $media-width-lg) {
+  .wrapper {
+    padding: 20px 5px;
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <ol class="crumbs">
-      <li v-for="(item, index) in breadcrumbList" :key="item[0]">
-        <router-link v-if="isLast(index)" to="/">{{ item[1] }}</router-link>
-        <span v-else>{{ item[1] }}</span>
+      <li v-for="(item, index) in breadcrumbList" :key="item">
+        <router-link v-if="isLast(index)" to="/">{{ item }}</router-link>
+        <span v-else>{{ item }}</span>
         <BaseIcon
           nameIcon="chevron-breadcrumb-right"
           width="5"
@@ -37,9 +37,10 @@ export default {
     this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb);
   },
   watch: {
-    $route() {
-      console.log("breadcramb");
-      this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb);
+    $route(to) {
+      console.log(to.params.city);
+      const city = to.params.city;
+      this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb, city);
     },
   },
   computed: {
@@ -63,19 +64,27 @@ export default {
      * @param arr Массив с ключами 2-го уровня для объекта со строковыми константами.
      */
     breadcrumbs(key, arr) {
-      arr.forEach((element) => {
-        if (element.name !== "cities") {
-          this.breadcrumbList.push([
-            element.name,
-            languageExpressions(this.getLocales, key, element.name),
-          ]);
-        } else {
-          this.breadcrumbList.push([
-            element.name,
-            this.getCitySelected.name_loc,
-          ]);
-        }
-      });
+      const crumbsArr = arr.map(({ name }) =>
+        languageExpressions(this.getLocales, key, name)
+      );
+
+      arr.some(({ name }) => name === "weather")
+        ? crumbsArr.push(this.getCitySelected.name_loc)
+        : crumbsArr;
+      this.breadcrumbList = crumbsArr;
+      // arr.forEach((element) => {
+      //   if (element.name !== "cities") {
+      //     this.breadcrumbList.push([
+      //       element.name,
+      //       languageExpressions(this.getLocales, key, element.name),
+      //     ]);
+      //   } else {
+      //     this.breadcrumbList.push([
+      //       element.name,
+      //       this.getCitySelected.name_loc,
+      //     ]);
+      //   }
+      // });
     },
   },
 };

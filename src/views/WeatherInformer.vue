@@ -14,7 +14,7 @@ import CurrentBlock from "../components/CurrentBlock.vue";
 import AllSVGIcons from "../components/AllSVGIcons.vue";
 
 export default {
-  name: "MainInformer",
+  name: "WeatherInformer",
   components: {
     TabsInformer,
     AllSVGIcons,

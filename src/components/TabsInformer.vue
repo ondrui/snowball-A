@@ -18,7 +18,15 @@
       </button>
     </div>
     <div class="tab">
-      <component :is="currentTabComponent"></component>
+      <!-- <component :is="currentTabComponent"></component> -->
+      <TabInformerForecast
+        :labelCoordinates="{
+          wind: '330px',
+          pressure: '384px',
+          humidity: '419px',
+        }"
+        isGrabCursor
+      />
     </div>
   </div>
 </template>
@@ -26,15 +34,17 @@
 import { languageExpressions } from "@/constants/locales";
 import { eventBus } from "../main.js";
 import { mapGetters } from "vuex";
-import TabInformerDay from "./TabInformerDay.vue";
-import TabInformerHourly from "./TabInformerHourly.vue";
-import TabInformerMain from "./TabInformerMain.vue";
+import TabInformerForecast from "./TabInformerForecast.vue";
+// import TabInformerDay from "./TabInformerDay.vue";
+// import TabInformerHourly from "./TabInformerHourly.vue";
+// import TabInformerMain from "./TabInformerMain.vue";
 
 export default {
   components: {
-    TabInformerDay,
-    TabInformerHourly,
-    TabInformerMain,
+    // TabInformerDay,
+    // TabInformerHourly,
+    // TabInformerMain,
+    TabInformerForecast,
   },
   data() {
     return {
@@ -81,16 +91,11 @@ export default {
      * @param key Строка содержит имя вкладки.
      */
     showContent(key) {
-      this.$router
-        .push({
-          name: "main",
-          params: {
-            locale: this.getLocales,
-            city: this.getCitySelected.name_url,
-            tab: key,
-          },
-        })
-        .catch(() => {});
+      if (key === "main") {
+        this.$router.push({ path: `/` }).catch(() => {});
+      } else {
+        this.$router.push({ path: `/ru/pogoda/avan/${key}` }).catch(() => {});
+      }
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.
