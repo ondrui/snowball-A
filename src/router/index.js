@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-// import WeatherInformer from "@/views/WeatherInformer.vue";
+import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
 import HomePage from "@/views/HomePage.vue";
-// import ListAllCities from "@/views/ListAllCities.vue";
+import ListAllCities from "@/views/ListAllCities.vue";
 // import TabInformerDayContent from "@/components/TabInformerDayContent.vue";
 // import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
 
@@ -15,36 +15,28 @@ const routes = [
     path: "/",
     name: "home",
     component: HomePage,
-    // children: [
-    //   {
-    //     path: "/pogoda/:city/day",
-    //     name: "pogodaDay",
-    //     component: TabInformerDayContent,
-    //     meta: {
-    //       breadcrumb: [{ name: "main" }, { name: "weather" }],
-    //     },
-    //   },
-    //   {
-    //     path: "/pogoda/:city/hourly",
-    //     name: "pogodaHourly",
-    //     component: TabInformerHourlyContent,
-    //     meta: {
-    //       breadcrumb: [{ name: "main" }, { name: "weather" }],
-    //     },
-    //   },
-    // ],
+    children: [
+      {
+        path: "/pogoda/:city/:tab",
+        name: "pogodaDay",
+        component: WeatherInformer,
+        meta: {
+          breadcrumb: [{ name: "main" }, { name: "weather" }],
+        },
+      },
+      {
+        path: "/cities",
+        name: "cities",
+        component: ListAllCities,
+        meta: {
+          breadcrumb: [{ name: "main" }, { name: "cities" }],
+        },
+      },
+    ],
     meta: {
       breadcrumb: [{ name: "main" }],
     },
   },
-  // {
-  //   path: "/cities",
-  //   name: "cities",
-  //   component: ListAllCities,
-  //   meta: {
-  //     breadcrumb: [{ name: "main" }, { name: "cities" }],
-  //   },
-  // },
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",
