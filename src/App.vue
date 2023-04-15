@@ -1,92 +1,12 @@
 <template>
   <div id="app">
-    <div v-if="!loading">Loading...</div>
-    <template v-else>
-      <TheHeader />
-      <SectionOtherCities />
-      <div class="page-wrapper">
-        <div class="main">
-          <BreadCrumbs />
-          <SearchBar />
-          <router-view></router-view>
-        </div>
-        <TheAside class="sidebar">
-          <HistoryAside />
-        </TheAside>
-      </div>
-      <SectionHistoryCities class="middle-section" />
-      <HistoryAside class="mob-section" />
-      <ScrollTop />
-    </template>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { languageExpressions } from "@/constants/locales";
-import SectionOtherCities from "./components/SectionOtherCities.vue";
-import TheAside from "./components/TheAside.vue";
-import TheHeader from "./components/TheHeader.vue";
-import HistoryAside from "./components/HistoryAside.vue";
-import SectionHistoryCities from "./components/SectionHistoryCities.vue";
-import ScrollTop from "./components/ScrollTop.vue";
-
 export default {
   name: "App",
-  components: {
-    TheHeader,
-    TheAside,
-    SectionOtherCities,
-    HistoryAside,
-    SectionHistoryCities,
-    ScrollTop,
-  },
-  created() {
-    // this.$store.dispatch("initialDataLoad");
-    this.init();
-  },
-  // watch: {
-  //   "$route.params"(to, from) {
-  //     console.log("to", to);
-  //     console.log("from", from);
-  //     // if (!to.city || !to.locale) return;
-  //     if (to.city !== from.city && to.city) {
-  //       console.log("city");
-  //       this.$store.commit("setCity", to.city);
-  //       localStorage.setItem("cities", JSON.stringify(to));
-  //     }
-  //     if (to.locale !== from.locale && to.locale) {
-  //       console.log("locale");
-  //       this.$store.commit("setLocale", to.locale);
-  //       localStorage.setItem("cities", JSON.stringify(to));
-  //     }
-  //   },
-  // },
-  computed: {
-    ...mapGetters(["getLocales", "loading"]),
-  },
-  methods: {
-    languageExpressions,
-    init() {
-      const cities = JSON.parse(localStorage.getItem("cities"));
-      if (!cities || !cities.city || !cities.locale) {
-        const initValue = {
-          city: "yerevan",
-          locale: "ru",
-          tab: "main",
-        };
-        this.$store.dispatch("setCity", initValue.city);
-        this.$store.commit("setLocale", initValue.locale);
-        localStorage.setItem("cities", JSON.stringify(initValue));
-        // this.$router.push({ name: "main", params: initValue }).catch(() => {});
-      } else {
-        const value = JSON.parse(localStorage.getItem("cities"));
-        this.$store.dispatch("setCity", value.city);
-        this.$store.commit("setLocale", value.locale);
-        // this.$router.push({ name: "main", params: value }).catch(() => {});
-      }
-    },
-  },
 };
 </script>
 
@@ -137,52 +57,5 @@ html {
 }
 a {
   text-decoration: none;
-}
-#app {
-  position: relative;
-}
-.page-wrapper {
-  display: grid;
-  min-height: 100vh;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  column-gap: 48px;
-  row-gap: 36px;
-  max-width: $width-page-xl;
-  padding: 0 10px;
-  width: 100%;
-  min-width: 390px;
-  margin: 0 auto;
-  margin-bottom: 40px;
-}
-.main {
-  max-width: 100%;
-  min-width: 390px;
-}
-.mob-section,
-.middle-section {
-  display: none;
-  margin-bottom: 50px;
-}
-@media only screen and (max-width: $media-width-xl) {
-  .page-wrapper,
-  .app-container {
-    display: block;
-    max-width: $width-page-lg;
-    .sidebar {
-      display: none;
-    }
-  }
-  .middle-section {
-    display: block;
-  }
-}
-@media only screen and (max-width: $media-width-sm) {
-  .mob-section {
-    display: block;
-    padding: 0 10px;
-  }
-  .middle-section {
-    display: none;
-  }
 }
 </style>

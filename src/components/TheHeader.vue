@@ -4,13 +4,13 @@
       <router-link to="/">
         <BaseIcon nameIcon="country-logo" pick="common" width="150" />
       </router-link>
-    </div>
-    <div>
-      <select name="locale" v-model="select">
-        <option value="ru">ru</option>
-        <option value="en">en</option>
-        <option value="am">am</option>
-      </select>
+      <div>
+        <select name="locale" v-model="select">
+          <option value="ru">ru</option>
+          <option value="en">en</option>
+          <option value="am">am</option>
+        </select>
+      </div>
     </div>
   </header>
 </template>
@@ -62,6 +62,8 @@ export default {
   padding-top: 14px;
 }
 .container {
+  display: flex;
+  justify-content: space-between;
   max-width: $width-page-xl;
   margin: 0 auto;
   padding: 0 10px;
