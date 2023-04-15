@@ -5,21 +5,46 @@ import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
 import HomePage from "@/views/HomePage.vue";
 import ListAllCities from "@/views/ListAllCities.vue";
-// import TabInformerDayContent from "@/components/TabInformerDayContent.vue";
-// import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
+import TabInformerDay from "@/views/TabInformerDay.vue";
+import TabInformerHourly from "@/views/TabInformerHourly.vue";
+import TabInformerMain from "@/views/TabInformerMain.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
     component: HomePage,
     children: [
       {
-        path: "/pogoda/:city/:tab",
-        name: "pogodaDay",
+        path: "/",
         component: WeatherInformer,
+        children: [
+          {
+            path: "/",
+            name: "main",
+            component: TabInformerMain,
+            meta: {
+              breadcrumb: [{ name: "main" }],
+            },
+          },
+          {
+            path: "/pogoda/:city/day",
+            name: "day",
+            component: TabInformerDay,
+            meta: {
+              breadcrumb: [{ name: "main" }, { name: "weather" }],
+            },
+          },
+          {
+            path: "/pogoda/:city/hourly",
+            name: "hourly",
+            component: TabInformerHourly,
+            meta: {
+              breadcrumb: [{ name: "main" }, { name: "weather" }],
+            },
+          },
+        ],
         meta: {
           breadcrumb: [{ name: "main" }, { name: "weather" }],
         },

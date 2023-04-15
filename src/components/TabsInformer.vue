@@ -45,7 +45,7 @@ import { mapGetters } from "vuex";
 import TabInformerForecast from "./TabInformerForecast.vue";
 // import TabInformerDay from "./TabInformerDay.vue";
 // import TabInformerHourly from "./TabInformerHourly.vue";
-import TabInformerMain from "./TabInformerMain.vue";
+import TabInformerMain from "../views/TabInformerMain.vue";
 
 export default {
   components: {

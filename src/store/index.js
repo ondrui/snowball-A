@@ -4058,7 +4058,7 @@ export default new Vuex.Store({
           axios.get("/forecast.json"),
           axios.get("/forecastFromAPI.json"),
           axios.get("/cities_all.json"),
-          new Promise((resolve) => setTimeout(() => resolve("done"), 1000)),
+          new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
         ]);
         const [total, data, cities] = res.map(({ data }) => data);
 
