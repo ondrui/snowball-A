@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
 
 import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -78,8 +79,7 @@ const router = new VueRouter({
       to.name === "not-found" ||
       to.name === "cities" ||
       to.hash === "#top" ||
-      (from.name === "cities" && to.params.tab === "hourly") ||
-      from.params.city !== to.params.city
+      from.name === "cities"
     ) {
       window.scrollTo({
         top: 0,
@@ -91,7 +91,9 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
-  console.log("next", next);
+  if (to.params.city) {
+    store.commit("setCity", to.params.city);
+  }
   next();
 });
 export default router;

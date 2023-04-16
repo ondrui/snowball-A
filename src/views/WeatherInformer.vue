@@ -92,9 +92,11 @@ export default {
       if (key === "main") {
         this.$router.push({ path: `/` }).catch(() => {});
       } else {
-        this.$router.push({ path: `/pogoda/avan/${key}` }).catch(() => {});
+        this.$router
+          .push({ path: `/pogoda/${this.getCitySelected.name_url}/${key}` })
+          .catch(() => {});
       }
-      this.currentTab = key;
+      // this.currentTab = key;
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.

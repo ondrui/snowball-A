@@ -68,7 +68,6 @@ export default {
   },
   mounted() {
     this.elemNameScroll = "wrapper-content";
-    console.log(this.$refs[this.elemNameScroll]);
     /**
      * Создаем объект-наблюдатель и задаем целевые наблюдаемые элементы.
      */

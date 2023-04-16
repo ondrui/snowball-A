@@ -38,8 +38,8 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log(to.params.city);
       const city = to.params.city;
+      console.log(city);
       this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb, city);
     },
   },
@@ -68,7 +68,7 @@ export default {
         languageExpressions(this.getLocales, key, name)
       );
 
-      arr.some(({ name }) => name === "weather")
+      arr.some(({ name }) => name !== "main")
         ? crumbsArr.push(this.getCitySelected.name_loc)
         : crumbsArr;
       this.breadcrumbList = crumbsArr;
