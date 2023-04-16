@@ -62,6 +62,7 @@ export default {
         .push({
           name: "hourly",
           params: { city: this.itemDataset.name_en.toLowerCase() },
+          hash: "#top",
         })
         .catch(() => {});
     },

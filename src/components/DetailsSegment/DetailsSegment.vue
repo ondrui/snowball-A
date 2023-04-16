@@ -45,8 +45,11 @@ export default {
     /**
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
-    tenDaysDetailsCard(value) {
-      if (value && this.locale === this.getLocales) setTimeout(this.focus, 500);
+    tenDaysDetailsCard(newVal, old) {
+      console.log("watch old", old);
+      console.log("watch new", newVal);
+      if (newVal && this.locale === this.getLocales)
+        setTimeout(this.focus, 500);
     },
   },
   computed: {

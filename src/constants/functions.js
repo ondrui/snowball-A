@@ -260,11 +260,11 @@ export const transtateCondition = (local, data) => {
   return languageExpressions(local, "weather_sign", data);
 };
 
-export const URLBuilder = (locale, city = " ", tab, name = "main") => {
+export const URLBuilder = (locale, city = " ", tab, name = "hourly") => {
   const obj = {
     locale: locale.toLowerCase(),
     city: city.toLowerCase(),
     tab: tab.toLowerCase(),
   };
-  return { name: name, params: obj };
+  return { name: name, params: obj, hash: "#top" };
 };

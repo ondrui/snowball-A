@@ -3411,6 +3411,7 @@ export default new Vuex.Store({
      * @param getLocales Языковая метка.
      */
     tenDaysDetailsCard: ({ datasetsTenDays }, { getLocales }) => {
+      console.log("tenDaysDetailsCard");
       const valuesArr = Object.values(datasetsTenDays);
       if (valuesArr.length === 0) return {};
       const sliceEndIndex = valuesArr.length > 12 ? 12 : valuesArr.length;

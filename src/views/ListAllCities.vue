@@ -110,7 +110,11 @@ export default {
       };
     },
     URLBuilder(value) {
-      return { name: "main", params: { city: value.name_en ?? " " } };
+      return {
+        name: "hourly",
+        params: { city: value.name_en ?? " " },
+        hash: "#top",
+      };
     },
   },
 };

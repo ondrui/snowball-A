@@ -41,10 +41,9 @@ export default {
         ({ name_en }) => name_en.toLowerCase() === city
       );
       if (!city || !hasCity) return;
-      this.$store.commit("setCity", city);
       localStorage.setItem("cities", JSON.stringify({ default: city }));
       this.$router
-        .push({ name: "main", params: { city: city } })
+        .push({ name: "hourly", params: { city: city }, hash: "#top" })
         .catch(() => {});
     },
   },
