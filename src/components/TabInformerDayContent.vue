@@ -2,7 +2,7 @@
   <div class="swiper-content">
     <div
       @mousedown="isMove"
-      @mouseup="toggle(index, $event)"
+      @mouseup="click(index, $event)"
       @mouseover="hover(index, true)"
       @mouseleave="hover(index, false)"
       :class="['item', { 'days-weekend': day.weekend === true }]"
@@ -92,7 +92,7 @@ export default {
      * графику с подробным прогнозом.
      * @param event Объект события.
      */
-    toggle(index, event) {
+    click(index, event) {
       /**
        * Обработчик вызывается когда отжали кнопку мыши на элементе.
        * Сначала проверяем не произошло ли изменение координаты Х мыши после нажатия на
@@ -105,12 +105,12 @@ export default {
       if (index === 0) {
         this.$router.push({ name: "hourly" }).catch(() => {});
       } else {
-        this.$store.dispatch("index", index);
+        this.$store.dispatch("setCardIndex", index);
       }
     },
     hover(index, bol) {
       if (index === 0) {
-        eventBus.$emit("go", bol);
+        eventBus.$emit("highlight", bol);
       }
     },
   },

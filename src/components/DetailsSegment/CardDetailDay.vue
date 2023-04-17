@@ -1,7 +1,7 @@
 <template>
   <div class="card-container">
     <div
-      @click="toggle(index)"
+      @click="focus(index)"
       :class="['card-content', { weekend: value.weekend === true }]"
     >
       <Transition>
@@ -86,8 +86,8 @@ export default {
      * за этот день.
      * @param index Параметром передается индекс элемента.
      */
-    toggle(index) {
-      this.$store.dispatch("index", index + 1);
+    focus(index) {
+      this.$store.dispatch("setCardIndex", index + 1);
     },
   },
 };

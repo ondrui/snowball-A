@@ -24,7 +24,7 @@
       </div>
     </div>
     <DetailsSegment />
-    <AllSVGIcons class="hidden" />
+    <AllSVGIcons v-if="false" />
   </div>
 </template>
 
@@ -54,12 +54,17 @@ export default {
   },
   created() {
     this.currentTab = this.$route.name;
-    eventBus.$on("go", (bol) => {
+    eventBus.$on("highlight", (bol) => {
       this.hover = bol;
     });
   },
   destroyed() {
     eventBus.$off();
+  },
+  watch: {
+    "$route.name"(name) {
+      this.currentTab = name;
+    },
   },
   computed: {
     ...mapGetters(["getLocales", "tenDaysTabTable", "getCitySelected"]),
@@ -72,13 +77,6 @@ export default {
     currentTabComponent() {
       const string = this.currentTab;
       return `TabInformer${string.charAt(0).toUpperCase() + string.slice(1)}`;
-    },
-  },
-  watch: {
-    "$route.name"(to) {
-      console.log("to", to);
-      this.currentTab = to ?? "main";
-      this.hover = false;
     },
   },
   methods: {
@@ -96,7 +94,6 @@ export default {
           .push({ path: `/pogoda/${this.getCitySelected.name_url}/${key}` })
           .catch(() => {});
       }
-      // this.currentTab = key;
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.

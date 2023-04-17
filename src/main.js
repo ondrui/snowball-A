@@ -15,7 +15,7 @@ directives.forEach((directive) => {
   Vue.directive(directive.name, directive);
 });
 /**
- * Создаем
+ * Создаем глобальную шину событий.
  */
 export const eventBus = new Vue();
 window.bus = eventBus;

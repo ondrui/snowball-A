@@ -38,18 +38,12 @@ export default {
       locale: "",
     };
   },
-  created() {
-    this.locale = this.getLocales;
-  },
   watch: {
     /**
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
-    tenDaysDetailsCard(newVal, old) {
-      console.log("watch old", old);
-      console.log("watch new", newVal);
-      if (newVal && this.locale === this.getLocales)
-        setTimeout(this.focus, 500);
+    tenDaysDetailsCard(newVal) {
+      if (newVal) setTimeout(this.focus, 500);
     },
   },
   computed: {

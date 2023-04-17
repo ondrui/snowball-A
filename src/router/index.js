@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from "@/store";
+// import store from "@/store";
 
 import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -91,9 +91,9 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
-  if (to.params.city) {
-    store.commit("setCity", to.params.city);
-  }
-  next();
+  // if (to.params.city) {
+  //   store.commit("setCity", to.params.city);
+  // }
+  next({ path: "dkdkk" });
 });
 export default router;

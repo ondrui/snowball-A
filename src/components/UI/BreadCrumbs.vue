@@ -39,7 +39,6 @@ export default {
   watch: {
     $route(to) {
       const city = to.params.city;
-      console.log(city);
       this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb, city);
     },
   },
@@ -68,23 +67,10 @@ export default {
         languageExpressions(this.getLocales, key, name)
       );
 
-      arr.some(({ name }) => name !== "main")
+      arr.some(({ name }) => name !== "main" && name !== "cities")
         ? crumbsArr.push(this.getCitySelected.name_loc)
         : crumbsArr;
       this.breadcrumbList = crumbsArr;
-      // arr.forEach((element) => {
-      //   if (element.name !== "cities") {
-      //     this.breadcrumbList.push([
-      //       element.name,
-      //       languageExpressions(this.getLocales, key, element.name),
-      //     ]);
-      //   } else {
-      //     this.breadcrumbList.push([
-      //       element.name,
-      //       this.getCitySelected.name_loc,
-      //     ]);
-      //   }
-      // });
     },
   },
 };

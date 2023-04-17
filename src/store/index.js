@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import router from "@/router";
 /**
  * @func languageExpressions Функция возвращает зодонную порометрами языковую константу.
  */
@@ -29,7 +30,8 @@ export default new Vuex.Store({
     /**
      * Город для которого выводится прогноз погоды.
      */
-    citySelected: "yerevan",
+    citySelected: "",
+    loading: false,
     /**
      * Список самых крупных городов.
      */
@@ -3077,11 +3079,7 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      */
     loading(state) {
-      return !(
-        state.datasetsHourly &&
-        Object.keys(state.datasetsHourly).length === 0 &&
-        state.datasetsHourly.constructor === Object
-      );
+      return state.loading;
     },
     getCountryNameLoc({ locales, country_loc }) {
       return country_loc[locales];
@@ -3094,6 +3092,9 @@ export default new Vuex.Store({
       const city = listAllCities.find(
         ({ name_en }) => name_en.toLowerCase() === citySelected
       );
+      if (!city) {
+        return;
+      }
       return { name_loc: city.name_ru, name_url: citySelected };
     },
     getListAllCities({ listAllCities }) {
@@ -3411,7 +3412,6 @@ export default new Vuex.Store({
      * @param getLocales Языковая метка.
      */
     tenDaysDetailsCard: ({ datasetsTenDays }, { getLocales }) => {
-      console.log("tenDaysDetailsCard");
       const valuesArr = Object.values(datasetsTenDays);
       if (valuesArr.length === 0) return {};
       const sliceEndIndex = valuesArr.length > 12 ? 12 : valuesArr.length;
@@ -4002,17 +4002,11 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.state.
      * @param index Код карточки.
      */
-    toggleDetails(state, [index, num]) {
-      // Object.keys(state.datasetsTenDays).map(
-      //   (e) => (state.datasetsTenDays[e].isOpen = false)
-      // );
-      // state.datasetsTenDays[index].isOpen = true;
-      if (index < num) {
-        Object.keys(state.datasetsTenDays).map(
-          (e) => (state.datasetsTenDays[e].isOpen = false)
-        );
-        state.datasetsTenDays[index].isOpen = true;
-      }
+    changeOpeningCard(state, index) {
+      Object.keys(state.datasetsTenDays).map(
+        (e) => (state.datasetsTenDays[e].isOpen = false)
+      );
+      state.datasetsTenDays[index].isOpen = true;
     },
     /**
      * Данные с сервера с городами.
@@ -4023,14 +4017,15 @@ export default new Vuex.Store({
       state.listAllCities = cities;
     },
     setCity(state, city) {
-      const isFindCityList = state.listAllCities.some(
-        (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
-      );
-      console.log("setCity", city, isFindCityList);
+      // const isFindCityList = state.listAllCities.some(
+      //   (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
+      // );
+      // console.log("setCity", city, isFindCityList);
 
-      if (city === "undefined" || city === undefined || !isFindCityList) {
-        return;
-      }
+      // if (city === "undefined" || city === undefined || !isFindCityList) {
+      //   router.push({ name: "not-found" });
+      //   return;
+      // }
       state.citySelected = city.toLowerCase();
     },
     setLocale(state, localeStr) {
@@ -4039,6 +4034,9 @@ export default new Vuex.Store({
       }
       state.locales = localeStr.toLowerCase();
     },
+    loading(state, bol) {
+      state.loading = bol;
+    },
   },
   actions: {
     /**
@@ -4046,9 +4044,8 @@ export default new Vuex.Store({
      * карточку с подробным прогнозом.
      * @param index Код карточки.
      */
-    index({ commit, getters }, index) {
-      const num = getters.tenDaysDetailsChart.length + 1;
-      commit("toggleDetails", [index, num]);
+    setCardIndex({ commit }, index) {
+      commit("changeOpeningCard", index);
     },
     /**
      * Get data from Internal vs External APIs.
@@ -4070,9 +4067,24 @@ export default new Vuex.Store({
         console.error("Error! Could not reach the API. " + error);
       }
     },
-    setCity: async ({ commit, dispatch }, city) => {
+    setCity: async ({ state, commit, dispatch }, city) => {
       await dispatch("initialDataLoad");
+      const isFindCityList = state.listAllCities.some(
+        (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
+      );
+      console.log("setCity", city, isFindCityList);
+
+      if (city === "undefined" || city === undefined || !isFindCityList) {
+        try {
+          await axios.get(window.location.href);
+        } catch (error) {
+          console.error(error);
+          router.push({ name: "not-found" });
+        }
+        return;
+      }
       commit("setCity", city);
+      commit("loading", true);
     },
   },
 });
