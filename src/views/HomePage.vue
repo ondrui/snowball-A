@@ -45,102 +45,36 @@ export default {
       initialData: false,
     };
   },
-  // beforeRouteEnter(to, from, next) {
-  //   console.log("to", to);
-  //   console.log("from", from);
-  //   console.log(Vue);
-  //   // this.$store.commit("setCity", to.city);
-  //   // this.init();
-  //   // next((vm) => vm.$route.push({ name: "not-found" }));
-  //   // getPost(to.params.id, (err, post) => {
-  //   //   next(vm => vm.setData(err, post))
-  //   // })
-  // },
   created() {
+    console.log("init home page");
     this.init();
+    this.initialData = true;
   },
   watch: {
-    $route(to, from) {
-      console.log("to", to);
-      console.log("from", from);
+    $route() {
+      console.log("watch route homepage");
+      this.init();
     },
   },
-  // watch: {
-  //   "$route.params"(to, from) {
-  //     console.log("to", to);
-  //     console.log("from", from);
-  //     // if (!to.city || !to.locale) return;
-  //     if (to.city !== from.city && to.city) {
-  //       console.log("city");
-  //       this.$store.commit("setCity", to.city);
-  //       localStorage.setItem("cities", JSON.stringify(to));
-  //     }
-  //     if (to.locale !== from.locale && to.locale) {
-  //       console.log("locale");
-  //       this.$store.commit("setLocale", to.locale);
-  //       localStorage.setItem("cities", JSON.stringify(to));
-  //     }
-  //   },
-  // },
   computed: {
     ...mapGetters(["loading"]),
   },
   methods: {
     init() {
-      console.log("init home page");
-      const cities = JSON.parse(localStorage.getItem("cities"));
-      // const city = this.$route.params.city
-      //   ? this.$route.params.city
-      //   : cities && cities.city
-      //   ? cities.city
-      //   : "yerevan";
-      // set default city;
+      const cityLS = localStorage.getItem("city");
       let city = "";
       if (this.$route.params.city) {
         city = this.$route.params.city;
-        // const initValue = {
-        //   city,
-        //   locale: "ru",
-        // };
-        // localStorage.setItem("cities", JSON.stringify(initValue));
-      } else if (cities && cities.city) {
-        city = cities.city;
+      } else if (cityLS) {
+        city = cityLS;
       } else {
         city = "yerevan";
-        localStorage.setItem(
-          "cities",
-          JSON.stringify({
-            city: "yerevan",
-            locale: "ru",
-          })
-        );
       }
       if (!this.initialData) {
-        console.log(this.$route);
-        console.log("url", this.$route.params.city);
-        console.log("localStorage", cities);
-        console.log("city", city);
         this.$store.dispatch("setCity", city);
-        // this.initialData = true;
       } else {
-        return;
+        this.$store.commit("setCity", city);
       }
-      // const cities = JSON.parse(localStorage.getItem("cities"));
-      // if (!cities || !cities.city || !cities.locale) {
-      //   const initValue = {
-      //     city: "yerevan",
-      //     locale: "ru",
-      //     tab: "main",
-      //   };
-      // this.$store.dispatch("setCity", initValue.city);
-      //   this.$store.commit("setLocale", initValue.locale);
-      //   localStorage.setItem("cities", JSON.stringify(initValue));
-      //   // this.$router.push({ name: "main", params: initValue }).catch(() => {});
-      // } else {
-      //   const value = JSON.parse(localStorage.getItem("cities"));
-      //   this.$store.dispatch("setCity", value.city);
-      //   this.$store.commit("setLocale", value.locale);
-      // this.$router.push({ name: "main", params: value }).catch(() => {});
     },
   },
 };

@@ -25,18 +25,24 @@ export default {
       select: "ru",
     };
   },
-  // created() {
-  //   this.$router
-  //     .push({ name: "main", params: { locale: this.select } })
-  //     .catch(() => {});
-  // },
+  created() {
+    this.select = this.getLocales;
+  },
   watch: {
     select(value) {
-      this.$router
-        .push({
-          path: `/${value}`,
-        })
-        .catch(() => {});
+      if (value === "ru") {
+        this.$router
+          .push({
+            name: "main",
+          })
+          .catch(() => {});
+      } else {
+        this.$router
+          .push({
+            path: `/${value}`,
+          })
+          .catch(() => {});
+      }
     },
   },
   computed: {

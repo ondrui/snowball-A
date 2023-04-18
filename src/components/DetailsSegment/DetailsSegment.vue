@@ -43,6 +43,7 @@ export default {
      * Следим за изменениями в массиве с карточками - полем isOpen.
      */
     tenDaysDetailsCard(newVal) {
+      console.log("watcher detail");
       if (newVal) setTimeout(this.focus, 500);
     },
   },

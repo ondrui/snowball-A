@@ -4017,18 +4017,13 @@ export default new Vuex.Store({
       state.listAllCities = cities;
     },
     setCity(state, city) {
-      // const isFindCityList = state.listAllCities.some(
-      //   (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
-      // );
-      // console.log("setCity", city, isFindCityList);
-
-      // if (city === "undefined" || city === undefined || !isFindCityList) {
-      //   router.push({ name: "not-found" });
-      //   return;
-      // }
+      console.log("mutation setCity");
       state.citySelected = city.toLowerCase();
+      localStorage.setItem("city", state.citySelected);
+      console.log("LS", localStorage.getItem("city", state.citySelected));
     },
     setLocale(state, localeStr) {
+      console.log("setLocale", localeStr);
       if (localeStr == "undefined" || localeStr == undefined) {
         return;
       }
@@ -4051,6 +4046,7 @@ export default new Vuex.Store({
      * Get data from Internal vs External APIs.
      */
     initialDataLoad: async ({ commit }) => {
+      commit("loading", false);
       try {
         const res = await Promise.all([
           axios.get("/forecast.json"),
@@ -4072,15 +4068,11 @@ export default new Vuex.Store({
       const isFindCityList = state.listAllCities.some(
         (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
       );
-      console.log("setCity", city, isFindCityList);
+      console.log("action setCity", city, isFindCityList);
 
       if (city === "undefined" || city === undefined || !isFindCityList) {
-        try {
-          await axios.get(window.location.href);
-        } catch (error) {
-          console.error(error);
-          router.push({ name: "not-found" });
-        }
+        console.log(router.currentRoute);
+        router.push({ path: "not-found" });
         return;
       }
       commit("setCity", city);

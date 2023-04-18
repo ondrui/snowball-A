@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import store from "@/store";
+import store from "@/store";
 
 import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -24,6 +24,22 @@ const routes = [
           {
             path: "/",
             name: "main",
+            component: TabInformerMain,
+            meta: {
+              breadcrumb: [{ name: "main" }],
+            },
+          },
+          {
+            path: "/en",
+            name: "main-en",
+            component: TabInformerMain,
+            meta: {
+              breadcrumb: [{ name: "main" }],
+            },
+          },
+          {
+            path: "/am",
+            name: "main-am",
             component: TabInformerMain,
             meta: {
               breadcrumb: [{ name: "main" }],
@@ -91,9 +107,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
-  // if (to.params.city) {
-  //   store.commit("setCity", to.params.city);
-  // }
-  next({ path: "dkdkk" });
+  if (to.name === "main-am" || to.name === "main-en") {
+    store.commit("setLocale", to.name.split("-")[1]);
+  }
+  if (to.name === "main") {
+    store.commit("setLocale", "ru");
+  }
+  next();
 });
 export default router;

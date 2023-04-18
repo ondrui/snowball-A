@@ -1,7 +1,11 @@
 <template>
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <ol class="crumbs">
-      <li v-for="(item, index) in breadcrumbList" :key="item">
+      <li
+        v-for="(item, index) in breadcrumbList"
+        :key="item"
+        :aria-current="!isLast(index) ? 'page' : null"
+      >
         <router-link v-if="isLast(index)" to="/">{{ item }}</router-link>
         <span v-else>{{ item }}</span>
         <BaseIcon
