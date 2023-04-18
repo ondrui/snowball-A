@@ -5,6 +5,7 @@
     </h1>
     <div
       ref="item"
+      :id="`id-${index}`"
       :class="['wrapper-list', { open: activeIndex === index }]"
       v-for="(item, index) in tenDaysDetailsCard"
       :key="`s-${index}`"
@@ -38,15 +39,6 @@ export default {
       locale: "",
     };
   },
-  watch: {
-    /**
-     * Следим за изменениями в массиве с карточками - полем isOpen.
-     */
-    tenDaysDetailsCard(newVal) {
-      console.log("watcher detail");
-      if (newVal) setTimeout(this.focus, 500);
-    },
-  },
   computed: {
     ...mapGetters([
       "getLocales",
@@ -73,21 +65,6 @@ export default {
   },
   methods: {
     languageExpressions,
-    /**
-     * Устанавливаем фокус на выбранный элемент и скролим до него.
-     */
-    focus() {
-      const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
-      if (index !== -1) {
-        this.$refs.item[index].scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        });
-      }
-    },
-    /**
-     * Отображает график и рамку вокруг элемента если свойство isOpen равно true.
-     */
     isOpen(index) {
       return this.tenDaysDetailsCard[index].isOpen === true;
     },

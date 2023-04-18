@@ -3216,7 +3216,11 @@ export default new Vuex.Store({
        */
       const sliceEndIndex = valuesArr.length > 12 ? -1 : -2;
       const arr = valuesArr.slice(0, sliceEndIndex).map((e) => {
-        const weekday = setTimeFormat(e.start_date, "D", getLocales);
+        const weekday = setTimeFormat(
+          e.start_date,
+          "D",
+          getLocales
+        ).toLowerCase();
         return {
           weekday: weekday,
           weekend:
@@ -3420,7 +3424,7 @@ export default new Vuex.Store({
         .map((e, index, array) => {
           const formatWeekday = ["D", "l"];
           const weekday = formatWeekday.map((el) =>
-            setTimeFormat(e.start_date, el, getLocales)
+            setTimeFormat(e.start_date, el, getLocales).toLowerCase()
           );
           const formatDate = ["d.m", "d F"];
           const date = formatDate.map((el) =>
@@ -3432,7 +3436,10 @@ export default new Vuex.Store({
             weekday,
             date,
             isOpen: e.isOpen,
-            weekend: weekday[0] === "сб" || weekday[0] === "вс",
+            weekend:
+              weekday[0] ===
+                languageExpressions(getLocales, "weekendDays")[0] ||
+              weekday[0] === languageExpressions(getLocales, "weekendDays")[1],
             condition: e.day.condition,
             condition_s:
               getLocales !== "ru"

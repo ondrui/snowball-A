@@ -47,20 +47,20 @@ export default {
   },
   created() {
     console.log("init home page");
-    this.init();
+    this.changingСity();
     this.initialData = true;
   },
   watch: {
     $route() {
       console.log("watch route homepage");
-      this.init();
+      this.changingСity();
     },
   },
   computed: {
     ...mapGetters(["loading"]),
   },
   methods: {
-    init() {
+    changingСity() {
       const cityLS = localStorage.getItem("city");
       let city = "";
       if (this.$route.params.city) {

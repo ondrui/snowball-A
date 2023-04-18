@@ -102,6 +102,9 @@ const router = new VueRouter({
         behavior: "smooth",
       });
     }
+    if (to.hash && to.hash !== "#top") {
+      return { selector: to.hash };
+    }
   },
 });
 router.beforeEach((to, from, next) => {

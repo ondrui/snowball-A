@@ -67,7 +67,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["tenDaysTabTable", "getLocales"]),
+    ...mapGetters(["tenDaysTabTable", "getLocales", "tenDaysDetailsCard"]),
   },
   methods: {
     /**
@@ -106,11 +106,25 @@ export default {
         this.$router.push({ name: "hourly" }).catch(() => {});
       } else {
         this.$store.dispatch("setCardIndex", index);
+        this.focus();
       }
     },
     hover(index, bol) {
       if (index === 0) {
         eventBus.$emit("highlight", bol);
+      }
+    },
+    /**
+     * Устанавливаем фокус на выбранный элемент и скролим до него.
+     */
+    focus() {
+      const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
+      if (index !== -1) {
+        this.$router.push({ hash: `#id-${index}` });
+        // this.$refs.item[index].scrollIntoView({
+        //   block: "nearest",
+        //   behavior: "smooth",
+        // });
       }
     },
   },
