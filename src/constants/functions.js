@@ -268,3 +268,16 @@ export const URLBuilder = (locale, city = " ", tab, name = "hourly") => {
   };
   return { name: name, params: obj, hash: "#top" };
 };
+
+export const choiceNameByLocale = (locale, obj, inflectCallback) => {
+  switch (locale) {
+    case "ru":
+      return inflectCallback
+        ? inflectCallback(obj[`name_${locale}`])
+        : obj[`name_${locale}`];
+    case "am":
+      return obj[`name_loc`];
+    default:
+      return obj[`name_${locale}`];
+  }
+};

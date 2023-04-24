@@ -3695,21 +3695,12 @@ export default new Vuex.Store({
     /**
      * Возвращает данные для температурных карточек на корте.
      */
-    cardMapData: ({ datasetsMap, listAllCities, getLocales }) => {
+    cardMapData: ({ datasetsMap, listAllCities }) => {
       // Добавляем ключ name_loc в state.datasetMap
       return datasetsMap.map((value) => {
         const { name_loc } = listAllCities.find(
           ({ name_en }) => name_en === value.name_en
         );
-        //
-        const filtedObj = Object.fromEntries(
-          Object.entries(value).filter(([key]) =>
-            getLocales === "am"
-              ? key === "name_loc"
-              : key === `name_${getLocales}`
-          )
-        );
-        console.log(filtedObj);
         return { ...value, name_loc };
       });
     },

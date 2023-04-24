@@ -28,6 +28,7 @@ import CardDetailDay from "./CardDetailDay.vue";
 import ContentDetailDay from "./ContentDetailDay.vue";
 import { mapGetters } from "vuex";
 import { cityIn } from "lvovich";
+import { choiceNameByLocale } from "@/constants/functions";
 
 export default {
   components: {
@@ -46,17 +47,15 @@ export default {
       "tenDaysDetailsChart",
       "getCitySelected",
     ]),
-    inflectCityName() {
-      return this.getLocales === "ru"
-        ? cityIn(this.getCitySelected[`name_${this.getLocales}`])
-        : this.getCitySelected[`name_${this.getLocales}`];
-    },
     segmentTitle() {
       const str = this.languageExpressions(
         this.getLocales,
         "detailsSegmentTitle"
       )
-        .replace("$", this.inflectCityName)
+        .replace(
+          "$",
+          this.choiceNameByLocale(this.getLocales, this.getCitySelected, cityIn)
+        )
         .replace("$", this.tenDaysDetailsCard.length);
       return str;
     },
@@ -66,6 +65,7 @@ export default {
     },
   },
   methods: {
+    choiceNameByLocale,
     languageExpressions,
     isOpen(index) {
       return this.tenDaysDetailsCard[index].isOpen === true;

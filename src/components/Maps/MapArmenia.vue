@@ -2,12 +2,12 @@
   <div class="map-container">
     <nav class="navigation">
       <MapMenu
-        :menuItemName="dayMarkers"
+        :menuItemName="showDayMarkers()"
         :selected="selectedDayMarker"
         @select="selectDayMarker"
       />
       <MapMenu
-        :menuItemName="indicators"
+        :menuItemName="showIndicators()"
         :selected="selectedIndicator"
         @select="selectIndicator"
       />
@@ -377,16 +377,6 @@ export default {
   data() {
     return {
       /**
-       * Массив содержит подписи и ключи для кнопок маркеров дня.
-       * Пример: Сейчас, Завтра и тд.
-       */
-      dayMarkers: [],
-      /**
-       * Массив содержит подписи и ключи для кнопок с погодными параметрами.
-       * Пример: Температура, Ветер и тд.
-       */
-      indicators: [],
-      /**
        * Значение активной кнопки с погодным параметром.
        */
       selectedIndicator: "temp",
@@ -467,27 +457,6 @@ export default {
       },
     };
   },
-  created() {
-    /**
-     * Заполняем массив, который содержит подписи и ключи для кнопок
-     * маркеров дня строковыми константы с учетом локали.
-     */
-    [0, 3, 4].forEach((e) =>
-      this.dayMarkers.push(
-        languageExpressions(this.getLocales, "timeMarker")[e]
-      )
-    );
-    /**
-     * Заполняем массив, который подписи и ключи для кнопок с
-     * погодными параметрами строковыми константы с учетом локали.
-     */
-    ["temp", "wind"].forEach((e) =>
-      this.indicators.push([
-        e,
-        languageExpressions(this.getLocales, "climateIndicators", e),
-      ])
-    );
-  },
   mounted() {
     /**
      * Задаем первоначальное значение выбранного района для того, чтобы запустить
@@ -531,6 +500,7 @@ export default {
           area_en,
           name_ru,
           name_en,
+          name_loc,
           x_svg,
           y_svg,
           [dayMarker]: marker,
@@ -540,6 +510,7 @@ export default {
             area_en,
             name_ru,
             name_en,
+            name_loc,
             x_svg,
             y_svg,
             ...marker,
@@ -708,6 +679,25 @@ export default {
           widthNew
         )} ${Math.round(heightNew)};`
       );
+    },
+    /**
+     * Возвращает массив содержащий подписи и ключи для кнопок маркеров дня.
+     * Пример: Сейчас, Завтра и тд.
+     */
+    showDayMarkers() {
+      return [0, 3, 4].map(
+        (e) => languageExpressions(this.getLocales, "timeMarker")[e]
+      );
+    },
+    /**
+     * Возвращает массив содержащий подписи и ключи для кнопок с
+     * погодными параметрами строковыми константы с учетом локали.
+     */
+    showIndicators() {
+      return ["temp", "wind"].map((e) => [
+        e,
+        languageExpressions(this.getLocales, "climateIndicators", e),
+      ]);
     },
   },
 };

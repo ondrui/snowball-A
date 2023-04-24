@@ -4,7 +4,7 @@
     class="card-link"
   >
     <div class="city-title">
-      <span>{{ datasetItem.name_ru }}</span>
+      <span>{{ choiceNameByLocale(getLocales, datasetItem) }}</span>
     </div>
     <div v-if="indicator === 'temp'" class="card-body-temp">
       <div class="icon-temp">
@@ -32,7 +32,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import { windDirection } from "@/constants/functions";
+import { windDirection, choiceNameByLocale } from "@/constants/functions";
 import { URLBuilder } from "@/constants/functions";
 
 export default {
@@ -57,6 +57,7 @@ export default {
     },
   },
   methods: {
+    choiceNameByLocale,
     languageExpressions,
     windDirection,
     URLBuilder,

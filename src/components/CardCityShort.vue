@@ -5,7 +5,7 @@
         <BaseIcon nameIcon="map-marker" pick="common" width="8" />
       </div>
       <div class="card-top-text">
-        <span>{{ itemDataset.name_ru }}</span>
+        <span>{{ choiceNameByLocale(getLocales, itemDataset) }}</span>
       </div>
       <div class="card-top-arrow">
         <BaseIcon
@@ -27,6 +27,9 @@
 </template>
 
 <script>
+import { choiceNameByLocale } from "@/constants/functions";
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     itemDataset: {
@@ -42,7 +45,11 @@ export default {
       mouseStartX: 0,
     };
   },
+  computed: {
+    ...mapGetters(["getLocales"]),
+  },
   methods: {
+    choiceNameByLocale,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.
@@ -100,6 +107,12 @@ export default {
     .card-top-arrow svg {
       fill: #0bc2ff;
     }
+    .card-top-marker svg :deep(path) {
+      stroke: #0bc2ff;
+    }
+    .card-top-marker svg :deep(circle) {
+      fill: #0bc2ff;
+    }
   }
 }
 .card-top {
@@ -109,6 +122,10 @@ export default {
 }
 .card-top-marker {
   display: flex;
+  & svg :deep(path),
+  & svg :deep(circle) {
+    transition: 200ms all ease-in-out;
+  }
 }
 .card-top-arrow {
   width: 24px;

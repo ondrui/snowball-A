@@ -5,7 +5,7 @@
         <BaseIcon nameIcon="map-marker" pick="common" width="9" />
       </div>
       <div class="card-top-text">
-        <span>{{ itemDataset.name_ru }}</span>
+        <span>{{ choiceNameByLocale(getLocales, itemDataset) }}</span>
       </div>
       <div class="card-top-arrow">
         <span>{{ languageExpressions(getLocales, "LinkTitleCardCity") }}</span>
@@ -61,6 +61,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
+import { choiceNameByLocale } from "@/constants/functions";
 
 export default {
   props: {
@@ -88,6 +89,7 @@ export default {
     },
   },
   methods: {
+    choiceNameByLocale,
     languageExpressions,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
@@ -138,6 +140,12 @@ export default {
     .card-top-arrow svg {
       fill: #0bc2ff;
     }
+    .card-top-marker svg :deep(path) {
+      stroke: #0bc2ff;
+    }
+    .card-top-marker svg :deep(circle) {
+      fill: #0bc2ff;
+    }
   }
 }
 .card-top {
@@ -147,6 +155,11 @@ export default {
 }
 .card-top-marker {
   display: flex;
+  & svg,
+  & svg :deep(path),
+  & svg :deep(circle) {
+    transition: 200ms all ease-in-out;
+  }
 }
 .card-top-arrow {
   margin-left: auto;
