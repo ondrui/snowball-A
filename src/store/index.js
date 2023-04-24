@@ -98,6 +98,7 @@ export default new Vuex.Store({
       {
         name_ru: "Гарнарич",
         name_en: "Garnarich",
+        name_loc: "Գառնառիչ",
         area_en: "Shirak Province",
         now: {
           temp: "+11°",
@@ -142,6 +143,7 @@ export default new Vuex.Store({
       {
         name_ru: "Бавра",
         name_en: "Bavra",
+        name_loc: "Բավրա",
         area_en: "Shirak Province",
         now: {
           temp: "+6°",
@@ -185,6 +187,7 @@ export default new Vuex.Store({
       {
         name_ru: "Какавасар",
         name_en: "Kaqavasar",
+        name_loc: "Կաքավասար",
         area_en: "Shirak Province",
         now: {
           temp: "+4°",
@@ -228,6 +231,7 @@ export default new Vuex.Store({
       {
         name_ru: "Амасия",
         name_en: "Amasia",
+        name_loc: "Ամասիա",
         area_en: "Shirak Province",
         now: {
           temp: "+6°",
@@ -270,6 +274,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Джаджур",
+        name_loc: "Ջաջուռ",
         name_en: "Jajur",
         area_en: "Shirak Province",
         now: {
@@ -313,6 +318,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Азатан",
+        name_loc: "Ազատան",
         name_en: "Azatan",
         area_en: "Shirak Province",
         now: {
@@ -339,6 +345,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Баграван",
+        name_loc: "Բագրավան",
         name_en: "Bagravan",
         area_en: "Shirak Province",
         now: {
@@ -364,6 +371,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Маралик",
+        name_loc: "Մարալիկ",
         name_en: "Maralik",
         area_en: "Shirak Province",
         now: {
@@ -389,6 +397,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Артик",
+        name_loc: "Արթիկ",
         name_en: "Artik",
         area_en: "Shirak Province",
         now: {
@@ -414,6 +423,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Степанаван",
+        name_loc: "Ստեփանավան",
         name_en: "Stepanavan",
         area_en: "Lori Province",
         home: true,
@@ -440,6 +450,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Гюмри",
+        name_loc: "Գյումրի",
         name_en: "Gyumri",
         area_en: "Shirak Province",
         home: true,
@@ -466,6 +477,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Ванадзор",
+        name_loc: "Վանաձոր",
         name_en: "Vanadzor",
         area_en: "Lori Province",
         home: true,
@@ -492,6 +504,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Мецаван",
+        name_loc: "Մեծավան",
         name_en: "Metsavan",
         area_en: "Lori Province",
 
@@ -518,6 +531,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Ташир",
+        name_loc: "Տաշիր",
         name_en: "Tashir",
         area_en: "Lori Province",
 
@@ -544,6 +558,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Благодарное",
+        name_loc: "Բլագոդարնոյե",
         name_en: "Blagodarnoe",
         area_en: "Lori Province",
 
@@ -570,6 +585,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Привольное",
+        name_loc: "Պրիվոլնոյե",
         name_en: "Privolnoye",
         area_en: "Lori Province",
 
@@ -596,6 +612,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Шамлуг",
+        name_loc: "Շամլուղ",
         name_en: "Shamlugh",
         area_en: "Lori Province",
 
@@ -622,6 +639,7 @@ export default new Vuex.Store({
       },
       {
         name_ru: "Ахтала",
+        name_loc: "Ախթալա",
         name_en: "Akhtala",
         area_en: "Lori Province",
 
@@ -2438,31 +2456,6 @@ export default new Vuex.Store({
         y_svg: 377,
       },
       {
-        name_ru: "Геранбой",
-        name_en: "Goranboy",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 524,
-        y_svg: 170,
-      },
-      {
         name_ru: "Капан",
         name_en: "Kapan",
         area_en: "Syunik Province",
@@ -2687,131 +2680,6 @@ export default new Vuex.Store({
         },
         x_svg: 511,
         y_svg: 538,
-      },
-      {
-        name_ru: "Гадрут",
-        name_en: "Hadrut",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 611,
-        y_svg: 391,
-      },
-      {
-        name_ru: "Степанакерт",
-        name_en: "Khankendi",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 544,
-        y_svg: 303,
-      },
-      {
-        name_ru: "Кельбаджар",
-        name_en: "Kalbajar",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 473,
-        y_svg: 240,
-      },
-      {
-        name_ru: "Мартакерт",
-        name_en: "Martakert",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 552,
-        y_svg: 237,
-      },
-      {
-        name_ru: "Лачин",
-        name_en: "Lachin",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 500,
-        y_svg: 370,
       },
     ],
     /**
@@ -3095,7 +2963,11 @@ export default new Vuex.Store({
       if (!city) {
         return;
       }
-      return { name_loc: city.name_ru, name_url: citySelected };
+      return {
+        name_en: city.name_en,
+        name_loc: city.name_loc,
+        name_ru: city.name_ru,
+      };
     },
     getListAllCities({ listAllCities }) {
       return listAllCities;
@@ -3385,6 +3257,7 @@ export default new Vuex.Store({
         const time =
           datasetsHourly[key]["sunrise"] && datasetsHourly[key]["sunset"]
             ? daytime(
+                getLocales,
                 datasetsHourly[key]["sunrise"],
                 datasetsHourly[key]["sunset"]
               )
@@ -3431,7 +3304,9 @@ export default new Vuex.Store({
             setTimeFormat(e.start_date, el, getLocales)
           );
           const time =
-            e.sunrise && e.sunset ? daytime(e.sunrise, e.sunset) : undefined;
+            e.sunrise && e.sunset
+              ? daytime(getLocales, e.sunrise, e.sunset)
+              : undefined;
           return {
             weekday,
             date,
@@ -3820,8 +3695,23 @@ export default new Vuex.Store({
     /**
      * Возвращает данные для температурных карточек на корте.
      */
-    cardMapData: ({ datasetsMap }) => {
-      return datasetsMap;
+    cardMapData: ({ datasetsMap, listAllCities, getLocales }) => {
+      // Добавляем ключ name_loc в state.datasetMap
+      return datasetsMap.map((value) => {
+        const { name_loc } = listAllCities.find(
+          ({ name_en }) => name_en === value.name_en
+        );
+        //
+        const filtedObj = Object.fromEntries(
+          Object.entries(value).filter(([key]) =>
+            getLocales === "am"
+              ? key === "name_loc"
+              : key === `name_${getLocales}`
+          )
+        );
+        console.log(filtedObj);
+        return { ...value, name_loc };
+      });
     },
     /**
      *

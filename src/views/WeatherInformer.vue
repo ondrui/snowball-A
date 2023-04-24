@@ -91,7 +91,7 @@ export default {
         this.$router.push({ path: `/` }).catch(() => {});
       } else {
         this.$router
-          .push({ path: `/pogoda/${this.getCitySelected.name_url}/${key}` })
+          .push({ path: `/pogoda/${this.getCitySelected.name_en}/${key}` })
           .catch(() => {});
       }
     },

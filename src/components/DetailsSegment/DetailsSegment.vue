@@ -47,7 +47,9 @@ export default {
       "getCitySelected",
     ]),
     inflectCityName() {
-      return cityIn(this.getCitySelected.name_loc);
+      return this.getLocales === "ru"
+        ? cityIn(this.getCitySelected[`name_${this.getLocales}`])
+        : this.getCitySelected[`name_${this.getLocales}`];
     },
     segmentTitle() {
       const str = this.languageExpressions(

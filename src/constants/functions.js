@@ -136,7 +136,7 @@ export const windDirection = (locales, prop) => {
  * @example
  * "10:14"
  */
-export const daytime = (sunrise, sunset, separator) => {
+export const daytime = (locale, sunrise, sunset, separator) => {
   const diffMilliseconds = new Date(sunset) - new Date(sunrise);
   // function convert Milliseconds to Hours and Minutes
   const padTo2Digits = (num) => num.toString().padStart(2, "0");
@@ -152,9 +152,9 @@ export const daytime = (sunrise, sunset, separator) => {
     return separator === ":"
       ? `${hours}:${padTo2Digits(minutes)}`
       : `${hours} ${
-          languageExpressions("ru", "units", "time")[0]
+          languageExpressions(locale, "units", "time")[0]
         } ${padTo2Digits(minutes)} ${
-          languageExpressions("ru", "units", "time")[1]
+          languageExpressions(locale, "units", "time")[1]
         }`;
   };
 
