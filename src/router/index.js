@@ -108,8 +108,8 @@ const router = new VueRouter({
   },
 });
 router.beforeEach((to, from, next) => {
-  console.log("to", to);
-  console.log("from", from);
+  // console.log("to", to);
+  // console.log("from", from);
   if (to.name === "main-am" || to.name === "main-en") {
     store.commit("setLocale", to.name.split("-")[1]);
   }

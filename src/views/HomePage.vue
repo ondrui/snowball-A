@@ -46,13 +46,11 @@ export default {
     };
   },
   created() {
-    console.log("init home page");
     this.changingСity();
     this.initialData = true;
   },
   watch: {
     $route() {
-      console.log("watch route homepage");
       this.changingСity();
     },
   },

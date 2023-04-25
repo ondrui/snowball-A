@@ -12,7 +12,12 @@ import { languageExpressions } from "@/constants/locales";
  * @func daytime Возвращает долготу дня в часах и минутах.
  * @func addPlus Добовляет знак +, если значение парометра больше нуля.
  */
-import { setTimeFormat, daytime, addPlus } from "@/constants/functions";
+import {
+  setTimeFormat,
+  daytime,
+  addPlus,
+  choiceNameByLocale,
+} from "@/constants/functions";
 
 Vue.use(Vuex);
 
@@ -3708,18 +3713,22 @@ export default new Vuex.Store({
      *
      * Возвращает самые населенные города Армении.
      */
-    getListTopCities: ({ listTopCities }) => {
+    getListTopCities: ({ listTopCities }, { getLocales }) => {
       return listTopCities
-        .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
+        .sort((a, b) => {
+          return choiceNameByLocale(getLocales, a).localeCompare(
+            choiceNameByLocale(getLocales, b)
+          );
+        })
         .map((e) => {
           return { ...e, name_en: e.name_en.toLocaleLowerCase() };
         });
     },
     /**
-     * Возвращает сгрупированный список городов.
+     * Возвращает сгрупированный по алфавиту список городов.
      */
     getGroupListAllCities:
-      ({ listAllCities }) =>
+      ({ listAllCities }, { getLocales }) =>
       (name) => {
         const formatArea_ru = (str) =>
           str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
@@ -3733,6 +3742,8 @@ export default new Vuex.Store({
           ({
             area_en,
             area_ru,
+            area_loc,
+            area_loc_l5,
             area_en_l5,
             area_ru_l5,
             name_en,
@@ -3747,12 +3758,15 @@ export default new Vuex.Store({
               name_en: name_en.toLocaleLowerCase(),
               name_ru,
               name_loc,
+              area_loc,
+              area_loc_l5,
             };
           }
         );
         const callback = (acc, cur) => {
-          if (cur.name_ru) {
-            const firstLetter = cur.name_ru[0].toUpperCase();
+          const city = choiceNameByLocale(getLocales, cur);
+          if (city) {
+            const firstLetter = city[0].toUpperCase();
             // if (!Object.hasOwn(acc, firstLetter)) {
             //   acc[firstLetter] = [];
             // }
@@ -3766,7 +3780,11 @@ export default new Vuex.Store({
           return acc;
         };
         const obj = transformedArr
-          .sort((a, b) => a.name_ru.localeCompare(b.name_ru))
+          .sort((a, b) =>
+            choiceNameByLocale(getLocales, a).localeCompare(
+              choiceNameByLocale(getLocales, b)
+            )
+          )
           .reduce(callback, {});
 
         const entries = Object.entries(obj);
@@ -3905,10 +3923,10 @@ export default new Vuex.Store({
       state.listAllCities = cities;
     },
     setCity(state, city) {
-      console.log("mutation setCity");
+      // console.log("mutation setCity");
       state.citySelected = city.toLowerCase();
       localStorage.setItem("city", state.citySelected);
-      console.log("LS", localStorage.getItem("city", state.citySelected));
+      // console.log("LS", localStorage.getItem("city", state.citySelected));
     },
     setLocale(state, localeStr) {
       console.log("setLocale", localeStr);
@@ -3959,7 +3977,6 @@ export default new Vuex.Store({
       console.log("action setCity", city, isFindCityList);
 
       if (city === "undefined" || city === undefined || !isFindCityList) {
-        console.log(router.currentRoute);
         router.push({ path: "not-found" });
         return;
       }

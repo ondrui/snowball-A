@@ -7,7 +7,7 @@
         v-for="(item, index) in addEmptyCell"
         :key="`l-${index}`"
       >
-        <span>{{ item.name_ru }}</span
+        <span>{{ choiceNameByLocale(getLocales, item) }}</span
         ><span>{{ item.temp }}</span>
       </router-link>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { URLBuilder } from "@/constants/functions";
+import { URLBuilder, choiceNameByLocale } from "@/constants/functions";
 
 export default {
   props: {
@@ -34,6 +34,7 @@ export default {
     },
   },
   methods: {
+    choiceNameByLocale,
     URLBuilder,
   },
 };
@@ -47,7 +48,6 @@ export default {
 .table {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-
   column-gap: 1px;
   background-color: #d6ebff;
 }
@@ -66,6 +66,7 @@ export default {
     line-height: 16px;
     color: #04569c;
     white-space: nowrap;
+    text-transform: capitalize;
   }
   &:hover > span:first-child {
     text-decoration: underline;
