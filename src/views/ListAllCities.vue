@@ -47,9 +47,12 @@
             :key="`city-${index}`"
           >
             <div>
-              {{ value.name_ru }}
+              {{ choiceNameByLocale(getLocales, value) }}
             </div>
-            <div>{{ value.area_ru }} {{ value.area_ru_l5 }}</div>
+            <div>
+              {{ choiceAreaByLocale(getLocales, value, "") }}
+              {{ choiceAreaByLocale(getLocales, value, "_l5") }}
+            </div>
           </router-link>
         </div>
       </div>
@@ -60,6 +63,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { languageExpressions } from "@/constants/locales";
+import { choiceNameByLocale, choiceAreaByLocale } from "@/constants/functions";
 
 export default {
   name: "ListAllCities",
@@ -86,6 +90,8 @@ export default {
     },
   },
   methods: {
+    choiceAreaByLocale,
+    choiceNameByLocale,
     languageExpressions,
     scrollSel() {
       window.scroll({

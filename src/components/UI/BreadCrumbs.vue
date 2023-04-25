@@ -22,7 +22,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import { URLBuilder } from "@/constants/functions";
+import { URLBuilder, choiceNameByLocale } from "@/constants/functions";
 import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
@@ -50,6 +50,7 @@ export default {
     ...mapGetters(["getLocales", "getCitySelected"]),
   },
   methods: {
+    choiceNameByLocale,
     /**
      * Возвращает строковые константы с учетом локали.
      */
@@ -72,7 +73,9 @@ export default {
       );
 
       arr.some(({ name }) => name !== "main" && name !== "cities")
-        ? crumbsArr.push(this.getCitySelected.name_loc)
+        ? crumbsArr.push(
+            choiceNameByLocale(this.getLocales, this.getCitySelected)
+          )
         : crumbsArr;
       this.breadcrumbList = crumbsArr;
     },

@@ -17,6 +17,7 @@ import {
   daytime,
   addPlus,
   choiceNameByLocale,
+  choiceAreaByLocale,
 } from "@/constants/functions";
 
 Vue.use(Vuex);
@@ -3730,39 +3731,40 @@ export default new Vuex.Store({
     getGroupListAllCities:
       ({ listAllCities }, { getLocales }) =>
       (name) => {
-        const formatArea_ru = (str) =>
-          str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
-        const formatArea_ru_l5 = (str) => {
-          if (str === "") return "";
-          const arr = str.split("");
-          arr.splice(-4, 3, "-");
-          return arr.join("");
-        };
-        const transformedArr = listAllCities.map(
-          ({
-            area_en,
-            area_ru,
-            area_loc,
-            area_loc_l5,
-            area_en_l5,
-            area_ru_l5,
-            name_en,
-            name_ru,
-            name_loc,
-          }) => {
-            return {
-              area_en,
-              area_ru: formatArea_ru(area_ru),
-              area_en_l5,
-              area_ru_l5: formatArea_ru_l5(area_ru_l5),
-              name_en: name_en.toLocaleLowerCase(),
-              name_ru,
-              name_loc,
-              area_loc,
-              area_loc_l5,
-            };
-          }
-        );
+        console.log(name);
+        // const formatArea_ru = (str) =>
+        //   str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
+        // const formatArea_ru_l5 = (str) => {
+        //   if (str === "") return "";
+        //   const arr = str.split("");
+        //   arr.splice(-4, 3, "-");
+        //   return arr.join("");
+        // };
+        // const transformedArr = listAllCities.map(
+        //   ({
+        //     area_en,
+        //     area_ru,
+        //     area_loc,
+        //     area_loc_l5,
+        //     area_en_l5,
+        //     area_ru_l5,
+        //     name_en,
+        //     name_ru,
+        //     name_loc,
+        //   }) => {
+        //     return {
+        //       area_en,
+        //       area_ru,
+        //       area_en_l5,
+        //       area_ru_l5,
+        //       name_en,
+        //       name_ru,
+        //       name_loc,
+        //       area_loc,
+        //       area_loc_l5,
+        //     };
+        //   }
+        // );
         const callback = (acc, cur) => {
           const city = choiceNameByLocale(getLocales, cur);
           if (city) {
@@ -3779,7 +3781,7 @@ export default new Vuex.Store({
           }
           return acc;
         };
-        const obj = transformedArr
+        const obj = listAllCities
           .sort((a, b) =>
             choiceNameByLocale(getLocales, a).localeCompare(
               choiceNameByLocale(getLocales, b)
@@ -3788,14 +3790,16 @@ export default new Vuex.Store({
           .reduce(callback, {});
 
         const entries = Object.entries(obj);
-        const formatStr = (str) => str.toLocaleLowerCase().split(" ")[0];
         const filtered = entries
           .map(([key, value]) => {
             const filteredValue =
               name === "all"
                 ? value
                 : value.filter((f) => {
-                    return formatStr(f.area_ru) === formatStr(name);
+                    return (
+                      choiceAreaByLocale(getLocales, f, "").toLowerCase() ===
+                      name.toLowerCase()
+                    );
                   });
             return filteredValue.length > 0 ? [key, filteredValue] : undefined;
           })
@@ -3806,9 +3810,12 @@ export default new Vuex.Store({
     /**
      * Возвращает список областей.
      */
-    getListArea: ({ listAllCities }) => {
+    getListArea: ({ listAllCities }, { getLocales }) => {
       const obj = {};
-      listAllCities.map(({ area_ru }) => (obj[area_ru] = true));
+      listAllCities.forEach(
+        (val) => (obj[choiceAreaByLocale(getLocales, val, "")] = true)
+      );
+      console.log(obj, getLocales);
       const arr = Object.keys(obj).sort((a, b) => a.localeCompare(b));
       return arr;
     },

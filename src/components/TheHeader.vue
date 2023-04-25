@@ -30,16 +30,19 @@ export default {
   },
   watch: {
     select(value) {
-      if (value === "ru") {
+      console.log(this.$route.name);
+      if (value === "ru" && this.$route.name.includes("main")) {
         this.$router
           .push({
             name: "main",
           })
           .catch(() => {});
+      } else if (this.$route.name.includes("main")) {
+        this.$router.push({ name: `main-${value}` }).catch(() => {});
       } else {
         this.$router
           .push({
-            path: `/${value}`,
+            params: { locale: value },
           })
           .catch(() => {});
       }

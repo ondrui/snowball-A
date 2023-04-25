@@ -281,3 +281,7 @@ export const choiceNameByLocale = (locale, obj, inflectCallback) => {
       return obj[`name_${locale}`];
   }
 };
+
+export const choiceAreaByLocale = (locale, obj, end) => {
+  return locale === "am" ? obj[`area_loc${end}`] : obj[`area_${locale}${end}`];
+};

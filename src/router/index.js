@@ -46,7 +46,7 @@ const routes = [
             },
           },
           {
-            path: "/pogoda/:city/day",
+            path: "/:locale?/pogoda/:city/day",
             name: "day",
             component: TabInformerDay,
             meta: {
@@ -54,7 +54,7 @@ const routes = [
             },
           },
           {
-            path: "/pogoda/:city/hourly",
+            path: "/:locale?/pogoda/:city/hourly",
             name: "hourly",
             component: TabInformerHourly,
             meta: {
@@ -67,7 +67,7 @@ const routes = [
         },
       },
       {
-        path: "/cities",
+        path: "/:locale?/cities",
         name: "cities",
         component: ListAllCities,
         meta: {
@@ -108,13 +108,17 @@ const router = new VueRouter({
   },
 });
 router.beforeEach((to, from, next) => {
-  // console.log("to", to);
-  // console.log("from", from);
+  console.log("to", to);
+  console.log("from", from);
   if (to.name === "main-am" || to.name === "main-en") {
     store.commit("setLocale", to.name.split("-")[1]);
   }
   if (to.name === "main") {
     store.commit("setLocale", "ru");
+  }
+  if (to.params.locale !== from.params.locale) {
+    const locale = !to.params.locale ? "ru" : to.params.locale;
+    store.commit("setLocale", locale);
   }
   next();
 });
