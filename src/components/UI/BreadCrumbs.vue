@@ -6,7 +6,9 @@
         :key="item"
         :aria-current="!isLast(index) ? 'page' : null"
       >
-        <router-link v-if="isLast(index)" to="/">{{ item }}</router-link>
+        <router-link v-if="isLast(index)" :to="URLBuilder()">{{
+          item
+        }}</router-link>
         <span v-else>{{ item }}</span>
         <BaseIcon
           nameIcon="chevron-breadcrumb-right"
@@ -22,7 +24,7 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import { URLBuilder, choiceNameByLocale } from "@/constants/functions";
+import { choiceNameByLocale } from "@/constants/functions";
 import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
@@ -55,7 +57,11 @@ export default {
      * Возвращает строковые константы с учетом локали.
      */
     languageExpressions,
-    URLBuilder,
+    URLBuilder() {
+      return this.getLocales === "ru"
+        ? { name: "main" }
+        : { name: `main-${this.getLocales}` };
+    },
     /**
      * По условию отображает элемент ссылка.
      */

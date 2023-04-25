@@ -39,6 +39,10 @@ export default {
           .catch(() => {});
       } else if (this.$route.name.includes("main")) {
         this.$router.push({ name: `main-${value}` }).catch(() => {});
+      } else if (value === "ru") {
+        this.$router
+          .push({ name: this.$route.name, params: {} })
+          .catch(() => {});
       } else {
         this.$router
           .push({

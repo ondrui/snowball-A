@@ -94,7 +94,7 @@ export default {
 }
 .segment-title {
   padding: 46px 0 8px 0;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 20px;
   line-height: 23px;
   color: #333333;
