@@ -285,3 +285,8 @@ export const choiceNameByLocale = (locale, obj, inflectCallback) => {
 export const choiceAreaByLocale = (locale, obj, end) => {
   return locale === "am" ? obj[`area_loc${end}`] : obj[`area_${locale}${end}`];
 };
+
+export const capitalize = (str) => {
+  const lower = str.toLowerCase();
+  return str.charAt(0).toUpperCase() + lower.slice(1);
+};

@@ -67,7 +67,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getLocales", "tenDaysTabTable", "getCitySelected"]),
+    ...mapGetters([
+      "getLocales",
+      "tenDaysTabTable",
+      "getCitySelected",
+      "getLocalesURL",
+    ]),
     /**
      * Подписи для вкладок.
      */
@@ -87,13 +92,15 @@ export default {
      * @param key Строка содержит имя вкладки.
      */
     showContent(key) {
-      if (key === "main") {
-        this.$router.push({ path: `/` }).catch(() => {});
-      } else {
-        this.$router
-          .push({ path: `/pogoda/${this.getCitySelected.name_en}/${key}` })
-          .catch(() => {});
-      }
+      this.$router
+        .push({
+          name: key,
+          params: {
+            lang: this.getLocalesURL,
+            city: this.getCitySelected.name_en,
+          },
+        })
+        .catch(() => {});
     },
     /**
      * Возвращает название вкладки с учетом количества дней прогноза.

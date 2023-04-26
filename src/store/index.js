@@ -18,6 +18,7 @@ import {
   addPlus,
   choiceNameByLocale,
   choiceAreaByLocale,
+  capitalize,
 } from "@/constants/functions";
 
 Vue.use(Vuex);
@@ -2948,6 +2949,9 @@ export default new Vuex.Store({
     getLocales(state) {
       return state.locales;
     },
+    getLocalesURL(state) {
+      return state.locales === "ru" ? undefined : state.locales;
+    },
     /**
      * Геттер с условиями для отображения лоадера.
      * @param state Текущее состояние store.
@@ -2956,23 +2960,28 @@ export default new Vuex.Store({
       return state.loading;
     },
     getCountryNameLoc({ locales, country_loc }) {
-      return country_loc[locales];
+      const countryName = country_loc[locales];
+      return capitalize(countryName);
     },
     /**
      * Возвращает город для которого будет выводится прогноз.
      * @param citySelected Текущее значение store.citySelected.
+     * @param listAllCities Текущее значение store.listAllCities.
+     * @param getLocales Текущее значение store.getLocales.
+     * @example
+     * {name_en:"amasia",name_loc_choice:"Амасия"}
      */
-    getCitySelected({ listAllCities, citySelected }) {
+    getCitySelected({ listAllCities, citySelected }, { getLocales }) {
       const city = listAllCities.find(
-        ({ name_en }) => name_en.toLowerCase() === citySelected
+        ({ name_en }) => name_en.toLowerCase() === citySelected.toLowerCase()
       );
       if (!city) {
         return;
       }
+      const cityName = choiceNameByLocale(getLocales, city);
       return {
-        name_en: city.name_en,
-        name_loc: city.name_loc,
-        name_ru: city.name_ru,
+        name_en: city.name_en.toLowerCase(),
+        name_loc_choice: capitalize(cityName),
       };
     },
     getListAllCities({ listAllCities }) {
@@ -3722,7 +3731,12 @@ export default new Vuex.Store({
           );
         })
         .map((e) => {
-          return { ...e, name_en: e.name_en.toLocaleLowerCase() };
+          const cityName = choiceNameByLocale(getLocales, e);
+          return {
+            temp: e.temp,
+            name_en: e.name_en.toLowerCase(),
+            name_loc_choice: cityName,
+          };
         });
     },
     /**
@@ -3731,7 +3745,6 @@ export default new Vuex.Store({
     getGroupListAllCities:
       ({ listAllCities }, { getLocales }) =>
       (name) => {
-        console.log(name);
         // const formatArea_ru = (str) =>
         //   str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
         // const formatArea_ru_l5 = (str) => {

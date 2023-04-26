@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="container">
-      <router-link to="/">
+      <router-link :to="pushNewURL()">
         <BaseIcon nameIcon="country-logo" pick="common" width="150" />
       </router-link>
       <div>
@@ -30,36 +30,41 @@ export default {
   },
   watch: {
     select(value) {
-      console.log(this.$route.name);
-      if (value === "ru" && this.$route.name.includes("main")) {
-        this.$router
-          .push({
-            name: "main",
-          })
-          .catch(() => {});
-      } else if (this.$route.name.includes("main")) {
-        this.$router.push({ params: { lang: value } }).catch(() => {});
-      } else if (value === "ru") {
-        this.$router
-          .push({ name: this.$route.name, params: {} })
-          .catch(() => {});
-      } else {
-        this.$router
-          .push({
-            params: { lang: value },
-          })
-          .catch(() => {});
-      }
+      this.changeLocaleHandler(value);
     },
   },
   computed: {
-    ...mapGetters(["tenDaysTabTable", "getLocales"]),
+    ...mapGetters([
+      "tenDaysTabTable",
+      "getLocales",
+      "getCitySelected",
+      "getLocalesURL",
+    ]),
   },
   methods: {
     /**
      * Возвращает строковые константы с учетом локали.
      */
     languageExpressions,
+    changeLocaleHandler(value) {
+      this.$router
+        .push({
+          params: {
+            lang: value === "ru" ? undefined : value,
+            city: this.getCitySelected.name_en,
+          },
+        })
+        .catch(() => {});
+    },
+    pushNewURL() {
+      return {
+        name: "main",
+        params: {
+          lang: this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+          city: this.getCitySelected.name_en,
+        },
+      };
+    },
   },
 };
 </script>

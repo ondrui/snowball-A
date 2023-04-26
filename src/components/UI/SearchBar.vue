@@ -4,7 +4,7 @@
       type="text"
       class="input-search-header"
       placeholder=""
-      :value="choiceNameByLocale(getLocales, getCitySelected)"
+      :value="getCitySelected.name_loc_choice"
       @change="handler"
     />
     <div class="history-icon-container">
@@ -28,7 +28,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { choiceNameByLocale } from "@/constants/functions";
 
 export default {
   name: "SearchBar",
@@ -36,7 +35,6 @@ export default {
     ...mapGetters(["getListAllCities", "getCitySelected", "getLocales"]),
   },
   methods: {
-    choiceNameByLocale,
     handler(e) {
       const city = e.target.value;
       const hasCity = this.getListAllCities.find(

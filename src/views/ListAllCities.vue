@@ -37,7 +37,7 @@
         <h2 :data-letter="item">{{ item }}</h2>
         <div class="cities-table-list">
           <router-link
-            :to="URLBuilder(value)"
+            :to="pushNewURL(value.name_en)"
             :class="[
               'cities-table-item',
               { 'empty-cell': !value },
@@ -81,7 +81,7 @@ export default {
     this.scrollSel();
   },
   computed: {
-    ...mapGetters(["getLocales", "getListArea"]),
+    ...mapGetters(["getLocales", "getListArea", "getLocalesURL"]),
     getGroupListAllCities() {
       return this.$store.getters.getGroupListAllCities(this.selected);
     },
@@ -115,12 +115,18 @@ export default {
         hiddenGap: expArr.length < 2,
       };
     },
-    URLBuilder(value) {
-      return {
-        name: "hourly",
-        params: { city: value.name_en ?? " " },
-        hash: "#top",
-      };
+    pushNewURL(city) {
+      return city
+        ? {
+            name: "hourly",
+            params: {
+              lang:
+                this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+              city,
+            },
+            hash: "#top",
+          }
+        : "";
     },
   },
 };

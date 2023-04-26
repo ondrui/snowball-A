@@ -6,7 +6,7 @@
         :key="item"
         :aria-current="!isLast(index) ? 'page' : null"
       >
-        <router-link v-if="isLast(index)" :to="URLBuilder()">{{
+        <router-link v-if="isLast(index)" :to="pushNewURL()">{{
           item
         }}</router-link>
         <span v-else>{{ item }}</span>
@@ -24,7 +24,6 @@
 
 <script>
 import { languageExpressions } from "@/constants/locales";
-import { choiceNameByLocale } from "@/constants/functions";
 import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
@@ -49,19 +48,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getLocales", "getCitySelected"]),
+    ...mapGetters(["getLocales", "getCitySelected", "getLocalesURL"]),
   },
   methods: {
-    choiceNameByLocale,
     /**
      * Возвращает строковые константы с учетом локали.
      */
     languageExpressions,
-    URLBuilder() {
-      return this.getLocales === "ru"
-        ? { name: "main" }
-        : { name: `main-${this.getLocales}` };
-    },
     /**
      * По условию отображает элемент ссылка.
      */
@@ -79,11 +72,18 @@ export default {
       );
 
       arr.some(({ name }) => name !== "main" && name !== "cities")
-        ? crumbsArr.push(
-            choiceNameByLocale(this.getLocales, this.getCitySelected)
-          )
+        ? crumbsArr.push(this.getCitySelected.name_loc_choice)
         : crumbsArr;
       this.breadcrumbList = crumbsArr;
+    },
+    pushNewURL() {
+      return {
+        name: "main",
+        params: {
+          lang: this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+          city: this.getCitySelected.name_en,
+        },
+      };
     },
   },
 };

@@ -74,13 +74,8 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior(to, from) {
-    if (
-      to.name === "not-found" ||
-      to.name === "cities" ||
-      to.hash === "#top" ||
-      from.name === "cities"
-    ) {
+  scrollBehavior(to) {
+    if (to.name === "not-found" || to.name === "cities" || to.hash === "#top") {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -95,16 +90,11 @@ router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
   const locale = to.params.lang || "ru";
-  // if (to.name === "main-am" || to.name === "main-en") {
-  //   store.commit("setLocale", to.name.split("-")[1]);
-  // }
-  // if (to.name === "main") {
-  //   store.commit("setLocale", "ru");
-  // }
-  // if (to.params.locale !== from.params.locale) {
-  //   const locale = !to.params.locale ? "ru" : to.params.locale;
-  store.commit("setLocale", locale);
-  // }
-  next();
+  if (locale === store.getters.getLocales) {
+    next();
+  } else {
+    store.commit("setLocale", locale);
+    next();
+  }
 });
 export default router;

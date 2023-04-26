@@ -2,12 +2,12 @@
   <div class="table-wrapper">
     <div class="table">
       <router-link
-        :to="URLBuilder(getLocales, item.name_en, 'hourly')"
+        :to="pushNewURL(item.name_en)"
         :class="['table-item', { 'empty-cell': !item }]"
         v-for="(item, index) in addEmptyCell"
         :key="`l-${index}`"
       >
-        <span>{{ choiceNameByLocale(getLocales, item) }}</span
+        <span>{{ item.name_loc_choice }}</span
         ><span>{{ item.temp }}</span>
       </router-link>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { URLBuilder, choiceNameByLocale } from "@/constants/functions";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -25,17 +25,26 @@ export default {
     },
   },
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["getLocalesURL"]),
     addEmptyCell() {
       const expArr = this.itemList;
       return [...expArr, ...Array(4).fill("")];
     },
   },
   methods: {
-    choiceNameByLocale,
-    URLBuilder,
+    pushNewURL(city) {
+      return city
+        ? {
+            name: "hourly",
+            params: {
+              lang:
+                this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+              city,
+            },
+            hash: "#top",
+          }
+        : "";
+    },
   },
 };
 </script>
