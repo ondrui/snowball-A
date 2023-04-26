@@ -14,15 +14,15 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/:lang(ru|am|en)?",
     component: HomePage,
     children: [
       {
-        path: "/",
+        path: "",
         component: WeatherInformer,
         children: [
           {
-            path: "/",
+            path: "",
             name: "main",
             component: TabInformerMain,
             meta: {
@@ -30,23 +30,7 @@ const routes = [
             },
           },
           {
-            path: "/en",
-            name: "main-en",
-            component: TabInformerMain,
-            meta: {
-              breadcrumb: [{ name: "main" }],
-            },
-          },
-          {
-            path: "/am",
-            name: "main-am",
-            component: TabInformerMain,
-            meta: {
-              breadcrumb: [{ name: "main" }],
-            },
-          },
-          {
-            path: "/:locale?/pogoda/:city/day",
+            path: "pogoda/:city/day",
             name: "day",
             component: TabInformerDay,
             meta: {
@@ -54,7 +38,7 @@ const routes = [
             },
           },
           {
-            path: "/:locale?/pogoda/:city/hourly",
+            path: "pogoda/:city/hourly",
             name: "hourly",
             component: TabInformerHourly,
             meta: {
@@ -67,7 +51,7 @@ const routes = [
         },
       },
       {
-        path: "/:locale?/cities",
+        path: "cities",
         name: "cities",
         component: ListAllCities,
         meta: {
@@ -110,16 +94,17 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
-  if (to.name === "main-am" || to.name === "main-en") {
-    store.commit("setLocale", to.name.split("-")[1]);
-  }
-  if (to.name === "main") {
-    store.commit("setLocale", "ru");
-  }
-  if (to.params.locale !== from.params.locale) {
-    const locale = !to.params.locale ? "ru" : to.params.locale;
-    store.commit("setLocale", locale);
-  }
+  const locale = to.params.lang || "ru";
+  // if (to.name === "main-am" || to.name === "main-en") {
+  //   store.commit("setLocale", to.name.split("-")[1]);
+  // }
+  // if (to.name === "main") {
+  //   store.commit("setLocale", "ru");
+  // }
+  // if (to.params.locale !== from.params.locale) {
+  //   const locale = !to.params.locale ? "ru" : to.params.locale;
+  store.commit("setLocale", locale);
+  // }
   next();
 });
 export default router;

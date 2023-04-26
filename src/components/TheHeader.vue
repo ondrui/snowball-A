@@ -38,7 +38,7 @@ export default {
           })
           .catch(() => {});
       } else if (this.$route.name.includes("main")) {
-        this.$router.push({ name: `main-${value}` }).catch(() => {});
+        this.$router.push({ params: { lang: value } }).catch(() => {});
       } else if (value === "ru") {
         this.$router
           .push({ name: this.$route.name, params: {} })
@@ -46,7 +46,7 @@ export default {
       } else {
         this.$router
           .push({
-            params: { locale: value },
+            params: { lang: value },
           })
           .catch(() => {});
       }
