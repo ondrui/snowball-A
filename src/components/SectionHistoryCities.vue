@@ -53,12 +53,12 @@ export default {
      * Возвращает языковую метку для определения локали.
      * @example "ru"
      */
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
     getHistoryTitle() {
       const arr = this.languageExpressions(
-        this.getLocales,
+        this.getLocale,
         "asideHistory"
       ).split(" ");
       return [arr[0], arr[1]];

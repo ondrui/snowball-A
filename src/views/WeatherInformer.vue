@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
 import { eventBus } from "../main.js";
 import { mapGetters } from "vuex";
 import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
@@ -68,16 +67,16 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getLocales",
       "tenDaysTabTable",
       "getCitySelected",
-      "getLocalesURL",
+      "getLocaleURL",
+      "getConstantLocale",
     ]),
     /**
      * Подписи для вкладок.
      */
     tabsList() {
-      return languageExpressions(this.getLocales, "tabsDescr");
+      return this.getConstantLocale("tabsDescr");
     },
     currentTabComponent() {
       const string = this.currentTab;
@@ -85,7 +84,6 @@ export default {
     },
   },
   methods: {
-    languageExpressions,
     /**
      * Обработчик для установки имени открытой вкладки. Передается
      * через параметр.
@@ -96,7 +94,7 @@ export default {
         .push({
           name: key,
           params: {
-            lang: this.getLocalesURL,
+            lang: this.getLocaleURL,
             city: this.getCitySelected.name_en,
           },
         })

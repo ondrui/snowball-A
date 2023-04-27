@@ -476,7 +476,7 @@ export default {
     this.$refs.animate.removeEventListener("endEvent", this.animateHandler);
   },
   computed: {
-    ...mapGetters(["getLocales"]),
+    ...mapGetters(["getLocale"]),
     /**
      * Фильтруем данные для отображения на карточках по выбранному
      * району.
@@ -498,9 +498,8 @@ export default {
         ({
           home,
           area_en,
-          name_ru,
           name_en,
-          name_loc,
+          name_loc_choice,
           x_svg,
           y_svg,
           [dayMarker]: marker,
@@ -508,9 +507,8 @@ export default {
           return {
             home,
             area_en,
-            name_ru,
             name_en,
-            name_loc,
+            name_loc_choice,
             x_svg,
             y_svg,
             ...marker,
@@ -686,7 +684,7 @@ export default {
      */
     showDayMarkers() {
       return [0, 3, 4].map(
-        (e) => languageExpressions(this.getLocales, "timeMarker")[e]
+        (e) => languageExpressions(this.getLocale, "timeMarker")[e]
       );
     },
     /**
@@ -696,7 +694,7 @@ export default {
     showIndicators() {
       return ["temp", "wind"].map((e) => [
         e,
-        languageExpressions(this.getLocales, "climateIndicators", e),
+        languageExpressions(this.getLocale, "climateIndicators", e),
       ]);
     },
   },

@@ -8,7 +8,7 @@
     <MapArmenia v-if="radio === 'map'" :datasetCard="cardMapData" />
     <ListTopCities v-if="radio === 'cities'" :itemList="getListTopCities" />
     <div class="link-city">
-      <router-link to="/cities">{{ getTitleLink }}</router-link>
+      <router-link :to="pushNewURL()">{{ getTitleLink }}</router-link>
       <div class="arrow-icon">
         <BaseIcon width="9" nameIcon="arrow-right" pick="common" />
       </div>
@@ -19,12 +19,11 @@
 <script>
 import MapArmenia from "@/components/Maps/MapArmenia.vue";
 import ListTopCities from "@/components/ListTopCities.vue";
-import { languageExpressions } from "@/constants/locales";
 import { mapGetters } from "vuex";
 import { cityIn } from "lvovich";
 
 export default {
-  name: "MainTabContent",
+  name: "TabInformerMain",
   components: {
     MapArmenia,
     ListTopCities,
@@ -36,30 +35,40 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getLocales",
       "getListTopCities",
       "cardMapData",
       "getCountryNameLoc",
       "getListAllCities",
+      "getConstantLocale",
+      "getCitySelected",
+      "getLocaleURL",
     ]),
     /**
      * Возвращает настройки отрисовки радио кнопок в компоненте Navbar.vue.
      */
     getRadioValues() {
       return [
-        ["map", languageExpressions(this.getLocales, "viewsSwitcher")[0]],
-        ["cities", languageExpressions(this.getLocales, "viewsSwitcher")[1]],
+        ["map", this.getConstantLocale("viewsSwitcher")[0]],
+        ["cities", this.getConstantLocale("viewsSwitcher")[1]],
       ];
     },
     getTitleLink() {
       const country = cityIn(this.getCountryNameLoc);
-      return this.languageExpressions(this.getLocales, "allCityBtnCaption")
+      return this.getConstantLocale("allCityBtnCaption")
         .replace("$", this.getListAllCities.length)
         .replace("$", country);
     },
   },
   methods: {
-    languageExpressions,
+    pushNewURL() {
+      return {
+        name: "cities",
+        params: {
+          lang: this.getLocaleURL,
+          city: this.getCitySelected.name_en,
+        },
+      };
+    },
   },
 };
 </script>

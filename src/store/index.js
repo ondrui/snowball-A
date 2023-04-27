@@ -28,7 +28,8 @@ export default new Vuex.Store({
     /**
      * Свойство определяет языковую локаль. Значение по умолчанию "ru".
      */
-    locales: "ru",
+    locale: "ru",
+    translatedConstants: {},
     country_loc: {
       ru: "Армения",
       en: "Armenia",
@@ -101,2594 +102,7 @@ export default new Vuex.Store({
     /**
      * Данные для карточек на карте.
      */
-    datasetsMap: [
-      {
-        name_ru: "Гарнарич",
-        name_en: "Garnarich",
-        name_loc: "Գառնառիչ",
-        area_en: "Shirak Province",
-        now: {
-          temp: "+11°",
-          feels_like: "+10°",
-          condition: "cloudy",
-          condition_s: "переменная облачность, небольшой дождь, возможна гроза",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        details: [
-          {
-            name: "утро",
-            temp: "+3°",
-            condition: "cloudy_rain_1_thunderstorm_1",
-          },
-          {
-            name: "день",
-            temp: "+17°",
-            condition: "cloudy",
-          },
-          {
-            name: "вечер",
-            temp: "+13°",
-            condition: "clear",
-          },
-        ],
-        x_svg: 19,
-        y_svg: 44,
-      },
-      {
-        name_ru: "Бавра",
-        name_en: "Bavra",
-        name_loc: "Բավրա",
-        area_en: "Shirak Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          condition_s: "переменная облачность",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "+3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        details: [
-          {
-            name: "утро",
-            temp: "+3°",
-            condition: "cloudy_rain_1_thunderstorm_1",
-          },
-          {
-            name: "день",
-            temp: "+17°",
-            condition: "cloudy",
-          },
-          {
-            name: "вечер",
-            temp: "+13°",
-            condition: "clear",
-          },
-        ],
-        x_svg: 73,
-        y_svg: 35,
-      },
-      {
-        name_ru: "Какавасар",
-        name_en: "Kaqavasar",
-        name_loc: "Կաքավասար",
-        area_en: "Shirak Province",
-        now: {
-          temp: "+4°",
-          condition: "mostly-cloudy",
-          condition_s: "облачно, небольшой дождь",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "+3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        details: [
-          {
-            name: "утро",
-            temp: "+3°",
-            condition: "cloudy_rain_1_thunderstorm_1",
-          },
-          {
-            name: "день",
-            temp: "+17°",
-            condition: "cloudy",
-          },
-          {
-            name: "вечер",
-            temp: "+13°",
-            condition: "clear",
-          },
-        ],
-        x_svg: 101,
-        y_svg: 76,
-      },
-      {
-        name_ru: "Амасия",
-        name_en: "Amasia",
-        name_loc: "Ամասիա",
-        area_en: "Shirak Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_snow_1",
-          condition_s: "облачно, дождь",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "+3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        details: [
-          {
-            name: "утро",
-            temp: "+3°",
-            condition: "cloudy_rain_1_thunderstorm_1",
-          },
-          {
-            name: "день",
-            temp: "+17°",
-            condition: "cloudy",
-          },
-          {
-            name: "вечер",
-            temp: "+13°",
-            condition: "clear",
-          },
-        ],
-        x_svg: 50,
-        y_svg: 80,
-      },
-      {
-        name_ru: "Джаджур",
-        name_loc: "Ջաջուռ",
-        name_en: "Jajur",
-        area_en: "Shirak Province",
-        now: {
-          temp: "+8°",
-          condition: "clear",
-          condition_s: "облачно, дождь",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "+9°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        details: [
-          {
-            name: "утро",
-            temp: "+3°",
-            condition: "cloudy_rain_1_thunderstorm_1",
-          },
-          {
-            name: "день",
-            temp: "+17°",
-            condition: "cloudy",
-          },
-          {
-            name: "вечер",
-            temp: "+13°",
-            condition: "clear",
-          },
-        ],
-        x_svg: 96,
-        y_svg: 110,
-      },
-      {
-        name_ru: "Азатан",
-        name_loc: "Ազատան",
-        name_en: "Azatan",
-        area_en: "Shirak Province",
-        now: {
-          temp: "+10°",
-          condition: "clear",
-          condition_s: "облачно, дождь",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "+3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 66,
-        y_svg: 145,
-      },
-      {
-        name_ru: "Баграван",
-        name_loc: "Բագրավան",
-        name_en: "Bagravan",
-        area_en: "Shirak Province",
-        now: {
-          temp: "-6°",
-          condition: "clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 32,
-        y_svg: 188,
-      },
-      {
-        name_ru: "Маралик",
-        name_loc: "Մարալիկ",
-        name_en: "Maralik",
-        area_en: "Shirak Province",
-        now: {
-          temp: "-6°",
-          condition: "clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 73,
-        y_svg: 173,
-      },
-      {
-        name_ru: "Артик",
-        name_loc: "Արթիկ",
-        name_en: "Artik",
-        area_en: "Shirak Province",
-        now: {
-          temp: "-6°",
-          condition: "clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 107,
-        y_svg: 161,
-      },
-      {
-        name_ru: "Степанаван",
-        name_loc: "Ստեփանավան",
-        name_en: "Stepanavan",
-        area_en: "Lori Province",
-        home: true,
-        now: {
-          temp: "-6°",
-          condition: "clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-3°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "+12°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 171,
-        y_svg: 52,
-      },
-      {
-        name_ru: "Гюмри",
-        name_loc: "Գյումրի",
-        name_en: "Gyumri",
-        area_en: "Shirak Province",
-        home: true,
-        now: {
-          temp: "+1°",
-          condition: "cloudy_rain_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-3°",
-          condition: "cloudy",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 62,
-        y_svg: 117,
-      },
-      {
-        name_ru: "Ванадзор",
-        name_loc: "Վանաձոր",
-        name_en: "Vanadzor",
-        area_en: "Lori Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 191,
-        y_svg: 115,
-      },
-      {
-        name_ru: "Мецаван",
-        name_loc: "Մեծավան",
-        name_en: "Metsavan",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 129,
-        y_svg: 24,
-      },
-      {
-        name_ru: "Ташир",
-        name_loc: "Տաշիր",
-        name_en: "Tashir",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 153,
-        y_svg: 33,
-      },
-      {
-        name_ru: "Благодарное",
-        name_loc: "Բլագոդարնոյե",
-        name_en: "Blagodarnoe",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 128,
-        y_svg: 55,
-      },
-      {
-        name_ru: "Привольное",
-        name_loc: "Պրիվոլնոյե",
-        name_en: "Privolnoye",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 189,
-        y_svg: 33,
-      },
-      {
-        name_ru: "Шамлуг",
-        name_loc: "Շամլուղ",
-        name_en: "Shamlugh",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 230,
-        y_svg: 24,
-      },
-      {
-        name_ru: "Ахтала",
-        name_loc: "Ախթալա",
-        name_en: "Akhtala",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 254,
-        y_svg: 37,
-      },
-      {
-        name_ru: "Алаверди",
-        name_en: "Alaverdi",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 223,
-        y_svg: 46,
-      },
-      {
-        name_ru: "Сараарт",
-        name_en: "Sarahart",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 137,
-        y_svg: 92,
-      },
-      {
-        name_ru: "Цахкабер",
-        name_en: "Tsakhkaber",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 113,
-        y_svg: 116,
-      },
-      {
-        name_ru: "Спитак",
-        name_en: "Spitak",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 148,
-        y_svg: 112,
-      },
-      {
-        name_ru: "Гаргар",
-        name_en: "Gargar",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 183,
-        y_svg: 86,
-      },
-      {
-        name_ru: "Туманян",
-        name_en: "Tumanyan",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 221,
-        y_svg: 69,
-      },
-      {
-        name_ru: "Ваагни",
-        name_en: "Vahagni",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 211,
-        y_svg: 97,
-      },
-      {
-        name_ru: "Маргаовит",
-        name_en: "Margahovit",
-        area_en: "Lori Province",
-
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 227,
-        y_svg: 136,
-      },
-      {
-        name_ru: "Иджеван",
-        name_en: "Ijevan",
-        area_en: "Tavush Province",
-        home: true,
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 299,
-        y_svg: 105,
-      },
-      {
-        name_ru: "Берд",
-        name_en: "Berd",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 341,
-        y_svg: 99,
-      },
-      {
-        name_ru: "Ахтанак",
-        name_en: "Haghtanak",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 253,
-        y_svg: 19,
-      },
-      {
-        name_ru: "Ноемберян",
-        name_en: "Noyemberian",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 281,
-        y_svg: 33,
-      },
-      {
-        name_ru: "Воскепар",
-        name_en: "Voskepar",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 282,
-        y_svg: 56,
-      },
-      {
-        name_ru: "Севкар",
-        name_en: "Sevkar",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 308,
-        y_svg: 72,
-      },
-      {
-        name_ru: "Айгедзор",
-        name_en: "Aygedzor",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 372,
-        y_svg: 121,
-      },
-      {
-        name_ru: "Дилижан",
-        name_en: "Dilijan",
-        area_en: "Tavush Province",
-        now: {
-          temp: "+6°",
-          condition: "cloudy_rain_1_thunderstorm_1_hail_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_sleet_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 256,
-        y_svg: 136,
-      },
-      {
-        name_ru: "Аштарак",
-        name_en: "Ashtarak",
-        area_en: "Aragatsotn Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 150,
-        y_svg: 240,
-      },
-      {
-        name_ru: "Гетап",
-        name_en: "Getap",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 27,
-        y_svg: 214,
-      },
-      {
-        name_ru: "Арагац",
-        name_en: "Aragats",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 32,
-        y_svg: 237,
-      },
-      {
-        name_ru: "Заринджа",
-        name_en: "Zarinja",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 50,
-        y_svg: 193,
-      },
-      {
-        name_ru: "Мастара",
-        name_en: "Mastara",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 77,
-        y_svg: 195,
-      },
-      {
-        name_ru: "Талин",
-        name_en: "Talin",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 73,
-        y_svg: 220,
-      },
-      {
-        name_ru: "Какавадзор",
-        name_en: "Kakavadzor",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 105,
-        y_svg: 222,
-      },
-      {
-        name_ru: "Аруч",
-        name_en: "Aruch",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 109,
-        y_svg: 247,
-      },
-      {
-        name_ru: "Беркарат",
-        name_en: "Berkarat",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 126,
-        y_svg: 143,
-      },
-      {
-        name_ru: "Цилкар",
-        name_en: "Tsilkar",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 154,
-        y_svg: 136,
-      },
-      {
-        name_ru: "Цахкаовит",
-        name_en: "Tsaghkahovit",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 135,
-        y_svg: 166,
-      },
-      {
-        name_ru: "Апаран",
-        name_en: "Aparan",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 167,
-        y_svg: 174,
-      },
-      {
-        name_ru: "Артаван",
-        name_en: "Hartavan",
-        area_en: "Aragatsotn Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 157,
-        y_svg: 198,
-      },
-      {
-        name_ru: "Масис",
-        name_en: "Masis",
-        area_en: "Ararat Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 172,
-        y_svg: 298,
-      },
-      {
-        name_ru: "Гетазат",
-        name_en: "Getazat",
-        area_en: "Ararat Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 204,
-        y_svg: 301,
-      },
-      {
-        name_ru: "Веди",
-        name_en: "Vedi",
-        area_en: "Ararat Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 231,
-        y_svg: 335,
-      },
-      {
-        name_ru: "Арарат",
-        name_en: "Ararat",
-        area_en: "Ararat Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 227,
-        y_svg: 359,
-      },
-      {
-        name_ru: "Шахап",
-        name_en: "Shaghap",
-        area_en: "Ararat Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 271,
-        y_svg: 348,
-      },
-      {
-        name_ru: "Ерасх",
-        name_en: "Yeraskh",
-        area_en: "Ararat Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snow_0",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_snow_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 248,
-        y_svg: 383,
-      },
-      {
-        name_ru: "Раздан",
-        name_en: "Hrazdan",
-        area_en: "Kotayk Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 233,
-        y_svg: 185,
-      },
-      {
-        name_ru: "Анкаван",
-        name_en: "Hanqavan",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 193,
-        y_svg: 154,
-      },
-      {
-        name_ru: "Цахкадзор",
-        name_en: "Tsakhkadzor",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 229,
-        y_svg: 163,
-      },
-      {
-        name_ru: "Чаренцаван",
-        name_en: "Charentsavan",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 220,
-        y_svg: 208,
-      },
-      {
-        name_ru: "Егвард",
-        name_en: "Yeghvard",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 187,
-        y_svg: 230,
-      },
-      {
-        name_ru: "Бюрегаван",
-        name_en: "Byureghavan",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 214,
-        y_svg: 231,
-      },
-      {
-        name_ru: "Атис",
-        name_en: "Hatis",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 240,
-        y_svg: 229,
-      },
-      {
-        name_ru: "Абовян",
-        name_en: "Abovyan",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 213,
-        y_svg: 255,
-      },
-      {
-        name_ru: "Зар",
-        name_en: "Zar",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 241,
-        y_svg: 253,
-      },
-      {
-        name_ru: "Гохт",
-        name_en: "Goght",
-        area_en: "Kotayk Province",
-        now: {
-          temp: "+5°",
-          condition: "mainly-clear",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "mainly-clear_rain_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "mainly-clear_rain_0_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 244,
-        y_svg: 279,
-      },
-      {
-        name_ru: "Гавар",
-        name_en: "Gavar",
-        area_en: "Gegharkunik Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "mostly-cloudy",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_0",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 310,
-        y_svg: 215,
-      },
-      {
-        name_ru: "Армавир",
-        name_en: "Armavir",
-        area_en: "Armavir Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 72,
-        y_svg: 273,
-      },
-      {
-        name_ru: "Ервандашат",
-        name_en: "Yervandashat",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 33,
-        y_svg: 278,
-      },
-      {
-        name_ru: "Каракерт",
-        name_en: "Karakert",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 61,
-        y_svg: 249,
-      },
-      {
-        name_ru: "Баграмян",
-        name_en: "Baghramyan",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 53,
-        y_svg: 269,
-      },
-      {
-        name_ru: "Налбандян",
-        name_en: "Nalbandyan",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 85,
-        y_svg: 297,
-      },
-      {
-        name_ru: "Мецамор",
-        name_en: "Metsamor",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 121,
-        y_svg: 276,
-      },
-      {
-        name_ru: "Маргара",
-        name_en: "Margara",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 127,
-        y_svg: 299,
-      },
-      {
-        name_ru: "Эчмиацин",
-        name_en: "Echmiatsin",
-        area_en: "Armavir Province",
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_rain_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_rain_1_hail_1_thunderstorm_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 151,
-        y_svg: 265,
-      },
-      {
-        name_ru: "Ереван",
-        name_en: "Yerevan",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_sleet_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "partly-cloudy_sleet_0",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "partly-cloudy_snow_0",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 230,
-        y_svg: 255,
-      },
-      {
-        name_ru: "Арташат",
-        name_en: "Artashat",
-        area_en: "Ararat Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "partly-cloudy_snow_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "semitransparent",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "snowstorm",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 194,
-        y_svg: 321,
-      },
-      {
-        name_ru: "Варденис",
-        name_en: "Vardenis",
-        area_en: "Gegharkunik Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 395,
-        y_svg: 258,
-      },
-      {
-        name_ru: "Севан",
-        name_en: "Sevan",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 259,
-        y_svg: 170,
-      },
-      {
-        name_ru: "Чамбарак",
-        name_en: "Chambarak",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 336,
-        y_svg: 169,
-      },
-      {
-        name_ru: "Джил",
-        name_en: "Jil",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 363,
-        y_svg: 200,
-      },
-      {
-        name_ru: "Арегуни",
-        name_en: "Areguni",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 387,
-        y_svg: 228,
-      },
-      {
-        name_ru: "Мартуни",
-        name_en: "Martuni",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 323,
-        y_svg: 268,
-      },
-      {
-        name_ru: "Варденик",
-        name_en: "Vardenik",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 359,
-        y_svg: 260,
-      },
-      {
-        name_ru: "Сотк",
-        name_en: "Sotk",
-        area_en: "Gegharkunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_snowstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 438,
-        y_svg: 255,
-      },
-      {
-        name_ru: "Ехегнадзор",
-        name_en: "Yeghegnadzor",
-        area_en: "Vayots Dzor Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 344,
-        y_svg: 366,
-      },
-      {
-        name_ru: "Агнджадзор",
-        name_en: "Aghnjadzor",
-        area_en: "Vayots Dzor Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 337,
-        y_svg: 328,
-      },
-      {
-        name_ru: "Арени",
-        name_en: "Areni",
-        area_en: "Vayots Dzor Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 318,
-        y_svg: 376,
-      },
-      {
-        name_ru: "Эрмон",
-        name_en: "Hermon",
-        area_en: "Vayots Dzor Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 369,
-        y_svg: 339,
-      },
-      {
-        name_ru: "Вайк",
-        name_en: "Vayk",
-        area_en: "Vayots Dzor Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 375,
-        y_svg: 385,
-      },
-      {
-        name_ru: "Джермук",
-        name_en: "Jermuk",
-        area_en: "Vayots Dzor Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 411,
-        y_svg: 340,
-      },
-      {
-        name_ru: "Сараван",
-        name_en: "Saravan",
-        area_en: "Vayots Dzor Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 412,
-        y_svg: 377,
-      },
-      {
-        name_ru: "Капан",
-        name_en: "Kapan",
-        area_en: "Syunik Province",
-        home: true,
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 545,
-        y_svg: 478,
-      },
-      {
-        name_ru: "Сисиан",
-        name_en: "Sisian",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 463,
-        y_svg: 405,
-      },
-      {
-        name_ru: "Дастакерт",
-        name_en: "Dastakert",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 467,
-        y_svg: 443,
-      },
-      {
-        name_ru: "Tex",
-        name_en: "Tegh",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 560,
-        y_svg: 401,
-      },
-      {
-        name_ru: "Горис",
-        name_en: "Goris",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 523,
-        y_svg: 407,
-      },
-      {
-        name_ru: "Татев",
-        name_en: "Tatev",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 509,
-        y_svg: 437,
-      },
-      {
-        name_ru: "Каджаран",
-        name_en: "Kajaran",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 496,
-        y_svg: 494,
-      },
-      {
-        name_ru: "Шишкерт",
-        name_en: "Shishkert",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 535,
-        y_svg: 508,
-      },
-      {
-        name_ru: "Мегри",
-        name_en: "Meghri",
-        area_en: "Syunik Province",
-        now: {
-          temp: "+5°",
-          condition: "cloudy_rain_0_thunderstorm_1",
-          wind_dir: "se",
-          wind_descr: "13 м/с ЮВ",
-        },
-        tomorrow: {
-          temp: "-33°",
-          condition: "cloudy_rain_1",
-          wind_dir: "ne",
-          wind_descr: "3 м/с СВ",
-        },
-        overmorrow: {
-          temp: "-2°",
-          condition: "cloudy_rain_1_thunderstorm_1",
-          wind_dir: "w",
-          wind_descr: "7 м/с З",
-        },
-        x_svg: 511,
-        y_svg: 538,
-      },
-    ],
+    datasetsMap: [],
     /**
      * Список всех городов Армении.
      */
@@ -2696,248 +110,7 @@ export default new Vuex.Store({
     /**
      * Самые населенные города Армении.
      */
-    listTopCities: [
-      { temp: "+6°", name_loc: "Երևան", name_ru: "Гюмри", name_en: "Gyumri" },
-      {
-        temp: "+6°",
-        name_loc: "Գյումրի",
-        name_ru: "Ереван",
-        name_en: "Yerevan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Վանաձոր",
-        name_ru: "Ванадзор",
-        name_en: "Vanadzor",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Աբովյան",
-        name_ru: "Абовян",
-        name_en: "Abovyan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Էջմիածին",
-        name_ru: "Эчмиацин",
-        name_en: "Echmiatsin",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Հրազդան",
-        name_ru: "Раздан",
-        name_en: "Hrazdan",
-      },
-      { temp: "+6°", name_loc: "Կապան", name_ru: "Капан", name_en: "Kapan" },
-      {
-        temp: "+6°",
-        name_loc: "Արմավիր",
-        name_ru: "Армавир",
-        name_en: "Armavir",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Չարենցավան",
-        name_ru: "Чаренцаван",
-        name_en: "Charentsavan",
-      },
-      { temp: "+6°", name_loc: "Սևան", name_ru: "Севан", name_en: "Sevan" },
-      {
-        temp: "+6°",
-        name_loc: "Արտաշատ",
-        name_ru: "Арташат",
-        name_en: "Artashat",
-      },
-      { temp: "+6°", name_loc: "Գավառ", name_ru: "Гавар", name_en: "Gavar" },
-      { temp: "+6°", name_loc: "Գորիս", name_ru: "Горис", name_en: "Goris" },
-      { temp: "+6°", name_loc: "Իջևան", name_ru: "Иджеван", name_en: "Ijevan" },
-      { temp: "+6°", name_loc: "Արարատ", name_ru: "Арарат", name_en: "Ararat" },
-      { temp: "+6°", name_loc: "Մասիս", name_ru: "Масис", name_en: "Masis" },
-      { temp: "+6°", name_loc: "Սպիտակ", name_ru: "Спитак", name_en: "Spitak" },
-      {
-        temp: "+6°",
-        name_loc: "Դիլիջան",
-        name_ru: "Дилижан",
-        name_en: "Dilijan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Աշտարակ",
-        name_ru: "Аштарак",
-        name_en: "Ashtarak",
-      },
-      { temp: "+6°", name_loc: "Արթիկ", name_ru: "Артик", name_en: "Artik" },
-      {
-        temp: "+6°",
-        name_loc: "Ալավերդի",
-        name_ru: "Алаверди",
-        name_en: "Alaverdi",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Ստեփանավան",
-        name_ru: "Степанаван",
-        name_en: "Stepanavan",
-      },
-      { temp: "+6°", name_loc: "Սիսիան", name_ru: "Сисиан", name_en: "Sisian" },
-      {
-        temp: "+6°",
-        name_loc: "Վարդենիս",
-        name_ru: "Варденис",
-        name_en: "Vardenis",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Մարտունի",
-        name_ru: "Мартуни",
-        name_en: "Martuni",
-      },
-      { temp: "+6°", name_loc: "Վեդի", name_ru: "Веди", name_en: "Vedi" },
-      {
-        temp: "+6°",
-        name_loc: "Եղվարդ",
-        name_ru: "Егвард",
-        name_en: "Yeghvard",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Մեծամոր",
-        name_ru: "Мецамор",
-        name_en: "Metsamor",
-      },
-      { temp: "+6°", name_loc: "Բերդ", name_ru: "Берд", name_en: "Berd" },
-      { temp: "+6°", name_loc: "Այնթապ", name_ru: "Айнтап", name_en: "Ayntap" },
-      {
-        temp: "+6°",
-        name_loc: "Սարուխան",
-        name_ru: "Сарухан",
-        name_en: "Sarukhan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Եղեգնաձոր",
-        name_ru: "Ехегнадзор",
-        name_en: "Yeghegnadzor",
-      },
-      { temp: "+6°", name_loc: "Արարատ", name_ru: "Арарат", name_en: "Ararat" },
-      { temp: "+6°", name_loc: "Տաշիր", name_ru: "Ташир", name_en: "Tashir" },
-      {
-        temp: "+6°",
-        name_loc: "Նոր Խարբերդ",
-        name_ru: "Нор Харберд",
-        name_en: "Nor Kharberd",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Քաջարան",
-        name_ru: "Каджаран",
-        name_en: "Kajaran",
-      },
-      { temp: "+6°", name_loc: "Գառնի", name_ru: "Гарни", name_en: "Garni" },
-      {
-        temp: "+6°",
-        name_loc: "Սարչապետ",
-        name_ru: "Сарчапет",
-        name_en: "Sarchapet",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Սարդարապատ",
-        name_ru: "Сардарапат",
-        name_en: "Sardarapat",
-      },
-      { temp: "+6°", name_loc: "Ապարան", name_ru: "Апаран", name_en: "Aparan" },
-      {
-        temp: "+6°",
-        name_loc: "Մեծավան",
-        name_ru: "Мецаван",
-        name_en: "Metsavan",
-      },
-      { temp: "+6°", name_loc: "Վայք", name_ru: "Вайк", name_en: "Vayk" },
-      {
-        temp: "+6°",
-        name_loc: "Մանթաշ",
-        name_ru: "Манташ",
-        name_en: "Mantash",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Նոյեմբերյան",
-        name_ru: "Ноемберян",
-        name_en: "Noyemberian",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Նալբանդյան",
-        name_ru: "Налбандян",
-        name_en: "Nalbandyan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Մարալիկ",
-        name_ru: "Маралик",
-        name_en: "Maralik",
-      },
-      { temp: "+6°", name_loc: "Թալին", name_ru: "Талин", name_en: "Talin" },
-      {
-        temp: "+6°",
-        name_loc: "Կարմիրգյուղ",
-        name_ru: "Кармиргюх",
-        name_en: "Karmirgyugh",
-      },
-      { temp: "+6°", name_loc: "Ավշար", name_ru: "Авшар", name_en: "Avshar" },
-      {
-        temp: "+6°",
-        name_loc: "Ոսկետափ",
-        name_ru: "Воскетап",
-        name_en: "Vosketap",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Ջերմուկ",
-        name_ru: "Джермук",
-        name_en: "Jermuk",
-      },
-      { temp: "+6°", name_loc: "Մեղրի", name_ru: "Мегри", name_en: "Meghri" },
-      { temp: "+6°", name_loc: "Օձուն", name_ru: "Одзун", name_en: "Odzun" },
-      {
-        temp: "+6°",
-        name_loc: "Մխչյան",
-        name_ru: "Мхчян",
-        name_en: "Mkhchyan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Մալիշկա",
-        name_ru: "Малишка",
-        name_en: "Malishka",
-      },
-      { temp: "+6°", name_loc: "Ագարակ", name_ru: "Агарак", name_en: "Agarak" },
-      {
-        temp: "+6°",
-        name_loc: "Վերին Արտաշատ",
-        name_ru: "Верин Арташат",
-        name_en: "Verin Artashat",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Այգավան",
-        name_ru: "Айгаван",
-        name_en: "Aygavan",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Գանձակ",
-        name_ru: "Гандзак",
-        name_en: "Gandzak",
-      },
-      {
-        temp: "+6°",
-        name_loc: "Շահումյան",
-        name_ru: "Шаумян",
-        name_en: "Shahumian",
-      },
-    ],
+    listTopCities: [],
   },
   getters: {
     /**
@@ -2946,12 +119,24 @@ export default new Vuex.Store({
      * "ru"
      * @param state Текущее состояние store.
      */
-    getLocales(state) {
-      return state.locales;
+    getLocale(state) {
+      return state.locale ?? "ru";
     },
-    getLocalesURL(state) {
-      return state.locales === "ru" ? undefined : state.locales;
+    getLocaleURL(state) {
+      return state.locale === "ru" ? undefined : state.locale;
     },
+    getConstantLocale:
+      ({ translatedConstants }, { getLocale }) =>
+      (key, name) => {
+        return key !== undefined && name !== undefined
+          ? translatedConstants[getLocale][key][name]
+          : key !== undefined
+          ? translatedConstants[getLocale][key]
+          : (console.log(
+              "Не найден ключ и/или имя параметра в языковых константах!"
+            ),
+            undefined);
+      },
     /**
      * Геттер с условиями для отображения лоадера.
      * @param state Текущее состояние store.
@@ -2959,26 +144,26 @@ export default new Vuex.Store({
     loading(state) {
       return state.loading;
     },
-    getCountryNameLoc({ locales, country_loc }) {
-      const countryName = country_loc[locales];
+    getCountryNameLoc({ locale, country_loc }) {
+      const countryName = country_loc[locale];
       return capitalize(countryName);
     },
     /**
      * Возвращает город для которого будет выводится прогноз.
      * @param citySelected Текущее значение store.citySelected.
      * @param listAllCities Текущее значение store.listAllCities.
-     * @param getLocales Текущее значение store.getLocales.
+     * @param getLocale Текущее значение store.getLocale.
      * @example
      * {name_en:"amasia",name_loc_choice:"Амасия"}
      */
-    getCitySelected({ listAllCities, citySelected }, { getLocales }) {
+    getCitySelected({ listAllCities, citySelected }, { getLocale }) {
       const city = listAllCities.find(
         ({ name_en }) => name_en.toLowerCase() === citySelected.toLowerCase()
       );
       if (!city) {
         return;
       }
-      const cityName = choiceNameByLocale(getLocales, city);
+      const cityName = choiceNameByLocale(getLocale, city);
       return {
         name_en: city.name_en.toLowerCase(),
         name_loc_choice: capitalize(cityName),
@@ -2991,37 +176,37 @@ export default new Vuex.Store({
      * Возвращает данные для отображения в шапке виджета.
      * Левая часть.
      * @param state Текущее состояние store.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
-    currentBlock(state, { getLocales, datasetsForHourlyCharts }) {
+    currentBlock(state, { getLocale, datasetsForHourlyCharts }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       /**
        * Данные используемые для отоброжения. Берем прогнозные данные
        * за текущий час из часового прогноза.
        */
       const data = state.datasetsHourly[0][1];
-      const time = setTimeFormat(new Date(), "H:i", getLocales);
+      const time = setTimeFormat(new Date(), "H:i", getLocale);
       const tempData = datasetsForHourlyCharts.data[1].value[0];
       return {
         timeText: `${languageExpressions(
-          getLocales,
+          getLocale,
           "currentBlock",
           "now"
         )} ${time} ${languageExpressions(
-          getLocales,
+          getLocale,
           "currentBlock",
           "forecast"
         )}`,
         condition: data.condition,
         condition_s:
-          getLocales !== "ru"
-            ? languageExpressions(getLocales, "weather_sign", data.condition)
+          getLocale !== "ru"
+            ? languageExpressions(getLocale, "weather_sign", data.condition)
             : data.condition_s,
         temp: `${addPlus(tempData.temp.value)}${
-          languageExpressions(getLocales, "units", "temp")[0]
+          languageExpressions(getLocale, "units", "temp")[0]
         }`,
         realFeel: `${languageExpressions(
-          getLocales,
+          getLocale,
           "currentBlock",
           "feelsLike"
         )} ${addPlus(tempData.feels_like.value)}`,
@@ -3031,59 +216,59 @@ export default new Vuex.Store({
      * Возвращает данные для отображения в шапке виджета.
      * Правая часть.
      * @param state Текущее состояние store.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
-    datasetCurrentBlockItem(state, { getLocales }) {
+    datasetCurrentBlockItem(state, { getLocale }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       const data = state.datasetsHourly[0][1];
       return [
         {
           icon: "wind-direction-grey",
           title: `${languageExpressions(
-            getLocales,
+            getLocale,
             "climateIndicators",
             "wind"
           )}:`,
           value: `${data.wind_speed} ${
-            languageExpressions(getLocales, "units", "speed")[0]
+            languageExpressions(getLocale, "units", "speed")[0]
           }`,
           wind_dir: [
             data.wind_dir,
-            languageExpressions(getLocales, "windDir", data.wind_dir)[1],
+            languageExpressions(getLocale, "windDir", data.wind_dir)[1],
           ],
         },
         {
           icon: "wind-gust",
           title: `${languageExpressions(
-            getLocales,
+            getLocale,
             "climateIndicators",
             "windGust_1"
           )}:`,
           value: `${data.wind_gust} ${
-            languageExpressions(getLocales, "units", "speed")[0]
+            languageExpressions(getLocale, "units", "speed")[0]
           }`,
           wind_dir: [data.wind_dir],
         },
         {
           icon: "pressure",
           title: `${languageExpressions(
-            getLocales,
+            getLocale,
             "climateIndicators",
             "pressure"
           )}:`,
           value: `${data.pressure} ${
-            languageExpressions(getLocales, "units", "pressure")[0]
+            languageExpressions(getLocale, "units", "pressure")[0]
           }`,
         },
         {
           icon: "humidity",
           title: `${languageExpressions(
-            getLocales,
+            getLocale,
             "climateIndicators",
             "humidity"
           )}:`,
           value: `${data.humidity}${
-            languageExpressions(getLocales, "units", "percent")[0]
+            languageExpressions(getLocale, "units", "percent")[0]
           }`,
         },
       ];
@@ -3092,9 +277,9 @@ export default new Vuex.Store({
      * Возвращает значения температур и другие данные для таблицы и графика на вкладке
      * "Прогноз погоды на 7-14 дней".
      * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
-    tenDaysTabTable: ({ datasetsTenDays }, { getLocales }) => {
+    tenDaysTabTable: ({ datasetsTenDays }, { getLocale }) => {
       const valuesArr = Object.values(datasetsTenDays);
       if (valuesArr.length === 0) return {};
       /**
@@ -3106,35 +291,34 @@ export default new Vuex.Store({
         const weekday = setTimeFormat(
           e.start_date,
           "D",
-          getLocales
+          getLocale
         ).toLowerCase();
         return {
           weekday: weekday,
           weekend:
-            weekday ===
-              `${languageExpressions(getLocales, "weekendDays")[0]}` ||
-            weekday === `${languageExpressions(getLocales, "weekendDays")[1]}`,
-          date: setTimeFormat(e.start_date, "d.m", getLocales),
+            weekday === `${languageExpressions(getLocale, "weekendDays")[0]}` ||
+            weekday === `${languageExpressions(getLocale, "weekendDays")[1]}`,
+          date: setTimeFormat(e.start_date, "d.m", getLocale),
           condition: e.day.condition,
           prec_sum: {
             value: e.day.prec_sum,
-            unit: languageExpressions(getLocales, "units", "precSum")[0],
+            unit: languageExpressions(getLocale, "units", "precSum")[0],
           },
           wind: {
             value: e.day.wind_speed,
-            unit: languageExpressions(getLocales, "units", "speed")[0],
+            unit: languageExpressions(getLocale, "units", "speed")[0],
             wind_dir: [
               e.day.wind_dir,
-              languageExpressions(getLocales, "windDir", e.day.wind_dir)[1],
+              languageExpressions(getLocale, "windDir", e.day.wind_dir)[1],
             ],
           },
           pressure: {
             value: e.day.pressure,
-            unit: languageExpressions(getLocales, "units", "pressure")[0],
+            unit: languageExpressions(getLocale, "units", "pressure")[0],
           },
           humidity: {
             value: e.day.humidity,
-            unit: languageExpressions(getLocales, "units", "percent")[0],
+            unit: languageExpressions(getLocale, "units", "percent")[0],
           },
         };
       });
@@ -3160,7 +344,7 @@ export default new Vuex.Store({
      *  max: 2
      * }]
      */
-    tenDaysTabTempCharts: ({ datasetsTenDays }, { getLocales }) => {
+    tenDaysTabTempCharts: ({ datasetsTenDays }, { getLocale }) => {
       const arr = Object.values(datasetsTenDays);
       if (arr.length === 0) return {};
       /**
@@ -3200,7 +384,7 @@ export default new Vuex.Store({
        */
       const min = Math.min(...nightTemp, ...dayTemp);
       const max = Math.max(...dayTemp, ...nightTemp);
-      const unit = languageExpressions(getLocales, "units", "temp")[0];
+      const unit = languageExpressions(getLocale, "units", "temp")[0];
       return [
         { unit, value: dayTemp, descr: "day", min, max },
         { unit, value: nightTemp, descr: "night", min, max },
@@ -3210,9 +394,9 @@ export default new Vuex.Store({
      * Возвращает данные для отображения таблицы подробного
      * почасового прогноза с разбивкой на часовые интервалы.
      * @param datasetsHourly Текущее состояние store.state.datasetsHourly.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
-    hourlyTabTable({ datasetsHourly }, { getLocales }) {
+    hourlyTabTable({ datasetsHourly }, { getLocale }) {
       if (Object.keys(datasetsHourly).length === 0) return {};
       /**
        * Возвращает значение времени для последующей сортировки.
@@ -3226,8 +410,8 @@ export default new Vuex.Store({
         const arr = Object.values(datasetsHourly[key])
           .filter((i) => typeof i === "object")
           .sort((a, b) => sortData(a) - sortData(b));
-        const weekday = setTimeFormat(arr[0].date, "l", getLocales);
-        const day = setTimeFormat(arr[0].date, "d F", getLocales);
+        const weekday = setTimeFormat(arr[0].date, "l", getLocale);
+        const day = setTimeFormat(arr[0].date, "d F", getLocale);
         const showArr = arr.map(
           ({
             condition,
@@ -3247,24 +431,24 @@ export default new Vuex.Store({
               date,
               light,
               humidity: `${humidity}${
-                languageExpressions(getLocales, "units", "percent")[0]
+                languageExpressions(getLocale, "units", "percent")[0]
               }`,
               prec_sum: `${prec_sum} ${
-                languageExpressions(getLocales, "units", "precSum")[0]
+                languageExpressions(getLocale, "units", "precSum")[0]
               }`,
               pressure,
               temp: `${temp}${
-                languageExpressions(getLocales, "units", "temp")[0]
+                languageExpressions(getLocale, "units", "temp")[0]
               }`,
               feels_like: `${feels_like}${
-                languageExpressions(getLocales, "units", "temp")[0]
+                languageExpressions(getLocale, "units", "temp")[0]
               }`,
               wind_dir: [
                 wind_dir,
-                `${languageExpressions(getLocales, "windDir", wind_dir)[1]}`,
+                `${languageExpressions(getLocale, "windDir", wind_dir)[1]}`,
               ],
               wind_speed: `${wind_speed} ${
-                languageExpressions(getLocales, "units", "speed")[0]
+                languageExpressions(getLocale, "units", "speed")[0]
               }`,
             };
           }
@@ -3272,7 +456,7 @@ export default new Vuex.Store({
         const time =
           datasetsHourly[key]["sunrise"] && datasetsHourly[key]["sunset"]
             ? daytime(
-                getLocales,
+                getLocale,
                 datasetsHourly[key]["sunrise"],
                 datasetsHourly[key]["sunset"]
               )
@@ -3286,10 +470,10 @@ export default new Vuex.Store({
           dayLength: {
             value: time,
             sunrise: datasetsHourly[key]["sunrise"]
-              ? setTimeFormat(datasetsHourly[key]["sunrise"], "H:i", getLocales)
+              ? setTimeFormat(datasetsHourly[key]["sunrise"], "H:i", getLocale)
               : undefined,
             sunset: datasetsHourly[key]["sunset"]
-              ? setTimeFormat(datasetsHourly[key]["sunset"], "H:i", getLocales)
+              ? setTimeFormat(datasetsHourly[key]["sunset"], "H:i", getLocale)
               : undefined,
           },
         };
@@ -3301,9 +485,9 @@ export default new Vuex.Store({
      * Подробный прогноз ограничен 10 днями.
      * Из данных с сервера убираем текущие сутки и последние.
      * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
-    tenDaysDetailsCard: ({ datasetsTenDays }, { getLocales }) => {
+    tenDaysDetailsCard: ({ datasetsTenDays }, { getLocale }) => {
       const valuesArr = Object.values(datasetsTenDays);
       if (valuesArr.length === 0) return {};
       const sliceEndIndex = valuesArr.length > 12 ? 12 : valuesArr.length;
@@ -3312,60 +496,59 @@ export default new Vuex.Store({
         .map((e, index, array) => {
           const formatWeekday = ["D", "l"];
           const weekday = formatWeekday.map((el) =>
-            setTimeFormat(e.start_date, el, getLocales).toLowerCase()
+            setTimeFormat(e.start_date, el, getLocale).toLowerCase()
           );
           const formatDate = ["d.m", "d F"];
           const date = formatDate.map((el) =>
-            setTimeFormat(e.start_date, el, getLocales)
+            setTimeFormat(e.start_date, el, getLocale)
           );
           const time =
             e.sunrise && e.sunset
-              ? daytime(getLocales, e.sunrise, e.sunset)
+              ? daytime(getLocale, e.sunrise, e.sunset)
               : undefined;
           return {
             weekday,
             date,
             isOpen: e.isOpen,
             weekend:
-              weekday[0] ===
-                languageExpressions(getLocales, "weekendDays")[0] ||
-              weekday[0] === languageExpressions(getLocales, "weekendDays")[1],
+              weekday[0] === languageExpressions(getLocale, "weekendDays")[0] ||
+              weekday[0] === languageExpressions(getLocale, "weekendDays")[1],
             condition: e.day.condition,
             condition_s:
-              getLocales !== "ru"
+              getLocale !== "ru"
                 ? languageExpressions(
-                    getLocales,
+                    getLocale,
                     "weather_sign",
                     e.day.condition
                   )
                 : e.day.condition_s,
             precProb: {
               title: languageExpressions(
-                getLocales,
+                getLocale,
                 "climateIndicators",
                 "precProb"
               ),
               value: `${e.day.prec_prob}${
-                languageExpressions(getLocales, "units", "percent")[0]
+                languageExpressions(getLocale, "units", "percent")[0]
               }`,
             },
             wind: {
               title: languageExpressions(
-                getLocales,
+                getLocale,
                 "climateIndicators",
                 "wind"
               ),
               value: `${languageExpressions(
-                getLocales,
+                getLocale,
                 "windDir",
                 e.day.wind_dir
               )[1].toUpperCase()} ${e.day.wind_speed} ${
-                languageExpressions(getLocales, "units", "speed")[0]
+                languageExpressions(getLocale, "units", "speed")[0]
               }`,
             },
             pressure: {
               title: languageExpressions(
-                getLocales,
+                getLocale,
                 "climateIndicators",
                 "pressure"
               ),
@@ -3373,54 +556,50 @@ export default new Vuex.Store({
             },
             wind_gust: {
               title: languageExpressions(
-                getLocales,
+                getLocale,
                 "climateIndicators",
                 "windGust_1"
               ).split(" ")[0],
               value: `${e.day.wind_gust} ${
-                languageExpressions(getLocales, "units", "speed")[0]
+                languageExpressions(getLocale, "units", "speed")[0]
               }`,
             },
             comf_idx: {
               title: languageExpressions(
-                getLocales,
+                getLocale,
                 "climateIndicators",
                 "comfort"
               ),
               value: `${e.day.comf_idx}0 ${
-                languageExpressions(getLocales, "units", "percent")[0]
+                languageExpressions(getLocale, "units", "percent")[0]
               }`,
             },
             humidity: {
               title: languageExpressions(
-                getLocales,
+                getLocale,
                 "climateIndicators",
                 "humidity"
               ),
               value: `${e.day.humidity} ${
-                languageExpressions(getLocales, "units", "percent")[0]
+                languageExpressions(getLocale, "units", "percent")[0]
               }`,
             },
             temp: {
               min: `${addPlus(array[index + 1]?.night.temp_min)}${
-                languageExpressions(getLocales, "units", "temp")[0]
+                languageExpressions(getLocale, "units", "temp")[0]
               }`,
               max: `${addPlus(e.day.temp_max)}${
-                languageExpressions(getLocales, "units", "temp")[0]
+                languageExpressions(getLocale, "units", "temp")[0]
               }`,
             },
             uvi: {
-              title: languageExpressions(
-                getLocales,
-                "climateIndicators",
-                "uvi"
-              ),
+              title: languageExpressions(getLocale, "climateIndicators", "uvi"),
               value: e.day.uvi,
             },
             dayLength: {
               daytime: {
                 title: languageExpressions(
-                  getLocales,
+                  getLocale,
                   "climateIndicators",
                   "daytime"
                 ),
@@ -3428,10 +607,10 @@ export default new Vuex.Store({
                 value: time,
               },
               sunrise: e.sunrise
-                ? setTimeFormat(e.sunrise, "H:i", getLocales)
+                ? setTimeFormat(e.sunrise, "H:i", getLocale)
                 : undefined,
               sunset: e.sunset
-                ? setTimeFormat(e.sunset, "H:i", getLocales)
+                ? setTimeFormat(e.sunset, "H:i", getLocale)
                 : undefined,
               polar: e.polar ?? undefined,
             },
@@ -3445,9 +624,9 @@ export default new Vuex.Store({
      * прогноза на 10 дней с разбивкой на 3-х часовые интервалы.
      * Из данных с сервера убираем текущие сутки и последние.
      * @param datasetsThreeHour Текущее состояние store.state.datasetsThreeHour.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
-    tenDaysDetailsChart: ({ datasetsThreeHour }, { getLocales }) => {
+    tenDaysDetailsChart: ({ datasetsThreeHour }, { getLocale }) => {
       if (Object.keys(datasetsThreeHour).length === 0) return {};
       /**
        * Возвращает значение времени для последующей сортировки.
@@ -3487,31 +666,31 @@ export default new Vuex.Store({
               condition,
               light,
               humidity: {
-                unit: languageExpressions(getLocales, "units", "percent")[0],
+                unit: languageExpressions(getLocale, "units", "percent")[0],
                 value: humidity,
               },
               prec_sum: {
                 value: prec_sum,
-                unit: languageExpressions(getLocales, "units", "precSum")[0],
+                unit: languageExpressions(getLocale, "units", "precSum")[0],
               },
               temp: {
                 value: temp,
-                unit: languageExpressions(getLocales, "units", "temp")[0],
+                unit: languageExpressions(getLocale, "units", "temp")[0],
               },
               feels_like: {
                 value: feels_like,
-                unit: languageExpressions(getLocales, "units", "temp")[0],
+                unit: languageExpressions(getLocale, "units", "temp")[0],
               },
               pressure: {
                 value: pressure,
-                unit: languageExpressions(getLocales, "units", "pressure")[0],
+                unit: languageExpressions(getLocale, "units", "pressure")[0],
               },
               wind: {
                 value: wind_speed,
-                unit: languageExpressions(getLocales, "units", "speed")[0],
+                unit: languageExpressions(getLocale, "units", "speed")[0],
                 wind_dir: [
                   wind_dir,
-                  languageExpressions(getLocales, "windDir", wind_dir)[1],
+                  languageExpressions(getLocale, "windDir", wind_dir)[1],
                 ],
               },
             };
@@ -3529,10 +708,10 @@ export default new Vuex.Store({
      * @param datasetsHourly Текущее состояние store.state.datasetsHourly.
      * @param datasetsFact Текущее состояние store.state.datasetsFact.
      * @param elem Объект с настройками для отрисовки графика.
-     * @param getLocales Языковая метка.
+     * @param getLocale Языковая метка.
      */
     calcAdjustingForecast:
-      ({ datasetsFact, datasetsHourly }, { getLocales }) =>
+      ({ datasetsFact, datasetsHourly }, { getLocale }) =>
       (elem) => {
         if (Object.keys(datasetsHourly).length === 0) return {};
         const periodAdjusted = elem.periodAdjusted;
@@ -3563,18 +742,18 @@ export default new Vuex.Store({
                 date,
                 temp: {
                   value: temp,
-                  unit: languageExpressions(getLocales, "units", "temp")[0],
+                  unit: languageExpressions(getLocale, "units", "temp")[0],
                 },
                 prec_sum: {
                   value: prec_sum,
-                  unit: languageExpressions(getLocales, "units", "precSum")[0],
+                  unit: languageExpressions(getLocale, "units", "precSum")[0],
                 },
                 feels_like: {
                   value:
                     periodAdjusted !== 0 && Math.abs(deltaTemp) > 1
                       ? feels_like + deltaTemp
                       : feels_like,
-                  unit: languageExpressions(getLocales, "units", "temp")[0],
+                  unit: languageExpressions(getLocale, "units", "temp")[0],
                 },
               };
             })
@@ -3601,7 +780,7 @@ export default new Vuex.Store({
             ...e,
             temp: {
               value: Math.round(calcTemp),
-              unit: languageExpressions(getLocales, "units", "temp")[0],
+              unit: languageExpressions(getLocale, "units", "temp")[0],
             },
           };
         });
@@ -3619,7 +798,7 @@ export default new Vuex.Store({
      */
     datasetsAPI: (
       { datasetsHourly, dataFromAPI, chartSettings },
-      { getLocales, calcAdjustingForecast }
+      { getLocale, calcAdjustingForecast }
     ) => {
       if (
         Object.keys(datasetsHourly).length === 0 ||
@@ -3640,11 +819,11 @@ export default new Vuex.Store({
         return {
           temp: {
             value: Math.round(spliceArrTemp[index]),
-            unit: languageExpressions(getLocales, "units", "temp")[0],
+            unit: languageExpressions(getLocale, "units", "temp")[0],
           },
           prec_sum: {
             value: 0,
-            unit: languageExpressions(getLocales, "units", "precSum")[0],
+            unit: languageExpressions(getLocale, "units", "precSum")[0],
           },
           feels_like: {
             value: "",
@@ -3710,76 +889,53 @@ export default new Vuex.Store({
     /**
      * Возвращает данные для температурных карточек на корте.
      */
-    cardMapData: ({ datasetsMap, listAllCities }) => {
+    cardMapData: ({ datasetsMap, listAllCities }, { getLocale }) => {
       // Добавляем ключ name_loc в state.datasetMap
-      return datasetsMap.map((value) => {
+      const arr = datasetsMap.map((value) => {
         const { name_loc } = listAllCities.find(
           ({ name_en }) => name_en === value.name_en
         );
         return { ...value, name_loc };
+      });
+      return arr.map((e) => {
+        const cityName = choiceNameByLocale(getLocale, e);
+        return {
+          area_en: e.area_en,
+          home: e.home,
+          name_en: e.name_en.toLowerCase(),
+          name_loc_choice: cityName,
+          now: e.now,
+          overmorrow: e.overmorrow,
+          tomorrow: e.tomorrow,
+          x_svg: e.x_svg,
+          y_svg: e.y_svg,
+        };
       });
     },
     /**
      *
      * Возвращает самые населенные города Армении.
      */
-    getListTopCities: ({ listTopCities }, { getLocales }) => {
+    getListTopCities: ({ listTopCities }, { getLocale }) => {
       return listTopCities
-        .sort((a, b) => {
-          return choiceNameByLocale(getLocales, a).localeCompare(
-            choiceNameByLocale(getLocales, b)
-          );
-        })
         .map((e) => {
-          const cityName = choiceNameByLocale(getLocales, e);
+          const cityName = choiceNameByLocale(getLocale, e);
           return {
             temp: e.temp,
             name_en: e.name_en.toLowerCase(),
             name_loc_choice: cityName,
           };
-        });
+        })
+        .sort((a, b) => a.name_loc_choice.localeCompare(b.name_loc_choice));
     },
     /**
      * Возвращает сгрупированный по алфавиту список городов.
      */
     getGroupListAllCities:
-      ({ listAllCities }, { getLocales }) =>
+      ({ listAllCities }, { getLocale }) =>
       (name) => {
-        // const formatArea_ru = (str) =>
-        //   str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
-        // const formatArea_ru_l5 = (str) => {
-        //   if (str === "") return "";
-        //   const arr = str.split("");
-        //   arr.splice(-4, 3, "-");
-        //   return arr.join("");
-        // };
-        // const transformedArr = listAllCities.map(
-        //   ({
-        //     area_en,
-        //     area_ru,
-        //     area_loc,
-        //     area_loc_l5,
-        //     area_en_l5,
-        //     area_ru_l5,
-        //     name_en,
-        //     name_ru,
-        //     name_loc,
-        //   }) => {
-        //     return {
-        //       area_en,
-        //       area_ru,
-        //       area_en_l5,
-        //       area_ru_l5,
-        //       name_en,
-        //       name_ru,
-        //       name_loc,
-        //       area_loc,
-        //       area_loc_l5,
-        //     };
-        //   }
-        // );
         const callback = (acc, cur) => {
-          const city = choiceNameByLocale(getLocales, cur);
+          const city = cur.name_loc_choice;
           if (city) {
             const firstLetter = city[0].toUpperCase();
             // if (!Object.hasOwn(acc, firstLetter)) {
@@ -3795,13 +951,30 @@ export default new Vuex.Store({
           return acc;
         };
         const obj = listAllCities
-          .sort((a, b) =>
-            choiceNameByLocale(getLocales, a).localeCompare(
-              choiceNameByLocale(getLocales, b)
-            )
-          )
+          .map((e) => {
+            const cityName = choiceNameByLocale(getLocale, e);
+            const area = choiceAreaByLocale(getLocale, e, "");
+            const area_l5 = choiceAreaByLocale(getLocale, e, "_l5");
+            const formatArea_ru = (str) =>
+              str.split(" ").length > 1 ? `${str.slice(0, -4)}.,` : str;
+            const formatArea_ru_l5 = (str) => {
+              if (str === "") return "";
+              const arr = str.split("");
+              arr.splice(-4, 3, "-");
+              return arr.join("");
+            };
+            return {
+              name_en: e.name_en.toLowerCase(),
+              name_loc_choice: cityName,
+              area,
+              area_l5,
+              area_f: getLocale === "ru" ? formatArea_ru(area) : `${area}, `,
+              area_l5_f:
+                getLocale === "ru" ? formatArea_ru_l5(area_l5) : `${area_l5}`,
+            };
+          })
+          .sort((a, b) => a.name_loc_choice.localeCompare(b.name_loc_choice))
           .reduce(callback, {});
-
         const entries = Object.entries(obj);
         const filtered = entries
           .map(([key, value]) => {
@@ -3809,10 +982,7 @@ export default new Vuex.Store({
               name === "all"
                 ? value
                 : value.filter((f) => {
-                    return (
-                      choiceAreaByLocale(getLocales, f, "").toLowerCase() ===
-                      name.toLowerCase()
-                    );
+                    return f.area.toLowerCase() === name.toLowerCase();
                   });
             return filteredValue.length > 0 ? [key, filteredValue] : undefined;
           })
@@ -3823,12 +993,11 @@ export default new Vuex.Store({
     /**
      * Возвращает список областей.
      */
-    getListArea: ({ listAllCities }, { getLocales }) => {
+    getListArea: ({ listAllCities }, { getLocale }) => {
       const obj = {};
       listAllCities.forEach(
-        (val) => (obj[choiceAreaByLocale(getLocales, val, "")] = true)
+        (val) => (obj[choiceAreaByLocale(getLocale, val, "")] = true)
       );
-      console.log(obj, getLocales);
       const arr = Object.keys(obj).sort((a, b) => a.localeCompare(b));
       return arr;
     },
@@ -3942,6 +1111,15 @@ export default new Vuex.Store({
     setListCities(state, { cities }) {
       state.listAllCities = cities;
     },
+    setMapDataset(state, { datasetsMap }) {
+      state.datasetsMap = datasetsMap;
+    },
+    setListTopCities(state, { topCities }) {
+      state.listTopCities = topCities;
+    },
+    setConstants(state, constants) {
+      state.translatedConstants = constants;
+    },
     setCity(state, city) {
       // console.log("mutation setCity");
       state.citySelected = city.toLowerCase();
@@ -3953,7 +1131,7 @@ export default new Vuex.Store({
       if (localeStr == "undefined" || localeStr == undefined) {
         return;
       }
-      state.locales = localeStr.toLowerCase();
+      state.locale = localeStr.toLowerCase();
     },
     loading(state, bol) {
       state.loading = bol;
@@ -3978,13 +1156,21 @@ export default new Vuex.Store({
           axios.get("/forecast.json"),
           axios.get("/forecastFromAPI.json"),
           axios.get("/cities_all.json"),
+          axios.get("/map_dataset.json"),
+          axios.get("/top_cities.json"),
+          axios.get("/translated_constants.json"),
           new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
         ]);
-        const [total, data, cities] = res.map(({ data }) => data);
+        const [total, data, cities, mapDataset, topCities, constants] = res.map(
+          ({ data }) => data
+        );
 
         commit("setData", total);
         commit("setDataAPI", data);
         commit("setListCities", cities);
+        commit("setMapDataset", mapDataset);
+        commit("setListTopCities", topCities);
+        commit("setConstants", constants);
       } catch (error) {
         console.error("Error! Could not reach the API. " + error);
       }

@@ -110,25 +110,21 @@ export const setTimeFormat = (date, format, locales) => {
 };
 /**
  * Возвращает команду поворота иконки ветра в соответствие с направлением ветра.
- * @param locales Языковая метка.
- * @param obj Объект с данными для отображения, в котором есть поле wind_dir.
+ * @param prop Объект с данными для отображения, в котором есть поле wind_dir.
+ * @param getter Геттер стора, который возвращает константы.
  * Поле wind_dir - значение указывает направление ветра.
  */
-export const windDirection = (locales, prop) => {
+export const windDirection = (prop, getter) => {
   if (typeof prop === "string") {
     const wind_dir = prop;
     return wind_dir
-      ? `transform:rotate(${
-          languageExpressions(locales, "windDir", wind_dir)[0]
-        }deg)`
+      ? `transform:rotate(${getter("windDir", wind_dir)[0]}deg)`
       : "transform:rotate(0deg)";
   }
   const { wind_dir } = prop;
 
   return wind_dir
-    ? `transform:rotate(${
-        languageExpressions(locales, "windDir", wind_dir[0])[0]
-      }deg)`
+    ? `transform:rotate(${getter("windDir", wind_dir[0])[0]}deg)`
     : "transform:rotate(0deg)";
 };
 /**
@@ -254,19 +250,6 @@ export const bezierCommand = (point, i, a) => {
   const cps = controlPoint(a[i - 1], a[i - 2], point);
   const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
   return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point.x},${point.y}`;
-};
-
-export const transtateCondition = (local, data) => {
-  return languageExpressions(local, "weather_sign", data);
-};
-
-export const URLBuilder = (locale, city = " ", tab, name = "hourly") => {
-  const obj = {
-    locale: locale.toLowerCase(),
-    city: city.toLowerCase(),
-    tab: tab.toLowerCase(),
-  };
-  return { name: name, params: obj, hash: "#top" };
 };
 
 export const choiceNameByLocale = (locale, obj, inflectCallback) => {

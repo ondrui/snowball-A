@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getLocales",
+      "getLocale",
       "tenDaysDetailsCard",
       "tenDaysDetailsChart",
       "getCitySelected",
@@ -49,7 +49,7 @@ export default {
     segmentTitle() {
       const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
       const str = this.languageExpressions(
-        this.getLocales,
+        this.getLocale,
         "detailsSegmentTitle"
       )
         .replace("$", inflectCityName)

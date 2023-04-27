@@ -9,14 +9,14 @@
       </button>
     </div>
     <RowCaptionInformer class="wind">
-      {{ languageExpressions(getLocales, "climateIndicators", "windDirSpeed") }}
+      {{ languageExpressions(getLocale, "climateIndicators", "windDirSpeed") }}
     </RowCaptionInformer>
     <RowCaptionInformer class="pressure">
-      {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
-      {{ languageExpressions(getLocales, "units", "pressure")[0] }}
+      {{ languageExpressions(getLocale, "climateIndicators", "pressure") }},
+      {{ languageExpressions(getLocale, "units", "pressure")[0] }}
     </RowCaptionInformer>
     <RowCaptionInformer class="humidity">
-      {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
+      {{ languageExpressions(getLocale, "climateIndicators", "humidity") }}
     </RowCaptionInformer>
     <DragScrolling
       ref="wrapper-content"
@@ -99,8 +99,8 @@ export default {
      * @example
      * "ru"
      */
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
     isButtons() {
       return this.scrollWidth > this.clientWidth;

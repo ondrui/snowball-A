@@ -2,10 +2,10 @@
   <div class="cities">
     <div class="cities-sticky">
       <div class="cities-select">
-        <span>{{ languageExpressions(getLocales, "listAllCities")[0] }}: </span>
+        <span>{{ getConstantLocale("listAllCities")[0] }}: </span>
         <select name="" id="" v-model="selected">
           <option value="all">
-            {{ languageExpressions(getLocales, "listAllCities")[1] }}
+            {{ getConstantLocale("listAllCities")[1] }}
           </option>
           <option
             :value="item"
@@ -47,11 +47,11 @@
             :key="`city-${index}`"
           >
             <div>
-              {{ choiceNameByLocale(getLocales, value) }}
+              {{ value.name_loc_choice }}
             </div>
             <div>
-              {{ choiceAreaByLocale(getLocales, value, "") }}
-              {{ choiceAreaByLocale(getLocales, value, "_l5") }}
+              {{ value.area_f }}
+              {{ value.area_l5_f }}
             </div>
           </router-link>
         </div>
@@ -62,8 +62,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { languageExpressions } from "@/constants/locales";
-import { choiceNameByLocale, choiceAreaByLocale } from "@/constants/functions";
 
 export default {
   name: "ListAllCities",
@@ -73,6 +71,11 @@ export default {
       crumbsKeys: [],
     };
   },
+  watch: {
+    getLocale() {
+      this.selected = "all";
+    },
+  },
   created() {
     const VALID_KEYS_CRUMBS = ["main", "citiesList"];
     this.crumbsKeys = VALID_KEYS_CRUMBS;
@@ -81,7 +84,12 @@ export default {
     this.scrollSel();
   },
   computed: {
-    ...mapGetters(["getLocales", "getListArea", "getLocalesURL"]),
+    ...mapGetters([
+      "getListArea",
+      "getLocaleURL",
+      "getConstantLocale",
+      "getLocale",
+    ]),
     getGroupListAllCities() {
       return this.$store.getters.getGroupListAllCities(this.selected);
     },
@@ -90,9 +98,6 @@ export default {
     },
   },
   methods: {
-    choiceAreaByLocale,
-    choiceNameByLocale,
-    languageExpressions,
     scrollSel() {
       window.scroll({
         top: 364,
@@ -120,8 +125,7 @@ export default {
         ? {
             name: "hourly",
             params: {
-              lang:
-                this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+              lang: this.getLocaleURL,
               city,
             },
             hash: "#top",

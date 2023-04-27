@@ -5,7 +5,7 @@
         <BaseIcon nameIcon="map-marker" pick="common" width="8" />
       </div>
       <div class="card-top-text">
-        <span>{{ choiceNameByLocale(getLocales, itemDataset) }}</span>
+        <span>{{ choiceNameByLocale(getLocale, itemDataset) }}</span>
       </div>
       <div class="card-top-arrow">
         <BaseIcon
@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLocales"]),
+    ...mapGetters(["getLocale"]),
   },
   methods: {
     choiceNameByLocale,

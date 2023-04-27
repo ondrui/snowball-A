@@ -5,7 +5,7 @@
         <BaseIcon nameIcon="country-logo" pick="common" width="150" />
       </router-link>
       <div>
-        <select name="locale" v-model="select">
+        <select name="locale" :value="getLocale" @change="changeLocaleHandler">
           <option value="ru">ru</option>
           <option value="en">en</option>
           <option value="am">am</option>
@@ -16,37 +16,20 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
 import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      select: "ru",
-    };
-  },
-  created() {
-    this.select = this.getLocales;
-  },
-  watch: {
-    select(value) {
-      this.changeLocaleHandler(value);
-    },
-  },
   computed: {
     ...mapGetters([
       "tenDaysTabTable",
-      "getLocales",
+      "getLocale",
       "getCitySelected",
-      "getLocalesURL",
+      "getLocaleURL",
     ]),
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
-    changeLocaleHandler(value) {
+    changeLocaleHandler(e) {
+      const value = e.target.value;
       this.$router
         .push({
           params: {
@@ -60,7 +43,7 @@ export default {
       return {
         name: "main",
         params: {
-          lang: this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+          lang: this.getLocaleURL,
           city: this.getCitySelected.name_en,
         },
       };

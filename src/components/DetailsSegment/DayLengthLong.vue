@@ -8,7 +8,7 @@
     <div v-show="isShowDayLength" class="day-length">
       {{
         value.dayLength.daytime.value ??
-        languageExpressions(getLocales, "polar", value.dayLength?.polar)
+        languageExpressions(getLocale, "polar", value.dayLength?.polar)
       }}
     </div>
     <div v-show="isShowLine" class="line"></div>
@@ -27,8 +27,8 @@ import { languageExpressions } from "@/constants/locales";
 export default {
   props: ["value"],
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
     isShowSunrise() {
       return !!this.value.dayLength.sunrise;

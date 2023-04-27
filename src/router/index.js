@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
   const locale = to.params.lang || "ru";
-  if (locale === store.getters.getLocales) {
+  if (locale === store.getters.getLocale) {
     next();
   } else {
     store.commit("setLocale", locale);

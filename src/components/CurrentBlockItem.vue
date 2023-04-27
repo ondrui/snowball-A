@@ -8,7 +8,7 @@
         width="40"
       />
       <BaseIcon
-        :style="windDirection(getLocales, dataValue)"
+        :style="windDirection(dataValue, getConstantLocale)"
         :nameIcon="dataValue.icon"
         pick="common"
         class="icon"
@@ -28,25 +28,15 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
+import { mapGetters } from "vuex";
 import { windDirection } from "@/constants/functions";
 
 export default {
   props: { dataValue: Object },
   computed: {
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["getConstantLocale"]),
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
     /**
      * Возвращает команду поворота иконки ветра в соответствие с направлением ветра.
      */

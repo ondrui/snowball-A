@@ -24,7 +24,7 @@
               width="8"
               nameIcon="wind-direction-blue"
               pick="common"
-              :style="windDirection(getLocales, day.wind)"
+              :style="windDirection(day.wind, getConstantLocale)"
             />
           </div>
           <span>{{ day.wind.wind_dir[1] }}</span>
@@ -49,7 +49,6 @@
 
 <script>
 import ChartsDayList from "@/components/SVGCharts/day/ChartsDayList.vue";
-import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
 import { eventBus } from "../main.js";
 import { mapGetters } from "vuex";
@@ -67,13 +66,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["tenDaysTabTable", "getLocales", "tenDaysDetailsCard"]),
+    ...mapGetters([
+      "tenDaysTabTable",
+      "tenDaysDetailsCard",
+      "getConstantLocale",
+    ]),
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
     /**
      * Возвращает команду поворота иконки ветра в соответствие с направлением ветра.
      */

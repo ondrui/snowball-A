@@ -32,7 +32,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "SearchBar",
   computed: {
-    ...mapGetters(["getListAllCities", "getCitySelected", "getLocales"]),
+    ...mapGetters(["getListAllCities", "getCitySelected", "getLocale"]),
   },
   methods: {
     handler(e) {

@@ -27,7 +27,7 @@
     <text v-show="isShowDayLength" y="18" :x="calcCoordinates.longText">
       {{
         datasets.dayLength.value ??
-        languageExpressions(getLocales, "polar", datasets?.polar)
+        languageExpressions(getLocale, "polar", datasets?.polar)
       }}
     </text>
     <g v-show="isShowSunset">
@@ -70,8 +70,8 @@ export default {
     this.calcX();
   },
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
     /**
      * Определяет размеры окна отображения SVG.

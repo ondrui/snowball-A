@@ -4,7 +4,7 @@
       <div v-show="isShowPolar">
         <BaseIcon :nameIcon="namePolarIcon" pick="common" width="20" />
         <div class="polar-text">
-          {{ languageExpressions(getLocales, "polar", value.dayLength?.polar) }}
+          {{ languageExpressions(getLocale, "polar", value.dayLength?.polar) }}
         </div>
       </div>
       <div v-show="isShowSunrise">
@@ -32,8 +32,8 @@ import { languageExpressions } from "@/constants/locales";
 export default {
   props: ["value"],
   computed: {
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
     isShowSunrise() {
       return !!this.value.dayLength.sunrise;

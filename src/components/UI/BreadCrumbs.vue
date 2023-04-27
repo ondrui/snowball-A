@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
 import { mapGetters } from "vuex";
 export default {
   name: "BreadCrumbs",
@@ -48,13 +47,9 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getLocales", "getCitySelected", "getLocalesURL"]),
+    ...mapGetters(["getCitySelected", "getLocaleURL", "getConstantLocale"]),
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
     /**
      * По условию отображает элемент ссылка.
      */
@@ -68,7 +63,7 @@ export default {
      */
     breadcrumbs(key, arr) {
       const crumbsArr = arr.map(({ name }) =>
-        languageExpressions(this.getLocales, key, name)
+        this.getConstantLocale(key, name)
       );
 
       arr.some(({ name }) => name !== "main" && name !== "cities")
@@ -80,7 +75,7 @@ export default {
       return {
         name: "main",
         params: {
-          lang: this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+          lang: this.getLocaleURL,
           city: this.getCitySelected.name_en,
         },
       };

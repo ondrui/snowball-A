@@ -42,7 +42,7 @@
                   width="8"
                   nameIcon="wind-direction-blue"
                   pick="common"
-                  :style="windDirection(getLocales, value)"
+                  :style="windDirection(value, getConstantLocale)"
                 />
               </div>
               <span>{{ value.wind_dir[1] }}</span>
@@ -64,7 +64,6 @@
 <script>
 import ChartHourlyTempList from "@/components/SVGCharts/hourly/ChartHourlyTempList.vue";
 import DayLengthChart from "@/components/SVGCharts/hourly/DayLengthChart.vue";
-import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
 import { mapGetters } from "vuex";
 
@@ -74,10 +73,13 @@ export default {
     DayLengthChart,
   },
   computed: {
-    ...mapGetters(["datasetsForHourlyCharts", "hourlyTabTable", "getLocales"]),
+    ...mapGetters([
+      "datasetsForHourlyCharts",
+      "hourlyTabTable",
+      "getConstantLocale",
+    ]),
   },
   methods: {
-    languageExpressions,
     windDirection,
   },
 };

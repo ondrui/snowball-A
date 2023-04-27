@@ -2,16 +2,14 @@
   <div>
     <div class="forecast-details-container">
       <RowCaptionInformer class="wind">
-        {{
-          languageExpressions(getLocales, "climateIndicators", "windDirSpeed")
-        }}
+        {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
       </RowCaptionInformer>
       <RowCaptionInformer class="pressure">
-        {{ languageExpressions(getLocales, "climateIndicators", "pressure") }},
-        {{ languageExpressions(getLocales, "units", "pressure")[0] }}
+        {{ getConstantLocale("climateIndicators", "pressure") }},
+        {{ getConstantLocale("units", "pressure")[0] }}
       </RowCaptionInformer>
       <RowCaptionInformer class="humidity">
-        {{ languageExpressions(getLocales, "climateIndicators", "humidity") }}
+        {{ getConstantLocale("climateIndicators", "humidity") }}
       </RowCaptionInformer>
       <div class="details-charts-temp">
         <ChartDetailsTemp :datasetChart="datasetChart" />
@@ -37,7 +35,7 @@
                 width="8"
                 nameIcon="wind-direction-blue"
                 pick="common"
-                :style="windDirection(getLocales, value.wind)"
+                :style="windDirection(value.wind, getConstantLocale)"
               />
             </div>
             <span>{{ value.wind.wind_dir[1] }}</span>
@@ -58,8 +56,8 @@
 <script>
 import ChartDetailsTemp from "@/components/SVGCharts/day-details/ChartDetailsTemp.vue";
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
-import { languageExpressions } from "@/constants/locales";
 import { windDirection } from "@/constants/functions";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -71,19 +69,9 @@ export default {
    */
   props: { datasetChart: Array },
   computed: {
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["getConstantLocale"]),
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
     /**
      * Возвращает команду поворота иконки ветра в соответствие с направлением ветра.
      */

@@ -41,7 +41,7 @@ export default {
     CurrentBlockItem,
   },
   computed: {
-    ...mapGetters(["getLocales", "datasetCurrentBlockItem", "currentBlock"]),
+    ...mapGetters(["getLocale", "datasetCurrentBlockItem", "currentBlock"]),
   },
   methods: {
     /**

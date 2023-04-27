@@ -39,8 +39,8 @@ export default {
      * Возвращает языковую метку для определения локали.
      * @example "ru"
      */
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
     getCountryNameLoc() {
       return this.$store.getters.getCountryNameLoc;
@@ -48,7 +48,7 @@ export default {
     getHistoryTitle() {
       const country = cityIn(this.getCountryNameLoc);
       const arr = this.languageExpressions(
-        this.getLocales,
+        this.getLocale,
         "sectionOtherCities"
       ).split(" ");
       return [arr.shift(), arr.join(" ").replace("$", country)];

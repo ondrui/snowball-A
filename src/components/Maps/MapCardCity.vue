@@ -1,10 +1,7 @@
 <template>
-  <router-link
-    :to="URLBuilder(getLocales, datasetItem.name_en, 'hourly')"
-    class="card-link"
-  >
+  <router-link :to="pushNewURL(datasetItem.name_en)" class="card-link">
     <div class="city-title">
-      <span>{{ choiceNameByLocale(getLocales, datasetItem) }}</span>
+      <span>{{ datasetItem.name_loc_choice }}</span>
     </div>
     <div v-if="indicator === 'temp'" class="card-body-temp">
       <div class="icon-temp">
@@ -20,7 +17,7 @@
           width="10"
           nameIcon="wind-direction-blue"
           pick="common"
-          :style="windDirection(getLocales, datasetItem.wind_dir)"
+          :style="windDirection(datasetItem.wind_dir, getConstantLocale)"
         />
       </div>
       <div class="value-wind">
@@ -31,9 +28,8 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
-import { windDirection, choiceNameByLocale } from "@/constants/functions";
-import { URLBuilder } from "@/constants/functions";
+import { windDirection } from "@/constants/functions";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -47,20 +43,22 @@ export default {
     },
   },
   computed: {
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocales() {
-      return this.$store.getters.getLocales;
-    },
+    ...mapGetters(["getLocaleURL", "getLocale", "getConstantLocale"]),
   },
   methods: {
-    choiceNameByLocale,
-    languageExpressions,
     windDirection,
-    URLBuilder,
+    pushNewURL(city) {
+      return city
+        ? {
+            name: "hourly",
+            params: {
+              lang: this.getLocaleURL,
+              city,
+            },
+            hash: "#top",
+          }
+        : "";
+    },
   },
 };
 </script>

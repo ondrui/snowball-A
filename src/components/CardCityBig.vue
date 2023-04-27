@@ -5,10 +5,10 @@
         <BaseIcon nameIcon="map-marker" pick="common" width="9" />
       </div>
       <div class="card-top-text">
-        <span>{{ choiceNameByLocale(getLocales, itemDataset) }}</span>
+        <span>{{ choiceNameByLocale(getLocale, itemDataset) }}</span>
       </div>
       <div class="card-top-arrow">
-        <span>{{ languageExpressions(getLocales, "LinkTitleCardCity") }}</span>
+        <span>{{ languageExpressions(getLocale, "LinkTitleCardCity") }}</span>
         <BaseIcon
           nameIcon="arrow-right"
           pick="common"
@@ -30,7 +30,7 @@
       <div class="card-middle-descr">
         <div class="card-middle-text">{{ itemDataset.now.condition_s }}</div>
         <div class="card-middle-feeling">
-          {{ languageExpressions(getLocales, "currentBlock", "feelsLike") }}
+          {{ languageExpressions(getLocale, "currentBlock", "feelsLike") }}
           {{ itemDataset.now.feels_like }}
         </div>
       </div>
@@ -84,8 +84,8 @@ export default {
      * @example
      * "ru"
      */
-    getLocales() {
-      return this.$store.getters.getLocales;
+    getLocale() {
+      return this.$store.getters.getLocale;
     },
   },
   methods: {

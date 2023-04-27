@@ -25,7 +25,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getLocalesURL"]),
+    ...mapGetters(["getLocaleURL"]),
     addEmptyCell() {
       const expArr = this.itemList;
       return [...expArr, ...Array(4).fill("")];
@@ -37,8 +37,7 @@ export default {
         ? {
             name: "hourly",
             params: {
-              lang:
-                this.getLocalesURL === "ru" ? undefined : this.getLocalesURL,
+              lang: this.getLocaleURL,
               city,
             },
             hash: "#top",
