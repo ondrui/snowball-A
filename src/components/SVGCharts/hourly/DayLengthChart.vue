@@ -27,7 +27,7 @@
     <text v-show="isShowDayLength" y="18" :x="calcCoordinates.longText">
       {{
         datasets.dayLength.value ??
-        languageExpressions(getLocale, "polar", datasets?.polar)
+        this.getConstantLocale("polar", datasets?.polar)
       }}
     </text>
     <g v-show="isShowSunset">
@@ -46,8 +46,7 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
-
+import { mapGetters } from "vuex";
 export default {
   /**
    * Объект с данными для отображения блока восход/заход солнца.
@@ -70,9 +69,7 @@ export default {
     this.calcX();
   },
   computed: {
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
+    ...mapGetters(["getConstantLocale"]),
     /**
      * Определяет размеры окна отображения SVG.
      */
@@ -183,7 +180,6 @@ export default {
     },
   },
   methods: {
-    languageExpressions,
     /**
      * Переводит принимаемый параметр (время) в координату Х элемента svg и возвращает
      * ее.

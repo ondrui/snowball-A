@@ -8,7 +8,7 @@
     <div v-show="isShowDayLength" class="day-length">
       {{
         value.dayLength.daytime.value ??
-        languageExpressions(getLocale, "polar", value.dayLength?.polar)
+        getConstantLocale("polar", value.dayLength?.polar)
       }}
     </div>
     <div v-show="isShowLine" class="line"></div>
@@ -19,17 +19,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 /**
  * Блок восход/закат солнца для широкой карточки.
  */
-import { languageExpressions } from "@/constants/locales";
 
 export default {
   props: ["value"],
   computed: {
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
+    ...mapGetters(["getConstantLocale"]),
     isShowSunrise() {
       return !!this.value.dayLength.sunrise;
     },
@@ -44,9 +42,6 @@ export default {
     isShowLine() {
       return this.value.dayLength.polar !== "night";
     },
-  },
-  methods: {
-    languageExpressions,
   },
 };
 </script>

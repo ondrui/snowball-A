@@ -1,5 +1,8 @@
 <template>
-  <router-link :to="pushNewURL(datasetItem.name_en)" class="card-link">
+  <router-link
+    :to="pushNewURL(datasetItem.name_en.toLowerCase())"
+    class="card-link"
+  >
     <div class="city-title">
       <span>{{ datasetItem.name_loc_choice }}</span>
     </div>

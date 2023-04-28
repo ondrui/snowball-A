@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
 import CardDetailDay from "./CardDetailDay.vue";
 import ContentDetailDay from "./ContentDetailDay.vue";
 import { mapGetters } from "vuex";
@@ -45,13 +44,11 @@ export default {
       "tenDaysDetailsCard",
       "tenDaysDetailsChart",
       "getCitySelected",
+      "getConstantLocale",
     ]),
     segmentTitle() {
       const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
-      const str = this.languageExpressions(
-        this.getLocale,
-        "detailsSegmentTitle"
-      )
+      const str = this.getConstantLocale("detailsSegmentTitle")
         .replace("$", inflectCityName)
         .replace("$", this.tenDaysDetailsCard.length);
       return str;
@@ -62,7 +59,6 @@ export default {
     },
   },
   methods: {
-    languageExpressions,
     isOpen(index) {
       return this.tenDaysDetailsCard[index].isOpen === true;
     },

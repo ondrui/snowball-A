@@ -37,7 +37,7 @@
         <h2 :data-letter="item">{{ item }}</h2>
         <div class="cities-table-list">
           <router-link
-            :to="pushNewURL(value.name_en)"
+            :to="pushNewURL(value?.name_en)"
             :class="[
               'cities-table-item',
               { 'empty-cell': !value },

@@ -3,10 +3,6 @@ import Vuex from "vuex";
 import axios from "axios";
 import router from "@/router";
 /**
- * @func languageExpressions Функция возвращает зодонную порометрами языковую константу.
- */
-import { languageExpressions } from "@/constants/locales";
-/**
  * Вспомогательные функции:
  * @func setTimeFormat Возвращает в заданном формате время, доту.
  * @func daytime Возвращает долготу дня в часах и минутах.
@@ -125,6 +121,9 @@ export default new Vuex.Store({
     getLocaleURL(state) {
       return state.locale === "ru" ? undefined : state.locale;
     },
+    /**
+     * Возвращает зодонную порометрами языковую константу.
+     */
     getConstantLocale:
       ({ translatedConstants }, { getLocale }) =>
       (key, name) => {
@@ -178,7 +177,10 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      * @param getLocale Языковая метка.
      */
-    currentBlock(state, { getLocale, datasetsForHourlyCharts }) {
+    currentBlock(
+      state,
+      { getLocale, datasetsForHourlyCharts, getConstantLocale }
+    ) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       /**
        * Данные используемые для отоброжения. Берем прогнозные данные
@@ -188,28 +190,21 @@ export default new Vuex.Store({
       const time = setTimeFormat(new Date(), "H:i", getLocale);
       const tempData = datasetsForHourlyCharts.data[1].value[0];
       return {
-        timeText: `${languageExpressions(
-          getLocale,
+        timeText: `${getConstantLocale(
           "currentBlock",
           "now"
-        )} ${time} ${languageExpressions(
-          getLocale,
-          "currentBlock",
-          "forecast"
-        )}`,
+        )} ${time} ${getConstantLocale("currentBlock", "forecast")}`,
         condition: data.condition,
         condition_s:
           getLocale !== "ru"
-            ? languageExpressions(getLocale, "weather_sign", data.condition)
+            ? getConstantLocale("weather_sign", data.condition)
             : data.condition_s,
         temp: `${addPlus(tempData.temp.value)}${
-          languageExpressions(getLocale, "units", "temp")[0]
+          getConstantLocale("units", "temp")[0]
         }`,
-        realFeel: `${languageExpressions(
-          getLocale,
-          "currentBlock",
-          "feelsLike"
-        )} ${addPlus(tempData.feels_like.value)}`,
+        realFeel: `${getConstantLocale("currentBlock", "feelsLike")} ${addPlus(
+          tempData.feels_like.value
+        )}`,
       };
     },
     /**
@@ -218,58 +213,36 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      * @param getLocale Языковая метка.
      */
-    datasetCurrentBlockItem(state, { getLocale }) {
+    datasetCurrentBlockItem(state, { getConstantLocale }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
       const data = state.datasetsHourly[0][1];
       return [
         {
           icon: "wind-direction-grey",
-          title: `${languageExpressions(
-            getLocale,
-            "climateIndicators",
-            "wind"
-          )}:`,
-          value: `${data.wind_speed} ${
-            languageExpressions(getLocale, "units", "speed")[0]
-          }`,
+          title: `${getConstantLocale("climateIndicators", "wind")}:`,
+          value: `${data.wind_speed} ${getConstantLocale("units", "speed")[0]}`,
           wind_dir: [
             data.wind_dir,
-            languageExpressions(getLocale, "windDir", data.wind_dir)[1],
+            getConstantLocale("windDir", data.wind_dir)[1],
           ],
         },
         {
           icon: "wind-gust",
-          title: `${languageExpressions(
-            getLocale,
-            "climateIndicators",
-            "windGust_1"
-          )}:`,
-          value: `${data.wind_gust} ${
-            languageExpressions(getLocale, "units", "speed")[0]
-          }`,
+          title: `${getConstantLocale("climateIndicators", "windGust_1")}:`,
+          value: `${data.wind_gust} ${getConstantLocale("units", "speed")[0]}`,
           wind_dir: [data.wind_dir],
         },
         {
           icon: "pressure",
-          title: `${languageExpressions(
-            getLocale,
-            "climateIndicators",
-            "pressure"
-          )}:`,
+          title: `${getConstantLocale("climateIndicators", "pressure")}:`,
           value: `${data.pressure} ${
-            languageExpressions(getLocale, "units", "pressure")[0]
+            getConstantLocale("units", "pressure")[0]
           }`,
         },
         {
           icon: "humidity",
-          title: `${languageExpressions(
-            getLocale,
-            "climateIndicators",
-            "humidity"
-          )}:`,
-          value: `${data.humidity}${
-            languageExpressions(getLocale, "units", "percent")[0]
-          }`,
+          title: `${getConstantLocale("climateIndicators", "humidity")}:`,
+          value: `${data.humidity}${getConstantLocale("units", "percent")[0]}`,
         },
       ];
     },
@@ -279,7 +252,10 @@ export default new Vuex.Store({
      * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
      * @param getLocale Языковая метка.
      */
-    tenDaysTabTable: ({ datasetsTenDays }, { getLocale }) => {
+    tenDaysTabTable: (
+      { datasetsTenDays },
+      { getLocale, getConstantLocale }
+    ) => {
       const valuesArr = Object.values(datasetsTenDays);
       if (valuesArr.length === 0) return {};
       /**
@@ -296,29 +272,29 @@ export default new Vuex.Store({
         return {
           weekday: weekday,
           weekend:
-            weekday === `${languageExpressions(getLocale, "weekendDays")[0]}` ||
-            weekday === `${languageExpressions(getLocale, "weekendDays")[1]}`,
+            weekday === `${getConstantLocale("weekendDays")[0]}` ||
+            weekday === `${getConstantLocale("weekendDays")[1]}`,
           date: setTimeFormat(e.start_date, "d.m", getLocale),
           condition: e.day.condition,
           prec_sum: {
             value: e.day.prec_sum,
-            unit: languageExpressions(getLocale, "units", "precSum")[0],
+            unit: getConstantLocale("units", "precSum")[0],
           },
           wind: {
             value: e.day.wind_speed,
-            unit: languageExpressions(getLocale, "units", "speed")[0],
+            unit: getConstantLocale("units", "speed")[0],
             wind_dir: [
               e.day.wind_dir,
-              languageExpressions(getLocale, "windDir", e.day.wind_dir)[1],
+              getConstantLocale("windDir", e.day.wind_dir)[1],
             ],
           },
           pressure: {
             value: e.day.pressure,
-            unit: languageExpressions(getLocale, "units", "pressure")[0],
+            unit: getConstantLocale("units", "pressure")[0],
           },
           humidity: {
             value: e.day.humidity,
-            unit: languageExpressions(getLocale, "units", "percent")[0],
+            unit: getConstantLocale("units", "percent")[0],
           },
         };
       });
@@ -344,7 +320,7 @@ export default new Vuex.Store({
      *  max: 2
      * }]
      */
-    tenDaysTabTempCharts: ({ datasetsTenDays }, { getLocale }) => {
+    tenDaysTabTempCharts: ({ datasetsTenDays }, { getConstantLocale }) => {
       const arr = Object.values(datasetsTenDays);
       if (arr.length === 0) return {};
       /**
@@ -384,7 +360,7 @@ export default new Vuex.Store({
        */
       const min = Math.min(...nightTemp, ...dayTemp);
       const max = Math.max(...dayTemp, ...nightTemp);
-      const unit = languageExpressions(getLocale, "units", "temp")[0];
+      const unit = getConstantLocale("units", "temp")[0];
       return [
         { unit, value: dayTemp, descr: "day", min, max },
         { unit, value: nightTemp, descr: "night", min, max },
@@ -396,7 +372,7 @@ export default new Vuex.Store({
      * @param datasetsHourly Текущее состояние store.state.datasetsHourly.
      * @param getLocale Языковая метка.
      */
-    hourlyTabTable({ datasetsHourly }, { getLocale }) {
+    hourlyTabTable({ datasetsHourly }, { getLocale, getConstantLocale }) {
       if (Object.keys(datasetsHourly).length === 0) return {};
       /**
        * Возвращает значение времени для последующей сортировки.
@@ -431,24 +407,22 @@ export default new Vuex.Store({
               date,
               light,
               humidity: `${humidity}${
-                languageExpressions(getLocale, "units", "percent")[0]
+                getConstantLocale("units", "percent")[0]
               }`,
               prec_sum: `${prec_sum} ${
-                languageExpressions(getLocale, "units", "precSum")[0]
+                getConstantLocale("units", "precSum")[0]
               }`,
               pressure,
-              temp: `${temp}${
-                languageExpressions(getLocale, "units", "temp")[0]
-              }`,
+              temp: `${temp}${getConstantLocale("units", "temp")[0]}`,
               feels_like: `${feels_like}${
-                languageExpressions(getLocale, "units", "temp")[0]
+                getConstantLocale("units", "temp")[0]
               }`,
               wind_dir: [
                 wind_dir,
-                `${languageExpressions(getLocale, "windDir", wind_dir)[1]}`,
+                `${getConstantLocale("windDir", wind_dir)[1]}`,
               ],
               wind_speed: `${wind_speed} ${
-                languageExpressions(getLocale, "units", "speed")[0]
+                getConstantLocale("units", "speed")[0]
               }`,
             };
           }
@@ -487,7 +461,10 @@ export default new Vuex.Store({
      * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
      * @param getLocale Языковая метка.
      */
-    tenDaysDetailsCard: ({ datasetsTenDays }, { getLocale }) => {
+    tenDaysDetailsCard: (
+      { datasetsTenDays },
+      { getLocale, getConstantLocale }
+    ) => {
       const valuesArr = Object.values(datasetsTenDays);
       if (valuesArr.length === 0) return {};
       const sliceEndIndex = valuesArr.length > 12 ? 12 : valuesArr.length;
@@ -511,98 +488,67 @@ export default new Vuex.Store({
             date,
             isOpen: e.isOpen,
             weekend:
-              weekday[0] === languageExpressions(getLocale, "weekendDays")[0] ||
-              weekday[0] === languageExpressions(getLocale, "weekendDays")[1],
+              weekday[0] === getConstantLocale("weekendDays")[0] ||
+              weekday[0] === getConstantLocale("weekendDays")[1],
             condition: e.day.condition,
             condition_s:
               getLocale !== "ru"
-                ? languageExpressions(
-                    getLocale,
-                    "weather_sign",
-                    e.day.condition
-                  )
+                ? getConstantLocale("weather_sign", e.day.condition)
                 : e.day.condition_s,
             precProb: {
-              title: languageExpressions(
-                getLocale,
-                "climateIndicators",
-                "precProb"
-              ),
+              title: getConstantLocale("climateIndicators", "precProb"),
               value: `${e.day.prec_prob}${
-                languageExpressions(getLocale, "units", "percent")[0]
+                getConstantLocale("units", "percent")[0]
               }`,
             },
             wind: {
-              title: languageExpressions(
-                getLocale,
-                "climateIndicators",
-                "wind"
-              ),
-              value: `${languageExpressions(
-                getLocale,
+              title: getConstantLocale("climateIndicators", "wind"),
+              value: `${getConstantLocale(
                 "windDir",
                 e.day.wind_dir
               )[1].toUpperCase()} ${e.day.wind_speed} ${
-                languageExpressions(getLocale, "units", "speed")[0]
+                getConstantLocale("units", "speed")[0]
               }`,
             },
             pressure: {
-              title: languageExpressions(
-                getLocale,
-                "climateIndicators",
-                "pressure"
-              ),
+              title: getConstantLocale("climateIndicators", "pressure"),
               value: `${e.day.pressure}`,
             },
             wind_gust: {
-              title: languageExpressions(
-                getLocale,
-                "climateIndicators",
-                "windGust_1"
-              ).split(" ")[0],
+              title: getConstantLocale("climateIndicators", "windGust_1").split(
+                " "
+              )[0],
               value: `${e.day.wind_gust} ${
-                languageExpressions(getLocale, "units", "speed")[0]
+                getConstantLocale("units", "speed")[0]
               }`,
             },
             comf_idx: {
-              title: languageExpressions(
-                getLocale,
-                "climateIndicators",
-                "comfort"
-              ),
+              title: getConstantLocale("climateIndicators", "comfort"),
               value: `${e.day.comf_idx}0 ${
-                languageExpressions(getLocale, "units", "percent")[0]
+                getConstantLocale("units", "percent")[0]
               }`,
             },
             humidity: {
-              title: languageExpressions(
-                getLocale,
-                "climateIndicators",
-                "humidity"
-              ),
+              title: getConstantLocale("climateIndicators", "humidity"),
               value: `${e.day.humidity} ${
-                languageExpressions(getLocale, "units", "percent")[0]
+                getConstantLocale("units", "percent")[0]
               }`,
             },
             temp: {
               min: `${addPlus(array[index + 1]?.night.temp_min)}${
-                languageExpressions(getLocale, "units", "temp")[0]
+                getConstantLocale("units", "temp")[0]
               }`,
               max: `${addPlus(e.day.temp_max)}${
-                languageExpressions(getLocale, "units", "temp")[0]
+                getConstantLocale("units", "temp")[0]
               }`,
             },
             uvi: {
-              title: languageExpressions(getLocale, "climateIndicators", "uvi"),
+              title: getConstantLocale("climateIndicators", "uvi"),
               value: e.day.uvi,
             },
             dayLength: {
               daytime: {
-                title: languageExpressions(
-                  getLocale,
-                  "climateIndicators",
-                  "daytime"
-                ),
+                title: getConstantLocale("climateIndicators", "daytime"),
                 value_mob: time,
                 value: time,
               },
@@ -626,7 +572,7 @@ export default new Vuex.Store({
      * @param datasetsThreeHour Текущее состояние store.state.datasetsThreeHour.
      * @param getLocale Языковая метка.
      */
-    tenDaysDetailsChart: ({ datasetsThreeHour }, { getLocale }) => {
+    tenDaysDetailsChart: ({ datasetsThreeHour }, { getConstantLocale }) => {
       if (Object.keys(datasetsThreeHour).length === 0) return {};
       /**
        * Возвращает значение времени для последующей сортировки.
@@ -666,32 +612,29 @@ export default new Vuex.Store({
               condition,
               light,
               humidity: {
-                unit: languageExpressions(getLocale, "units", "percent")[0],
+                unit: getConstantLocale("units", "percent")[0],
                 value: humidity,
               },
               prec_sum: {
                 value: prec_sum,
-                unit: languageExpressions(getLocale, "units", "precSum")[0],
+                unit: getConstantLocale("units", "precSum")[0],
               },
               temp: {
                 value: temp,
-                unit: languageExpressions(getLocale, "units", "temp")[0],
+                unit: getConstantLocale("units", "temp")[0],
               },
               feels_like: {
                 value: feels_like,
-                unit: languageExpressions(getLocale, "units", "temp")[0],
+                unit: getConstantLocale("units", "temp")[0],
               },
               pressure: {
                 value: pressure,
-                unit: languageExpressions(getLocale, "units", "pressure")[0],
+                unit: getConstantLocale("units", "pressure")[0],
               },
               wind: {
                 value: wind_speed,
-                unit: languageExpressions(getLocale, "units", "speed")[0],
-                wind_dir: [
-                  wind_dir,
-                  languageExpressions(getLocale, "windDir", wind_dir)[1],
-                ],
+                unit: getConstantLocale("units", "speed")[0],
+                wind_dir: [wind_dir, getConstantLocale("windDir", wind_dir)[1]],
               },
             };
           }
@@ -711,7 +654,7 @@ export default new Vuex.Store({
      * @param getLocale Языковая метка.
      */
     calcAdjustingForecast:
-      ({ datasetsFact, datasetsHourly }, { getLocale }) =>
+      ({ datasetsFact, datasetsHourly }, { getConstantLocale }) =>
       (elem) => {
         if (Object.keys(datasetsHourly).length === 0) return {};
         const periodAdjusted = elem.periodAdjusted;
@@ -742,18 +685,18 @@ export default new Vuex.Store({
                 date,
                 temp: {
                   value: temp,
-                  unit: languageExpressions(getLocale, "units", "temp")[0],
+                  unit: getConstantLocale("units", "temp")[0],
                 },
                 prec_sum: {
                   value: prec_sum,
-                  unit: languageExpressions(getLocale, "units", "precSum")[0],
+                  unit: getConstantLocale("units", "precSum")[0],
                 },
                 feels_like: {
                   value:
                     periodAdjusted !== 0 && Math.abs(deltaTemp) > 1
                       ? feels_like + deltaTemp
                       : feels_like,
-                  unit: languageExpressions(getLocale, "units", "temp")[0],
+                  unit: getConstantLocale("units", "temp")[0],
                 },
               };
             })
@@ -780,7 +723,7 @@ export default new Vuex.Store({
             ...e,
             temp: {
               value: Math.round(calcTemp),
-              unit: languageExpressions(getLocale, "units", "temp")[0],
+              unit: getConstantLocale("units", "temp")[0],
             },
           };
         });
@@ -798,7 +741,7 @@ export default new Vuex.Store({
      */
     datasetsAPI: (
       { datasetsHourly, dataFromAPI, chartSettings },
-      { getLocale, calcAdjustingForecast }
+      { getConstantLocale, calcAdjustingForecast }
     ) => {
       if (
         Object.keys(datasetsHourly).length === 0 ||
@@ -819,11 +762,11 @@ export default new Vuex.Store({
         return {
           temp: {
             value: Math.round(spliceArrTemp[index]),
-            unit: languageExpressions(getLocale, "units", "temp")[0],
+            unit: getConstantLocale("units", "temp")[0],
           },
           prec_sum: {
             value: 0,
-            unit: languageExpressions(getLocale, "units", "precSum")[0],
+            unit: getConstantLocale("units", "precSum")[0],
           },
           feels_like: {
             value: "",
@@ -901,6 +844,7 @@ export default new Vuex.Store({
         const cityName = choiceNameByLocale(getLocale, e);
         return {
           area_en: e.area_en,
+          details: e.details,
           home: e.home,
           name_en: e.name_en.toLowerCase(),
           name_loc_choice: cityName,

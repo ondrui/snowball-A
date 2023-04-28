@@ -4,7 +4,7 @@
       <div v-show="isShowPolar">
         <BaseIcon :nameIcon="namePolarIcon" pick="common" width="20" />
         <div class="polar-text">
-          {{ languageExpressions(getLocale, "polar", value.dayLength?.polar) }}
+          {{ getConstantLocale("polar", value.dayLength?.polar) }}
         </div>
       </div>
       <div v-show="isShowSunrise">
@@ -24,17 +24,14 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 /**
  * Блок восход/закат солнца для карточки под мобильную версию.
  */
-import { languageExpressions } from "@/constants/locales";
-
 export default {
   props: ["value"],
   computed: {
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
+    ...mapGetters(["getConstantLocale"]),
     isShowSunrise() {
       return !!this.value.dayLength.sunrise;
     },
@@ -50,9 +47,6 @@ export default {
     namePolarIcon() {
       return this.value.dayLength.polar === "day" ? "sun-1" : "moon-1";
     },
-  },
-  methods: {
-    languageExpressions,
   },
 };
 </script>

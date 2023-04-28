@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
 import CurrentBlockItem from "./CurrentBlockItem.vue";
 import { mapGetters } from "vuex";
 
@@ -41,13 +40,7 @@ export default {
     CurrentBlockItem,
   },
   computed: {
-    ...mapGetters(["getLocale", "datasetCurrentBlockItem", "currentBlock"]),
-  },
-  methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
+    ...mapGetters(["datasetCurrentBlockItem", "currentBlock"]),
   },
 };
 </script>

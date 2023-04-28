@@ -2,7 +2,7 @@
   <div class="table-wrapper">
     <div class="table">
       <router-link
-        :to="pushNewURL(item.name_en)"
+        :to="pushNewURL(item.name_en?.toLowerCase())"
         :class="['table-item', { 'empty-cell': !item }]"
         v-for="(item, index) in addEmptyCell"
         :key="`l-${index}`"

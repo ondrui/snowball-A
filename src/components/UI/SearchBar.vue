@@ -32,18 +32,41 @@ import { mapGetters } from "vuex";
 export default {
   name: "SearchBar",
   computed: {
-    ...mapGetters(["getListAllCities", "getCitySelected", "getLocale"]),
+    ...mapGetters(["getListAllCities", "getCitySelected", "getLocaleURL"]),
   },
   methods: {
     handler(e) {
       const city = e.target.value;
-      const hasCity = this.getListAllCities.find(
-        ({ name_en }) => name_en.toLowerCase() === city
-      );
-      if (!city || !hasCity) return;
-      this.$router
-        .push({ name: "hourly", params: { city: city }, hash: "#top" })
-        .catch(() => {});
+      this.getListAllCities.forEach((element) => {
+        const arr = Object.entries(element).filter(([key]) => {
+          return key.includes("name");
+        });
+        const elem = arr.find(
+          (f) => f[1]?.toLowerCase() === city.toLowerCase()
+        );
+        if (!city || !elem) return;
+        this.$router
+          .push({
+            name: "hourly",
+            params: {
+              lang: this.getLocaleURL,
+              city: element.name_en.toLowerCase(),
+            },
+            hash: "#top",
+          })
+          .catch(() => {});
+      });
+      // const hasCity = this.getListAllCities.find(
+      //   ({ name_en }) => name_en.toLowerCase() === city
+      // );
+      // if (!city || !hasCity) return;
+      // this.$router
+      //   .push({
+      //     name: "hourly",
+      //     params: { lang: this.getLocaleURL, city: city },
+      //     hash: "#top",
+      //   })
+      //   .catch(() => {});
     },
   },
 };

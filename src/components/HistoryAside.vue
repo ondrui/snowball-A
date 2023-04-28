@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
+import { mapGetters } from "vuex";
 import CardCityShort from "./CardCityShort.vue";
 import CardCityBig from "./CardCityBig.vue";
 import CardCityMiddle from "./CardCityMiddle.vue";
@@ -37,29 +37,13 @@ export default {
     cardMapData() {
       return this.$store.getters.cardMapData.slice(0, 5);
     },
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
+    ...mapGetters(["getConstantLocale"]),
     getHistoryTitle() {
-      const arr = this.languageExpressions(
-        this.getLocale,
-        "asideHistory"
-      ).split(" ");
+      const arr = this.getConstantLocale("asideHistory").split(" ");
       return [arr[0], arr[1]];
     },
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
-    /**
-     *
-     */
     showComponent(index, length) {
       if (index === 0) return "CardCityBig";
       if (index === 4 || (index === 3 && length === 5)) return "CardCityShort";

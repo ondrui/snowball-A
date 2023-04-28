@@ -68,8 +68,10 @@ export default {
   computed: {
     ...mapGetters([
       "tenDaysTabTable",
+      "getLocaleURL",
       "tenDaysDetailsCard",
       "getConstantLocale",
+      "getCitySelected",
     ]),
   },
   methods: {
@@ -102,7 +104,16 @@ export default {
        */
       if (this.mouseStartX !== event.x) return;
       if (index === 0) {
-        this.$router.push({ name: "hourly" }).catch(() => {});
+        this.$router
+          .push({
+            name: "hourly",
+            params: {
+              lang: this.getLocaleURL,
+              city: this.getCitySelected.name_en,
+            },
+          })
+          .catch(() => {});
+        eventBus.$emit("highlight", false);
       } else {
         this.$store.dispatch("setCardIndex", index);
         this.focus();

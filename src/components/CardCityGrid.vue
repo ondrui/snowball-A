@@ -5,7 +5,7 @@
         <BaseIcon nameIcon="map-marker" pick="common" width="8" />
       </div>
       <div class="card-top-text">
-        <span>{{ choiceNameByLocale(getLocale, itemDataset) }}</span>
+        <span>{{ itemDataset.name_loc_choice }}</span>
       </div>
       <div class="card-top-arrow">
         <BaseIcon
@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLocale"]),
+    ...mapGetters(["getLocaleURL"]),
   },
   methods: {
     choiceNameByLocale,
@@ -68,7 +68,10 @@ export default {
       this.$router
         .push({
           name: "hourly",
-          params: { city: this.itemDataset.name_en.toLowerCase() },
+          params: {
+            lang: this.getLocaleURL,
+            city: this.itemDataset.name_en.toLowerCase(),
+          },
           hash: "#top",
         })
         .catch(() => {});

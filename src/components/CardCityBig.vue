@@ -5,10 +5,10 @@
         <BaseIcon nameIcon="map-marker" pick="common" width="9" />
       </div>
       <div class="card-top-text">
-        <span>{{ choiceNameByLocale(getLocale, itemDataset) }}</span>
+        <span>{{ itemDataset.name_loc_choice }}</span>
       </div>
       <div class="card-top-arrow">
-        <span>{{ languageExpressions(getLocale, "LinkTitleCardCity") }}</span>
+        <span>{{ getConstantLocale("LinkTitleCardCity") }}</span>
         <BaseIcon
           nameIcon="arrow-right"
           pick="common"
@@ -30,7 +30,7 @@
       <div class="card-middle-descr">
         <div class="card-middle-text">{{ itemDataset.now.condition_s }}</div>
         <div class="card-middle-feeling">
-          {{ languageExpressions(getLocale, "currentBlock", "feelsLike") }}
+          {{ getConstantLocale("currentBlock", "feelsLike") }}
           {{ itemDataset.now.feels_like }}
         </div>
       </div>
@@ -60,8 +60,7 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
-import { choiceNameByLocale } from "@/constants/functions";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -79,18 +78,9 @@ export default {
     };
   },
   computed: {
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
+    ...mapGetters(["getLocaleURL", "getConstantLocale"]),
   },
   methods: {
-    choiceNameByLocale,
-    languageExpressions,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.
@@ -109,7 +99,10 @@ export default {
       this.$router
         .push({
           name: "hourly",
-          params: { city: this.itemDataset.name_en },
+          params: {
+            lang: this.getLocaleURL,
+            city: this.itemDataset.name_en.toLowerCase(),
+          },
           hash: "#top",
         })
         .catch(() => {});

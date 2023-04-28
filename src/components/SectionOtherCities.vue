@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import { languageExpressions } from "@/constants/locales";
 import CardCityGrid from "./CardCityGrid.vue";
 import DragScrolling from "./DragScrolling.vue";
 import { cityIn } from "lvovich";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -35,30 +35,12 @@ export default {
     cardMapData() {
       return this.$store.getters.cardMapData.slice(0, 5);
     },
-    /**
-     * Возвращает языковую метку для определения локали.
-     * @example "ru"
-     */
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
-    getCountryNameLoc() {
-      return this.$store.getters.getCountryNameLoc;
-    },
+    ...mapGetters(["getCountryNameLoc", "getConstantLocale"]),
     getHistoryTitle() {
       const country = cityIn(this.getCountryNameLoc);
-      const arr = this.languageExpressions(
-        this.getLocale,
-        "sectionOtherCities"
-      ).split(" ");
+      const arr = this.getConstantLocale("sectionOtherCities").split(" ");
       return [arr.shift(), arr.join(" ").replace("$", country)];
     },
-  },
-  methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
   },
 };
 </script>

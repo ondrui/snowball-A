@@ -8,7 +8,7 @@
       "now": {
         "temp": "+11°",
         "feels_like": "+10°",
-        "condition": "cloudy",
+        "condition": "partly-cloudy_rain_0_thunderstorm_1",
         "condition_s": "переменная облачность, небольшой дождь, возможна гроза",
         "wind_dir": "se",
         "wind_descr": "13 м/с ЮВ"
@@ -27,17 +27,17 @@
       },
       "details": [
         {
-          "name": "утро",
+          "name": "morning",
           "temp": "+3°",
           "condition": "cloudy_rain_1_thunderstorm_1"
         },
         {
-          "name": "день",
+          "name": "day",
           "temp": "+17°",
           "condition": "cloudy"
         },
         {
-          "name": "вечер",
+          "name": "evening",
           "temp": "+13°",
           "condition": "clear"
         }

@@ -9,14 +9,14 @@
       </button>
     </div>
     <RowCaptionInformer class="wind">
-      {{ languageExpressions(getLocale, "climateIndicators", "windDirSpeed") }}
+      {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
     </RowCaptionInformer>
     <RowCaptionInformer class="pressure">
-      {{ languageExpressions(getLocale, "climateIndicators", "pressure") }},
-      {{ languageExpressions(getLocale, "units", "pressure")[0] }}
+      {{ getConstantLocale("climateIndicators", "pressure") }},
+      {{ getConstantLocale("units", "pressure")[0] }}
     </RowCaptionInformer>
     <RowCaptionInformer class="humidity">
-      {{ languageExpressions(getLocale, "climateIndicators", "humidity") }}
+      {{ getConstantLocale("climateIndicators", "humidity") }}
     </RowCaptionInformer>
     <DragScrolling
       ref="wrapper-content"
@@ -28,8 +28,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
-import { languageExpressions } from "@/constants/locales";
 import DragScrolling from "./DragScrolling.vue";
 
 export default {
@@ -94,20 +94,12 @@ export default {
     this.observer.disconnect();
   },
   computed: {
-    /**
-     * Возвращает языковую метку.
-     * @example
-     * "ru"
-     */
-    getLocale() {
-      return this.$store.getters.getLocale;
-    },
+    ...mapGetters(["getConstantLocale"]),
     isButtons() {
       return this.scrollWidth > this.clientWidth;
     },
   },
   methods: {
-    languageExpressions,
     /**
      * Колбэк-функция вызывается при пересечении элемента, который содержит
      * график с боковыми границами графика.

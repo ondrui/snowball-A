@@ -6,7 +6,7 @@
           <BaseIcon nameIcon="map-marker" pick="common" width="8" />
         </div>
         <div class="card-title-text">
-          <span>{{ choiceNameByLocale(getLocale, itemDataset) }}</span>
+          <span>{{ itemDataset.name_loc_choice }}</span>
         </div>
         <div class="card-title-arrow">
           <BaseIcon
@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { choiceNameByLocale } from "@/constants/functions";
 import { mapGetters } from "vuex";
 
 export default {
@@ -48,10 +47,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLocale"]),
+    ...mapGetters(["getLocaleURL"]),
   },
   methods: {
-    choiceNameByLocale,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.
@@ -70,7 +68,10 @@ export default {
       this.$router
         .push({
           name: "hourly",
-          params: { city: this.itemDataset.name_en },
+          params: {
+            lang: this.getLocaleURL,
+            city: this.itemDataset.name_en.toLowerCase(),
+          },
           hash: "#top",
         })
         .catch(() => {});

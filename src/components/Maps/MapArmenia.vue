@@ -357,7 +357,6 @@
 import MapCardCity from "./MapCardCity.vue";
 import MapMenu from "./MapMenu.vue";
 import { mapGetters } from "vuex";
-import { languageExpressions } from "@/constants/locales";
 
 export default {
   components: {
@@ -476,7 +475,7 @@ export default {
     this.$refs.animate.removeEventListener("endEvent", this.animateHandler);
   },
   computed: {
-    ...mapGetters(["getLocale"]),
+    ...mapGetters(["getConstantLocale"]),
     /**
      * Фильтруем данные для отображения на карточках по выбранному
      * району.
@@ -535,10 +534,6 @@ export default {
     },
   },
   methods: {
-    /**
-     * Возвращает строковые константы с учетом локали.
-     */
-    languageExpressions,
     /**
      * Обработчик клика из дочернего компонента, в котором находятся
      * кнопки отвечающие за отображение различной информации на карточках.
@@ -683,9 +678,7 @@ export default {
      * Пример: Сейчас, Завтра и тд.
      */
     showDayMarkers() {
-      return [0, 3, 4].map(
-        (e) => languageExpressions(this.getLocale, "timeMarker")[e]
-      );
+      return [0, 3, 4].map((e) => this.getConstantLocale("timeMarker")[e]);
     },
     /**
      * Возвращает массив содержащий подписи и ключи для кнопок с
@@ -694,7 +687,7 @@ export default {
     showIndicators() {
       return ["temp", "wind"].map((e) => [
         e,
-        languageExpressions(this.getLocale, "climateIndicators", e),
+        this.getConstantLocale("climateIndicators", e),
       ]);
     },
   },
