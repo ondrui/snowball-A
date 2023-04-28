@@ -1,18 +1,3 @@
-import {
-  defaultOptionsDateTimeFormat,
-  formatListDateTime,
-  languageExpressions,
-} from "./locales";
-/**
- * Возвращает строку с датой и временем в заданном формате.
- * @param date Строковое представление даты получаемое с
- * сервера.
- * @param format Строковое представление формата.
- * @param locales Языковая метка для определения локали.
- * @returns {string}
- * @example
- * "20:30"
- */
 /**
  * Возможные значения формата отображения времени и даты.
  * Ключи - символы описывающие возможный формат даты и времени.
@@ -30,18 +15,32 @@ import {
  * @property i - Минуты с ведущим нулём.
  * @property S - Секунды с ведущим нулём.
  */
-// const formatListDateTime = {
-//   d: ["day", "numeric"],
-//   D: ["weekday", "short"],
-//   l: ["weekday", "long"],
-//   m: ["month", "2-digit"],
-//   F: ["month", "long"],
-//   M: ["month", "short"],
-//   Y: ["year", "numeric"],
-//   H: ["hour", "2-digit"],
-//   i: ["minute", "2-digit"],
-//   S: ["second", "2-digit"],
-// };
+export const formatListDateTime = {
+  d: ["day", "numeric"],
+  D: ["weekday", "short"],
+  l: ["weekday", "long"],
+  m: ["month", "2-digit"],
+  F: ["month", "long"],
+  M: ["month", "short"],
+  Y: ["year", "numeric"],
+  H: ["hour", "2-digit"],
+  i: ["minute", "2-digit"],
+  S: ["second", "2-digit"],
+};
+
+/**
+ * Объект с дефолтными значениями свойств форматирования даты и времени.
+ */
+export const defaultOptionsDateTimeFormat = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hourCycle: "h24",
+};
 
 export const setTimeFormat = (date, format, locales) => {
   /**
@@ -132,7 +131,7 @@ export const windDirection = (prop, getter) => {
  * @example
  * "10:14"
  */
-export const daytime = (locale, sunrise, sunset, separator) => {
+export const daytime = (sunrise, sunset, getter, separator) => {
   const diffMilliseconds = new Date(sunset) - new Date(sunrise);
   // function convert Milliseconds to Hours and Minutes
   const padTo2Digits = (num) => num.toString().padStart(2, "0");
@@ -147,10 +146,8 @@ export const daytime = (locale, sunrise, sunset, separator) => {
     minutes = minutes % 60;
     return separator === ":"
       ? `${hours}:${padTo2Digits(minutes)}`
-      : `${hours} ${
-          languageExpressions(locale, "units", "time")[0]
-        } ${padTo2Digits(minutes)} ${
-          languageExpressions(locale, "units", "time")[1]
+      : `${hours} ${getter("units", "time")[0]} ${padTo2Digits(minutes)} ${
+          getter("units", "time")[1]
         }`;
   };
 

@@ -71,17 +71,17 @@
       },
       "details": [
         {
-          "name": "утро",
+          "name": "morning",
           "temp": "+3°",
           "condition": "cloudy_rain_1_thunderstorm_1"
         },
         {
-          "name": "день",
+          "name": "day",
           "temp": "+17°",
           "condition": "cloudy"
         },
         {
-          "name": "вечер",
+          "name": "evening",
           "temp": "+13°",
           "condition": "clear"
         }
@@ -115,17 +115,17 @@
       },
       "details": [
         {
-          "name": "утро",
+          "name": "morning",
           "temp": "+3°",
           "condition": "cloudy_rain_1_thunderstorm_1"
         },
         {
-          "name": "день",
+          "name": "day",
           "temp": "+17°",
           "condition": "cloudy"
         },
         {
-          "name": "вечер",
+          "name": "evening",
           "temp": "+13°",
           "condition": "clear"
         }
@@ -159,17 +159,17 @@
       },
       "details": [
         {
-          "name": "утро",
+          "name": "morning",
           "temp": "+3°",
           "condition": "cloudy_rain_1_thunderstorm_1"
         },
         {
-          "name": "день",
+          "name": "day",
           "temp": "+17°",
           "condition": "cloudy"
         },
         {
-          "name": "вечер",
+          "name": "evening",
           "temp": "+13°",
           "condition": "clear"
         }
@@ -203,17 +203,17 @@
       },
       "details": [
         {
-          "name": "утро",
+          "name": "morning",
           "temp": "+3°",
           "condition": "cloudy_rain_1_thunderstorm_1"
         },
         {
-          "name": "день",
+          "name": "day",
           "temp": "+17°",
           "condition": "cloudy"
         },
         {
-          "name": "вечер",
+          "name": "evening",
           "temp": "+13°",
           "condition": "clear"
         }

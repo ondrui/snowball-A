@@ -40,40 +40,8 @@ export default {
     SectionHistoryCities,
     ScrollTop,
   },
-  data() {
-    return {
-      initialData: false,
-    };
-  },
-  created() {
-    this.changingСity();
-    this.initialData = true;
-  },
-  watch: {
-    $route() {
-      this.changingСity();
-    },
-  },
   computed: {
     ...mapGetters(["loading"]),
-  },
-  methods: {
-    changingСity() {
-      const cityLS = localStorage.getItem("city");
-      let city = "";
-      if (this.$route.params.city) {
-        city = this.$route.params.city;
-      } else if (cityLS) {
-        city = cityLS;
-      } else {
-        city = "yerevan";
-      }
-      if (!this.initialData) {
-        this.$store.dispatch("setCity", city);
-      } else {
-        this.$store.commit("setCity", city);
-      }
-    },
   },
 };
 </script>

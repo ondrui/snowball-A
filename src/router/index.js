@@ -88,12 +88,19 @@ const router = new VueRouter({
 });
 router.beforeEach((to, from, next) => {
   console.log("to", to);
-  console.log("from", from);
-  const locale = to.params.lang || "ru";
-  if (locale === store.getters.getLocale) {
+  const lang = to.params.lang;
+  const city = to.params.city;
+  if (
+    lang === store.getters.getLocale &&
+    city === store.getters.getCitySelected?.name_en
+  ) {
+    next();
+  } else if (city) {
+    console.log("router commit");
+    store.commit("setLocale", lang);
+    store.commit("setCity", city);
     next();
   } else {
-    store.commit("setLocale", locale);
     next();
   }
 });

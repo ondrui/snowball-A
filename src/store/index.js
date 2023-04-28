@@ -24,7 +24,7 @@ export default new Vuex.Store({
     /**
      * Свойство определяет языковую локаль. Значение по умолчанию "ru".
      */
-    locale: "ru",
+    locale: "",
     translatedConstants: {},
     country_loc: {
       ru: "Армения",
@@ -430,9 +430,9 @@ export default new Vuex.Store({
         const time =
           datasetsHourly[key]["sunrise"] && datasetsHourly[key]["sunset"]
             ? daytime(
-                getLocale,
                 datasetsHourly[key]["sunrise"],
-                datasetsHourly[key]["sunset"]
+                datasetsHourly[key]["sunset"],
+                getConstantLocale
               )
             : undefined;
         obj[key] = {
@@ -481,7 +481,7 @@ export default new Vuex.Store({
           );
           const time =
             e.sunrise && e.sunset
-              ? daytime(getLocale, e.sunrise, e.sunset)
+              ? daytime(e.sunrise, e.sunset, getConstantLocale)
               : undefined;
           return {
             weekday,
@@ -832,7 +832,10 @@ export default new Vuex.Store({
     /**
      * Возвращает данные для температурных карточек на корте.
      */
-    cardMapData: ({ datasetsMap, listAllCities }, { getLocale }) => {
+    cardMapData: (
+      { datasetsMap, listAllCities },
+      { getLocale, getConstantLocale }
+    ) => {
       // Добавляем ключ name_loc в state.datasetMap
       const arr = datasetsMap.map((value) => {
         const { name_loc } = listAllCities.find(
@@ -842,9 +845,23 @@ export default new Vuex.Store({
       });
       return arr.map((e) => {
         const cityName = choiceNameByLocale(getLocale, e);
+        const localDetails = e.details?.map((value) => {
+          const nameDaymarker = getConstantLocale("timeMarker").find(
+            ([key]) => key === value.name
+          );
+          return {
+            ...value,
+            name: nameDaymarker[1],
+          };
+        });
+        const localCondition = getConstantLocale(
+          "weather_sign",
+          e.now.condition
+        );
+        e.now.condition_s = localCondition;
         return {
           area_en: e.area_en,
-          details: e.details,
+          details: localDetails,
           home: e.home,
           name_en: e.name_en.toLowerCase(),
           name_loc_choice: cityName,
@@ -1065,7 +1082,7 @@ export default new Vuex.Store({
       state.translatedConstants = constants;
     },
     setCity(state, city) {
-      // console.log("mutation setCity");
+      console.log("mutation setCity", city);
       state.citySelected = city.toLowerCase();
       localStorage.setItem("city", state.citySelected);
       // console.log("LS", localStorage.getItem("city", state.citySelected));
@@ -1076,6 +1093,7 @@ export default new Vuex.Store({
         return;
       }
       state.locale = localeStr.toLowerCase();
+      localStorage.setItem("lang", state.locale);
     },
     loading(state, bol) {
       state.loading = bol;
@@ -1119,8 +1137,26 @@ export default new Vuex.Store({
         console.error("Error! Could not reach the API. " + error);
       }
     },
-    setCity: async ({ state, commit, dispatch }, city) => {
+    setCity: async ({ state, commit, dispatch }) => {
       await dispatch("initialDataLoad");
+      const cityLS = localStorage.getItem("city");
+      const langLS = localStorage.getItem("lang");
+      let city = "";
+      let lang = "";
+      if (this.$route.params.city) {
+        city = this.$route.params.city;
+      } else if (cityLS) {
+        city = cityLS;
+      } else {
+        city = "yerevan";
+      }
+      if (this.$route.params.lang) {
+        lang = this.$route.params.lang;
+      } else if (langLS) {
+        lang = langLS;
+      } else {
+        lang = "ru";
+      }
       const isFindCityList = state.listAllCities.some(
         (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
       );
@@ -1131,6 +1167,7 @@ export default new Vuex.Store({
         return;
       }
       commit("setCity", city);
+      commit("setLocale", lang);
       commit("loading", true);
     },
   },

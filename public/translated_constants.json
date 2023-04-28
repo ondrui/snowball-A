@@ -210,7 +210,7 @@
     }
   },
   "en": {
-    "sectionOtherCities": "weather for cities in the $",
+    "sectionOtherCities": "weather for cities in $",
     "asideHistory": "browsing history",
     "viewsSwitcher": ["map", "sity"],
     "LinkTitleCardCity": "more",
