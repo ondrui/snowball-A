@@ -8,7 +8,10 @@
 export default {
   name: "App",
   created() {
-    this.$store.dispatch("setCity");
+    /**
+     * Вызываем экшн для первоначальной загрузки данных в стор.
+     */
+    this.$store.dispatch("initialDispatch");
   },
 };
 </script>

@@ -22,9 +22,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     /**
-     * Свойство определяет языковую локаль. Значение по умолчанию "ru".
+     * Свойство определяет текущую языковую локаль.
+     * Значение по умолчанию "ru".
      */
     locale: "",
+    /**
+     * Массив с поддерживаемыми языками.
+     */
+    supportedLocales: [],
+    /**
+     * Объект с переводами.
+     */
     translatedConstants: {},
     country_loc: {
       ru: "Армения",
@@ -35,11 +43,10 @@ export default new Vuex.Store({
      * Город для которого выводится прогноз погоды.
      */
     citySelected: "",
-    loading: false,
     /**
-     * Список самых крупных городов.
+     * Лоадер.
      */
-    listLargestcities: [],
+    loading: false,
     /**
      * Объект с фактическими погодными данными, которые приходят с сервера.
      */
@@ -116,7 +123,7 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      */
     getLocale(state) {
-      return state.locale ?? "ru";
+      return state.locale;
     },
     getLocaleURL(state) {
       return state.locale === "ru" ? undefined : state.locale;
@@ -965,7 +972,7 @@ export default new Vuex.Store({
   },
   mutations: {
     /**
-     * Заполняет store данными, полученными с бэкэнда, предварительно их модифицировав.
+     * Заполняет store прогнозными данными, полученными с бэкэнда, предварительно их модифицировав.
      * @param state Текущее состояние store.state.
      * @param forecast_1 Прогноз по часу начиная с текущего часа.
      * @param forecast_24  Прогноз по полусуткам "день" (с 9:00 до 21:00),
@@ -973,7 +980,7 @@ export default new Vuex.Store({
      * @param forecast_3 Прогноз по 3 часа начиная с текущего часа.
      * @param fact Информация о фактической погоде.
      */
-    setData(state, { forecast_1, forecast_24, forecast_3, fact }) {
+    setDataForecast(state, { forecast_1, forecast_24, forecast_3, fact }) {
       //fact datasets
       state.datasetsFact = fact;
       /**
@@ -1069,7 +1076,7 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.state.
      * @param cities Массив с данными по городам.
      */
-    setListCities(state, { cities }) {
+    setListAllCities(state, { cities }) {
       state.listAllCities = cities;
     },
     setMapDataset(state, { datasetsMap }) {
@@ -1082,18 +1089,17 @@ export default new Vuex.Store({
       state.translatedConstants = constants;
     },
     setCity(state, city) {
-      console.log("mutation setCity", city);
+      console.log("setCity", city);
       state.citySelected = city.toLowerCase();
       localStorage.setItem("city", state.citySelected);
-      // console.log("LS", localStorage.getItem("city", state.citySelected));
     },
     setLocale(state, localeStr) {
       console.log("setLocale", localeStr);
-      if (localeStr == "undefined" || localeStr == undefined) {
-        return;
-      }
       state.locale = localeStr.toLowerCase();
       localStorage.setItem("lang", state.locale);
+    },
+    setSupportedLocales(state, { locales }) {
+      state.supportedLocales = locales;
     },
     loading(state, bol) {
       state.loading = bol;
@@ -1111,7 +1117,7 @@ export default new Vuex.Store({
     /**
      * Get data from Internal vs External APIs.
      */
-    initialDataLoad: async ({ commit }) => {
+    loadData: async ({ commit }) => {
       commit("loading", false);
       try {
         const res = await Promise.all([
@@ -1121,54 +1127,85 @@ export default new Vuex.Store({
           axios.get("/map_dataset.json"),
           axios.get("/top_cities.json"),
           axios.get("/translated_constants.json"),
+          axios.get("/supported-locales.json"),
           new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
         ]);
-        const [total, data, cities, mapDataset, topCities, constants] = res.map(
-          ({ data }) => data
-        );
+        const [total, data, cities, mapDataset, topCities, constants, locales] =
+          res.map(({ data }) => data);
 
-        commit("setData", total);
+        commit("setDataForecast", total);
         commit("setDataAPI", data);
-        commit("setListCities", cities);
+        commit("setListAllCities", cities);
         commit("setMapDataset", mapDataset);
         commit("setListTopCities", topCities);
         commit("setConstants", constants);
+        commit("setSupportedLocales", locales);
       } catch (error) {
         console.error("Error! Could not reach the API. " + error);
       }
     },
-    setCity: async ({ state, commit, dispatch }) => {
-      await dispatch("initialDataLoad");
+    initialDispatch: async ({ state, commit, dispatch }) => {
+      console.log("initialDispatch");
+      await dispatch("loadData");
+      const defaultCity = "yerevan";
+      const defaultLocale = "ru";
       const cityLS = localStorage.getItem("city");
       const langLS = localStorage.getItem("lang");
       let city = "";
       let lang = "";
-      if (this.$route.params.city) {
-        city = this.$route.params.city;
+      if (router.currentRoute.params.city) {
+        city = router.currentRoute.params.city;
       } else if (cityLS) {
         city = cityLS;
       } else {
-        city = "yerevan";
+        city = defaultCity;
       }
-      if (this.$route.params.lang) {
-        lang = this.$route.params.lang;
+      if (router.currentRoute.params.lang) {
+        lang = router.currentRoute.params.lang;
       } else if (langLS) {
         lang = langLS;
       } else {
-        lang = "ru";
+        lang = defaultLocale;
       }
-      const isFindCityList = state.listAllCities.some(
+      const hasCityInTheList = state.listAllCities.some(
         (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
       );
-      console.log("action setCity", city, isFindCityList);
 
-      if (city === "undefined" || city === undefined || !isFindCityList) {
-        router.push({ path: "not-found" });
+      console.log("сity", city, hasCityInTheList);
+
+      if (city === "undefined" || city === undefined || !hasCityInTheList) {
+        router.push({ path: "not-found" }).catch(() => {});
         return;
       }
+
+      const locale = state.supportedLocales.includes(lang)
+        ? lang
+        : defaultLocale;
+
       commit("setCity", city);
-      commit("setLocale", lang);
+      commit("setLocale", locale);
       commit("loading", true);
+    },
+    setParams({ state, commit }, { lang, city, path }) {
+      console.log("setParams");
+      const hasCityInTheList = state.listAllCities.some(
+        (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
+      );
+
+      console.log("сity", city, hasCityInTheList);
+
+      if (city === "undefined" || city === undefined || !hasCityInTheList) {
+        console.log(path);
+        axios.get(path);
+        // router.push({ path: "not-found" }).catch(() => {});
+        return;
+      }
+
+      const locale = state.supportedLocales.includes(lang)
+        ? lang
+        : state.locale;
+      commit("setLocale", locale);
+      return city;
     },
   },
 });

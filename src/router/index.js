@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import store from "@/store";
 
 import WeatherInformer from "@/views/WeatherInformer.vue";
-import NotFound from "@/views/NotFound.vue";
+// import NotFound from "@/views/NotFound.vue";
 import HomePage from "@/views/HomePage.vue";
 import ListAllCities from "@/views/ListAllCities.vue";
 import TabInformerDay from "@/views/TabInformerDay.vue";
@@ -14,7 +14,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/:lang(ru|am|en)?",
+    path: "/:lang(am|ru)?",
     component: HomePage,
     children: [
       {
@@ -63,11 +63,11 @@ const routes = [
       breadcrumb: [{ name: "main" }],
     },
   },
-  {
-    path: "/:pathMatch(.*)*",
-    name: "not-found",
-    component: NotFound,
-  },
+  // {
+  //   path: "/:pathMatch(.*)*",
+  //   name: "not-found",
+  //   component: NotFound,
+  // },
 ];
 
 const router = new VueRouter({
@@ -88,20 +88,27 @@ const router = new VueRouter({
 });
 router.beforeEach((to, from, next) => {
   console.log("to", to);
-  const lang = to.params.lang;
+  const lang = to.params.lang || "ru";
   const city = to.params.city;
-  if (
-    lang === store.getters.getLocale &&
-    city === store.getters.getCitySelected?.name_en
-  ) {
+  const path = to.path;
+  const obj = { lang, city, path };
+
+  store.dispatch("setParams", obj).then((res) => {
+    console.log(res);
     next();
-  } else if (city) {
-    console.log("router commit");
-    store.commit("setLocale", lang);
-    store.commit("setCity", city);
-    next();
-  } else {
-    next();
-  }
+  });
+  // if (
+  //   lang === store.getters.getLocale &&
+  //   city === store.getters.getCitySelected?.name_en
+  // ) {
+  //   next();
+  // } else if (city) {
+  //   console.log("router commit");
+  //   store.commit("setLocale", lang);
+  //   store.commit("setCity", city);
+  //   next();
+  // } else {
+  // next();
+  // }
 });
 export default router;

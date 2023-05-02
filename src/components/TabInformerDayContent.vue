@@ -130,7 +130,7 @@ export default {
     focus() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
       if (index !== -1) {
-        this.$router.push({ hash: `#id-${index}` });
+        this.$router.push({ hash: `#id-${index}` }).catch(() => {});
         // this.$refs.item[index].scrollIntoView({
         //   block: "nearest",
         //   behavior: "smooth",
