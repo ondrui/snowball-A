@@ -18,11 +18,12 @@ directives.forEach((directive) => {
  * Создаем глобальную шину событий.
  */
 export const eventBus = new Vue();
-window.bus = eventBus;
 Vue.config.productionTip = false;
 
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount("#app");
+
+window.vm = vm;

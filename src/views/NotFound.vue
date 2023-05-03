@@ -3,13 +3,31 @@
     <div>
       <h1>404! Page Not Found!</h1>
       <h2>it seems you're in the wrong page</h2>
-      <router-link to="/">Перейти на главную</router-link>
+      <router-link :to="pushNewURL()">Перейти на главную</router-link>
     </div>
   </div>
 </template>
+<script>
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["getLocaleURL", "getCitySelected"]),
+  },
+  methods: {
+    pushNewURL() {
+      return {
+        name: "main",
+        params: {
+          lang: this.getLocaleURL,
+          city: this.getCitySelected.name_en,
+        },
+      };
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .container {
-  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;

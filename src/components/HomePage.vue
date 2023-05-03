@@ -1,23 +1,20 @@
 <template>
   <div class="home-page">
-    <div v-if="!loading">Loading...</div>
-    <template v-else>
-      <TheHeader />
-      <SectionOtherCities />
-      <div class="page-wrapper">
-        <div class="main">
-          <BreadCrumbs />
-          <SearchBar />
-          <router-view></router-view>
-        </div>
-        <TheAside class="sidebar">
-          <HistoryAside />
-        </TheAside>
+    <TheHeader />
+    <SectionOtherCities />
+    <div class="page-wrapper">
+      <div class="main">
+        <BreadCrumbs v-if="isBreadcrumbsShow" />
+        <SearchBar />
+        <router-view></router-view>
       </div>
-      <SectionHistoryCities class="middle-section" />
-      <HistoryAside class="mob-section" />
-      <ScrollTop />
-    </template>
+      <TheAside class="sidebar">
+        <HistoryAside />
+      </TheAside>
+    </div>
+    <SectionHistoryCities class="middle-section" />
+    <HistoryAside class="mob-section" />
+    <ScrollTop />
   </div>
 </template>
 
@@ -40,8 +37,14 @@ export default {
     SectionHistoryCities,
     ScrollTop,
   },
+  created() {
+    console.log("home page created");
+  },
   computed: {
     ...mapGetters(["loading"]),
+    isBreadcrumbsShow() {
+      return this.$route.meta.breadcrumb[0].name !== "404";
+    },
   },
 };
 </script>

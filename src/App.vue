@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <div v-if="loading">Loading...</div>
+    <HomePage v-else />
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import HomePage from "./components/HomePage.vue";
 export default {
   name: "App",
+  components: {
+    HomePage,
+  },
+  computed: {
+    ...mapGetters(["loading"]),
+  },
   created() {
     /**
      * Вызываем экшн для первоначальной загрузки данных в стор.
      */
-    this.$store.dispatch("initialDispatch");
+    // this.$store.dispatch("initialDispatch");
   },
 };
 </script>

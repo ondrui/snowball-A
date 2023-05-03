@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import router from "@/router";
 /**
  * Вспомогательные функции:
  * @func setTimeFormat Возвращает в заданном формате время, доту.
@@ -25,7 +24,7 @@ export default new Vuex.Store({
      * Свойство определяет текущую языковую локаль.
      * Значение по умолчанию "ru".
      */
-    locale: "",
+    locale: undefined,
     /**
      * Массив с поддерживаемыми языками.
      */
@@ -47,6 +46,7 @@ export default new Vuex.Store({
      * Лоадер.
      */
     loading: false,
+    initDataLoad: false,
     /**
      * Объект с фактическими погодными данными, которые приходят с сервера.
      */
@@ -1090,19 +1090,28 @@ export default new Vuex.Store({
     },
     setCity(state, city) {
       console.log("setCity", city);
+      if (city === undefined) return;
       state.citySelected = city.toLowerCase();
       localStorage.setItem("city", state.citySelected);
     },
     setLocale(state, localeStr) {
       console.log("setLocale", localeStr);
-      state.locale = localeStr.toLowerCase();
+      if (localeStr === undefined) {
+        state.locale = "ru";
+      } else {
+        state.locale = localeStr.toLowerCase();
+      }
       localStorage.setItem("lang", state.locale);
     },
     setSupportedLocales(state, { locales }) {
       state.supportedLocales = locales;
     },
     loading(state, bol) {
+      console.log(bol);
       state.loading = bol;
+    },
+    initCommit(state, bol) {
+      state.initDataLoad = bol;
     },
   },
   actions: {
@@ -1118,7 +1127,7 @@ export default new Vuex.Store({
      * Get data from Internal vs External APIs.
      */
     loadData: async ({ commit }) => {
-      commit("loading", false);
+      commit("loading", true);
       try {
         const res = await Promise.all([
           axios.get("/forecast.json"),
@@ -1144,68 +1153,52 @@ export default new Vuex.Store({
         console.error("Error! Could not reach the API. " + error);
       }
     },
-    initialDispatch: async ({ state, commit, dispatch }) => {
-      console.log("initialDispatch");
-      await dispatch("loadData");
+
+    setParams: async ({ state, commit, dispatch }, { lang, city, path }) => {
+      console.log("setParams");
+      console.log("locale", lang);
+      console.log("сity", city);
+      if (!state.initDataLoad) {
+        await dispatch("loadData");
+        commit("initCommit", true);
+      }
       const defaultCity = "yerevan";
       const defaultLocale = "ru";
-      const cityLS = localStorage.getItem("city");
-      const langLS = localStorage.getItem("lang");
-      let city = "";
-      let lang = "";
-      if (router.currentRoute.params.city) {
-        city = router.currentRoute.params.city;
-      } else if (cityLS) {
-        city = cityLS;
-      } else {
-        city = defaultCity;
-      }
-      if (router.currentRoute.params.lang) {
-        lang = router.currentRoute.params.lang;
-      } else if (langLS) {
-        lang = langLS;
-      } else {
-        lang = defaultLocale;
-      }
+      const setData = (key, value, defaultValue) => {
+        const valueLS = localStorage.getItem(key);
+        if (value) {
+          return value;
+        } else if (valueLS) {
+          return valueLS;
+        } else {
+          return defaultValue;
+        }
+      };
+      city = setData("city", city, defaultCity);
+      lang = setData("lang", lang, defaultLocale);
+
       const hasCityInTheList = state.listAllCities.some(
         (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
       );
 
-      console.log("сity", city, hasCityInTheList);
+      console.log("hasCityInTheList", hasCityInTheList);
 
-      if (city === "undefined" || city === undefined || !hasCityInTheList) {
-        router.push({ path: "not-found" }).catch(() => {});
-        return;
+      const isLocaleSupported = state.supportedLocales.includes(lang);
+
+      console.log("isLocaleSupported", isLocaleSupported);
+
+      if (
+        (!hasCityInTheList && city !== undefined) ||
+        (!isLocaleSupported && lang !== undefined)
+      ) {
+        axios.get(path).catch((err) => console.log(err));
+        return 404;
       }
 
-      const locale = state.supportedLocales.includes(lang)
-        ? lang
-        : defaultLocale;
-
+      commit("setLocale", lang);
       commit("setCity", city);
-      commit("setLocale", locale);
-      commit("loading", true);
-    },
-    setParams({ state, commit }, { lang, city, path }) {
-      console.log("setParams");
-      const hasCityInTheList = state.listAllCities.some(
-        (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
-      );
-
-      console.log("сity", city, hasCityInTheList);
-
-      if (city === "undefined" || city === undefined || !hasCityInTheList) {
-        console.log(path);
-        axios.get(path);
-        // router.push({ path: "not-found" }).catch(() => {});
-        return;
-      }
-
-      const locale = state.supportedLocales.includes(lang)
-        ? lang
-        : state.locale;
-      commit("setLocale", locale);
-      return city;
+      console.log("finish dispatch");
+      return 200;
     },
   },
 });
