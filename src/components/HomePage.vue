@@ -37,9 +37,6 @@ export default {
     SectionHistoryCities,
     ScrollTop,
   },
-  created() {
-    console.log("home page created");
-  },
   computed: {
     ...mapGetters(["loading"]),
     isBreadcrumbsShow() {

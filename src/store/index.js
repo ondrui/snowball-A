@@ -150,8 +150,8 @@ export default new Vuex.Store({
     loading(state) {
       return state.loading;
     },
-    getCountryNameLoc({ locale, country_loc }) {
-      const countryName = country_loc[locale];
+    getCountryNameLoc({ country_loc }, { getLocale }) {
+      const countryName = country_loc[getLocale];
       return capitalize(countryName);
     },
     /**
@@ -1096,18 +1096,19 @@ export default new Vuex.Store({
     },
     setLocale(state, localeStr) {
       console.log("setLocale", localeStr);
+      const defaultLocale = "ru";
       if (localeStr === undefined) {
-        state.locale = "ru";
+        state.locale = defaultLocale;
+        localStorage.removeItem("lang");
       } else {
         state.locale = localeStr.toLowerCase();
+        localStorage.setItem("lang", state.locale);
       }
-      localStorage.setItem("lang", state.locale);
     },
     setSupportedLocales(state, { locales }) {
       state.supportedLocales = locales;
     },
     loading(state, bol) {
-      console.log(bol);
       state.loading = bol;
     },
     initCommit(state, bol) {
@@ -1154,19 +1155,56 @@ export default new Vuex.Store({
       }
     },
 
-    setParams: async ({ state, commit, dispatch }, { lang, city, path }) => {
+    setParams: async ({ state, commit, dispatch }, { lang, city }) => {
       console.log("setParams");
-      console.log("locale", lang);
-      console.log("сity", city);
+      console.log("locale from router", lang);
+      console.log("сity from router", city);
       if (!state.initDataLoad) {
         await dispatch("loadData");
         commit("initCommit", true);
       }
-      const defaultCity = "yerevan";
+
       const defaultLocale = "ru";
+
+      const isLocaleSupported = state.supportedLocales.includes(lang);
+
+      console.log("isLocaleSupported", isLocaleSupported);
+
+      // if (
+      //   (!hasCityInTheList && city !== undefined) ||
+      //   (!isLocaleSupported && lang !== undefined)
+      // ) {
+      //   commit("setLocale", lang);
+      //   commit("setCity", city);
+      //   return 404;
+      // }
+
+      const selectCity = () => {
+        const defaultCity = "yerevan";
+        const cityLS = localStorage.getItem("city");
+
+        if (!city && cityLS) {
+          return cityLS;
+        }
+        if (!city && !cityLS) {
+          return defaultCity;
+        }
+        const hasCityInTheList = state.listAllCities.some(
+          (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
+        );
+
+        console.log("hasCityInTheList", hasCityInTheList);
+        if (city && hasCityInTheList) {
+          return city;
+        }
+        return undefined;
+      };
+
+      console.log("selectCity", selectCity());
+
       const setData = (key, value, defaultValue) => {
         const valueLS = localStorage.getItem(key);
-        if (value) {
+        if (key === "lang" || (key === "city" && value)) {
           return value;
         } else if (valueLS) {
           return valueLS;
@@ -1174,30 +1212,11 @@ export default new Vuex.Store({
           return defaultValue;
         }
       };
-      city = setData("city", city, defaultCity);
       lang = setData("lang", lang, defaultLocale);
-
-      const hasCityInTheList = state.listAllCities.some(
-        (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
-      );
-
-      console.log("hasCityInTheList", hasCityInTheList);
-
-      const isLocaleSupported = state.supportedLocales.includes(lang);
-
-      console.log("isLocaleSupported", isLocaleSupported);
-
-      if (
-        (!hasCityInTheList && city !== undefined) ||
-        (!isLocaleSupported && lang !== undefined)
-      ) {
-        axios.get(path).catch((err) => console.log(err));
-        return 404;
-      }
+      console.log(city, lang);
 
       commit("setLocale", lang);
       commit("setCity", city);
-      console.log("finish dispatch");
       return 200;
     },
   },

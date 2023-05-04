@@ -37,7 +37,9 @@ export default {
             city: this.getCitySelected.name_en,
           },
         })
-        .catch(() => {});
+        .catch((er) => {
+          new Error(er);
+        });
     },
     pushNewURL() {
       return {

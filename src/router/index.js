@@ -13,14 +13,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/:lang?/not-found",
-    name: "page-404",
-    component: NotFound,
-    meta: {
-      breadcrumb: [{ name: "404" }],
-    },
-  },
-  {
     path: "/:lang?/cities",
     name: "cities",
     component: ListAllCities,
@@ -62,7 +54,16 @@ const routes = [
     },
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: "/:lang?/not-found",
+    name: "page-404",
+    component: NotFound,
+    alias: "*",
+    meta: {
+      breadcrumb: [{ name: "404" }],
+    },
+  },
+  {
+    path: "/:lang?/:pathMatch(.*)*",
     name: "not-found",
     component: NotFound,
     meta: {
@@ -92,26 +93,22 @@ router.beforeEach((to, from, next) => {
   const obj = {
     lang: to.params.lang,
     city: to.params.city,
-    path: to.path,
   };
-
   store.dispatch("setParams", obj).then((res) => {
     console.log(res);
-    store.commit("loading", false);
-    next();
+    if (res === 404) {
+      next({
+        name: "not-found",
+        params: { pathMatch: to.path.split("/").slice(1) },
+        meta: {
+          breadcrumb: [{ name: "404" }],
+        },
+      });
+    } else {
+      store.commit("loading", false);
+      next();
+    }
   });
 });
-// if (
-//   lang === store.getters.getLocale &&
-//   city === store.getters.getCitySelected?.name_en
-// ) {
-//   next();
-// } else if (city) {
-//   console.log("router commit");
-//   store.commit("setLocale", lang);
-//   store.commit("setCity", city);
-//   next();
-// } else {
-// next();
-// }
+
 export default router;

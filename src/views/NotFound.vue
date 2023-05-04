@@ -9,7 +9,11 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
+  created() {
+    axios.get(this.$route.path).catch((err) => console.log(err));
+  },
   computed: {
     ...mapGetters(["getLocaleURL", "getCitySelected"]),
   },

@@ -20,7 +20,7 @@ export default {
     /**
      * Вызываем экшн для первоначальной загрузки данных в стор.
      */
-    // this.$store.dispatch("initialDispatch");
+    // this.$store.dispatch("loadData");
   },
 };
 </script>
