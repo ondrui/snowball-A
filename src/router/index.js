@@ -8,6 +8,7 @@ import ListAllCities from "@/views/ListAllCities.vue";
 import TabInformerDay from "@/views/TabInformerDay.vue";
 import TabInformerHourly from "@/views/TabInformerHourly.vue";
 import TabInformerMain from "@/views/TabInformerMain.vue";
+import { LOADING } from "@/store/mutations";
 
 Vue.use(VueRouter);
 
@@ -88,6 +89,7 @@ const router = new VueRouter({
     }
   },
 });
+
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   const obj = {
@@ -105,7 +107,7 @@ router.beforeEach((to, from, next) => {
         },
       });
     } else {
-      store.commit("loading", false);
+      store.commit(LOADING, false);
       next();
     }
   });

@@ -1,6 +1,32 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import {
+  SET_DATA_FORECAST,
+  setDataForecast,
+  SET_DATA_API,
+  setDataAPI,
+  CHANGE_OPENING_CARD,
+  changeOpeningCard,
+  SET_LIST_ALL_CITIES,
+  setListAllCities,
+  SET_MAP_DATA_SET,
+  setMapDataset,
+  SET_LIST_TOP_CITIES,
+  setListTopCities,
+  SET_CONSTANTS,
+  setConstants,
+  SET_CITY,
+  setCity,
+  SET_LOCALE,
+  setLocale,
+  SET_SUPPORTED_LOCALES,
+  setSupportedLocales,
+  LOADING,
+  loading,
+  INIT_COMMIT,
+  initCommit,
+} from "./mutations";
 /**
  * Вспомогательные функции:
  * @func setTimeFormat Возвращает в заданном формате время, доту.
@@ -22,7 +48,7 @@ export default new Vuex.Store({
   state: {
     /**
      * Свойство определяет текущую языковую локаль.
-     * Значение по умолчанию "ru".
+     * Значение по умолчанию undefined.
      */
     locale: undefined,
     /**
@@ -33,6 +59,9 @@ export default new Vuex.Store({
      * Объект с переводами.
      */
     translatedConstants: {},
+    /**
+     * Название страны с учетом локалей.
+     */
     country_loc: {
       ru: "Армения",
       en: "Armenia",
@@ -971,149 +1000,18 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    /**
-     * Заполняет store прогнозными данными, полученными с бэкэнда, предварительно их модифицировав.
-     * @param state Текущее состояние store.state.
-     * @param forecast_1 Прогноз по часу начиная с текущего часа.
-     * @param forecast_24  Прогноз по полусуткам "день" (с 9:00 до 21:00),
-     * "ночь" (с 21:00 до 09:00).
-     * @param forecast_3 Прогноз по 3 часа начиная с текущего часа.
-     * @param fact Информация о фактической погоде.
-     */
-    setDataForecast(state, { forecast_1, forecast_24, forecast_3, fact }) {
-      //fact datasets
-      state.datasetsFact = fact;
-      /**
-       * Выбираем необходимые данные для часового прогноза.
-       * hourly datasets
-       */
-      const filteredDatasets = Object.keys(forecast_1)
-        .filter((key) => key !== "3" && key !== "start_date")
-        .reduce((obj, key) => {
-          const addObj = Object.keys(forecast_1[key]).reduce((total, p) => {
-            total[p] =
-              typeof forecast_1[key][p] === "object"
-                ? {
-                    ...forecast_1[key][p],
-                    prec_sum: +(Math.random() * 10).toFixed(1),
-                  }
-                : forecast_1[key][p];
-            return total;
-          }, {});
-          obj[key] = addObj;
-          return obj;
-        }, {});
-      state.datasetsHourly = filteredDatasets;
-      /**
-       * Выбираем необходимые данные для подробного прогноза с разбивой на 3 часа.
-       * Three Hour Datasets
-       */
-      const filteredThreeHourDatasets = Object.keys(forecast_3)
-        .filter((key) => key !== "start_date")
-        .reduce((obj, key) => {
-          const addObj = Object.keys(forecast_3[key]).reduce((total, p) => {
-            total[p] =
-              typeof forecast_3[key][p] === "object"
-                ? {
-                    ...forecast_3[key][p],
-                    prec_sum: +(Math.random() * 10).toFixed(1),
-                  }
-                : forecast_3[key][p];
-            return total;
-          }, {});
-          obj[key] = addObj;
-          return obj;
-        }, {});
-      state.datasetsThreeHour = filteredThreeHourDatasets;
-      /**
-       * Выбираем необходимые данные для прогноза  на 7-14 дней.
-       * 7-14 days datasets
-       */
-      const filteredTenDatasets = Object.keys(forecast_24).reduce(
-        (obj, key, index) => {
-          const addObj = Object.keys(forecast_24[key]).reduce((total, p) => {
-            total[p] =
-              typeof forecast_24[key][p] === "object"
-                ? {
-                    ...forecast_24[key][p],
-                    prec_sum: +(Math.random() * 10).toFixed(1),
-                  }
-                : forecast_24[key][p];
-            return total;
-          }, {});
-          addObj.isOpen = index === 1 ? true : false;
-          obj[key] = addObj;
-          return obj;
-        },
-        {}
-      );
-      state.datasetsTenDays = filteredTenDatasets;
-    },
-    /**
-     *
-     * @param state Текущее состояние store.state.
-     * @param hourly Прогноз по часу начиная с текущего часа.
-     */
-    setDataAPI(state, { hourly }) {
-      state.dataFromAPI = hourly;
-    },
-    /**
-     * Вызывается когда пользователь кликает на
-     * карточку с подробным прогнозом.
-     * Закрываем все открытые графики и открываем выбранный.
-     * Данное поведение реализовано через смену значения поля isOpen.
-     * @param state Текущее состояние store.state.
-     * @param index Код карточки.
-     */
-    changeOpeningCard(state, index) {
-      Object.keys(state.datasetsTenDays).map(
-        (e) => (state.datasetsTenDays[e].isOpen = false)
-      );
-      state.datasetsTenDays[index].isOpen = true;
-    },
-    /**
-     * Данные с сервера с городами.
-     * @param state Текущее состояние store.state.
-     * @param cities Массив с данными по городам.
-     */
-    setListAllCities(state, { cities }) {
-      state.listAllCities = cities;
-    },
-    setMapDataset(state, { datasetsMap }) {
-      state.datasetsMap = datasetsMap;
-    },
-    setListTopCities(state, { topCities }) {
-      state.listTopCities = topCities;
-    },
-    setConstants(state, constants) {
-      state.translatedConstants = constants;
-    },
-    setCity(state, city) {
-      console.log("setCity", city);
-      if (city === undefined) return;
-      state.citySelected = city.toLowerCase();
-      localStorage.setItem("city", state.citySelected);
-    },
-    setLocale(state, localeStr) {
-      console.log("setLocale", localeStr);
-      const defaultLocale = "ru";
-      if (localeStr === undefined) {
-        state.locale = defaultLocale;
-        localStorage.removeItem("lang");
-      } else {
-        state.locale = localeStr.toLowerCase();
-        localStorage.setItem("lang", state.locale);
-      }
-    },
-    setSupportedLocales(state, { locales }) {
-      state.supportedLocales = locales;
-    },
-    loading(state, bol) {
-      state.loading = bol;
-    },
-    initCommit(state, bol) {
-      state.initDataLoad = bol;
-    },
+    [SET_DATA_FORECAST]: setDataForecast,
+    [SET_DATA_API]: setDataAPI,
+    [CHANGE_OPENING_CARD]: changeOpeningCard,
+    [SET_LIST_ALL_CITIES]: setListAllCities,
+    [SET_MAP_DATA_SET]: setMapDataset,
+    [SET_LIST_TOP_CITIES]: setListTopCities,
+    [SET_CONSTANTS]: setConstants,
+    [SET_CITY]: setCity,
+    [SET_LOCALE]: setLocale,
+    [SET_SUPPORTED_LOCALES]: setSupportedLocales,
+    [LOADING]: loading,
+    [INIT_COMMIT]: initCommit,
   },
   actions: {
     /**
@@ -1122,13 +1020,13 @@ export default new Vuex.Store({
      * @param index Код карточки.
      */
     setCardIndex({ commit }, index) {
-      commit("changeOpeningCard", index);
+      commit(CHANGE_OPENING_CARD, index);
     },
     /**
      * Get data from Internal vs External APIs.
      */
     loadData: async ({ commit }) => {
-      commit("loading", true);
+      commit(LOADING, true);
       try {
         const res = await Promise.all([
           axios.get("/forecast.json"),
@@ -1143,13 +1041,13 @@ export default new Vuex.Store({
         const [total, data, cities, mapDataset, topCities, constants, locales] =
           res.map(({ data }) => data);
 
-        commit("setDataForecast", total);
-        commit("setDataAPI", data);
-        commit("setListAllCities", cities);
-        commit("setMapDataset", mapDataset);
-        commit("setListTopCities", topCities);
-        commit("setConstants", constants);
-        commit("setSupportedLocales", locales);
+        commit(SET_DATA_FORECAST, total);
+        commit(SET_DATA_API, data);
+        commit(SET_LIST_ALL_CITIES, cities);
+        commit(SET_MAP_DATA_SET, mapDataset);
+        commit(SET_LIST_TOP_CITIES, topCities);
+        commit(SET_CONSTANTS, constants);
+        commit(SET_SUPPORTED_LOCALES, locales);
       } catch (error) {
         console.error("Error! Could not reach the API. " + error);
       }
@@ -1159,64 +1057,56 @@ export default new Vuex.Store({
       console.log("setParams");
       console.log("locale from router", lang);
       console.log("сity from router", city);
+
       if (!state.initDataLoad) {
         await dispatch("loadData");
-        commit("initCommit", true);
+        commit(INIT_COMMIT, true);
       }
 
-      const defaultLocale = "ru";
+      const langLS = localStorage.getItem("lang");
+      const defaultCity = "yerevan";
+      const cityLS = localStorage.getItem("city");
 
-      const isLocaleSupported = state.supportedLocales.includes(lang);
+      const setLang = () => {
+        if (!lang) {
+          return undefined;
+        }
 
-      console.log("isLocaleSupported", isLocaleSupported);
+        const isLocaleSupported = state.supportedLocales.includes(lang);
 
-      // if (
-      //   (!hasCityInTheList && city !== undefined) ||
-      //   (!isLocaleSupported && lang !== undefined)
-      // ) {
-      //   commit("setLocale", lang);
-      //   commit("setCity", city);
-      //   return 404;
-      // }
+        console.log("isLocaleSupported", isLocaleSupported);
+        return isLocaleSupported ? lang : null;
+      };
 
       const selectCity = () => {
-        const defaultCity = "yerevan";
-        const cityLS = localStorage.getItem("city");
+        if (!city) {
+          return cityLS ?? defaultCity;
+        }
 
-        if (!city && cityLS) {
-          return cityLS;
-        }
-        if (!city && !cityLS) {
-          return defaultCity;
-        }
         const hasCityInTheList = state.listAllCities.some(
           (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
         );
 
         console.log("hasCityInTheList", hasCityInTheList);
-        if (city && hasCityInTheList) {
-          return city;
-        }
-        return undefined;
+        return hasCityInTheList ? city : undefined;
       };
 
       console.log("selectCity", selectCity());
+      console.log("setLang", setLang());
 
-      const setData = (key, value, defaultValue) => {
-        const valueLS = localStorage.getItem(key);
-        if (key === "lang" || (key === "city" && value)) {
-          return value;
-        } else if (valueLS) {
-          return valueLS;
-        } else {
-          return defaultValue;
-        }
-      };
-      lang = setData("lang", lang, defaultLocale);
+      city = selectCity();
+      lang = setLang();
+
       console.log(city, lang);
 
-      commit("setLocale", lang);
-      commit("setCity", city);
+      if (lang === null || city === undefined) {
+        commit(SET_LOCALE, langLS ?? undefined);
+        commit(SET_CITY, cityLS ?? defaultCity);
+        return 404;
+      }
+
+      commit(SET_LOCALE, lang);
+      commit(SET_CITY, city);
       return 200;
     },
   },
