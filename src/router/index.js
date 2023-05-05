@@ -98,10 +98,14 @@ router.beforeEach((to, from, next) => {
   };
   store.dispatch("setParams", obj).then((res) => {
     console.log(res);
+    console.log(to.path.split("/"));
     if (res === 404) {
       next({
         name: "not-found",
-        params: { pathMatch: to.path.split("/").slice(1) },
+        params: {
+          pathMatch: to.path.split("/").slice(2),
+          lang: store.getters.getLocaleURL,
+        },
         meta: {
           breadcrumb: [{ name: "404" }],
         },

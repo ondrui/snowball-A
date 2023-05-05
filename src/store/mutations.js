@@ -158,7 +158,7 @@ export const SET_LOCALE = "setLocale";
 export const setLocale = (state, localeStr) => {
   console.log("setLocale", localeStr);
   const defaultLocale = "ru";
-  if (localeStr === undefined) {
+  if (localeStr === undefined || localeStr === null) {
     state.locale = defaultLocale;
     // Удаляем локаль из local storage.
     localStorage.removeItem("lang");
@@ -187,5 +187,13 @@ export const loading = (state, bol) => {
  */
 export const INIT_COMMIT = "initCommit";
 export const initCommit = (state, bol) => {
-  state.initDataLoad = bol;
+  state.isDataLoad = bol;
+};
+/**
+ *
+ */
+export const SET_INITIAL_LS = "setInitialLS";
+export const setInitialLS = (state) => {
+  state.localStorage.lang = localStorage.getItem("lang");
+  state.localStorage.city = localStorage.getItem("city");
 };

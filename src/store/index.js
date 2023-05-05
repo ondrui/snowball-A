@@ -26,6 +26,8 @@ import {
   loading,
   INIT_COMMIT,
   initCommit,
+  SET_INITIAL_LS,
+  setInitialLS,
 } from "./mutations";
 /**
  * Вспомогательные функции:
@@ -75,7 +77,14 @@ export default new Vuex.Store({
      * Лоадер.
      */
     loading: false,
-    initDataLoad: false,
+    /**
+     * Флаг состояния загрузки данных с сервера.
+     */
+    isDataLoad: false,
+    /**
+     * Объект с данными из localStorage.
+     */
+    localStorage: {},
     /**
      * Объект с фактическими погодными данными, которые приходят с сервера.
      */
@@ -1012,6 +1021,7 @@ export default new Vuex.Store({
     [SET_SUPPORTED_LOCALES]: setSupportedLocales,
     [LOADING]: loading,
     [INIT_COMMIT]: initCommit,
+    [SET_INITIAL_LS]: setInitialLS,
   },
   actions: {
     /**
@@ -1058,44 +1068,45 @@ export default new Vuex.Store({
       console.log("locale from router", lang);
       console.log("сity from router", city);
 
-      if (!state.initDataLoad) {
-        await dispatch("loadData");
-        commit(INIT_COMMIT, true);
-      }
-
-      const langLS = localStorage.getItem("lang");
       const defaultCity = "yerevan";
+      const langLS = localStorage.getItem("lang");
       const cityLS = localStorage.getItem("city");
 
-      const setLang = () => {
-        if (!lang) {
-          return undefined;
-        }
+      if (!state.isDataLoad) {
+        await dispatch("loadData");
+        commit(SET_LOCALE, langLS);
+        commit(SET_CITY, cityLS ?? defaultCity);
+        commit(INIT_COMMIT, true);
+      } else {
+        const setLang = () => {
+          if (!lang) {
+            return undefined;
+          }
 
-        const isLocaleSupported = state.supportedLocales.includes(lang);
+          const isLocaleSupported = state.supportedLocales.includes(lang);
 
-        console.log("isLocaleSupported", isLocaleSupported);
-        return isLocaleSupported ? lang : null;
-      };
+          console.log("isLocaleSupported", isLocaleSupported);
+          return isLocaleSupported ? lang : null;
+        };
 
-      const selectCity = () => {
-        if (!city) {
-          return cityLS ?? defaultCity;
-        }
+        const selectCity = () => {
+          if (!city) {
+            return cityLS ?? defaultCity;
+          }
 
-        const hasCityInTheList = state.listAllCities.some(
-          (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
-        );
+          const hasCityInTheList = state.listAllCities.some(
+            (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
+          );
 
-        console.log("hasCityInTheList", hasCityInTheList);
-        return hasCityInTheList ? city : undefined;
-      };
+          console.log("hasCityInTheList", hasCityInTheList);
+          return hasCityInTheList ? city : undefined;
+        };
 
-      console.log("selectCity", selectCity());
-      console.log("setLang", setLang());
-
-      city = selectCity();
-      lang = setLang();
+        console.log("selectCity", selectCity());
+        console.log("setLang", setLang());
+        city = selectCity();
+        lang = setLang();
+      }
 
       console.log(city, lang);
 
