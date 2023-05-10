@@ -150,22 +150,24 @@ export const setCity = (state, city) => {
   state.citySelected = city.toLowerCase();
   // Сохраняем название города на английском в local storage.
   localStorage.setItem("city", state.citySelected);
+  console.log("localStorage", localStorage.getItem("city"));
 };
 /**
- * Изменяем локаль в сторе.
+ * Изменяем текущую локаль в сторе.
  */
 export const SET_LOCALE = "setLocale";
 export const setLocale = (state, localeStr) => {
   console.log("setLocale", localeStr);
-  const defaultLocale = "ru";
   if (localeStr === undefined || localeStr === null) {
-    state.locale = defaultLocale;
-    // Удаляем локаль из local storage.
+    state.currentLocale = state.defaultLocale;
+    // Удаляем локаль из local storage, если выбран язык по умолчанию.
     localStorage.removeItem("lang");
+    console.log("localStorage", localStorage.getItem("lang"));
   } else {
-    state.locale = localeStr.toLowerCase();
+    state.currentLocale = localeStr.toLowerCase();
     // Сохраняем локаль в local storage.
-    localStorage.setItem("lang", state.locale);
+    localStorage.setItem("lang", state.currentLocale);
+    console.log("localStorage", localStorage.getItem("lang"));
   }
 };
 /**

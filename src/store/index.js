@@ -52,7 +52,7 @@ export default new Vuex.Store({
      * Свойство определяет текущую языковую локаль.
      * Значение по умолчанию undefined.
      */
-    locale: undefined,
+    currentLocale: undefined,
     /**
      * Массив с поддерживаемыми языками.
      */
@@ -70,6 +70,14 @@ export default new Vuex.Store({
       am: "Հայաստանի",
     },
     /**
+     * Устанавливаем город по умолчанию.
+     */
+    defaultCity: "yerevan",
+    /**
+     * Устанавливаем город по умолчанию.
+     */
+    defaultLocale: "ru",
+    /**
      * Город для которого выводится прогноз погоды.
      */
     citySelected: "",
@@ -81,10 +89,6 @@ export default new Vuex.Store({
      * Флаг состояния загрузки данных с сервера.
      */
     isDataLoad: false,
-    /**
-     * Объект с данными из localStorage.
-     */
-    localStorage: {},
     /**
      * Объект с фактическими погодными данными, которые приходят с сервера.
      */
@@ -161,10 +165,18 @@ export default new Vuex.Store({
      * @param state Текущее состояние store.
      */
     getLocale(state) {
-      return state.locale;
+      return state.currentLocale;
     },
+    /**
+     * Возвращает языковую метку для отображения ее в URL.
+     * @example
+     * "en"
+     * @param state Текущее состояние store.
+     */
     getLocaleURL(state) {
-      return state.locale === "ru" ? undefined : state.locale;
+      return state.currentLocale === state.defaultLocale
+        ? undefined
+        : state.currentLocale;
     },
     /**
      * Возвращает зодонную порометрами языковую константу.
@@ -241,6 +253,7 @@ export default new Vuex.Store({
         )} ${time} ${getConstantLocale("currentBlock", "forecast")}`,
         condition: data.condition,
         condition_s:
+          // Проверяем из какого поля брать данные для отображения.
           getLocale !== "ru"
             ? getConstantLocale("weather_sign", data.condition)
             : data.condition_s,
@@ -537,6 +550,7 @@ export default new Vuex.Store({
               weekday[0] === getConstantLocale("weekendDays")[1],
             condition: e.day.condition,
             condition_s:
+              // Проверяем из какого поля брать данные для отображения.
               getLocale !== "ru"
                 ? getConstantLocale("weather_sign", e.day.condition)
                 : e.day.condition_s,
@@ -974,6 +988,11 @@ export default new Vuex.Store({
               name_loc_choice: cityName,
               area,
               area_l5,
+              /**
+               * Для русского языка используем заданное форматирование.
+               * @example
+               * Гехаркуникская обл., Чамбаракский р-н
+               */
               area_f: getLocale === "ru" ? formatArea_ru(area) : `${area}, `,
               area_l5_f:
                 getLocale === "ru" ? formatArea_ru_l5(area_l5) : `${area_l5}`,
@@ -1036,6 +1055,7 @@ export default new Vuex.Store({
      * Get data from Internal vs External APIs.
      */
     loadData: async ({ commit }) => {
+      console.log("loadData");
       commit(LOADING, true);
       try {
         const res = await Promise.all([
@@ -1063,62 +1083,66 @@ export default new Vuex.Store({
       }
     },
 
-    setParams: async ({ state, commit, dispatch }, { lang, city }) => {
+    setParams: async ({ state, commit, dispatch }, { langURL, cityURL }) => {
       console.log("setParams");
-      console.log("locale from router", lang);
-      console.log("сity from router", city);
+      console.log("locale from router", langURL);
+      console.log("сity from router", cityURL);
 
-      const defaultCity = "yerevan";
+      if (state.isDataLoad) {
+        commit(SET_LOCALE, langURL);
+        commit(SET_CITY, cityURL);
+        return 200;
+      }
+
+      const defaultCity = state.defaultCity;
       const langLS = localStorage.getItem("lang");
       const cityLS = localStorage.getItem("city");
+      console.log("cityLS", cityLS);
+      console.log("langLS", langLS);
+      await dispatch("loadData");
 
-      if (!state.isDataLoad) {
-        await dispatch("loadData");
-        commit(SET_LOCALE, langLS);
-        commit(SET_CITY, cityLS ?? defaultCity);
-        commit(INIT_COMMIT, true);
-      } else {
-        const setLang = () => {
-          if (!lang) {
-            return undefined;
-          }
+      const setLang = () => {
+        if (!langURL) {
+          return langLS ?? undefined;
+        }
 
-          const isLocaleSupported = state.supportedLocales.includes(lang);
+        const isLocaleSupported = state.supportedLocales.includes(langURL);
 
-          console.log("isLocaleSupported", isLocaleSupported);
-          return isLocaleSupported ? lang : null;
-        };
+        console.log("isLocaleSupported", isLocaleSupported);
+        return isLocaleSupported ? langURL : null;
+      };
 
-        const selectCity = () => {
-          if (!city) {
-            return cityLS ?? defaultCity;
-          }
+      const selectCity = () => {
+        if (!cityURL) {
+          return cityLS ?? defaultCity;
+        }
 
-          const hasCityInTheList = state.listAllCities.some(
-            (obj) => obj.name_en.toLowerCase() === city.toLowerCase()
-          );
+        const hasCityInTheList = state.listAllCities.some(
+          (obj) => obj.name_en.toLowerCase() === cityURL.toLowerCase()
+        );
 
-          console.log("hasCityInTheList", hasCityInTheList);
-          return hasCityInTheList ? city : undefined;
-        };
+        console.log("hasCityInTheList", hasCityInTheList);
+        return hasCityInTheList ? cityURL : undefined;
+      };
 
-        console.log("selectCity", selectCity());
-        console.log("setLang", setLang());
-        city = selectCity();
-        lang = setLang();
-      }
+      const city = selectCity();
+      const lang = setLang();
+      console.log("city", city);
+      console.log("lang", lang);
 
       console.log(city, lang);
 
       if (lang === null || city === undefined) {
         commit(SET_LOCALE, langLS ?? undefined);
         commit(SET_CITY, cityLS ?? defaultCity);
+        commit(INIT_COMMIT, true);
         return 404;
       }
 
       commit(SET_LOCALE, lang);
       commit(SET_CITY, city);
-      return 200;
+      commit(INIT_COMMIT, true);
+      return 100;
     },
   },
 });

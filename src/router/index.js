@@ -55,15 +55,6 @@ const routes = [
     },
   },
   {
-    path: "/:lang?/not-found",
-    name: "page-404",
-    component: NotFound,
-    alias: "*",
-    meta: {
-      breadcrumb: [{ name: "404" }],
-    },
-  },
-  {
     path: "/:lang?/:pathMatch(.*)*",
     name: "not-found",
     component: NotFound,
@@ -93,13 +84,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   const obj = {
-    lang: to.params.lang,
-    city: to.params.city,
+    langURL: to.params.lang,
+    cityURL: to.params.city,
   };
-  store.dispatch("setParams", obj).then((res) => {
-    console.log(res);
-    console.log(to.path.split("/"));
-    if (res === 404) {
+  store.dispatch("setParams", obj).then((code) => {
+    console.log(code);
+    if (code === 404) {
       next({
         name: "not-found",
         params: {
@@ -108,6 +98,14 @@ router.beforeEach((to, from, next) => {
         },
         meta: {
           breadcrumb: [{ name: "404" }],
+        },
+      });
+    } else if (code === 100) {
+      next({
+        name: to.name,
+        params: {
+          lang: store.getters.getLocaleURL,
+          city: store.getters.getCitySelected.name_en.toLowerCase(),
         },
       });
     } else {

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import SectionOtherCities from "@/components/SectionOtherCities.vue";
 import TheAside from "@/components/TheAside.vue";
 import TheHeader from "@/components/TheHeader.vue";
@@ -38,7 +37,6 @@ export default {
     ScrollTop,
   },
   computed: {
-    ...mapGetters(["loading"]),
     isBreadcrumbsShow() {
       return this.$route.meta.breadcrumb[0].name !== "404";
     },
