@@ -179,6 +179,21 @@ export default new Vuex.Store({
         : state.currentLocale;
     },
     /**
+     * Возвращает массив с поддерживаемыми языками.
+     * @param state Текущее состояние store.
+     */
+    getSupportedLocales(state) {
+      // switch (getLocale) {
+      //   case value:
+
+      //     break;
+
+      //   default:
+      //     break;
+      // }
+      return state.supportedLocales;
+    },
+    /**
      * Возвращает зодонную порометрами языковую константу.
      */
     getConstantLocale:
@@ -1068,8 +1083,15 @@ export default new Vuex.Store({
           axios.get("/supported-locales.json"),
           new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
         ]);
-        const [total, data, cities, mapDataset, topCities, constants, locales] =
-          res.map(({ data }) => data);
+        const [
+          total,
+          data,
+          cities,
+          mapDataset,
+          topCities,
+          constants,
+          supportedLocales,
+        ] = res.map(({ data }) => data);
 
         commit(SET_DATA_FORECAST, total);
         commit(SET_DATA_API, data);
@@ -1077,7 +1099,7 @@ export default new Vuex.Store({
         commit(SET_MAP_DATA_SET, mapDataset);
         commit(SET_LIST_TOP_CITIES, topCities);
         commit(SET_CONSTANTS, constants);
-        commit(SET_SUPPORTED_LOCALES, locales);
+        commit(SET_SUPPORTED_LOCALES, supportedLocales);
       } catch (error) {
         console.error("Error! Could not reach the API. " + error);
       }
@@ -1106,7 +1128,9 @@ export default new Vuex.Store({
           return langLS ?? undefined;
         }
 
-        const isLocaleSupported = state.supportedLocales.includes(langURL);
+        const isLocaleSupported = state.supportedLocales.some(
+          (obj) => obj.key.toLowerCase() === langURL.toLowerCase()
+        );
 
         console.log("isLocaleSupported", isLocaleSupported);
         return isLocaleSupported ? langURL : null;
@@ -1122,7 +1146,7 @@ export default new Vuex.Store({
         );
 
         console.log("hasCityInTheList", hasCityInTheList);
-        return hasCityInTheList ? cityURL : undefined;
+        return hasCityInTheList ? cityURL : null;
       };
 
       const city = selectCity();
@@ -1132,7 +1156,7 @@ export default new Vuex.Store({
 
       console.log(city, lang);
 
-      if (lang === null || city === undefined) {
+      if (lang === null || city === null) {
         commit(SET_LOCALE, langLS ?? undefined);
         commit(SET_CITY, cityLS ?? defaultCity);
         commit(INIT_COMMIT, true);

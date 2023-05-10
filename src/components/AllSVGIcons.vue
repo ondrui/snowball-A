@@ -18,6 +18,7 @@ export default {
         "arrow-down-common",
         "arrow-up-common",
         "arrow-right-common",
+        "chevron-dropdown-common",
         "chevron-breadcrumb-right-common",
         "chevron-more-down-common",
         "chevron-scroll-left-common",

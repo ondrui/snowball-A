@@ -174,8 +174,8 @@ export const setLocale = (state, localeStr) => {
  * Массив с поддерживаемыми языками.
  */
 export const SET_SUPPORTED_LOCALES = "setSupportedLocales";
-export const setSupportedLocales = (state, { locales }) => {
-  state.supportedLocales = locales;
+export const setSupportedLocales = (state, { supportedLocales }) => {
+  state.supportedLocales = supportedLocales;
 };
 /**
  * Управляет состоянием лоадера.
