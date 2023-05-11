@@ -82,13 +82,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log("to", to);
   const obj = {
     langURL: to.params.lang,
     cityURL: to.params.city,
   };
   store.dispatch("setParams", obj).then((code) => {
-    console.log(code);
     if (code === 404) {
       next({
         name: "not-found",

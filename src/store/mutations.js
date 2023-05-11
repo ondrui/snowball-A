@@ -145,29 +145,24 @@ export const setConstants = (state, constants) => {
  */
 export const SET_CITY = "setCity";
 export const setCity = (state, city) => {
-  console.log("setCity", city);
   if (city === undefined) return;
   state.citySelected = city.toLowerCase();
   // Сохраняем название города на английском в local storage.
   localStorage.setItem("city", state.citySelected);
-  console.log("localStorage", localStorage.getItem("city"));
 };
 /**
  * Изменяем текущую локаль в сторе.
  */
 export const SET_LOCALE = "setLocale";
 export const setLocale = (state, localeStr) => {
-  console.log("setLocale", localeStr);
   if (localeStr === undefined || localeStr === null) {
     state.currentLocale = state.defaultLocale;
     // Удаляем локаль из local storage, если выбран язык по умолчанию.
     localStorage.removeItem("lang");
-    console.log("localStorage", localStorage.getItem("lang"));
   } else {
     state.currentLocale = localeStr.toLowerCase();
     // Сохраняем локаль в local storage.
     localStorage.setItem("lang", state.currentLocale);
-    console.log("localStorage", localStorage.getItem("lang"));
   }
 };
 /**

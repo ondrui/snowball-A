@@ -191,7 +191,6 @@ export default new Vuex.Store({
         filtred.unshift(found);
         return filtred;
       };
-      console.log(orderedByLocale(getLocale));
       switch (getLocale) {
         case state.defaultLocale:
           return orderedByLocale(getLocale);
@@ -1078,7 +1077,6 @@ export default new Vuex.Store({
      * Get data from Internal vs External APIs.
      */
     loadData: async ({ commit }) => {
-      console.log("loadData");
       commit(LOADING, true);
       try {
         const res = await Promise.all([
@@ -1114,10 +1112,6 @@ export default new Vuex.Store({
     },
 
     setParams: async ({ state, commit, dispatch }, { langURL, cityURL }) => {
-      console.log("setParams");
-      console.log("locale from router", langURL);
-      console.log("сity from router", cityURL);
-
       if (state.isDataLoad) {
         commit(SET_LOCALE, langURL);
         commit(SET_CITY, cityURL);
@@ -1127,8 +1121,6 @@ export default new Vuex.Store({
       const defaultCity = state.defaultCity;
       const langLS = localStorage.getItem("lang");
       const cityLS = localStorage.getItem("city");
-      console.log("cityLS", cityLS);
-      console.log("langLS", langLS);
       await dispatch("loadData");
 
       const setLang = () => {
@@ -1140,7 +1132,6 @@ export default new Vuex.Store({
           (obj) => obj.key.toLowerCase() === langURL.toLowerCase()
         );
 
-        console.log("isLocaleSupported", isLocaleSupported);
         return isLocaleSupported ? langURL : null;
       };
 
@@ -1153,16 +1144,11 @@ export default new Vuex.Store({
           (obj) => obj.name_en.toLowerCase() === cityURL.toLowerCase()
         );
 
-        console.log("hasCityInTheList", hasCityInTheList);
         return hasCityInTheList ? cityURL : null;
       };
 
       const city = selectCity();
       const lang = setLang();
-      console.log("city", city);
-      console.log("lang", lang);
-
-      console.log(city, lang);
 
       if (lang === null || city === null) {
         commit(SET_LOCALE, langLS ?? undefined);

@@ -6,7 +6,7 @@
       </router-link>
       <div class="header-dropdown">
         <button @click.stop="openMenu" class="header-dropdown-btn">
-          {{ SupportedLocalesForSwitcher[0].title.toUpperCase() }}
+          {{ SupportedLocalesForSwitcher[0].title }}
         </button>
         <div class="header-dropdown-icon">
           <BaseIcon nameIcon="chevron-dropdown" pick="common" width="10" />
@@ -14,7 +14,7 @@
         <ul v-if="open">
           <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
             <router-link :to="pushNewURL(lang.key)">
-              {{ lang.title.toUpperCase() }}</router-link
+              {{ lang.title }}</router-link
             >
           </li>
         </ul>
@@ -92,6 +92,10 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  border-radius: 2px;
+  column-gap: 4px;
+  padding: 0 7px;
+  transition: 200ms all ease-in-out;
   &:hover {
     background-color: #f0f7fc;
   }
@@ -102,13 +106,14 @@ export default {
     font-size: 14px;
     line-height: 16px;
     color: #04569c;
-    padding: 6px 4px 6px 9px;
+    padding: 6px 0;
     cursor: pointer;
+    text-transform: uppercase;
   }
   & ul {
     position: absolute;
     top: -11px;
-    left: -10px;
+    left: -12px;
     min-width: 68px;
     margin: 0;
     padding: 9px 0;
@@ -121,6 +126,7 @@ export default {
     // opacity: 0.8;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
+    z-index: 1;
     & a {
       display: block;
       font-weight: 400;
@@ -129,6 +135,8 @@ export default {
       color: #04569c;
       padding: 8px 0;
       text-align: center;
+      text-transform: uppercase;
+      transition: 200ms all ease-in-out;
     }
     & a:hover {
       background-color: #f0f7fc;
