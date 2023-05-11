@@ -113,7 +113,7 @@ export default {
   & ul {
     position: absolute;
     top: -11px;
-    left: -12px;
+    left: -13px;
     min-width: 68px;
     margin: 0;
     padding: 9px 0;
@@ -123,7 +123,7 @@ export default {
     justify-content: center;
     gap: 2px;
     background: #ffffff;
-    // opacity: 0.8;
+    opacity: 0.8;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
     z-index: 1;
