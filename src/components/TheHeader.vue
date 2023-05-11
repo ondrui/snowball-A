@@ -7,10 +7,13 @@
       <div class="header-dropdown">
         <button @click.stop="openMenu" class="header-dropdown-btn">
           {{ SupportedLocalesForSwitcher[0].title }}
+          <BaseIcon
+            class="header-dropdown-icon"
+            nameIcon="chevron-dropdown"
+            pick="common"
+            width="10"
+          />
         </button>
-        <div class="header-dropdown-icon">
-          <BaseIcon nameIcon="chevron-dropdown" pick="common" width="10" />
-        </div>
         <ul v-if="open">
           <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
             <router-link :to="pushNewURL(lang.key)">
@@ -90,33 +93,32 @@ export default {
 }
 .header-dropdown {
   position: relative;
-  display: flex;
-  align-items: center;
   border-radius: 2px;
-  column-gap: 4px;
-  padding: 0 7px;
-  transition: 200ms all ease-in-out;
-  &:hover {
-    background-color: #f0f7fc;
-  }
   & button {
+    display: inline-flex;
+    column-gap: 4px;
+    align-items: center;
     border: none;
     background-color: transparent;
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #04569c;
-    padding: 6px 0;
+    padding: 6px 8px;
     cursor: pointer;
     text-transform: uppercase;
+    border-radius: 2px;
+    transition: 200ms all ease-in-out;
+    &:hover {
+      background-color: #f0f7fc;
+    }
   }
   & ul {
     position: absolute;
-    top: -11px;
-    left: -13px;
-    min-width: 68px;
+    top: -8px;
+    left: -9px;
+    padding: 8px 0;
     margin: 0;
-    padding: 9px 0;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -133,7 +135,7 @@ export default {
       font-size: 14px;
       line-height: 16px;
       color: #04569c;
-      padding: 8px 0;
+      padding: 6px 16px;
       text-align: center;
       text-transform: uppercase;
       transition: 200ms all ease-in-out;
