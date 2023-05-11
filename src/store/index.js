@@ -182,16 +182,24 @@ export default new Vuex.Store({
      * Возвращает массив с поддерживаемыми языками.
      * @param state Текущее состояние store.
      */
-    getSupportedLocales(state) {
-      // switch (getLocale) {
-      //   case value:
-
-      //     break;
-
-      //   default:
-      //     break;
-      // }
-      return state.supportedLocales;
+    SupportedLocalesForSwitcher(state, { getLocale }) {
+      const orderedByLocale = (locale) => {
+        const filtred = state.supportedLocales.filter(
+          ({ key }) => key !== locale
+        );
+        const found = state.supportedLocales.find(({ key }) => key === locale);
+        filtred.unshift(found);
+        return filtred;
+      };
+      console.log(orderedByLocale(getLocale));
+      switch (getLocale) {
+        case state.defaultLocale:
+          return orderedByLocale(getLocale);
+        case "en":
+          return orderedByLocale(getLocale);
+        default:
+          return state.supportedLocales;
+      }
     },
     /**
      * Возвращает зодонную порометрами языковую константу.

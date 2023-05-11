@@ -1,18 +1,18 @@
 <template>
   <header class="header">
     <div class="container">
-      <router-link :to="pushNewURL(getLocaleURL)">
+      <router-link :to="pushNewURL(getLocaleURL, 'main')">
         <BaseIcon nameIcon="country-logo" pick="common" width="150" />
       </router-link>
       <div class="header-dropdown">
-        <button @click.stop="showMenu" class="header-dropdown-btn">
-          {{ langs[0].title.toUpperCase() }}
+        <button @click.stop="openMenu" class="header-dropdown-btn">
+          {{ SupportedLocalesForSwitcher[0].title.toUpperCase() }}
         </button>
         <div class="header-dropdown-icon">
           <BaseIcon nameIcon="chevron-dropdown" pick="common" width="10" />
         </div>
         <ul v-if="open">
-          <li v-for="lang in langs" :key="lang.key">
+          <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
             <router-link :to="pushNewURL(lang.key)">
               {{ lang.title.toUpperCase() }}</router-link
             >
@@ -29,17 +29,15 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      langs: [],
       open: false,
     };
   },
   created() {
-    this.langs = this.getSupportedLocales;
-    window.addEventListener("click", this.close);
+    window.addEventListener("click", this.closeMenu);
   },
 
   beforeDestroy() {
-    window.removeEventListener("click", this.close);
+    window.removeEventListener("click", this.closeMenu);
   },
   computed: {
     ...mapGetters([
@@ -47,25 +45,24 @@ export default {
       "getLocale",
       "getCitySelected",
       "getLocaleURL",
-      "getSupportedLocales",
+      "SupportedLocalesForSwitcher",
     ]),
   },
   methods: {
-    pushNewURL(value) {
-      return {
-        name: "main",
+    pushNewURL(value, name) {
+      const to = this.$router.resolve({
+        name: name === "main" ? name : this.$route.name,
         params: {
           lang: value === "ru" ? undefined : value,
           city: this.getCitySelected.name_en,
         },
-      };
+      });
+      return to.location;
     },
-    showMenu() {
+    openMenu() {
       this.open = true;
     },
-    close(e) {
-      console.log(e.target);
-      console.log(this.$el);
+    closeMenu() {
       this.open = false;
     },
   },
@@ -95,10 +92,13 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  &:hover {
+    background-color: #f0f7fc;
+  }
   & button {
     border: none;
     background-color: transparent;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #04569c;
@@ -123,7 +123,7 @@ export default {
     border-radius: 10px;
     & a {
       display: block;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 16px;
       color: #04569c;
