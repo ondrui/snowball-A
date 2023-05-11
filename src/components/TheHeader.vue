@@ -14,13 +14,15 @@
             width="10"
           />
         </button>
-        <ul v-if="open">
-          <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
-            <router-link :to="pushNewURL(lang.key)">
-              {{ lang.title }}</router-link
-            >
-          </li>
-        </ul>
+        <div class="header-dropdown-content">
+          <ul v-if="open">
+            <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
+              <router-link :to="pushNewURL(lang.key)">
+                {{ lang.title }}</router-link
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -108,15 +110,19 @@ export default {
     cursor: pointer;
     text-transform: uppercase;
     border-radius: 2px;
-    transition: 200ms all ease-in-out;
     &:hover {
+      transition: 200ms all ease-in-out;
       background-color: #f0f7fc;
     }
   }
-  & ul {
+  & .header-dropdown-content {
     position: absolute;
-    top: -8px;
-    left: -9px;
+    top: -16px;
+    left: -19px;
+    padding: 8px 10px;
+    z-index: 1;
+  }
+  & ul {
     padding: 8px 0;
     margin: 0;
     list-style: none;
@@ -125,10 +131,9 @@ export default {
     justify-content: center;
     gap: 2px;
     background: #ffffff;
-    opacity: 0.8;
+    // opacity: 0.8;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
-    z-index: 1;
     & a {
       display: block;
       font-weight: 400;
