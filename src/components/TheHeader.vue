@@ -4,25 +4,15 @@
       <router-link :to="pushNewURL(getLocaleURL, 'main')">
         <BaseIcon nameIcon="country-logo" pick="common" width="150" />
       </router-link>
-      <div class="header-dropdown">
-        <button @click.stop="openMenu" class="header-dropdown-btn">
-          {{ SupportedLocalesForSwitcher[0].title }}
-          <BaseIcon
-            class="header-dropdown-icon"
-            nameIcon="chevron-dropdown"
-            pick="common"
-            width="10"
-          />
-        </button>
-        <div class="header-dropdown-content">
-          <ul v-if="open">
-            <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
-              <router-link :to="pushNewURL(lang.key)">
-                {{ lang.title }}</router-link
-              >
-            </li>
-          </ul>
-        </div>
+      <div :class="['header-dropdown', { 'hide-menu': isHide }]">
+        <ul class="header-dropdown-content" @click.stop="toggleMenu">
+          <li v-for="lang in SupportedLocalesForSwitcher" :key="lang.key">
+            <router-link :to="pushNewURL(lang.key)">
+              {{ lang.title }}
+              <BaseIcon nameIcon="chevron-dropdown" pick="common" width="10"
+            /></router-link>
+          </li>
+        </ul>
       </div>
     </div>
   </header>
@@ -34,7 +24,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      open: false,
+      isHide: true,
     };
   },
   created() {
@@ -64,11 +54,11 @@ export default {
       });
       return to.location;
     },
-    openMenu() {
-      this.open = true;
+    toggleMenu() {
+      this.isHide = !this.isHide;
     },
     closeMenu() {
-      this.open = false;
+      this.isHide = true;
     },
   },
 };
@@ -96,46 +86,37 @@ export default {
 .header-dropdown {
   position: relative;
   border-radius: 2px;
-  & button {
-    display: inline-flex;
-    column-gap: 4px;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    color: #04569c;
-    padding: 6px 8px;
-    cursor: pointer;
-    text-transform: uppercase;
-    border-radius: 2px;
-    &:hover {
-      transition: 200ms all ease-in-out;
-      background-color: #f0f7fc;
+  height: 28px;
+  width: 58px;
+  & svg {
+    display: none;
+  }
+  &.hide-menu {
+    overflow: hidden;
+    & svg {
+      display: flex;
+      align-items: center;
     }
   }
   & .header-dropdown-content {
     position: absolute;
-    top: -16px;
-    left: -19px;
-    padding: 8px 10px;
-    z-index: 1;
-  }
-  & ul {
-    padding: 8px 0;
-    margin: 0;
-    list-style: none;
+    top: -8px;
+    left: -8px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 2px;
+    padding: 8px 0px;
+    list-style: none;
+    z-index: 1;
+    margin: 0;
     background: #ffffff;
-    // opacity: 0.8;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
     & a {
-      display: block;
+      width: 100%;
+      display: inline-flex;
+      column-gap: 4px;
+      // align-items: center;
       font-weight: 400;
       font-size: 14px;
       line-height: 16px;
@@ -148,10 +129,6 @@ export default {
     & a:hover {
       background-color: #f0f7fc;
     }
-  }
-  & .header-dropdown-icon {
-    display: flex;
-    align-items: center;
   }
 }
 @media only screen and (max-width: $media-width-xl) {
