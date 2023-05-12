@@ -4,6 +4,10 @@ import router from "./router";
 import store from "./store";
 import components from "./components/UI";
 import directives from "./directives";
+
+import VueMeta from "vue-meta";
+
+Vue.use(VueMeta);
 /**
  * Регистрация часто используемых компонент и директив глобально.
  */

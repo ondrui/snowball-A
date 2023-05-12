@@ -65,6 +65,9 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "ListAllCities",
+  metaInfo: {
+    title: "Default Title",
+  },
   data() {
     return {
       selected: "all",

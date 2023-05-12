@@ -10,11 +10,18 @@ import { mapGetters } from "vuex";
 import HomePage from "./components/HomePage.vue";
 export default {
   name: "App",
+  metaInfo() {
+    return {
+      htmlAttrs: {
+        lang: this.getLocale === "am" ? "hy" : this.getLocale,
+      },
+    };
+  },
   components: {
     HomePage,
   },
   computed: {
-    ...mapGetters(["loading"]),
+    ...mapGetters(["loading", "getLocale"]),
   },
   created() {
     /**
