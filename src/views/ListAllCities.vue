@@ -62,20 +62,28 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { cityIn } from "lvovich";
 
 export default {
   name: "ListAllCities",
   metaInfo() {
+    const country = cityIn(this.getCountryNameLoc);
     return {
-      title: this.getConstantLocale("cities", "title"),
+      title: this.getConstantLocale("cities", "title").replace("$", country),
       meta: [
         {
           name: "description",
-          content: this.getConstantLocale("cities", "description"),
+          content: this.getConstantLocale("cities", "description").replace(
+            "$",
+            country
+          ),
         },
         {
           name: "keywords",
-          content: this.getConstantLocale("cities", "keywords"),
+          content: this.getConstantLocale("cities", "keywords").replace(
+            "$",
+            country
+          ),
         },
       ],
     };
@@ -104,6 +112,7 @@ export default {
       "getLocaleURL",
       "getConstantLocale",
       "getLocale",
+      "getCountryNameLoc",
     ]),
     getGroupListAllCities() {
       return this.$store.getters.getGroupListAllCities(this.selected);

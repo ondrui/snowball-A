@@ -15,20 +15,35 @@
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
 import TabInformerDayContent from "@/components/TabInformerDayContent.vue";
 import { mapGetters } from "vuex";
+import { cityIn } from "lvovich";
 
 export default {
   name: "TabInformerDay",
   metaInfo() {
+    const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
+    const country = cityIn(this.getCountryNameLoc);
+    const daysNum = this.tenDaysTabTable.length;
+    const strTitle = this.getConstantLocale("day", "title")
+      .replace("$", inflectCityName)
+      .replace("$", daysNum);
+    const strDescr = this.getConstantLocale("day", "description")
+      .replace("$", inflectCityName)
+      .replace("$", daysNum);
+    const strKeywords = this.getConstantLocale("day", "keywords")
+      .replace("$", inflectCityName)
+      .replace("$", daysNum)
+      .replace("$", country)
+      .replace("$", daysNum);
     return {
-      title: this.getConstantLocale("day", "title"),
+      title: strTitle,
       meta: [
         {
           name: "description",
-          content: this.getConstantLocale("day", "description"),
+          content: strDescr,
         },
         {
           name: "keywords",
-          content: this.getConstantLocale("day", "keywords"),
+          content: strKeywords,
         },
       ],
     };
@@ -38,7 +53,12 @@ export default {
     TabInformerDayContent,
   },
   computed: {
-    ...mapGetters(["getConstantLocale"]),
+    ...mapGetters([
+      "getConstantLocale",
+      "tenDaysTabTable",
+      "getCitySelected",
+      "getCountryNameLoc",
+    ]),
   },
 };
 </script>

@@ -16,20 +16,32 @@
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
 import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
 import { mapGetters } from "vuex";
+import { cityIn } from "lvovich";
 
 export default {
   name: "TabInformerHourly",
   metaInfo() {
+    const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
+    const country = cityIn(this.getCountryNameLoc);
+    const strKeywords = this.getConstantLocale("hourly", "keywords")
+      .replace("$", inflectCityName)
+      .replace("$", country);
     return {
-      title: this.getConstantLocale("hourly", "title"),
+      title: this.getConstantLocale("hourly", "title").replace(
+        "$",
+        inflectCityName
+      ),
       meta: [
         {
           name: "description",
-          content: this.getConstantLocale("hourly", "description"),
+          content: this.getConstantLocale("hourly", "description").replace(
+            "$",
+            inflectCityName
+          ),
         },
         {
           name: "keywords",
-          content: this.getConstantLocale("hourly", "keywords"),
+          content: strKeywords,
         },
       ],
     };
@@ -39,7 +51,11 @@ export default {
     TabInformerHourlyContent,
   },
   computed: {
-    ...mapGetters(["getConstantLocale"]),
+    ...mapGetters([
+      "getConstantLocale",
+      "getCitySelected",
+      "getCountryNameLoc",
+    ]),
   },
 };
 </script>

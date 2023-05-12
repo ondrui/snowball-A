@@ -25,16 +25,23 @@ import { cityIn } from "lvovich";
 export default {
   name: "TabInformerMain",
   metaInfo() {
+    const country = cityIn(this.getCountryNameLoc);
     return {
-      title: this.getConstantLocale("main", "title"),
+      title: this.getConstantLocale("main", "title").replace("$", country),
       meta: [
         {
           name: "description",
-          content: this.getConstantLocale("main", "description"),
+          content: this.getConstantLocale("main", "description").replace(
+            "$",
+            country
+          ),
         },
         {
           name: "keywords",
-          content: this.getConstantLocale("main", "keywords"),
+          content: this.getConstantLocale("main", "keywords").replace(
+            "$",
+            country
+          ),
         },
       ],
     };
