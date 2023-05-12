@@ -47,4 +47,5 @@ module.exports = {
     host: "localhost",
     // allowedHosts: "all",
   },
+  publicPath: process.env.NODE_ENV === "production" ? "/snowball-A/" : "/",
 };
