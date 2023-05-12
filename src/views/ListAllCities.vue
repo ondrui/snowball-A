@@ -65,8 +65,20 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "ListAllCities",
-  metaInfo: {
-    title: "Default Title",
+  metaInfo() {
+    return {
+      title: this.getConstantLocale("cities", "title"),
+      meta: [
+        {
+          name: "description",
+          content: this.getConstantLocale("cities", "description"),
+        },
+        {
+          name: "keywords",
+          content: this.getConstantLocale("cities", "keywords"),
+        },
+      ],
+    };
   },
   data() {
     return {

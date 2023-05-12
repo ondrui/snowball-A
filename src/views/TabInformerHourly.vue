@@ -15,12 +15,31 @@
 <script>
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
 import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "TabInformerHourly",
+  metaInfo() {
+    return {
+      title: this.getConstantLocale("hourly", "title"),
+      meta: [
+        {
+          name: "description",
+          content: this.getConstantLocale("hourly", "description"),
+        },
+        {
+          name: "keywords",
+          content: this.getConstantLocale("hourly", "keywords"),
+        },
+      ],
+    };
+  },
   components: {
     ScrollableModeInformer,
     TabInformerHourlyContent,
+  },
+  computed: {
+    ...mapGetters(["getConstantLocale"]),
   },
 };
 </script>

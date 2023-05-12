@@ -24,6 +24,21 @@ import { cityIn } from "lvovich";
 
 export default {
   name: "TabInformerMain",
+  metaInfo() {
+    return {
+      title: this.getConstantLocale("main", "title"),
+      meta: [
+        {
+          name: "description",
+          content: this.getConstantLocale("main", "description"),
+        },
+        {
+          name: "keywords",
+          content: this.getConstantLocale("main", "keywords"),
+        },
+      ],
+    };
+  },
   components: {
     MapArmenia,
     ListTopCities,

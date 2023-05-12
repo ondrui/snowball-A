@@ -14,12 +14,31 @@
 <script>
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
 import TabInformerDayContent from "@/components/TabInformerDayContent.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "TabInformerDay",
+  metaInfo() {
+    return {
+      title: this.getConstantLocale("day", "title"),
+      meta: [
+        {
+          name: "description",
+          content: this.getConstantLocale("day", "description"),
+        },
+        {
+          name: "keywords",
+          content: this.getConstantLocale("day", "keywords"),
+        },
+      ],
+    };
+  },
   components: {
     ScrollableModeInformer,
     TabInformerDayContent,
+  },
+  computed: {
+    ...mapGetters(["getConstantLocale"]),
   },
 };
 </script>
