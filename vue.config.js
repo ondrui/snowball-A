@@ -5,6 +5,7 @@ module.exports = defineConfig({
 });
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
   chainWebpack: (config) => {
     config.module.rules.delete("svg");
   },
@@ -47,5 +48,4 @@ module.exports = {
     host: "localhost",
     // allowedHosts: "all",
   },
-  publicPath: process.env.NODE_ENV === "production" ? "/snowball-A/" : "/",
 };
