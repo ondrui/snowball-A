@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
+import axios from "axios";
 
 import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -82,12 +83,16 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log("to", to);
+  console.log("from", from);
   const obj = {
     langURL: to.params.lang,
     cityURL: to.params.city,
+    nameRouteURL: to.name,
   };
   store.dispatch("setParams", obj).then((code) => {
     if (code === 404) {
+      axios.get(to.path).catch((err) => console.log(err));
       next({
         name: "not-found",
         params: {

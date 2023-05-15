@@ -1111,10 +1111,18 @@ export default new Vuex.Store({
       }
     },
 
-    setParams: async ({ state, commit, dispatch }, { langURL, cityURL }) => {
+    setParams: async (
+      { state, commit, dispatch },
+      { langURL, cityURL, nameRouteURL }
+    ) => {
+      console.log("action store setParams");
+      console.log("langURL", langURL);
+      console.log("cityURL", cityURL);
+      console.log("nameRouteURL", nameRouteURL);
       if (state.isDataLoad) {
         commit(SET_LOCALE, langURL);
         commit(SET_CITY, cityURL);
+        console.log(200);
         return 200;
       }
 
@@ -1150,16 +1158,21 @@ export default new Vuex.Store({
       const city = selectCity();
       const lang = setLang();
 
-      if (lang === null || city === null) {
+      console.log("lang", lang);
+      console.log("city", city);
+
+      if (nameRouteURL === "not-found" || lang === null || city === null) {
         commit(SET_LOCALE, langLS ?? undefined);
         commit(SET_CITY, cityLS ?? defaultCity);
         commit(INIT_COMMIT, true);
+        console.log(404);
         return 404;
       }
 
       commit(SET_LOCALE, lang);
       commit(SET_CITY, city);
       commit(INIT_COMMIT, true);
+      console.log(100);
       return 100;
     },
   },
