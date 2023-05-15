@@ -66,7 +66,14 @@ import { cityIn } from "lvovich";
 
 export default {
   name: "ListAllCities",
-  metaInfo() {
+  /**
+   * Параметр компонента, который содержит всю информацию,
+   * которая преобразуется в различные метатеги и атрибуты страницы.
+   * Добавляет информацию в тег <title>
+   * Добавляет на страницу метатег <meta> с атрибутом name и keywords.
+   * Добавляет на страницу метатег <meta> с атрибутом name и description.
+   */
+  head() {
     const country = cityIn(this.getCountryNameLoc);
     return {
       title: this.getConstantLocale("cities", "title").replace("$", country),

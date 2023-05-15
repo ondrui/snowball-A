@@ -6,8 +6,13 @@ import components from "./components/UI";
 import directives from "./directives";
 
 import VueMeta from "vue-meta";
-
-Vue.use(VueMeta);
+/**
+ * Библиотека для добавления атрибутов с динамическими метаданными в
+ * приложение из компонентов.
+ */
+Vue.use(VueMeta, {
+  keyName: "head",
+});
 /**
  * Регистрация часто используемых компонент и директив глобально.
  */

@@ -10,7 +10,12 @@ import { mapGetters } from "vuex";
 import HomePage from "./components/HomePage.vue";
 export default {
   name: "App",
-  metaInfo() {
+  /**
+   * Параметр компонента, который содержит всю информацию,
+   * которая преобразуется в различные метатеги и атрибуты страницы.
+   * Добавляет информацию в тег <lang>
+   */
+  head() {
     return {
       htmlAttrs: {
         lang: this.getLocale === "am" ? "hy" : this.getLocale,

@@ -20,7 +20,14 @@ import { cityIn } from "lvovich";
 
 export default {
   name: "TabInformerHourly",
-  metaInfo() {
+  /**
+   * Параметр компонента, который содержит всю информацию,
+   * которая преобразуется в различные метатеги и атрибуты страницы.
+   * Добавляет информацию в тег <title>
+   * Добавляет на страницу метатег <meta> с атрибутом name и keywords.
+   * Добавляет на страницу метатег <meta> с атрибутом name и description.
+   */
+  head() {
     const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
     const country = cityIn(this.getCountryNameLoc);
     const strKeywords = this.getConstantLocale("hourly", "keywords")
