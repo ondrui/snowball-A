@@ -163,18 +163,18 @@ export default {
   height: 30px;
 }
 .hourly-temp-item {
-  height: 180px;
+  height: 190px;
 }
 .hourly-icon {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 60px;
+  margin-top: 5px;
+  height: 70px;
   align-items: center;
 }
 .hourly-charts-temp {
   position: absolute;
-  top: 146px;
+  top: 175px;
   width: 100%;
   height: 170px;
   z-index: 10;

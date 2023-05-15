@@ -1,6 +1,10 @@
 <template>
   <div>
     <div class="forecast-details-container">
+      <RowCaptionInformer class="temp">
+        {{ getConstantLocale("climateIndicators", "temp") }} /
+        {{ getConstantLocale("currentBlock", "feelsLike") }}
+      </RowCaptionInformer>
       <RowCaptionInformer class="wind">
         {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
       </RowCaptionInformer>
@@ -123,30 +127,33 @@ export default {
   height: 33px;
 }
 .details-temp-item {
-  height: 156px;
+  height: 176px;
 }
 .details-precip-item {
   height: 60px;
 }
 .details-icon {
-  height: 60px;
+  height: 70px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  margin-top: 8px;
+}
+.temp {
+  top: 100px;
 }
 .wind {
-  top: 245px;
+  top: 282px;
 }
 .pressure {
-  top: 298px;
+  top: 335px;
 }
 .humidity {
-  top: 334px;
+  top: 371px;
 }
 .details-charts-temp {
   position: absolute;
-  top: 96px;
+  top: 116px;
   width: 100%;
   height: 156px;
   z-index: 10;
@@ -204,7 +211,7 @@ export default {
     border-top: none;
   }
   .details-icon {
-    height: 63px;
+    height: 72px;
   }
 }
 </style>

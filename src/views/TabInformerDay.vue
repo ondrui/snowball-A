@@ -2,11 +2,28 @@
   <div class="wrapper">
     <ScrollableModeInformer
       :labelCoordinates="{
-        wind: '308px',
-        pressure: '361px',
-        humidity: '398px',
+        temp: '135px',
+        wind: '333px',
+        pressure: '386px',
+        humidity: '423px',
       }"
-      ><TabInformerDayContent
+    >
+      <template #row-caption>
+        <RowCaptionInformer class="temp">
+          {{ getConstantLocale("climateIndicators", "temp") }}
+        </RowCaptionInformer>
+        <RowCaptionInformer class="wind">
+          {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
+        </RowCaptionInformer>
+        <RowCaptionInformer class="pressure">
+          {{ getConstantLocale("climateIndicators", "pressure") }},
+          {{ getConstantLocale("units", "pressure")[0] }}
+        </RowCaptionInformer>
+        <RowCaptionInformer class="humidity">
+          {{ getConstantLocale("climateIndicators", "humidity") }}
+        </RowCaptionInformer>
+      </template>
+      <TabInformerDayContent
     /></ScrollableModeInformer>
   </div>
 </template>
@@ -14,6 +31,7 @@
 <script>
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
 import TabInformerDayContent from "@/components/TabInformerDayContent.vue";
+import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { mapGetters } from "vuex";
 import { cityIn } from "lvovich";
 
@@ -58,6 +76,7 @@ export default {
   components: {
     ScrollableModeInformer,
     TabInformerDayContent,
+    RowCaptionInformer,
   },
   computed: {
     ...mapGetters([

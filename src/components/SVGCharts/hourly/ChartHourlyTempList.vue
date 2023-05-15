@@ -34,7 +34,7 @@ export default {
       /**
        * Высота элемента SVG.
        */
-      height: 180,
+      height: 170,
       /**
        * Размер шрифта значения температуры.
        */
@@ -177,6 +177,6 @@ export default {
   display: inline-block;
   fill: none;
   width: 100%;
-  height: 188px;
+  height: 170px;
 }
 </style>

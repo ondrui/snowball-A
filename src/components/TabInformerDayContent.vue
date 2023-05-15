@@ -220,7 +220,7 @@ export default {
   }
 }
 .days-temp-item {
-  height: 170px;
+  height: 190px;
 }
 .days-weekday {
   height: 64px;
@@ -242,19 +242,18 @@ export default {
 }
 .days-icon {
   margin: 0 auto;
+  margin-top: 5px;
   height: 82px;
   width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 .days-charts-temp {
   height: 170px;
   position: absolute;
-  top: 123px;
+  top: 154px;
   width: 100%;
-  // z-index: 10;
   cursor: pointer;
 }
 .days-wind-descr {

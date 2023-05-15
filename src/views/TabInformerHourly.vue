@@ -2,12 +2,30 @@
   <div class="wrapper">
     <ScrollableModeInformer
       :labelCoordinates="{
-        wind: '330px',
-        pressure: '384px',
-        humidity: '419px',
+        temp: '156px',
+        wind: '355px',
+        pressure: '409px',
+        humidity: '444px',
       }"
       isGrabCursor
-      ><TabInformerHourlyContent
+    >
+      <template #row-caption>
+        <RowCaptionInformer class="temp">
+          {{ getConstantLocale("climateIndicators", "temp") }} /
+          {{ getConstantLocale("currentBlock", "feelsLike") }}
+        </RowCaptionInformer>
+        <RowCaptionInformer class="wind">
+          {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
+        </RowCaptionInformer>
+        <RowCaptionInformer class="pressure">
+          {{ getConstantLocale("climateIndicators", "pressure") }},
+          {{ getConstantLocale("units", "pressure")[0] }}
+        </RowCaptionInformer>
+        <RowCaptionInformer class="humidity">
+          {{ getConstantLocale("climateIndicators", "humidity") }}
+        </RowCaptionInformer>
+      </template>
+      <TabInformerHourlyContent
     /></ScrollableModeInformer>
   </div>
 </template>
@@ -15,6 +33,7 @@
 <script>
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
 import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
+import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { mapGetters } from "vuex";
 import { cityIn } from "lvovich";
 
@@ -56,6 +75,7 @@ export default {
   components: {
     ScrollableModeInformer,
     TabInformerHourlyContent,
+    RowCaptionInformer,
   },
   computed: {
     ...mapGetters([

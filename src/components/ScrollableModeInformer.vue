@@ -8,16 +8,7 @@
         <BaseIcon width="7" nameIcon="chevron-scroll-right" pick="common" />
       </button>
     </div>
-    <RowCaptionInformer class="wind">
-      {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
-    </RowCaptionInformer>
-    <RowCaptionInformer class="pressure">
-      {{ getConstantLocale("climateIndicators", "pressure") }},
-      {{ getConstantLocale("units", "pressure")[0] }}
-    </RowCaptionInformer>
-    <RowCaptionInformer class="humidity">
-      {{ getConstantLocale("climateIndicators", "humidity") }}
-    </RowCaptionInformer>
+    <slot name="row-caption"></slot>
     <DragScrolling
       ref="wrapper-content"
       class="wrapper-content"
@@ -29,12 +20,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import DragScrolling from "./DragScrolling.vue";
 
 export default {
   components: {
-    RowCaptionInformer,
     DragScrolling,
   },
   props: {
@@ -203,6 +192,9 @@ export default {
       transition: all 0.5s;
     }
   }
+}
+.temp {
+  top: v-bind("labelCoordinates.temp");
 }
 .wind {
   top: v-bind("labelCoordinates.wind");
