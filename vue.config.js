@@ -6,6 +6,7 @@ module.exports = defineConfig({
 
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "/vue-app/" : "/",
+  outputDir: "/var/www/html/vue-app",
   chainWebpack: (config) => {
     config.module.rules.delete("svg");
   },
