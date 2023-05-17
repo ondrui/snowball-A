@@ -1080,13 +1080,13 @@ export default new Vuex.Store({
       commit(LOADING, true);
       try {
         const res = await Promise.all([
-          axios.get("/vue-app/forecast.json"),
-          axios.get("/vue-app/forecastFromAPI.json"),
-          axios.get("/vue-app/cities_all.json"),
-          axios.get("/vue-app/map_dataset.json"),
-          axios.get("/vue-app/top_cities.json"),
-          axios.get("/vue-app/translated_constants.json"),
-          axios.get("/vue-app/supported-locales.json"),
+          axios.get("/forecast.json"),
+          axios.get("/forecastFromAPI.json"),
+          axios.get("/cities_all.json"),
+          axios.get("/map_dataset.json"),
+          axios.get("/top_cities.json"),
+          axios.get("/translated_constants.json"),
+          axios.get("/supported-locales.json"),
           new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
         ]);
         const [
