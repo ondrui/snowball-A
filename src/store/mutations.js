@@ -186,11 +186,3 @@ export const INIT_COMMIT = "initCommit";
 export const initCommit = (state, bol) => {
   state.isDataLoad = bol;
 };
-/**
- *
- */
-export const SET_INITIAL_LS = "setInitialLS";
-export const setInitialLS = (state) => {
-  state.localStorage.lang = localStorage.getItem("lang");
-  state.localStorage.city = localStorage.getItem("city");
-};

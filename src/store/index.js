@@ -26,14 +26,9 @@ import {
   loading,
   INIT_COMMIT,
   initCommit,
-  SET_INITIAL_LS,
-  setInitialLS,
 } from "./mutations";
 /**
- * Вспомогательные функции:
- * @func setTimeFormat Возвращает в заданном формате время, доту.
- * @func daytime Возвращает долготу дня в часах и минутах.
- * @func addPlus Добовляет знак +, если значение парометра больше нуля.
+ * Вспомогательные функции.
  */
 import {
   setTimeFormat,
@@ -62,7 +57,7 @@ export default new Vuex.Store({
      */
     translatedConstants: {},
     /**
-     * Название страны с учетом локалей.
+     * Название страны на разных языках.
      */
     country_loc: {
       ru: "Армения",
@@ -74,7 +69,7 @@ export default new Vuex.Store({
      */
     defaultCity: "yerevan",
     /**
-     * Устанавливаем город по умолчанию.
+     * Устанавливаем язык по умолчанию.
      */
     defaultLocale: "ru",
     /**
@@ -160,18 +155,18 @@ export default new Vuex.Store({
   getters: {
     /**
      * Возвращает языковую метку.
+     * @param state Текущее состояние store.
      * @example
      * "ru"
-     * @param state Текущее состояние store.
      */
     getLocale(state) {
       return state.currentLocale;
     },
     /**
      * Возвращает языковую метку для отображения ее в URL.
+     * @param state Текущее состояние store.
      * @example
      * "en"
-     * @param state Текущее состояние store.
      */
     getLocaleURL(state) {
       return state.currentLocale === state.defaultLocale
@@ -179,7 +174,9 @@ export default new Vuex.Store({
         : state.currentLocale;
     },
     /**
-     * Возвращает массив с поддерживаемыми языками.
+     * Возвращает массив с поддерживаемыми языками в требуемом порядке.
+     * Выбранный язык первый элемент массива.
+     * Используется на странице в переключателе языков.
      * @param state Текущее состояние store.
      */
     SupportedLocalesForSwitcher(state, { getLocale }) {
@@ -201,7 +198,10 @@ export default new Vuex.Store({
       }
     },
     /**
-     * Возвращает зодонную порометрами языковую константу.
+     * Возвращает задонную параметрами языковую строковую константу.
+     * @param translatedConstants Объект с переведенными строками.
+     * @param getLocale Текущий язык.
+     * @param key, name Строки с ключами из объекта с переводами.
      */
     getConstantLocale:
       ({ translatedConstants }, { getLocale }) =>
@@ -222,6 +222,11 @@ export default new Vuex.Store({
     loading(state) {
       return state.loading;
     },
+    /**
+     * Возвращает название страны с учетом выбранного языка.
+     * @param country_loc Название страны на разных языках.
+     * @param getLocale Текущий язык.
+     */
     getCountryNameLoc({ country_loc }, { getLocale }) {
       const countryName = country_loc[getLocale];
       return capitalize(countryName);
@@ -247,6 +252,10 @@ export default new Vuex.Store({
         name_loc_choice: capitalize(cityName),
       };
     },
+    /**
+     * Возвращает список всех городов Армении.
+     * @param listAllCities Список всех городов Армении.
+     */
     getListAllCities({ listAllCities }) {
       return listAllCities;
     },
@@ -255,6 +264,9 @@ export default new Vuex.Store({
      * Левая часть.
      * @param state Текущее состояние store.
      * @param getLocale Языковая метка.
+     * @param datasetsForHourlyCharts Объект данных для отображения графиков подробного
+     * почасового прогноза с разбивкой на часовые интервалы.
+     * @param getConstantLocale Геттер возвращает троковую константу.
      */
     currentBlock(
       state,
@@ -275,7 +287,8 @@ export default new Vuex.Store({
         )} ${time} ${getConstantLocale("currentBlock", "forecast")}`,
         condition: data.condition,
         condition_s:
-          // Проверяем из какого поля брать данные для отображения.
+          // Проверяем из какого поля брать данные для отображения
+          // в зависимости от языка.
           getLocale !== "ru"
             ? getConstantLocale("weather_sign", data.condition)
             : data.condition_s,
@@ -291,7 +304,7 @@ export default new Vuex.Store({
      * Возвращает данные для отображения в шапке виджета.
      * Правая часть.
      * @param state Текущее состояние store.
-     * @param getLocale Языковая метка.
+     * @param getConstantLocale Геттер возвращает троковую константу.
      */
     datasetCurrentBlockItem(state, { getConstantLocale }) {
       if (Object.keys(state.datasetsHourly).length === 0) return {};
@@ -329,8 +342,9 @@ export default new Vuex.Store({
     /**
      * Возвращает значения температур и другие данные для таблицы и графика на вкладке
      * "Прогноз погоды на 7-14 дней".
-     * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
+     * @param datasetsTenDays Объект с данными для отображения прогноза на 10-14 дней.
      * @param getLocale Языковая метка.
+     * @param getConstantLocale Геттер возвращает троковую константу.
      */
     tenDaysTabTable: (
       { datasetsTenDays },
@@ -383,7 +397,8 @@ export default new Vuex.Store({
     /**
      * Возвращает значения температур и другие данные  для графика на вкладке
      * "Прогноз погоды на 7-14 дней".
-     * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
+     * @param datasetsTenDays Объект с данными для отображения прогноза на 10-14 дней.
+     * @param getConstantLocale Геттер возвращает троковую константу.
      * @example
      * [{
      *  unit: "°",
@@ -435,7 +450,7 @@ export default new Vuex.Store({
           : null
       );
       /**
-       * Вычисляем минимальную и максимальную температуру для ограничения
+       * Вычисляем минимальную и максимальную температуру для определения
        * границ графика.
        */
       const min = Math.min(...nightTemp, ...dayTemp);
@@ -451,6 +466,7 @@ export default new Vuex.Store({
      * почасового прогноза с разбивкой на часовые интервалы.
      * @param datasetsHourly Текущее состояние store.state.datasetsHourly.
      * @param getLocale Языковая метка.
+     * @param getConstantLocale Геттер возвращает троковую константу.
      */
     hourlyTabTable({ datasetsHourly }, { getLocale, getConstantLocale }) {
       if (Object.keys(datasetsHourly).length === 0) return {};
@@ -540,6 +556,7 @@ export default new Vuex.Store({
      * Из данных с сервера убираем текущие сутки и последние.
      * @param datasetsTenDays Текущее состояние store.state.datasetsTenDays.
      * @param getLocale Языковая метка.
+     * @param getConstantLocale Геттер возвращает троковую константу.
      */
     tenDaysDetailsCard: (
       { datasetsTenDays },
@@ -738,15 +755,20 @@ export default new Vuex.Store({
       ({ datasetsFact, datasetsHourly }, { getConstantLocale }) =>
       (elem) => {
         if (Object.keys(datasetsHourly).length === 0) return {};
+        // количество интервалов в которые будут
+        // внесены корректировки.
         const periodAdjusted = elem.periodAdjusted;
+        // Объект с фактическими данными.
         const obsTimeFact = {
           time: datasetsFact.obs_time,
           temp: datasetsFact.temp,
         };
+        // Объект с данными из почасового прогноза за первый час.
         const firstForecastTime = {
           time: datasetsHourly[0][1].date,
           temp: datasetsHourly[0][1].temp,
         };
+        // разница между временем снятия фактических данных и первым прогнозным часом.
         const diffTime =
           (new Date(firstForecastTime.time) - new Date(obsTimeFact.time)) /
             (1000 * 60 * 60) -
@@ -787,7 +809,7 @@ export default new Vuex.Store({
         const ajustingDataArr = dataArr.map((e, index) => {
           let calcTemp;
           /**
-           * Задаем условия применения функции корректировки.
+           * Задаем условия применения функции корректировки.\
            */
           if (
             index < indexPointMerge &&
@@ -971,7 +993,9 @@ export default new Vuex.Store({
         .sort((a, b) => a.name_loc_choice.localeCompare(b.name_loc_choice));
     },
     /**
-     * Возвращает сгрупированный по алфавиту список городов.
+     * Возвращает сгрупированный по алфавиту список городов и
+     * отфильтрованный по выбранной области.
+     * @param name Название области.
      */
     getGroupListAllCities:
       ({ listAllCities }, { getLocale }) =>
@@ -1045,6 +1069,7 @@ export default new Vuex.Store({
       listAllCities.forEach(
         (val) => (obj[choiceAreaByLocale(getLocale, val, "")] = true)
       );
+      console.log(obj);
       const arr = Object.keys(obj).sort((a, b) => a.localeCompare(b));
       return arr;
     },
@@ -1062,7 +1087,6 @@ export default new Vuex.Store({
     [SET_SUPPORTED_LOCALES]: setSupportedLocales,
     [LOADING]: loading,
     [INIT_COMMIT]: initCommit,
-    [SET_INITIAL_LS]: setInitialLS,
   },
   actions: {
     /**
@@ -1110,7 +1134,13 @@ export default new Vuex.Store({
         console.error("Error! Could not reach the API. " + error);
       }
     },
-
+    /**
+     * @param langURL Языковая локоль из адресной строки.
+     * @param cityURL Выбранный город.
+     * @param nameRouteURL имя маршрута.
+     * Возвращает числовой код нужный роутеру для перехода
+     * на требуемую страницу.
+     */
     setParams: async (
       { state, commit, dispatch },
       { langURL, cityURL, nameRouteURL }
@@ -1130,7 +1160,9 @@ export default new Vuex.Store({
       const langLS = localStorage.getItem("lang");
       const cityLS = localStorage.getItem("city");
       await dispatch("loadData");
-
+      /**
+       * Функция определяет и возвращает название города
+       */
       const setLang = () => {
         if (!langURL) {
           return langLS ?? undefined;

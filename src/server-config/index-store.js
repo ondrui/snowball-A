@@ -26,8 +26,6 @@ import {
   loading,
   INIT_COMMIT,
   initCommit,
-  SET_INITIAL_LS,
-  setInitialLS,
 } from "./mutations";
 /**
  * Вспомогательные функции:
@@ -1062,7 +1060,6 @@ export default new Vuex.Store({
     [SET_SUPPORTED_LOCALES]: setSupportedLocales,
     [LOADING]: loading,
     [INIT_COMMIT]: initCommit,
-    [SET_INITIAL_LS]: setInitialLS,
   },
   actions: {
     /**

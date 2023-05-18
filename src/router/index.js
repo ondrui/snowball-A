@@ -18,6 +18,10 @@ const routes = [
     path: "/:lang?/cities",
     name: "cities",
     component: ListAllCities,
+    /**
+     * В метаданных маршрутов указываем информацию для навигации по
+     * хлебным крошкам.
+     */
     meta: {
       breadcrumb: [{ name: "main" }, { name: "cities" }],
     },
@@ -81,7 +85,10 @@ const router = new VueRouter({
     }
   },
 });
-
+/**
+ * В хуке вызывается экшн стора, в который передаются нужные параметры.
+ * Результатом его завершения будет код, который обрабатывается в хуке.
+ */
 router.beforeEach((to, from, next) => {
   console.log("to", to);
   console.log("from", from);
@@ -91,7 +98,12 @@ router.beforeEach((to, from, next) => {
     nameRouteURL: to.name,
   };
   store.dispatch("setParams", obj).then((code) => {
+    /**
+     * Код 404 указывает на не существующую страницу,
+     * отправляется запрос на сервер для получения ответа с кодом 404.
+     */
     if (code === 404) {
+      console.log("code 404");
       axios.get(to.path).catch((err) => console.log(err));
       next({
         name: "not-found",
@@ -103,6 +115,9 @@ router.beforeEach((to, from, next) => {
           breadcrumb: [{ name: "404" }],
         },
       });
+      /**
+       * Код 100 означает первоначальную загрузку приложения.
+       */
     } else if (code === 100) {
       next({
         name: to.name,

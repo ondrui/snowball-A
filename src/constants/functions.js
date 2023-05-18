@@ -41,7 +41,15 @@ export const defaultOptionsDateTimeFormat = {
   second: "2-digit",
   hourCycle: "h24",
 };
-
+/**
+ * Возвращает строку с датой и временем в заданном формате.
+ * @param date Числовое значение даты.
+ * @param format Строковое представление формата.
+ * @param locales Языковая метка для определения локали.
+ * @returns {string}
+ * @example
+ * "20:30"
+ */
 export const setTimeFormat = (date, format, locales) => {
   /**
    * Объект options настраивает формат даты и времени и передается
@@ -127,7 +135,11 @@ export const windDirection = (prop, getter) => {
     : "transform:rotate(0deg)";
 };
 /**
- * Возвращает долготу дня в часах и минутах.
+ * Вычисляет и возвращает долготу дня в часах и минутах.
+ * @param sunrise Время восхода Солнца в формате W3C "YYYY-MM-DDThh:mm:ssTZD".
+ * @param sunset Время захода Солнца в формате W3C "YYYY-MM-DDThh:mm:ssTZD".
+ * @param getter Коллбэк функция геттер из стора.
+ * @param separator Символ разделителя между часами и минутами.
  * @example
  * "10:14"
  */
@@ -248,7 +260,12 @@ export const bezierCommand = (point, i, a) => {
   const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
   return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point.x},${point.y}`;
 };
-
+/**
+ * Возврашает название города с учетом локали.
+ * @param locale Языковая метка для определения локали.
+ * @param obj Объект с названиями на разных языках.
+ * @param inflectCallback Функция склонения русских названий.
+ */
 export const choiceNameByLocale = (locale, obj, inflectCallback) => {
   switch (locale) {
     case "ru":
@@ -261,11 +278,19 @@ export const choiceNameByLocale = (locale, obj, inflectCallback) => {
       return obj[`name_${locale}`];
   }
 };
-
+/**
+ * Возврашает название области с учетом локали.
+ * @param locale Языковая метка для определения локали.
+ * @param obj Объект с названиями на разных языках.
+ * @param end Строка содержит дополнителиное окончание для ключа.
+ */
 export const choiceAreaByLocale = (locale, obj, end) => {
   return locale === "am" ? obj[`area_loc${end}`] : obj[`area_${locale}${end}`];
 };
-
+/**
+ * Делает строку заглавной
+ * @param  str Строка для форматирования.
+ */
 export const capitalize = (str) => {
   const lower = str.toLowerCase();
   return str.charAt(0).toUpperCase() + lower.slice(1);
