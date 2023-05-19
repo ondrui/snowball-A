@@ -1161,7 +1161,7 @@ export default new Vuex.Store({
       const cityLS = localStorage.getItem("city");
       await dispatch("loadData");
       /**
-       * Функция определяет и возвращает название города
+       *
        */
       const setLang = () => {
         if (!langURL) {
