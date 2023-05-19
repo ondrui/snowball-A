@@ -1087,26 +1087,12 @@ export default new Vuex.Store({
               : { [[...parents, k].join(".")]: v }
           )
         );
-      const flatObject = getValues(translatedConstants);
-      console.log(flatObject);
       const resObj = {};
-
-      // arrKeys.forEach((val) => {
-
-      //   if (val.includes(val.slice(3))) {
-      //     console.log("yes");
-      //     const key = val.slice(3);
-      //     const a = flatObject[val];
-      //     resObj[key] = a;
-      //   }
-      // });
 
       ["am", "ru", "en"].forEach((v) => {
         resObj[v] = getValues(translatedConstants[v]);
       });
-      console.log(resObj);
       const arrKeys = Object.keys(resObj.am);
-      console.log(arrKeys);
 
       const res = arrKeys.map((v) => [
         v,
@@ -1114,8 +1100,7 @@ export default new Vuex.Store({
         resObj.ru[v],
         resObj.en[v],
       ]);
-      console.log(res);
-      return translatedConstants;
+      return res;
     },
   },
   mutations: {
