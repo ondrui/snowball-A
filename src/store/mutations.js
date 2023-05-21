@@ -16,23 +16,31 @@ export const setDataForecast = (
   //fact datasets
   state.datasetsFact = fact;
   /**
+   * Добавляет в объект новое свойство prec_sum с рандомным значением
+   * и возвращает этот объект.
+   * @param obj Объект, в который надо добовить новое св-во.
+   */
+  const addPrecSumVal = (obj) => {
+    return Object.keys(obj).reduce((total, p) => {
+      const value = obj[p];
+      total[p] =
+        typeof value === "object" && value !== null && !Array.isArray(value)
+          ? {
+              ...value,
+              prec_sum: +(Math.random() * 10).toFixed(1),
+            }
+          : value;
+      return total;
+    }, {});
+  };
+  /**
    * Выбираем необходимые данные для часового прогноза.
    * hourly datasets
    */
   const filteredDatasets = Object.keys(forecast_1)
     .filter((key) => key !== "3" && key !== "start_date")
     .reduce((obj, key) => {
-      const addObj = Object.keys(forecast_1[key]).reduce((total, p) => {
-        total[p] =
-          typeof forecast_1[key][p] === "object"
-            ? {
-                ...forecast_1[key][p],
-                prec_sum: +(Math.random() * 10).toFixed(1),
-              }
-            : forecast_1[key][p];
-        return total;
-      }, {});
-      obj[key] = addObj;
+      obj[key] = addPrecSumVal(forecast_1[key]);
       return obj;
     }, {});
   state.datasetsHourly = filteredDatasets;
@@ -43,17 +51,7 @@ export const setDataForecast = (
   const filteredThreeHourDatasets = Object.keys(forecast_3)
     .filter((key) => key !== "start_date")
     .reduce((obj, key) => {
-      const addObj = Object.keys(forecast_3[key]).reduce((total, p) => {
-        total[p] =
-          typeof forecast_3[key][p] === "object"
-            ? {
-                ...forecast_3[key][p],
-                prec_sum: +(Math.random() * 10).toFixed(1),
-              }
-            : forecast_3[key][p];
-        return total;
-      }, {});
-      obj[key] = addObj;
+      obj[key] = addPrecSumVal(forecast_3[key]);
       return obj;
     }, {});
   state.datasetsThreeHour = filteredThreeHourDatasets;
@@ -63,16 +61,10 @@ export const setDataForecast = (
    */
   const filteredTenDatasets = Object.keys(forecast_24).reduce(
     (obj, key, index) => {
-      const addObj = Object.keys(forecast_24[key]).reduce((total, p) => {
-        total[p] =
-          typeof forecast_24[key][p] === "object"
-            ? {
-                ...forecast_24[key][p],
-                prec_sum: +(Math.random() * 10).toFixed(1),
-              }
-            : forecast_24[key][p];
-        return total;
-      }, {});
+      const addObj = addPrecSumVal(forecast_24[key]);
+      // isOpen - свойство указывает открыта карточка с подробным
+      // прогнозом. При первоначальной загрузке открываем первую
+      // карточку.
       addObj.isOpen = index === 1 ? true : false;
       obj[key] = addObj;
       return obj;

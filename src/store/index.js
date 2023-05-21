@@ -1069,7 +1069,6 @@ export default new Vuex.Store({
       listAllCities.forEach(
         (val) => (obj[choiceAreaByLocale(getLocale, val, "")] = true)
       );
-      console.log(obj);
       const arr = Object.keys(obj).sort((a, b) => a.localeCompare(b));
       return arr;
     },
