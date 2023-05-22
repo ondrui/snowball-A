@@ -262,25 +262,16 @@ export const bezierCommand = (point, i, a) => {
 };
 /**
  * Возврашает название города с учетом локали.
- * @param locale Языковая метка для определения локали.
+ * @param defLocale Языковая метка по умолчанию.
+ * @param locale Текущая языковая локаль.
  * @param obj Объект с названиями на разных языках.
- * @param inflectCallback Функция склонения русских названий.
  */
-export const choiceNameByLocale = (locale, obj, inflectCallback) => {
-  switch (locale) {
-    case "ru":
-      return inflectCallback
-        ? inflectCallback(obj[`name_${locale}`])
-        : obj[`name_${locale}`];
-    case "am":
-      return obj[`name_loc`];
-    default:
-      return obj[`name_${locale}`];
-  }
+export const choiceNameByLocale = (defLocale, locale, obj) => {
+  return locale !== defLocale ? obj[`name_${locale}`] : obj[`name_loc`];
 };
 /**
  * Возврашает название области с учетом локали.
- * @param locale Языковая метка для определения локали.
+ * @param locale Текущая языковая локаль.
  * @param obj Объект с названиями на разных языках.
  * @param end Строка содержит дополнителиное окончание для ключа.
  */

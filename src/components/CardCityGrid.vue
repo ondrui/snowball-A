@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import { choiceNameByLocale } from "@/constants/functions";
 import { mapGetters } from "vuex";
 
 export default {
@@ -49,7 +48,6 @@ export default {
     ...mapGetters(["getLocaleURL"]),
   },
   methods: {
-    choiceNameByLocale,
     /**
      * Обработчик вызывается когда нажали кнопку мыши на элементе.
      * Сохраняем в переменную значение координаты Х.

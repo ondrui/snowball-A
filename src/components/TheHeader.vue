@@ -40,6 +40,7 @@ export default {
       "getLocale",
       "getCitySelected",
       "getLocaleURL",
+      "getDefaultLocale",
       "SupportedLocalesForSwitcher",
     ]),
   },
@@ -48,7 +49,7 @@ export default {
       const to = this.$router.resolve({
         name: name === "main" ? name : this.$route.name,
         params: {
-          lang: value === "ru" ? undefined : value,
+          lang: value === this.getDefaultLocale ? undefined : value,
           city: this.getCitySelected.name_en,
         },
       });

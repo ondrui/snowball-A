@@ -123,7 +123,7 @@ router.beforeEach((to, from, next) => {
         name: to.name,
         params: {
           lang: store.getters.getLocaleURL,
-          city: store.getters.getCitySelected.name_en.toLowerCase(),
+          city: store.getters.getCitySelected.name_en,
         },
       });
     } else {

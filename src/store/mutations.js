@@ -165,7 +165,7 @@ export const setSupportedLocales = (state, { supportedLocales }) => {
   state.supportedLocales = supportedLocales;
 };
 /**
- * Управляет состоянием лоадера.
+ * Устанавливает состояние лоадера загрузки.
  */
 export const LOADING = "loading";
 export const loading = (state, bol) => {
