@@ -45,22 +45,32 @@ export default {
   data() {
     return {
       /**
-       * @param currentTab Имя открытой вкладки (кампоненты).
+       * @param currentTab Имя открытой вкладки (компоненты).
        */
       currentTab: "main",
+      /**
+       * @param hover Подсветка вкладки при изменении параметра.
+       */
       hover: false,
     };
   },
   created() {
+    // При создании компоненты подсвечиваем вкладку из маршрута роутера.
     this.currentTab = this.$route.name;
+    // При создании компоненты подписываемся на событие highlight
+    // и устанавливаем обработчик на событие.
     eventBus.$on("highlight", (bol) => {
       this.hover = bol;
     });
   },
   destroyed() {
+    // Отписываемся от слушателей события при уничтожении компоненты.
     eventBus.$off();
   },
   watch: {
+    /**
+     * При изменении марщрута роутера подсвечиваем выбранную вкладку.
+     */
     "$route.name"(name) {
       this.currentTab = name;
     },
@@ -78,16 +88,15 @@ export default {
     tabsList() {
       return this.getConstantLocale("tabsDescr");
     },
-    currentTabComponent() {
-      const string = this.currentTab;
-      return `TabInformer${string.charAt(0).toUpperCase() + string.slice(1)}`;
-    },
   },
   methods: {
     /**
      * Обработчик для установки имени открытой вкладки. Передается
-     * через параметр.
-     * @param key Строка содержит имя вкладки.
+     * через параметр . Обработчик вызывает переход на новый URL.
+     * В качестве аргумента передаем объект, описывающий маршрут.
+     * @param key Строка содержит имя маршрута для роутера.
+     * @param lang Текущая локаль берется из стора.
+     * @param city Город для которого выводится прогноз погоды берется из стора.
      */
     showContent(key) {
       this.$router
@@ -110,6 +119,10 @@ export default {
         ? value.replace("$", this.tenDaysTabTable.length)
         : value;
     },
+    /**
+     * Проверяем условия подсветки вкладки hourly - должно быть имя вкладки hourly и
+     * параметр hover true.
+     */
     isHover(val) {
       return val === "hourly" && this.hover;
     },
@@ -119,11 +132,7 @@ export default {
 
 <style lang="scss" scoped>
 .main-container {
-  // margin: 0 auto;
   background-color: #ffffff;
-  // width: 800px;
-  // max-width: 900px;
-  // min-width: 420px;
 }
 .home-icon {
   width: 18px;
@@ -142,7 +151,6 @@ export default {
   align-items: flex-end;
   column-gap: 2px;
   position: relative;
-  // border-bottom: 1px solid #b2d3e8;
   box-shadow: inset 0 -1px 0 0 #b2d3e8;
 
   .button-tab {
@@ -150,14 +158,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    // flex: 1;
     border: none;
     white-space: nowrap;
     cursor: pointer;
     border: 1px solid #b2d3e8;
     background-color: #ffffff;
     border-radius: 4px 4px 0 0;
-    // min-width: 10ch;
     min-height: 34px;
     &:first-child span {
       display: flex;

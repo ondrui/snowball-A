@@ -1,3 +1,6 @@
+/**
+ * Кастомная директива добавляет Intersection Observer на элемент.
+ */
 export default {
   inserted: (el, binding) => {
     const callback = (entries) => {

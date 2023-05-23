@@ -28,12 +28,6 @@ export default {
   computed: {
     ...mapGetters(["loading", "getLocale"]),
   },
-  created() {
-    /**
-     * Вызываем экшн для первоначальной загрузки данных в стор.
-     */
-    // this.$store.dispatch("loadData");
-  },
 };
 </script>
 

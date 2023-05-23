@@ -14,6 +14,12 @@ export default {
     ...mapGetters(["getLocaleURL", "getCitySelected"]),
   },
   methods: {
+    /**
+     * Функция возвращает объект описывающий маршрут перехода на новый URL.
+     * @param name Строка содержит имя маршрута для роутера.
+     * @param lang Текущая локаль берется из стора.
+     * @param city Город для которого выводится прогноз погоды берется из стора.
+     */
     pushNewURL() {
       return {
         name: "main",

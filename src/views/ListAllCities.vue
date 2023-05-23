@@ -97,19 +97,24 @@ export default {
   },
   data() {
     return {
+      /**
+       * Свойство selected - значением является название области из селекта.
+       * all - показать все города.
+       */
       selected: "all",
-      crumbsKeys: [],
     };
   },
   watch: {
+    /**
+     * При изменении локали сбрасываем фильтрацию по области.
+     */
     getLocale() {
       this.selected = "all";
     },
   },
-  created() {
-    const VALID_KEYS_CRUMBS = ["main", "citiesList"];
-    this.crumbsKeys = VALID_KEYS_CRUMBS;
-  },
+  /**
+   * При обновлении компоненты вызываем прокрутку страницы до заданной координаты.
+   */
   updated() {
     this.scrollSel();
   },
@@ -122,19 +127,33 @@ export default {
       "getCountryNameLoc",
     ]),
     getGroupListAllCities() {
+      /**
+       * В геттер передаем значение свойства selected.
+       * Для фильтрации городов по области.
+       */
       return this.$store.getters.getGroupListAllCities(this.selected);
     },
+    /**
+     * Возвращает массив букв сгруппированных городов по первой букве.
+     */
     getABC() {
       return Object.keys(this.getGroupListAllCities);
     },
   },
   methods: {
+    /**
+     * Вызывает плавную прокрутку страницы до заданной координаты.
+     */
     scrollSel() {
       window.scroll({
         top: 364,
         behavior: "smooth",
       });
     },
+    /**
+     * Вызывает плавную прокрутку страницы до выбранной буквы
+     * при клике на букву.
+     */
     scrollToLetter(event) {
       const el = document.querySelector(
         `[data-letter=${event.target.dataset.name}]`
@@ -144,6 +163,10 @@ export default {
         behavior: "smooth",
       });
     },
+    /**
+     * Добавляем пустые ячейки в таблицу для установки
+     * заданного дизайном форматирования.
+     */
     formatedListCities(item) {
       const expArr = this.getGroupListAllCities[item];
       return {
@@ -151,6 +174,14 @@ export default {
         hiddenGap: expArr.length < 2,
       };
     },
+    /**
+     * Функция возвращает объект описывающий маршрут перехода на новый URL.
+     * Переход происходит при условии передачи в функцию название города.
+     * @param name Строка содержит имя маршрута для роутера.
+     * @param lang Текущая локаль берется из стора.
+     * @param city Город для которого выводится прогноз погоды берется из стора.
+     * @param hash #top вызываем плавную прокрутку в начало страницы.
+     */
     pushNewURL(city) {
       return city
         ? {

@@ -59,6 +59,9 @@ export default {
   },
   data() {
     return {
+      /**
+       * @param radio Свойство определяет условную отрисовку разных компонент.
+       */
       radio: "map",
     };
   },
@@ -81,6 +84,9 @@ export default {
         ["cities", this.getConstantLocale("viewsSwitcher")[1]],
       ];
     },
+    /**
+     * Возвращает строку с текстовым содержимым ссылки.
+     */
     getTitleLink() {
       const country = cityIn(this.getCountryNameLoc);
       return this.getConstantLocale("allCityBtnCaption")
@@ -89,6 +95,12 @@ export default {
     },
   },
   methods: {
+    /**
+     * Функция возвращает объект описывающий маршрут перехода на новый URL.
+     * @param name Строка содержит имя маршрута для роутера.
+     * @param lang Текущая локаль берется из стора.
+     * @param city Город для которого выводится прогноз погоды берется из стора.
+     */
     pushNewURL() {
       return {
         name: "cities",
@@ -152,5 +164,4 @@ export default {
     }
   }
 }
-// box-shadow: 0 0px 8px 4px rgb(0 70 128 / 81%);
 </style>

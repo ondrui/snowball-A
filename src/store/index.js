@@ -1215,30 +1215,37 @@ export default new Vuex.Store({
       }
       // Переменная с городом по умолчанию.
       const defaultCity = state.defaultCity;
+      // Переменная с языком по умолчанию.
+      const defaultLocale = state.defaultLocale;
       // Переменная с городом и языковой меткой из LocalStorage.
       const langLS = localStorage.getItem("lang");
       const cityLS = localStorage.getItem("city");
       // Загружаем данные с сервера.
       await dispatch("loadData");
       /**
-       *
+       * Проверяем и устанавливаем значение локали.
        */
       const setLang = () => {
         if (!langURL) {
-          return langLS ?? undefined;
+          return langLS ?? defaultLocale;
         }
-
+        // Проверяем содержит ли массив с поддерживаемыми языками
+        // параметр langURL.
         const isLocaleSupported = state.supportedLocales.some(
           (obj) => obj.key.toLowerCase() === langURL.toLowerCase()
         );
 
         return isLocaleSupported ? langURL : null;
       };
-
+      /**
+       * Проверяем и устанавливаем значение города.
+       */
       const selectCity = () => {
         if (!cityURL) {
           return cityLS ?? defaultCity;
         }
+        // Проверяем содержит ли массив со всеми городами
+        // параметр cityURL.
         const hasCityInTheList = state.listAllCities.some(
           (obj) => obj.name_en.toLowerCase() === cityURL.toLowerCase()
         );
@@ -1252,8 +1259,8 @@ export default new Vuex.Store({
       console.log("lang", lang);
       console.log("city", city);
 
-      if (nameRouteURL === "not-found" || lang === null || city === null) {
-        commit(SET_LOCALE, langLS ?? undefined);
+      if (lang === null || city === null) {
+        commit(SET_LOCALE, langLS ?? defaultLocale);
         commit(SET_CITY, cityLS ?? defaultCity);
         commit(INIT_COMMIT, true);
         console.log(404);
@@ -1264,7 +1271,7 @@ export default new Vuex.Store({
       commit(SET_CITY, city);
       commit(INIT_COMMIT, true);
       console.log(100);
-      return 100;
+      return nameRouteURL === "not-found" ? 404 : 100;
     },
   },
 });

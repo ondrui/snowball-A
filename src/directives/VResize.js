@@ -1,3 +1,7 @@
+/**
+ * Кастомная директива вызывающая обработчик при изменении размера окна.
+ * Аргументами задается оптимизация.
+ */
 export default {
   inserted: (el, { modifiers, value, arg }) => {
     let timeout = null; // holder for timeout id
