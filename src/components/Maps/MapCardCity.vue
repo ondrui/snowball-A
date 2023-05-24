@@ -36,10 +36,17 @@ import { mapGetters } from "vuex";
 
 export default {
   props: {
+    /**
+     * Объект содержит данные для отображения в карточке.
+     */
     datasetItem: {
       type: Object,
       required: true,
     },
+    /**
+     * Строка содержит название параметра для отображения
+     * Возможные значения: "temp" или "wind".
+     */
     indicator: {
       type: String,
       required: true,
@@ -49,7 +56,18 @@ export default {
     ...mapGetters(["getLocaleURL", "getLocale", "getConstantLocale"]),
   },
   methods: {
+    /**
+     * Возвращает команду поворота иконки ветра в соответствие с направлением ветра.
+     */
     windDirection,
+    /**
+     * Функция возвращает объект описывающий маршрут перехода на новый URL.
+     * Переход происходит при условии передачи в функцию название города.
+     * @param name Строка содержит имя маршрута для роутера.
+     * @param lang Текущая локаль берется из стора.
+     * @param city Город для которого выводится прогноз погоды берется из карточки.
+     * @param hash #top вызываем плавную прокрутку в начало страницы.
+     */
     pushNewURL(city) {
       return city
         ? {

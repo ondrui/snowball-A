@@ -17,19 +17,32 @@
 <script>
 export default {
   props: {
+    /**
+     * Массив для отрисовки списка с кнопками и названиями
+     * кнопок на выбранном языке.
+     */
     menuItemName: {
       type: Array,
       required: true,
     },
+    /**
+     * Выбранный пункт списка.
+     */
     selected: {
       type: String,
       required: true,
     },
   },
   methods: {
+    /**
+     * Подсвечиваем выбранный пункт item.
+     */
     isActive(item) {
       return this.selected === item;
     },
+    /**
+     * Передаем выбранный пункт списка item в родительский компонент.
+     */
     select(item) {
       this.$emit("select", item);
     },

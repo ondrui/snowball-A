@@ -50,12 +50,19 @@ export default {
       return this.$store.getters.cardMapData.slice(0, 5);
     },
     ...mapGetters(["getConstantLocale"]),
+    /**
+     * Заголовок блока.
+     */
     getHistoryTitle() {
       const arr = this.getConstantLocale("asideHistory").split(" ");
       return [arr[0], arr[1]];
     },
   },
   methods: {
+    /**
+     * Функция в зависимости от порядкового номера карточки и общего количества
+     * карточек задает ей нужный размер.
+     */
     showComponent(index, length) {
       if (index === 0) return "CardCityBig";
       if (length < 4) return "CardCityBig";

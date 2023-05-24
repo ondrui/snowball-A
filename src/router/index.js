@@ -91,7 +91,6 @@ const router = new VueRouter({
  */
 router.beforeEach((to, from, next) => {
   console.log("to", to);
-  console.log("from", from);
   const obj = {
     langURL: to.params.lang,
     cityURL: to.params.city,

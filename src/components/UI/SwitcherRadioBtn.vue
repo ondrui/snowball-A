@@ -20,14 +20,25 @@
 <script>
 export default {
   name: "SwitcherRadioBtn",
+  /**
+   * Изменяем входной параметр и событие, используемые для работы
+   * v-model.
+   */
   model: {
     prop: "checked",
     event: "change",
   },
   props: {
+    /**
+     * Массив содержит значенме и название радио кнопок в выбранной
+     * локали.
+     */
     radioValues: {
       type: Array,
     },
+    /**
+     * Пропс используется для v-model компоненты с родителем.
+     */
     checked: {
       type: String,
     },

@@ -19,7 +19,6 @@ export default {
   methods: {
     calcSize() {
       this.viewportHeight = `${window.innerHeight}px`;
-      // this.viewportHeight = `${document.documentElement.clientHeight}px`;
     },
   },
 };

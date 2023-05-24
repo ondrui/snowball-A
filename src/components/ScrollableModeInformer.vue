@@ -27,6 +27,9 @@ export default {
     DragScrolling,
   },
   props: {
+    /**
+     * Пропс получает координату Y подписей параметров на графике.
+     */
     labelCoordinates: {
       type: Object,
       required: true,
@@ -37,7 +40,12 @@ export default {
   },
   data() {
     return {
+      /**
+       * Вспомогательные свойства помогают определить условия
+       * показа/скрытия кнопок скролла графика.
+       */
       clientWidth: 0,
+      // Полная внутренняя ширина, включая прокрученную область.
       scrollWidth: 0,
       firstItem: null,
       lastItem: null,
@@ -130,7 +138,7 @@ export default {
      */
     resizeBrowserHandler() {
       /**
-       * Определяет и устанавливает требуемые для
+       * Определяет и устанавливает требуемые свойства прокручиваего элемента.
        */
       const elem = this.$refs[this.elemNameScroll].$el;
       this.clientWidth = Math.round(elem.clientWidth);

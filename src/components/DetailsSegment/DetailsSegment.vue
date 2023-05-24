@@ -33,11 +33,6 @@ export default {
     CardDetailDay,
     ContentDetailDay,
   },
-  data() {
-    return {
-      locale: "",
-    };
-  },
   computed: {
     ...mapGetters([
       "getLocale",
@@ -46,6 +41,9 @@ export default {
       "getCitySelected",
       "getConstantLocale",
     ]),
+    /**
+     * Кон
+     */
     segmentTitle() {
       const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
       const str = this.getConstantLocale("detailsSegmentTitle")

@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       /**
-       * Массив содержит имена ссылок.
+       * Массив содержит имена ссылок навигационной цепочки.
        */
       breadcrumbList: [],
     };
@@ -41,6 +41,10 @@ export default {
     this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb);
   },
   watch: {
+    /**
+     * Изменяем ссылки навигационной цепочки при изменении маршрута
+     * роутера.
+     */
     $route(to) {
       const city = to.params.city;
       this.breadcrumbs("breadcrumbs", this.$route.meta.breadcrumb, city);
@@ -65,12 +69,21 @@ export default {
       const crumbsArr = arr.map(({ name }) =>
         this.getConstantLocale(key, name)
       );
-
+      /**
+       * Добавляем название города при переходе на маршруты, которые
+       * не называются "main" и "cities".
+       */
       arr.some(({ name }) => name !== "main" && name !== "cities")
         ? crumbsArr.push(this.getCitySelected.name_loc_choice)
         : crumbsArr;
       this.breadcrumbList = crumbsArr;
     },
+    /**
+     * Функция возвращает объект описывающий маршрут перехода на новый URL.
+     * @param name Строка содержит имя маршрута для роутера.
+     * @param lang Текущая локаль берется из стора.
+     * @param city Город для которого выводится прогноз погоды берется из стора.
+     */
     pushNewURL() {
       return {
         name: "main",

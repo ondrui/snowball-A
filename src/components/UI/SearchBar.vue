@@ -56,17 +56,6 @@ export default {
           })
           .catch(() => {});
       });
-      // const hasCity = this.getListAllCities.find(
-      //   ({ name_en }) => name_en.toLowerCase() === city
-      // );
-      // if (!city || !hasCity) return;
-      // this.$router
-      //   .push({
-      //     name: "hourly",
-      //     params: { lang: this.getLocaleURL, city: city },
-      //     hash: "#top",
-      //   })
-      //   .catch(() => {});
     },
   },
 };

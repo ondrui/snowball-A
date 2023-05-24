@@ -12,6 +12,9 @@
 export default {
   data() {
     return {
+      /**
+       * Значение свойства содержит высоту блока.
+       */
       heightSidebarContent: "",
     };
   },
