@@ -42,7 +42,7 @@ export default {
       "getConstantLocale",
     ]),
     /**
-     * Кон
+     * Конструктор заголовка.
      */
     segmentTitle() {
       const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
@@ -51,14 +51,12 @@ export default {
         .replace("$", this.tenDaysDetailsCard.length);
       return str;
     },
+    /**
+     * Возвращает индекс элемента, у которого свойство isOpen === true.
+     */
     activeIndex() {
       const index = this.tenDaysDetailsCard.findIndex((i) => i.isOpen === true);
       return index;
-    },
-  },
-  methods: {
-    isOpen(index) {
-      return this.tenDaysDetailsCard[index].isOpen === true;
     },
   },
 };

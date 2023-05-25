@@ -32,18 +32,33 @@ export default {
   props: ["value"],
   computed: {
     ...mapGetters(["getConstantLocale"]),
+    /**
+     * Условие отображения иконки и времени восхода солнца.
+     */
     isShowSunrise() {
       return !!this.value.dayLength.sunrise;
     },
+    /**
+     * Условие отображения строки с продолжительностью дня.
+     */
     isShowDayLength() {
       return !!this.value.dayLength.daytime.value;
     },
+    /**
+     * Условие отображения иконки и времени захода солнца.
+     */
     isShowSunset() {
       return !!this.value.dayLength.sunset;
     },
+    /**
+     * Условие отображения блока полярного дня или ночи.
+     */
     isShowPolar() {
       return !!this.value.dayLength.polar;
     },
+    /**
+     * Условие отображения иконки полярного дня или ночи.
+     */
     namePolarIcon() {
       return this.value.dayLength.polar === "day" ? "sun-1" : "moon-1";
     },

@@ -28,17 +28,29 @@ export default {
   props: ["value"],
   computed: {
     ...mapGetters(["getConstantLocale"]),
+    /**
+     * Условие отображения иконки и времени восхода солнца.
+     */
     isShowSunrise() {
       return !!this.value.dayLength.sunrise;
     },
+    /**
+     * Условие отображения строки с продолжительностью дня.
+     */
     isShowDayLength() {
       return !!(
         this.value.dayLength.daytime.value || this.value.dayLength.polar
       );
     },
+    /**
+     * Условие отображения иконки и времени захода солнца.
+     */
     isShowSunset() {
       return !!this.value.dayLength.sunset;
     },
+    /**
+     * Условие отображения линии.
+     */
     isShowLine() {
       return this.value.dayLength.polar !== "night";
     },
