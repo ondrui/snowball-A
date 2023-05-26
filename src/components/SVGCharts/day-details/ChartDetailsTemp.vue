@@ -90,8 +90,8 @@ export default {
             ? `M ${point.x},${point.y}`
             : i !== a.length - 1 && point.y === a[i - 1].y
             ? `${acc} L ${point.x} ${point.y}`
-            : `${acc} ${this.catmullRom2bezier(a, i - 1)}`,
-        // `${acc} ${this.bezierCommand(point, i, a)}`,
+            : // : `${acc} ${this.catmullRom2bezier(a, i - 1)}`,
+              `${acc} ${this.bezierCommand(point, i, a)}`,
         ""
       );
       return `${d}`;
