@@ -88,10 +88,11 @@ export default {
         (acc, point, i, a) =>
           i === 0
             ? `M ${point.x},${point.y}`
-            : i !== a.length - 1 && point.y === a[i - 1].y
-            ? `${acc} L ${point.x} ${point.y}`
-            : // : `${acc} ${this.catmullRom2bezier(a, i - 1)}`,
-              `${acc} ${this.bezierCommand(point, i, a)}`,
+            : // Если у соседних точек координата Y совпадает проводим прямую линию между точками.
+              // : i !== a.length - 1 && point.y === a[i - 1].y
+              // ? `${acc} L ${point.x} ${point.y}`
+              `${acc} ${this.catmullRom2bezier(a, i - 1)}`,
+        // `${acc} ${this.bezierCommand(point, i, a)}`,
         ""
       );
       return `${d}`;
