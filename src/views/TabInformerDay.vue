@@ -51,9 +51,14 @@ export default {
     const strTitle = this.getConstantLocale("day", "title")
       .replace("$", inflectCityName)
       .replace("$", daysNum);
-    const strDescr = this.getConstantLocale("day", "description")
-      .replace("$", inflectCityName)
-      .replace("$", daysNum);
+    const strDescr =
+      this.getLocale === "am"
+        ? this.getConstantLocale("day", "description")
+            .replace("$", daysNum)
+            .replace("$", inflectCityName)
+        : this.getConstantLocale("day", "description")
+            .replace("$", inflectCityName)
+            .replace("$", daysNum);
     const strKeywords = this.getConstantLocale("day", "keywords")
       .replace("$", inflectCityName)
       .replace("$", daysNum)
@@ -84,6 +89,7 @@ export default {
       "tenDaysTabTable",
       "getCitySelected",
       "getCountryNameLoc",
+      "getLocale",
     ]),
   },
 };

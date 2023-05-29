@@ -38,6 +38,12 @@ import {
   choiceAreaByLocale,
   capitalize,
 } from "@/constants/functions";
+/**
+ * Day.js is a minimalist JavaScript library that parses, validates, manipulates, and
+ * displays dates and times for modern browsers with a largely Moment.js-compatible API.
+ */
+import dayjs from "dayjs";
+import "dayjs/locale/hy-am";
 
 Vue.use(Vuex);
 
@@ -368,11 +374,14 @@ export default new Vuex.Store({
        */
       const sliceEndIndex = valuesArr.length > 12 ? -1 : -2;
       const arr = valuesArr.slice(0, sliceEndIndex).map((e) => {
-        const weekday = setTimeFormat(
-          e.start_date,
-          "D",
-          getLocale
-        ).toLowerCase();
+        /**
+         * Устанавливаем армянский язык для библиотеки dayjs.
+         */
+        dayjs.locale("hy-am");
+        const weekday =
+          getLocale === "am"
+            ? dayjs(e.start_date).format("ddd")
+            : setTimeFormat(e.start_date, "D", getLocale).toLowerCase();
         return {
           weekday: weekday,
           weekend:
@@ -492,8 +501,14 @@ export default new Vuex.Store({
         const arr = Object.values(datasetsHourly[key])
           .filter((i) => typeof i === "object")
           .sort((a, b) => sortData(a) - sortData(b));
-        const weekday = setTimeFormat(arr[0].date, "l", getLocale);
-        const day = setTimeFormat(arr[0].date, "d F", getLocale);
+        const weekday =
+          getLocale === "am"
+            ? dayjs(arr[0].date).format("dddd")
+            : setTimeFormat(arr[0].date, "l", getLocale);
+        const day =
+          getLocale === "am"
+            ? dayjs(arr[0].date).format("D MMMM")
+            : setTimeFormat(arr[0].date, "d F", getLocale);
         const showArr = arr.map(
           ({
             condition,
@@ -580,13 +595,19 @@ export default new Vuex.Store({
         .slice(1, sliceEndIndex)
         .map((e, index, array) => {
           const formatWeekday = ["D", "l"];
-          const weekday = formatWeekday.map((el) =>
-            setTimeFormat(e.start_date, el, getLocale).toLowerCase()
-          );
+          const weekday =
+            getLocale === "am"
+              ? ["ddd", "dddd"].map((el) => dayjs(e.start_date).format(el))
+              : formatWeekday.map((el) =>
+                  setTimeFormat(e.start_date, el, getLocale).toLowerCase()
+                );
           const formatDate = ["d.m", "d F"];
-          const date = formatDate.map((el) =>
-            setTimeFormat(e.start_date, el, getLocale)
-          );
+          const date =
+            getLocale === "am"
+              ? ["D.MM", "D MMMM"].map((el) => dayjs(e.start_date).format(el))
+              : formatDate.map((el) =>
+                  setTimeFormat(e.start_date, el, getLocale)
+                );
           const time =
             e.sunrise && e.sunset
               ? daytime(e.sunrise, e.sunset, getConstantLocale)
