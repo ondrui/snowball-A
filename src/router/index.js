@@ -90,7 +90,6 @@ const router = new VueRouter({
  * Результатом его завершения будет код, который обрабатывается в хуке.
  */
 router.beforeEach((to, from, next) => {
-  console.log("to", to);
   const obj = {
     langURL: to.params.lang,
     cityURL: to.params.city,
@@ -102,7 +101,6 @@ router.beforeEach((to, from, next) => {
      * отправляется запрос на сервер для получения ответа с кодом 404.
      */
     if (code === 404) {
-      console.log("code 404");
       axios.get(to.path).catch((err) => console.log(err));
       next({
         name: "not-found",

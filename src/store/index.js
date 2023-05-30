@@ -44,16 +44,10 @@ import {
  */
 import dayjs from "dayjs";
 import "dayjs/locale/hy-am";
-import localeData from "dayjs/plugin/localeData";
 /**
  * Устанавливаем армянский язык для библиотеки dayjs.
  */
 dayjs.locale("hy-am");
-dayjs.extend(localeData);
-
-console.log(dayjs.weekdaysShort());
-const globalLocaleData = dayjs.localeData();
-console.log(globalLocaleData.weekdaysShort());
 
 Vue.use(Vuex);
 
@@ -1228,16 +1222,11 @@ export default new Vuex.Store({
       { state, commit, dispatch },
       { langURL, cityURL, nameRouteURL }
     ) => {
-      console.log("action store setParams");
-      console.log("langURL", langURL);
-      console.log("cityURL", cityURL);
-      console.log("nameRouteURL", nameRouteURL);
       // Если это не первоначальная загрузка приложения, то
       // используем язык и город из параметров маршрута роутера.
       if (state.isDataLoad) {
         commit(SET_LOCALE, langURL);
         commit(SET_CITY, cityURL);
-        console.log(200);
         return 200;
       }
       // Переменная с городом по умолчанию.
@@ -1283,21 +1272,16 @@ export default new Vuex.Store({
       const city = selectCity();
       const lang = setLang();
 
-      console.log("lang", lang);
-      console.log("city", city);
-
       if (lang === null || city === null) {
         commit(SET_LOCALE, langLS ?? defaultLocale);
         commit(SET_CITY, cityLS ?? defaultCity);
         commit(INIT_COMMIT, true);
-        console.log(404);
         return 404;
       }
 
       commit(SET_LOCALE, lang);
       commit(SET_CITY, city);
       commit(INIT_COMMIT, true);
-      console.log(100);
       return nameRouteURL === "not-found" ? 404 : 100;
     },
   },
