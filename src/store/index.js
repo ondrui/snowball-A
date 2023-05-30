@@ -44,6 +44,16 @@ import {
  */
 import dayjs from "dayjs";
 import "dayjs/locale/hy-am";
+import localeData from "dayjs/plugin/localeData";
+/**
+ * Устанавливаем армянский язык для библиотеки dayjs.
+ */
+dayjs.locale("hy-am");
+dayjs.extend(localeData);
+
+console.log(dayjs.weekdaysShort());
+const globalLocaleData = dayjs.localeData();
+console.log(globalLocaleData.weekdaysShort());
 
 Vue.use(Vuex);
 
@@ -374,10 +384,6 @@ export default new Vuex.Store({
        */
       const sliceEndIndex = valuesArr.length > 12 ? -1 : -2;
       const arr = valuesArr.slice(0, sliceEndIndex).map((e) => {
-        /**
-         * Устанавливаем армянский язык для библиотеки dayjs.
-         */
-        dayjs.locale("hy-am");
         const weekday =
           getLocale === "am"
             ? dayjs(e.start_date).format("ddd")
