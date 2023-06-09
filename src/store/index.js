@@ -123,28 +123,47 @@ export default new Vuex.Store({
      * внесены корректировки.
      * @property func - функция согласно которой будут корректироваться
      * данные.
+     * @property Variable - Погодная переменная для отображения на графике.
      */
     chartSettings: [
       {
         title: "linear_0",
+        variable: "temp",
         periodAdjusted: 0,
         func: (periodAdjusted, diffTime, index) =>
           (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
       },
       {
         title: "linear_6",
+        variable: "temp",
         periodAdjusted: 6,
+        func: (periodAdjusted, diffTime, index) =>
+          (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
+      },
+      {
+        title: "linear_tmax",
+        variable: "temp_max",
+        periodAdjusted: 0,
+        func: (periodAdjusted, diffTime, index) =>
+          (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
+      },
+      {
+        title: "linear_tmin",
+        variable: "temp_min",
+        periodAdjusted: 0,
         func: (periodAdjusted, diffTime, index) =>
           (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
       },
       // {
       //   title: "linear_8",
+      // variable: "temp",
       //   periodAdjusted: 8,
       //   func: (periodAdjusted, diffTime, index) =>
       //     (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
       // },
       // {
       //   title: "exp_12",
+      //   variable: "temp",
       //   periodAdjusted: 12,
       //   func: (periodAdjusted, diffTime, index) => 1 / Math.exp(index),
       // },
@@ -790,6 +809,8 @@ export default new Vuex.Store({
       ({ datasetsFact, datasetsHourly }, { getConstantLocale }) =>
       (elem) => {
         if (Object.keys(datasetsHourly).length === 0) return {};
+        // Погодная переменная для отображения на графике.
+        const variable = elem.variable;
         // количество интервалов в которые будут
         // внесены корректировки.
         const periodAdjusted = elem.periodAdjusted;
@@ -802,7 +823,7 @@ export default new Vuex.Store({
         // Объект с данными из почасового прогноза за первый час.
         const firstForecastTime = {
           time: datasetsHourly[0][1].date,
-          temp: datasetsHourly[0][1].temp,
+          temp: datasetsHourly[0][1][variable],
         };
         // разница между временем снятия фактических данных и первым прогнозным часом.
         const diffTime =
@@ -820,7 +841,7 @@ export default new Vuex.Store({
         for (const key in datasetsHourly) {
           const arr = Object.values(datasetsHourly[key])
             .filter((i) => typeof i === "object")
-            .map(({ temp, prec_sum, date, feels_like }) => {
+            .map(({ [variable]: temp, prec_sum, date, feels_like }) => {
               return {
                 date,
                 temp: {

@@ -101,6 +101,12 @@ export default {
   // stroke-dasharray: 8 4;
   stroke: #b63705;
 }
+.linear_tmax {
+  stroke: teal;
+}
+.linear_tmin {
+  stroke: red;
+}
 .exp_12,
 .linear_8 {
   // stroke-dasharray: 8 4;
