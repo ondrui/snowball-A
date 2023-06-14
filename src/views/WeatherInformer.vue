@@ -116,7 +116,7 @@ export default {
      */
     showTitle(value, key) {
       return key === "day"
-        ? value.replace("$", this.tenDaysTabTable.length)
+        ? value.replace("$_length", this.tenDaysTabTable.length)
         : value;
     },
     /**

@@ -47,8 +47,8 @@ export default {
     segmentTitle() {
       const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
       const str = this.getConstantLocale("detailsSegmentTitle")
-        .replace("$", inflectCityName)
-        .replace("$", this.tenDaysDetailsCard.length);
+        .replace("$_city", inflectCityName)
+        .replace("$_length", this.tenDaysDetailsCard.length);
       return str;
     },
     /**

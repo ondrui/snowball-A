@@ -76,19 +76,22 @@ export default {
   head() {
     const country = cityIn(this.getCountryNameLoc);
     return {
-      title: this.getConstantLocale("cities", "title").replace("$", country),
+      title: this.getConstantLocale("cities", "title").replace(
+        "$_country",
+        country
+      ),
       meta: [
         {
           name: "description",
           content: this.getConstantLocale("cities", "description").replace(
-            "$",
+            "$_country",
             country
           ),
         },
         {
           name: "keywords",
           content: this.getConstantLocale("cities", "keywords").replace(
-            "$",
+            "$_country",
             country
           ),
         },

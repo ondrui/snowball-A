@@ -42,7 +42,7 @@ export default {
     getHistoryTitle() {
       const country = cityIn(this.getCountryNameLoc);
       const arr = this.getConstantLocale("sectionOtherCities").split(" ");
-      return [arr.shift(), arr.join(" ").replace("$", country)];
+      return [arr.shift(), arr.join(" ").replace("$_country", country)];
     },
   },
 };

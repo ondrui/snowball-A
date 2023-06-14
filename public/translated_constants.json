@@ -1,26 +1,26 @@
 {
   "am": {
     "cities": {
-      "title": "Եղանակը $ բոլոր քաղաքներում՝ 1000+ քաղաք.",
-      "description": "$ 1000+ քաղաքների ցանկ, որոնց համար մենք ունենք եղանակային տվյալներ բոլոր հիմնական օդերևութաբանական պարամետրերի, ինչպես նաև աստղագիտական ​​պարամետրերի համար.",
-      "keywords": "եղանակ $ում, եղանակ, եղանակի տեսություն, ամենժամյա եղանակ, եղանակի կանխատեսում 10 օրվա համար, եղանակն այսօր, եղանակը վաղը"
+      "title": "Եղանակը $_country բոլոր քաղաքներում՝ 1000+ քաղաք.",
+      "description": "$_country 1000+ քաղաքների ցանկ, որոնց համար մենք ունենք եղանակային տվյալներ բոլոր հիմնական օդերևութաբանական պարամետրերի, ինչպես նաև աստղագիտական ​​պարամետրերի համար.",
+      "keywords": "եղանակ $_countryում, եղանակ, եղանակի տեսություն, ամենժամյա եղանակ, եղանակի կանխատեսում 10 օրվա համար, եղանակն այսօր, եղանակը վաղը"
     },
     "main": {
-      "title": "Եղանակ $ 1000+ քաղաքներքում. Ճշգրիտ ժամային և մանրամասն եղանակի կանխատեսում առաջիկա 10 օրվա համար:",
-      "description": "$ բոլոր քաղաքների մանրամասն եղանակի կանխատեսումը այսօրվա, վաղվա, երկու շաբաթվա համար։ 3 օրվա ճշգրիտ ժամային կանխատեսում: Աստղագիտական ​​պարամետրեր՝ արևի և լուսնի արևածագը և մայրամուտը:",
-      "keywords": "եղանակ $ում, եղանակ, եղանակի տեսություն, ամենժամյա եղանակը, 10 օրվա եղանակի կանխատեսում, եղանակն այսօր, եղանակը վաղը"
+      "title": "Եղանակ $_country 1000+ քաղաքներքում. Ճշգրիտ ժամային և մանրամասն եղանակի կանխատեսում առաջիկա 10 օրվա համար:",
+      "description": "$_country բոլոր քաղաքների մանրամասն եղանակի կանխատեսումը այսօրվա, վաղվա, երկու շաբաթվա համար։ 3 օրվա ճշգրիտ ժամային կանխատեսում: Աստղագիտական ​​պարամետրեր՝ արևի և լուսնի արևածագը և մայրամուտը:",
+      "keywords": "եղանակ $_countryում, եղանակ, եղանակի տեսություն, ամենժամյա եղանակը, 10 օրվա եղանակի կանխատեսում, եղանակն այսօր, եղանակը վաղը"
     },
     "hourly": {
-      "title": "Եղանակը $ում՝ ճշգրիտ և մանրամասն ժամային կանխատեսում",
-      "description": "Եղանակի ճշգրիտ ժամային կանխատեսում $ում՝ օդերևութաբանական բոլոր պարամետրերով + արևածագն ու մայրամուտը և լուսինը։ Տեղեկություններ ջերմաստիճանի, ճնշման, խոնավության, քամու արագության, ուղղության և պոռթկումների մասին.",
-      "keywords": "Եղանակի ժամային տեսություն $ում, եղանակ $ում, եղանակ, եղանակի կանխատեսում, ամենժամյա եղանակ, եղանակն այսօր, եղանակը վաղը և մյուս օրը"
+      "title": "Եղանակը $_cityում՝ ճշգրիտ և մանրամասն ժամային կանխատեսում",
+      "description": "Եղանակի ճշգրիտ ժամային կանխատեսում $_cityում՝ օդերևութաբանական բոլոր պարամետրերով + արևածագն ու մայրամուտը և լուսինը։ Տեղեկություններ ջերմաստիճանի, ճնշման, խոնավության, քամու արագության, ուղղության և պոռթկումների մասին.",
+      "keywords": "Եղանակի ժամային տեսություն $_cityում, եղանակ $_countryում, եղանակ, եղանակի կանխատեսում, ամենժամյա եղանակ, եղանակն այսօր, եղանակը վաղը և մյուս օրը"
     },
     "day": {
-      "title": "Եղանակը $ում $ օրվա համար. ամենօրյա մանրամասն ճշգրիտ կանխատեսում",
-      "description": "$ օրվա եղանակի ճշգրիտ կանխատեսում $ում օդերևութաբանական բոլոր պարամետրերով + արևածագը և մայրամուտը և լուսինը։ Տեղեկություններ ջերմաստիճանի, ճնշման, խոնավության, քամու արագության, ուղղության և պոռթկումների մասին.",
-      "keywords": "Եղանակ $ում 10 օր, Եղանակ $ում, Եղանակ, Եղանակի տեսություն, Եղանակ 10 օր, Եղանակ Այսօր, Եղանակ Վաղը"
+      "title": "Եղանակը $_cityում $_days օրվա համար. ամենօրյա մանրամասն ճշգրիտ կանխատեսում",
+      "description": "$_days օրվա եղանակի ճշգրիտ կանխատեսում $_cityում օդերևութաբանական բոլոր պարամետրերով + արևածագը և մայրամուտը և լուսինը։ Տեղեկություններ ջերմաստիճանի, ճնշման, խոնավության, քամու արագության, ուղղության և պոռթկումների մասին.",
+      "keywords": "Եղանակ $_cityում $_days օր, Եղանակ $_countryում, Եղանակ, Եղանակի տեսություն, Եղանակ $_days օր, Եղանակ Այսօր, Եղանակ Վաղը"
     },
-    "sectionOtherCities": "եղանակը $ քաղաքներում",
+    "sectionOtherCities": "եղանակը $_country քաղաքներում",
     "asideHistory": "դիտման պատմություն",
     "viewsSwitcher": ["քարտեզ", "քաղաքներ"],
     "LinkTitleCardCity": "ավելին",
@@ -35,7 +35,7 @@
       ["evening", "երեկո"],
       ["night", "գիշեր"]
     ],
-    "allCityBtnCaption": "$ բոլոր $ բնակավայրերը",
+    "allCityBtnCaption": "$_length բոլոր $_country բնակավայրերը",
     "breadcrumbs": {
       "main": "տուն",
       "weather": "եղանակ",
@@ -49,9 +49,9 @@
     "tabsDescr": {
       "main": "տուն",
       "hourly": "ժամային կանխատեսում",
-      "day": "եղանակի կանխատեսում $ օրվա համար"
+      "day": "եղանակի կանխատեսում $_length օրվա համար"
     },
-    "detailsSegmentTitle": "եղանակը $ - մանրամասն կանխատեսում $ օրվա համար",
+    "detailsSegmentTitle": "եղանակը $_city - մանրամասն կանխատեսում $_length օրվա համար",
     "climateIndicators": {
       "temp": "ջերմաստիճանը",
       "pressure": "ճնշում",
@@ -135,26 +135,26 @@
   },
   "ru": {
     "cities": {
-      "title": "Погода во всех городах $: 1000+ городов.",
-      "description": "Список 1000+ городов $ по которым у нас есть данные о погоде по всем основным метеопараметрам, а также астрономические параметры.",
-      "keywords": "погода в $, погода, прогноз погоды, погода почасовая, прогноз погоды на 10 дней, погода на сегодня, погода на завтра"
+      "title": "Погода во всех городах $_country: 1000+ городов.",
+      "description": "Список 1000+ городов $_country по которым у нас есть данные о погоде по всем основным метеопараметрам, а также астрономические параметры.",
+      "keywords": "погода в $_country, погода, прогноз погоды, погода почасовая, прогноз погоды на 10 дней, погода на сегодня, погода на завтра"
     },
     "main": {
-      "title": "Погода по 1000+ городам $! Точный почасовой и подробный прогноз погоды на 10 дней вперед.",
-      "description": "Подробный прогноз погоды по всем городам $ на сегодня завтра, две недели. Точный почасовой прогноз на 3 дня. Астрономические параметры: восходы-заходы солнца и луны. ",
-      "keywords": "погода в $, погода, прогноз погоды, погода почасовая, прогноз погоды на 10 дней, погода на сегодня, погода на завтра"
+      "title": "Погода по 1000+ городам $_country! Точный почасовой и подробный прогноз погоды на 10 дней вперед.",
+      "description": "Подробный прогноз погоды по всем городам $_country на сегодня завтра, две недели. Точный почасовой прогноз на 3 дня. Астрономические параметры: восходы-заходы солнца и луны. ",
+      "keywords": "погода в $_country, погода, прогноз погоды, погода почасовая, прогноз погоды на 10 дней, погода на сегодня, погода на завтра"
     },
     "hourly": {
-      "title": "Погода в $ - точный и подробный почасовой прогноз",
-      "description": "Точный почасовой прогноз погоды в $ по всем метеопараметрам + восходы и захода Солнца и Луны. Информация о температуре, давлении, влажности, скорости, направлении и порывах ветра.",
-      "keywords": "почасовой прогноз погоды в $, погода в $, погода, прогноз погоды, погода почасовая, погода на сегодня, погода на завтра и послезавтра"
+      "title": "Погода в $_city - точный и подробный почасовой прогноз",
+      "description": "Точный почасовой прогноз погоды в $_city по всем метеопараметрам + восходы и захода Солнца и Луны. Информация о температуре, давлении, влажности, скорости, направлении и порывах ветра.",
+      "keywords": "почасовой прогноз погоды в $_city, погода в $_country, погода, прогноз погоды, погода почасовая, погода на сегодня, погода на завтра и послезавтра"
     },
     "day": {
-      "title": "Погода в $ на $ дней - подробный точный прогноз на каждый день",
-      "description": "Точный прогноз погоды в $ на $ дней по всем метеопараметрам + восходы и захода Солнца и Луны. Информация о температуре, давлении, влажности, скорости, направлении и порывах ветра.",
-      "keywords": "погода в $ на $ дней, погода в $, погода, прогноз погоды, прогноз погоды на $ дней, погода на сегодня, погода на завтра"
+      "title": "Погода в $_city на $_days дней - подробный точный прогноз на каждый день",
+      "description": "Точный прогноз погоды в $_city на $_days дней по всем метеопараметрам + восходы и захода Солнца и Луны. Информация о температуре, давлении, влажности, скорости, направлении и порывах ветра.",
+      "keywords": "погода в $_city на $_days дней, погода в $_country, погода, прогноз погоды, прогноз погоды на $_days дней, погода на сегодня, погода на завтра"
     },
-    "sectionOtherCities": "погода в городах $",
+    "sectionOtherCities": "погода в городах $_country",
     "asideHistory": "история просмотров",
     "viewsSwitcher": ["карта", "города"],
     "LinkTitleCardCity": "подробнее",
@@ -169,7 +169,7 @@
       ["evening", "вечер"],
       ["night", "ночь"]
     ],
-    "allCityBtnCaption": "Все $ населенных пункта $",
+    "allCityBtnCaption": "Все $_length населенных пункта $_country",
     "breadcrumbs": {
       "main": "главная",
       "weather": "погода",
@@ -183,9 +183,9 @@
     "tabsDescr": {
       "main": "главная",
       "hourly": "почасовой прогноз",
-      "day": "прогноз погоды на $ дней"
+      "day": "прогноз погоды на $_length дней"
     },
-    "detailsSegmentTitle": "погода в $ - подробный прогноз на $ дней",
+    "detailsSegmentTitle": "погода в $_city - подробный прогноз на $_length дней",
     "climateIndicators": {
       "temp": "температура",
       "pressure": "давление",
@@ -260,26 +260,26 @@
   },
   "en": {
     "cities": {
-      "title": "Weather in all cities of $: 1000+ cities.",
-      "description": "List of 1000+ cities in $ for which we have weather data for all major meteorological parameters, as well as astronomical parameters.",
-      "keywords": "weather in $, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
+      "title": "Weather in all cities of $_country: 1000+ cities.",
+      "description": "List of 1000+ cities in $_country for which we have weather data for all major meteorological parameters, as well as astronomical parameters.",
+      "keywords": "weather in $_country, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
     },
     "main": {
-      "title": "Weather for 1000+ cities of $! Accurate hourly and detailed weather forecast for 10 days ahead.",
-      "description": "Detailed weather forecast for all cities of $ for today tomorrow, two weeks. Accurate hourly forecast for 3 days. Astronomical parameters: sunrises and sunsets of the sun and moon.",
-      "keywords": "weather in $, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
+      "title": "Weather for 1000+ cities of $_country! Accurate hourly and detailed weather forecast for 10 days ahead.",
+      "description": "Detailed weather forecast for all cities of $_country for today tomorrow, two weeks. Accurate hourly forecast for 3 days. Astronomical parameters: sunrises and sunsets of the sun and moon.",
+      "keywords": "weather in $_country, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
     },
     "hourly": {
-      "title": "Weather in $ - accurate and detailed hourly forecast",
-      "description": "Accurate hourly weather forecast in $ for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
-      "keywords": "hourly weather forecast in $, weather in $, weather, weather forecast, hourly weather, weather for today, weather for tomorrow and the day after tomorrow"
+      "title": "Weather in $_city - accurate and detailed hourly forecast",
+      "description": "Accurate hourly weather forecast in $_city for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
+      "keywords": "hourly weather forecast in $_city, weather in $_country, weather, weather forecast, hourly weather, weather for today, weather for tomorrow and the day after tomorrow"
     },
     "day": {
-      "title": "Weather in $ for $ days - detailed accurate forecast for every day",
-      "description": "Accurate weather forecast in $ for $ days for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
-      "keywords": "weather in $ for $ days, weather in $, weather, weather forecast, weather forecast for $ days, weather for today, weather for tomorrow"
+      "title": "Weather in $_city for $_days days - detailed accurate forecast for every day",
+      "description": "Accurate weather forecast in $_city for $_days days for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
+      "keywords": "weather in $_city for $_days days, weather in $_country, weather, weather forecast, weather forecast for $_days days, weather for today, weather for tomorrow"
     },
-    "sectionOtherCities": "weather for cities in $",
+    "sectionOtherCities": "weather for cities in $_country",
     "asideHistory": "browsing history",
     "viewsSwitcher": ["map", "sity"],
     "LinkTitleCardCity": "more",
@@ -294,7 +294,7 @@
       ["evening", "evening"],
       ["night", "night"]
     ],
-    "allCityBtnCaption": "All $ locations in $",
+    "allCityBtnCaption": "All $_length locations in $_country",
     "breadcrumbs": {
       "main": "home",
       "weather": "weather",
@@ -308,9 +308,9 @@
     "tabsDescr": {
       "main": "main",
       "hourly": "hourly",
-      "day": "$ day forecast"
+      "day": "$_length day forecast"
     },
-    "detailsSegmentTitle": "weather in $ - detailed forecast for $ days",
+    "detailsSegmentTitle": "weather in $_city - detailed forecast for $_length days",
     "climateIndicators": {
       "temp": "temperature",
       "pressure": "pressure",

@@ -50,18 +50,18 @@ export default {
     const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
     const country = cityIn(this.getCountryNameLoc);
     const strKeywords = this.getConstantLocale("hourly", "keywords")
-      .replace("$", inflectCityName)
-      .replace("$", country);
+      .replace("$_city", inflectCityName)
+      .replace("$_country", country);
     return {
       title: this.getConstantLocale("hourly", "title").replace(
-        "$",
+        "$_city",
         inflectCityName
       ),
       meta: [
         {
           name: "description",
           content: this.getConstantLocale("hourly", "description").replace(
-            "$",
+            "$_city",
             inflectCityName
           ),
         },

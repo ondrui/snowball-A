@@ -49,21 +49,21 @@ export default {
     const country = cityIn(this.getCountryNameLoc);
     const daysNum = this.tenDaysTabTable.length;
     const strTitle = this.getConstantLocale("day", "title")
-      .replace("$", inflectCityName)
-      .replace("$", daysNum);
+      .replace("$_city", inflectCityName)
+      .replace("$_days", daysNum);
     const strDescr =
       this.getLocale === "am"
         ? this.getConstantLocale("day", "description")
-            .replace("$", daysNum)
-            .replace("$", inflectCityName)
+            .replace("$_days", daysNum)
+            .replace("$_city", inflectCityName)
         : this.getConstantLocale("day", "description")
-            .replace("$", inflectCityName)
-            .replace("$", daysNum);
+            .replace("$_city", inflectCityName)
+            .replace("$_days", daysNum);
     const strKeywords = this.getConstantLocale("day", "keywords")
-      .replace("$", inflectCityName)
-      .replace("$", daysNum)
-      .replace("$", country)
-      .replace("$", daysNum);
+      .replace("$_city", inflectCityName)
+      .replace("$_days", daysNum)
+      .replace("$_country", country)
+      .replace("$_days", daysNum);
     return {
       title: strTitle,
       meta: [

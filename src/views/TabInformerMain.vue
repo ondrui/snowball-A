@@ -34,19 +34,22 @@ export default {
   head() {
     const country = cityIn(this.getCountryNameLoc);
     return {
-      title: this.getConstantLocale("main", "title").replace("$", country),
+      title: this.getConstantLocale("main", "title").replace(
+        "$_country",
+        country
+      ),
       meta: [
         {
           name: "description",
           content: this.getConstantLocale("main", "description").replace(
-            "$",
+            "$_country",
             country
           ),
         },
         {
           name: "keywords",
           content: this.getConstantLocale("main", "keywords").replace(
-            "$",
+            "$_country",
             country
           ),
         },
@@ -91,8 +94,8 @@ export default {
     getTitleLink() {
       const country = cityIn(this.getCountryNameLoc);
       return this.getConstantLocale("allCityBtnCaption")
-        .replace("$", this.getListAllCities.length)
-        .replace("$", country);
+        .replace("$_length", this.getListAllCities.length)
+        .replace("$_country", country);
     },
   },
   methods: {
