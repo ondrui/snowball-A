@@ -4,11 +4,9 @@
       @click="toggle(index)"
       :class="['card-content', { weekend: value.weekend === true }]"
     >
-      <Transition>
-        <div class="card-chevron" v-show="!value.isOpen">
-          <BaseIcon nameIcon="chevron-more-down" width="8" pick="common" />
-        </div>
-      </Transition>
+      <div :class="['card-chevron', { rotate: value.isOpen }]">
+        <BaseIcon nameIcon="chevron-more-down" width="8" pick="common" />
+      </div>
       <div class="card-content__date">
         <div class="date-text-short">
           <div>{{ value.weekday[0] }}</div>
@@ -84,22 +82,23 @@ export default {
      * Обработчик вызывается при клике на карточку.
      * Нужен для отображения графика подробного прогноза
      * за этот день.
+     * @param card Т.к. action store setCardIndex вызывается из разных компонент,
+     * дополнительно используется параметр card.
      * @param index Параметром передается индекс элемента.
+     *  .
      */
     toggle(index) {
-      this.$store.dispatch("setCardIndex", index + 1);
+      const obj = {
+        index: index + 1,
+        card: true,
+      };
+      this.$store.dispatch("setCardIndex", obj);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.v-leave-active {
-  transition: all 0.5s ease;
-}
-.v-leave-to {
-  opacity: 0;
-}
 svg {
   display: block;
 }
@@ -223,9 +222,17 @@ svg {
   left: 0;
   right: 0;
   bottom: 6px;
+  transition: all 0.3s ease-in-out;
+  &.rotate {
+    transform: rotate(180deg);
+  }
 }
 .card-container:hover .card-chevron {
   transform: scale(2);
+}
+
+.card-container:hover .card-chevron.rotate {
+  transform: scale(2) rotate(180deg);
 }
 
 @media only screen and (max-width: $media-width-xl) {

@@ -90,13 +90,19 @@ export const setDataAPI = (state, { hourly }) => {
  * Данное поведение реализовано через смену значения поля isOpen.
  * @param state Текущее состояние store.state.
  * @param index Код карточки.
+ * @param card Т.к. action store setCardIndex вызывается из разных компонент,
+ * дополнительно используется параметр card.
  */
 export const CHANGE_OPENING_CARD = "changeOpeningCard";
-export const changeOpeningCard = (state, index) => {
-  Object.keys(state.datasetsTenDays).map(
-    (e) => (state.datasetsTenDays[e].isOpen = false)
-  );
-  state.datasetsTenDays[index].isOpen = true;
+export const changeOpeningCard = (state, { index, card }) => {
+  if (state.datasetsTenDays[index].isOpen && card) {
+    state.datasetsTenDays[index].isOpen = false;
+  } else {
+    Object.keys(state.datasetsTenDays).map(
+      (e) => (state.datasetsTenDays[e].isOpen = false)
+    );
+    state.datasetsTenDays[index].isOpen = true;
+  }
 };
 /**
  * Массив объектов с данными по всем городам.

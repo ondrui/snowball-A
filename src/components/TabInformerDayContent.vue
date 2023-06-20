@@ -126,7 +126,7 @@ export default {
          */
         eventBus.$emit("highlight", false);
       } else {
-        this.$store.dispatch("setCardIndex", index);
+        this.$store.dispatch("setCardIndex", { index });
         this.focus();
       }
     },

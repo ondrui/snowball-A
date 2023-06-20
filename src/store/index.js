@@ -140,20 +140,20 @@ export default new Vuex.Store({
         func: (periodAdjusted, diffTime, index) =>
           (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
       },
-      {
-        title: "linear_tmax",
-        variable: "temp_max",
-        periodAdjusted: 0,
-        func: (periodAdjusted, diffTime, index) =>
-          (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
-      },
-      {
-        title: "linear_tmin",
-        variable: "temp_min",
-        periodAdjusted: 0,
-        func: (periodAdjusted, diffTime, index) =>
-          (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
-      },
+      // {
+      //   title: "linear_tmax",
+      //   variable: "temp_max",
+      //   periodAdjusted: 0,
+      //   func: (periodAdjusted, diffTime, index) =>
+      //     (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
+      // },
+      // {
+      //   title: "linear_tmin",
+      //   variable: "temp_min",
+      //   periodAdjusted: 0,
+      //   func: (periodAdjusted, diffTime, index) =>
+      //     (periodAdjusted - diffTime - index - 1) / (periodAdjusted - 1),
+      // },
       // {
       //   title: "linear_8",
       // variable: "temp",
@@ -1191,9 +1191,11 @@ export default new Vuex.Store({
      * Вызывается когда пользователь кликает на
      * карточку с подробным прогнозом.
      * @param index Код карточки.
+     * @param card Т.к. action store setCardIndex вызывается из разных компонент,
+     * дополнительно используется параметр card.
      */
-    setCardIndex({ commit }, index) {
-      commit(CHANGE_OPENING_CARD, index);
+    setCardIndex({ commit }, { index, card }) {
+      commit(CHANGE_OPENING_CARD, { index, card });
     },
     /**
      * Get data from Internal vs External APIs.
