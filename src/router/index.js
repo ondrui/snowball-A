@@ -81,7 +81,14 @@ const router = new VueRouter({
       });
     }
     if (to.hash && to.hash !== "#top") {
-      return { selector: to.hash };
+      // Используем таймаут, чтобы к началу перехода к элементу карточка
+      // с графиком успела раскрыться и размер страницы пересчитался.
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ selector: to.hash, offset: { x: 0, y: 50 } });
+        }, 400);
+      });
+      // return { selector: to.hash, offset: { x: 0, y: 50 } };
     }
   },
 });
