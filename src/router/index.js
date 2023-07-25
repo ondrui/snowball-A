@@ -108,11 +108,21 @@ router.beforeEach((to, from, next) => {
      * отправляется запрос на сервер для получения ответа с кодом 404.
      */
     if (code === 404) {
+      console.log(to.path.split("/"));
+      console.log(to.path.split("/").slice(2));
+      console.log(
+        store.getters.getLocaleURL,
+        typeof store.getters.getLocaleURL === "undefined"
+      );
       axios.get(to.path).catch((err) => console.log(err));
+      // Передаем параметры в маршрут, чтобы URL не изменился при вызове next().
+      // Удаляем языковую метку (если оно есть) и первый пробел из параметра pathMatch.
+      const startSlice =
+        typeof store.getters.getLocaleURL === "undefined" ? 1 : 2;
       next({
         name: "not-found",
         params: {
-          pathMatch: to.path.split("/").slice(2),
+          pathMatch: to.path.split("/").slice(startSlice),
           lang: store.getters.getLocaleURL,
         },
         meta: {
