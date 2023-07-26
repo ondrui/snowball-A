@@ -47,7 +47,6 @@ export default {
 <style lang="scss" scoped>
 .home-page {
   position: relative;
-  margin-top: 30px;
 }
 .page-wrapper {
   display: grid;
