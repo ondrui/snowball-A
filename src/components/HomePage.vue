@@ -50,13 +50,11 @@ export default {
 }
 .page-wrapper {
   display: grid;
-  min-height: 100vh;
   grid-template-columns: minmax(0, 1fr) 300px;
   column-gap: 48px;
   row-gap: 36px;
   max-width: $width-page-xl;
   padding: 0 10px;
-  width: 100%;
   min-width: 390px;
   margin: 0 auto;
   margin-bottom: 40px;
@@ -71,8 +69,7 @@ export default {
   margin-bottom: 50px;
 }
 @media only screen and (max-width: $media-width-xl) {
-  .page-wrapper,
-  .app-container {
+  .page-wrapper {
     display: block;
     max-width: $width-page-lg;
     .sidebar {
